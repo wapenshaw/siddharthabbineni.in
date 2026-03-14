@@ -43,7 +43,7 @@ jobs:
             (github.event_name == 'workflow_dispatch' && github.event.inputs.environment == 'prod') ||
             (github.event_name == 'push' && github.ref == 'refs/heads/master')
               && secrets.AZURE_SWA_DEPLOY_TOKEN_PROD
-              || secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_MANGO_FOREST_072AF5C03
+              || secrets.AZURE_SWA_DEPLOY_TOKEN_STAGING
             }}
           action: upload
           app_location: /
