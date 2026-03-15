@@ -8,7 +8,7 @@ export const ThemeMode = {
 export const mobileBreakpointsMap = {
 	base: true,
 	md: true,
-	lg: true,
+	lg: false,
 	xl: false,
 }
 

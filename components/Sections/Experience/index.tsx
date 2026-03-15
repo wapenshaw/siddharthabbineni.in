@@ -15,7 +15,7 @@ const DetailSection = () => (
 		>
 			Experience
 		</Heading>
-		<Text color="text.description">
+		<Text color="text.description" fontSize="md">
 			Azure-certified Solutions Architect and Full Stack Lead with 13+ years
 			of experience in designing and implementing complex systems using the
 			.NET ecosystem, modern web frameworks, and cloud platforms. Currently

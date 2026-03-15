@@ -53,7 +53,7 @@ const Navigation = () => {
 	return (
 		<>
 			<Box
-				display={{ base: 'flex', xl: 'none' }}
+				display={{ base: 'flex', lg: 'none' }}
 				alignItems="center"
 				className={styles.menuBar}
 				zIndex={100}

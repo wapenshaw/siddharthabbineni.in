@@ -117,7 +117,7 @@ const Sidebar = ({ soData }: SideBarProps) => {
 
 					<MotionText
 						colorPalette="gray"
-						fontSize="small"
+						fontSize="md"
 						className={styles.marginTopForce}
 						variants={fadeInUp}
 					>
@@ -126,7 +126,7 @@ const Sidebar = ({ soData }: SideBarProps) => {
 
 					<MotionHeading
 						as="h3"
-						size="md" color="text.emphasis"
+						size="lg" color="text.emphasis"
 						className={styles.marginTopSmall}
 						variants={fadeInUp}
 					>
@@ -134,7 +134,8 @@ const Sidebar = ({ soData }: SideBarProps) => {
 					</MotionHeading>
 
 					<MotionText color="text.description"
-						fontSize="medium"
+						fontSize="md"
+						lineHeight="tall"
 						paddingRight={{ lg: '12' }}
 						variants={fadeInUp}
 						maxWidth={{ base: '100%', lg: '80%' }}
@@ -163,8 +164,7 @@ const Sidebar = ({ soData }: SideBarProps) => {
 							<SimpleGrid
 								columns={3}
 								gap={3}
-								flex={1}
-								justifyItems="center"
+								justifyItems="end"
 							>
 								{SocialMedias.map((socMedia) => (
 									<Link

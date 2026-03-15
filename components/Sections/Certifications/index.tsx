@@ -60,12 +60,12 @@ const CertCard = ({ cert }: { cert: Certification }) => {
 						objectFit="contain"
 					/>
 					<Heading
-						fontSize={{ base: 'xs', md: 'sm' }}
+						fontSize={{ base: 'sm', md: 'md' }}
 						lineHeight="short"
 					>
 						{cert.name}
 					</Heading>
-					<Text fontSize="xs" color="text.description">
+					<Text fontSize="sm" color="text.description">
 						{cert.earned}{' '}
 						<GoLinkExternal
 							style={{ display: 'inline', verticalAlign: 'middle' }}
