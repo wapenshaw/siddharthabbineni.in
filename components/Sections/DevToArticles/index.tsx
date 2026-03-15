@@ -6,11 +6,11 @@ import {Heading,
 	Link,
 	Stack,
 	SimpleGrid,
-	Separator,
-	Icon} from '@chakra-ui/react'
-import { IoMdOpen } from 'react-icons/io'
+	Separator} from '@chakra-ui/react'
 import { Article } from 'types/article'
 import { useColorModeValue } from 'components/ui/color-mode'
+
+const MAX_HOME_ARTICLES = 2
 
 const DevToArticles = ({ articles }: { articles: Article[] }) => {
 	const bg = useColorModeValue('blackAlpha.50', 'whiteAlpha.100')
@@ -19,6 +19,8 @@ const DevToArticles = ({ articles }: { articles: Article[] }) => {
 		'rgba(49, 151, 149, 0.06)',
 		'rgba(157, 236, 249, 0.06)'
 	)
+	const displayArticles = articles.slice(0, MAX_HOME_ARTICLES)
+
 	return (
 		<Stack
 			width={{ base: '99%', lg: '60%', xl: '75%' }}
@@ -34,19 +36,10 @@ const DevToArticles = ({ articles }: { articles: Article[] }) => {
 				Blog
 			</Heading>
 			<Text color="text.description">
-				Enjoy these two guides while I work on restoring posts from my{' '}
-				<Link
-					aria-label="Old Website"
-					target="_blank"
-					rel="noreferrer"
-					_hover={{ textDecoration: 'none' }}
-					href="https://web.archive.org/web/20110203010702/http://www.siddharthabbineni.com/"
-				>
-					old site <Icon as={IoMdOpen} />
-				</Link>
+				Latest articles and guides on software engineering.
 			</Text>
 			<SimpleGrid columns={{ base: 1, md: 2 }} gap={{ base: 5, md: 10 }}>
-				{articles.map((item) => (
+				{displayArticles.map((item) => (
 					<Link
 						aria-label={item.title}
 						target="_blank"
@@ -94,6 +87,16 @@ const DevToArticles = ({ articles }: { articles: Article[] }) => {
 					</Link>
 				))}
 			</SimpleGrid>
+			{articles.length > MAX_HOME_ARTICLES && (
+				<Link
+					href="/blog"
+					color="text.accentAlt"
+					fontWeight="medium"
+					_hover={{ textDecoration: 'underline' }}
+				>
+					View all {articles.length} articles →
+				</Link>
+			)}
 		</Stack>
 	)
 }

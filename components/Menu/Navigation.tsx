@@ -181,6 +181,30 @@ const Navigation = () => {
 							marginX={2}
 						>
 							<a
+								href="#certifications"
+								rel="noreferrer"
+								onClick={onMenuItemClick}
+							>
+								Certifications
+							</a>
+						</Button>
+					</Box>
+					<Box
+						width={{ base: '100%', lg: 'auto' }}
+						textAlign={{ base: 'center', lg: 'left' }}
+						marginY={{ base: 2, lg: 0 }}
+					>
+						<Button
+							asChild
+							fontWeight="light"
+							variant="ghost"
+							fontSize={menuButtonSize}
+							letterSpacing={2}
+							className={btnClassName}
+							padding={2}
+							marginX={2}
+						>
+							<a
 								href="#blog"
 								rel="noreferrer"
 								onClick={onMenuItemClick}

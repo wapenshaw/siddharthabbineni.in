@@ -1,0 +1,393 @@
+%-------------------------
+% Resume in Latex
+% Author : Siddharth Abbineni
+% Based off of: https://github.com/sb2nov/resume
+% License : MIT
+%------------------------
+
+\documentclass[12pt]{article}
+
+% Example for A4 paper with minimal margins set individually
+\usepackage[a4paper, left=1cm, right=1cm, top=1.2cm, bottom=1.2cm]{geometry}
+
+\usepackage{soul} % Use the soul package for underlining
+\usepackage{latexsym}
+\usepackage[empty]{fullpage}
+\usepackage{titlesec}
+\usepackage{marvosym}
+\usepackage{fontawesome5} % For the icons
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{verbatim}
+\usepackage{enumitem}
+\usepackage{amsmath}
+\usepackage[hidelinks]{hyperref}
+\usepackage{fancyhdr}
+\usepackage[english]{babel}
+\input{glyphtounicode}
+
+%----------FONT OPTIONS----------
+% sans-serif
+% \usepackage[sfdefault]{FiraSans}
+% \usepackage[sfdefault]{roboto}
+% \usepackage[sfdefault]{noto-sans}
+% \usepackage[default]{sourcesanspro}
+% \usepackage[default]{sourcesanspro}
+% \usepackage[default]{sourcesanspro}
+% \usepackage[default]{raleway}
+% \usepackage[default]{sourcesanspro}
+% \usepackage[sfdefault]{FiraSans}
+% serif
+% \usepackage{CormorantGaramond}
+\usepackage{charter}  % This one is good
+% \usepackage{palatino}
+% \usepackage{fourier}
+% \usepackage{bookman} 
+% \usepackage{lmodern}
+% \usepackage{tgadventor}
+% \usepackage{tgheros}
+% \usepackage{courier}
+
+\pagestyle{fancy}
+\fancyhf{} % clear all header and footer fields
+\fancyfoot{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% Adjust margins (Original template adjustments)
+\addtolength{\oddsidemargin}{-0.5in}
+\addtolength{\evensidemargin}{-0.5in}
+\addtolength{\textwidth}{1in}
+\addtolength{\topmargin}{-.5in}
+\addtolength{\textheight}{1.0in} % Adjust text height to fit content, potentially 1.0in or slightly more
+
+\urlstyle{same}
+\raggedbottom
+\raggedright
+\setlength{\tabcolsep}{0in}
+
+% Sections formatting
+\titleformat{\section}{
+  \vspace{-4pt}\scshape\raggedright\large
+}{}{0em}{}[\color{black}\titlerule \vspace{-5pt}]
+
+% Ensure that generate pdf is machine readable/ATS parsable
+\pdfgentounicode=1
+
+% % Variables for Anonymization
+% \newcommand{\MyName}{Kanneganti Brahmanandam}
+% \newcommand{\MyEmail}{khan.dada@gmail.com}
+% \newcommand{\MyPhone}{+91-9848022338}
+% \newcommand{\MyLinkedIn}{khan.dada}
+% \newcommand{\MyWebsite}{brahmi-soft-engg.in}
+% \newcommand{\CompanyOne}{Manikyam Movies}
+% \newcommand{\CompanyOneOne}{(Client: Uthoothi Bank, Aug 2022 – Present)}
+% \newcommand{\CompanyOneTwo}{(Internal Product Development – Manikyam Movies)}
+% \newcommand{\CompanyTwo}{Jayasurya Talent Agency}
+% \newcommand{\CompanyThree}{Gajala Software}
+% \newcommand{\CompanyFour}{Siva Reddy Constructions}
+% \newcommand{\CollegeName}{Bokkalo College Idi}
+% \newcommand{\ProductVatify}{TaxMeMommy}
+
+% Variables for Original
+\newcommand{\MyName}{Siddharth Abbineni}
+\newcommand{\MyEmail}{siddharth.abbineni@gmail.com}
+\newcommand{\MyPhone}{+91-7036999995}
+\newcommand{\MyLinkedIn}{siddharthabbineni}
+\newcommand{\MyWebsite}{siddharthabbineni.in}
+\newcommand{\CompanyOne}{Pinion Services}
+\newcommand{\CompanyOneOne}{(Client: Santander Consumer Bank AS, Aug 2022 – Present)}
+\newcommand{\CompanyOneTwo}{(Internal Product Development – Pinion Services)}
+\newcommand{\CompanyTwo}{Melite Technologies}
+\newcommand{\CompanyThree}{Delhi Public School, Nacharam}
+\newcommand{\CompanyFour}{QSP, Time Inc.}
+\newcommand{\CollegeName}{CVR College of Engineering}
+\newcommand{\ProductVatify}{Vatify}
+
+
+%-------------------------
+% Custom commands
+\newcommand{\resumeItem}[1]{
+  \item\small{
+    {#1 \vspace{-2pt}}
+  }
+}
+
+% Command for skills section
+\newcommand{\resumeSkillItem}[1]{
+    \item\small{#1}
+}
+
+\newcommand{\resumeSubheading}[4]{
+  % Removed \vspace{-2pt} here, spacing handled manually before the item
+  \item % Start the item
+    \begin{tabular*}{0.97\textwidth}[t]{l@{\extracolsep{\fill}}r}
+       % Job Title and Date on first line
+       {\textbf{#1}} & \small{#2} \\ 
+       % Company and Location on second line
+       {\small#3} & \small {#4} \\ 
+    \end{tabular*} \vspace{2pt} % Add a small space after the company/location info
+    % Add the horizontal rule
+    \noindent\rule{0.97\textwidth}{0.4pt} \vspace{-4pt} % Draw a thin line matching the tabular width, adjust space after
+    % The \resumeItemListStart will follow immediately after this spacing
+}
+
+\newcommand{\resumeSubSubheading}[2]{
+    \item
+    \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
+      {\small #1} & {\small #2} \\
+    \end{tabular*}\vspace{-4pt}
+}
+
+\newcommand{\resumeProjectHeading}[2]{ % Re-purposing this for Role descriptions if needed, but resumeSubheading seems sufficient
+    \item
+    \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
+      \small#1 & #2 \\
+    \end{tabular*}\vspace{-5pt}
+}
+
+\newcommand{\resumeSubItem}[1]{\resumeItem{#1}\vspace{-4pt}}
+
+\renewcommand\labelitemii{$\vcenter{\hbox{\tiny$\bullet$}}$}
+
+\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=0.15in, label={}]}
+\newcommand{\resumeSubHeadingListEnd}{\end{itemize}}
+\newcommand{\resumeItemListStart}{\begin{itemize}[leftmargin=0.25in]} % Indent bullet points slightly more
+\newcommand{\resumeItemListEnd}{\end{itemize}\vspace{-5pt}}
+
+%-------------------------------------------
+%%%%%%  RESUME STARTS HERE  %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+\setlength{\footskip}{4.35004pt}
+
+
+%----------HEADING----------
+\begin{center}
+    % Name - Size set explicitly
+    \textbf{\Huge \scshape {\MyName}} \\ \vspace{3pt} 
+
+    % Contact Info Line - Apply size command within a group
+    {\small % Or \footnotesize, \normalsize, etc.
+    \href{mailto:siddharth.abbineni@gmail.com}{\faEnvelope~\underline{{\MyEmail}}} $|$ 
+    {\faPhone~{\MyPhone}} $|$ 
+    \href{https://www.linkedin.com/in/siddharthabbineni/}{\faLinkedin~\underline{{\MyLinkedIn}}} $|$
+    \href{https://www.siddharthabbineni.in/}{\faGlobe~\underline{{\MyWebsite}}}
+    } % End of group for size command
+\end{center}
+
+\vspace{-15pt}
+
+% --- Make sure these packages are in your preamble ---
+
+% \usepackage{geometry}   % For margins (You likely already have this)
+% ---
+
+% %---------- HEADER (Name Left, Badges Right - Fixed Height 2.5cm, Reduced Gap) ----------
+% \noindent % Prevent indentation
+% % --- Left Column (Name & Contact Info) ---
+% \begin{minipage}[t]{0.60\textwidth} % Adjust width as needed
+%     \vspace{0pt} % Ensure alignment starts at the very top
+
+%     % Outer parbox sets the total height and allows vertical stretching
+%     \parbox[t][2.5cm][s]{\linewidth}{ 
+    
+%         % Inner parbox contains Name + Contact Info together at natural height
+%         \parbox[t]{\linewidth}{ 
+%             % --- Name ---
+%             {\Huge \scshape Siddharth Abbineni} 
+            
+%             % Small, natural paragraph space will occur here. Adjust if needed.
+%             % Could add a specific \vspace{3pt} here if parskip is too large/small
+%             \vfill
+%             % --- Contact Info Line ---
+%             { % Start group for size control
+%               \small % Adjust size for best fit
+%               \vspace{15pt}
+%               \href{mailto:siddharth.abbineni@gmail.com}{\faEnvelope~siddharth.abbineni@gmail.com} $|$
+%               {\faPhone~+91-7036999995} \\[\smallskipamount] % Use small space after line break
+%               \href{https://www.linkedin.com/in/siddharthabbineni/}{\faLinkedin~linkedin.com/in/siddharthabbineni} $|$ 
+%               \href{https://www.siddharthabbineni.in/}{\faGlobe~siddharthabbineni.in}
+              
+%             } % End group for size control
+%         } % End INNER parbox
+        
+%         % This vfill is now AFTER the inner box, pushing it up
+%         % and filling the remaining space below the contact info
+%         \vfill 
+        
+%     } % End OUTER parbox (height 2.5cm)
+% \end{minipage}% <-- No space here
+% \hfill % Push right minipage to the margin
+% % --- Right Column (Badges) ---
+% \begin{minipage}[t]{0.38\textwidth} % Adjust width as needed
+%     \vspace{0pt} % Ensure alignment starts at the very top
+%     \raggedleft % Align badges to the right
+
+%     % --- Certification Badges (Side-by-Side, Fixed Height) ---
+%     \includegraphics[height=2.2cm]{az305.png} % Set fixed height
+%     \hspace{10pt} 
+%     \includegraphics[height=2.2cm]{az400.png} % Set fixed height
+
+% \end{minipage}
+
+% \vspace{10pt} % Add space after the header block
+% %---------- END HEADER ---------- 
+
+%----------SUMMARY----------
+\section*{Summary} % Using section* for unnumbered summary heading
+\small{Azure-certified Solutions Architect and Full Stack Lead with 13+ years of experience in designing and implementing complex systems using the .NET ecosystem, modern web frameworks (React, Angular, Vue), and cloud platforms. Proven track record in microservices design, Azure migrations, and delivering enterprise solutions such as debt-recovery systems, ERPs, and document management platforms.}
+\vspace{-10pt}
+% %-----------COMPETENCIES AND CREDENTIALS (Condensed with Minimal Breaks)-----------
+% \section{Competencies and Credentials}
+% \vspace{-1pt} % Adjust spacing as needed
+% \begin{itemize}[leftmargin=0.15in, label={}] % Use itemize but without label for consistent indent
+%     \small{\item{ % Single item for the whole block
+%         \textbf{Core Competencies:} Cloud Architecture, Full-Stack Development, Microservices Design, DevOps  \\ \vspace{2pt}
+%         \textbf{Cloud:} Azure (Certified), AWS, GCP, Docker, Kubernetes (AKS, EKS), Azure Functions, APIM  \\ \vspace{2pt}
+%         \textbf{DevOps:} Azure DevOps (Pipelines, Repos, Artifacts), GitHub Actions, Terraform, Argo CD, Azure Container Registry, SonarQube, CI/CD Pipelines \\ \vspace{2pt} % Line break after Cloud/DevOps/Core
+%         \textbf{Backend:} .NET Core, ASP.NET, Node.js, MSSQL, PostgreSQL, MySQL \\ \vspace{2pt}
+%         \textbf{Frontend:} React, Angular, Vue, Blazor, Tailwind CSS \\ \vspace{2pt} % Line break after Backend/Frontend
+%         \textbf{Certifications:} \textbf{Azure:} 
+%         \href{https://learn.microsoft.com/api/credentials/share/en-us/wapenshaw/630EC7F36687255E?sharingId=1731259073C0B668}{\ul{Solutions Architect}},
+%         \href{https://learn.microsoft.com/api/credentials/share/en-us/wapenshaw/5E49330F73A465E8?sharingId=1731259073C0B668}{\ul{DevOps Engineer}},
+%         \href{https://learn.microsoft.com/api/credentials/share/en-us/wapenshaw/24EEE21A39365BBD?sharingId=1731259073C0B668}{\ul{Administrator Associate}},
+%         \href{https://learn.microsoft.com/api/credentials/share/en-us/wapenshaw/E65DD45EE23C0CF5?sharingId=1731259073C0B668}{\ul{Developer Associate}}
+%     }}
+% \end{itemize}
+
+%-----------TECHNICAL SKILLS-----------
+\section{Technical Skills}
+\begin{itemize}[leftmargin=0.15in, label={}, itemsep=-2pt, topsep=0pt, partopsep=0pt] 
+    \small
+    \item \textbf{Cloud \& DevOps:} Azure, AWS, GCP, Azure DevOps (Pipelines, Repos, Artifacts), GitHub Actions, Terraform, Bicep, Argo CD, Helm, Docker, Kubernetes (AKS, EKS), Azure Container Registry, Docker Hub
+    \item \textbf{Backend \& Architecture:} .NET (Core, Framework, ASP.NET MVC/API), Microservices Architecture, Solution Design, Redis, MSSQL, PostgreSQL, MySQL, System Integration (On-prem, Cloud, 3rd Party)
+    \item \textbf{Observability \& Security:} Azure Monitor, Application Insights, Kibana (Elasticsearch), OpenTelemetry, Microsoft Defender for Cloud, Azure Security Center, OWASP ZAP, SonarQube
+    \item \textbf{Frontend \& UI:} React, Angular, Vue.js, Blazor, JavaScript, TypeScript, HTML5, CSS3, Tailwind CSS
+    \item \textbf{AI \& Data:} Azure Cognitive Services, Azure OpenAI, ML.NET,  SQL Server Reporting Services (SSRS)
+\end{itemize}
+\vspace{-10pt}
+
+%-----------CERTIFICATIONS-----------
+\section{Certifications}
+\noindent % Prevents any paragraph indentation
+\begin{small} % Use small font for the entire line for compactness
+    \faMicrosoft~ % Microsoft icon (alternative: \faCloud for Azure specific)
+    \textbf{Azure:} 
+    \href{https://learn.microsoft.com/api/credentials/share/en-us/wapenshaw/630EC7F36687255E?sharingId=1731259073C0B668}{\ul{Solutions Architect Expert}}, 
+    \href{https://learn.microsoft.com/api/credentials/share/en-us/wapenshaw/5E49330F73A465E8?sharingId=1731259073C0B668}{\ul{DevOps Engineer Expert}}, 
+    \href{https://learn.microsoft.com/api/credentials/share/en-us/wapenshaw/24EEE21A39365BBD?sharingId=1731259073C0B668}{\ul{Administrator Associate}}, 
+    \href{https://learn.microsoft.com/api/credentials/share/en-us/wapenshaw/E65DD45EE23C0CF5?sharingId=1731259073C0B668}{\ul{Developer Associate}}
+\end{small}
+\vspace{-15pt}
+%-----------CERTIFICATIONS-----------
+%-----------PROFESSIONAL EXPERIENCE-----------
+\section{Professional Experience}
+\begin{itemize}[leftmargin=0in, label={}] % Outer list for job entries, no indent/label
+
+    \resumeSubheading
+      {Sr Technology Automation Engineer}{Aug 2025 – Present}
+      {Assurant}{Hyderabad, India}
+      \resumeItemListStart
+        \resumeItem{Taking on responsibility to drive automation initiatives across infrastructure and cloud services to streamline service fulfillment, remediation, and reporting.}
+        \resumeItem{Contributing to the design and implementation of cloud-agnostic automation frameworks that aim to reduce manual effort and improve delivery efficiency.}
+        \resumeItem{Supporting the development of scalable infrastructure provisioning, multi-cloud deployments, and CI/CD pipelines.}
+        \resumeItem{Partnering with cloud architects and infrastructure teams to deliver secure and resilient automation solutions.}
+        \resumeItem{Beginning work on advancing self-service platforms, AI/ML-driven automation, and cloud-native practices to help modernize enterprise IT services.}
+      \resumeItemListEnd
+      
+    \resumeSubheading
+      {Senior Technical Specialist}{Dec 2020 – Aug 2025}
+      {{\CompanyOne}}{Hyderabad, India}
+      \resumeItemListStart % Start bullets for this role
+        \resumeItem{\textbf{Solutions Architect Lead {\CompanyOneOne}:}}
+            \begin{itemize} % Nested list for client project specifics
+                \resumeItem{Led the technical roadmap for Azure \& AWS migrations and spearheaded a .NET Core/AKS Distributions \& Collections Engine, increasing debt recovery by 30\%.}
+                \resumeItem{Architected 8+ mission-critical core banking microservices and prototyped AI-driven credit risk analysis models using Azure Cognitive Services \& OpenAI.}
+                \resumeItem{Implemented Azure Infrastructure as Code (IaC) using Terraform and authored comprehensive C4 system designs.}
+            \end{itemize}
+            \vspace{2pt}
+        \resumeItem{\textbf{Product Engineering Lead {\CompanyOneTwo}:}}
+            \begin{itemize} % Nested list for internal projects
+                \resumeItem{Architected a Positive Credit Register API and a full-stack Document Management Center (React.js, Azure Cognitive Services) within strict regulatory deadlines.}
+                \resumeItem{Spearheaded feature upgrades for the '\href{https://vatify.pinion.services}{{\underline{{\ProductVatify}}}}' application, integrating Stripe payments and scaling active users from 100+ to 1,000+.}
+                \resumeItem{Managed Azure cloud resources and CI/CD pipelines via Azure DevOps for efficient, automated deployments.}
+            \end{itemize}
+      \resumeItemListEnd % End bullets for Pinion Services
+
+    \resumeSubheading
+      {Senior Software Engineer}{Nov 2016 – Nov 2020}
+      {{\CompanyTwo}}{Hyderabad, India}
+      \resumeItemListStart
+        % Bullet 1: ERP/CRM Leadership & Scale
+        \resumeItem{Led a development team of 5 engineers in creating the 'Studease' Educational ERP/CRM solution (ASP.NET 4.0, SQL Server); successfully deployed across 5 educational institutions, managing records for over 15,000 students and staff.}
+        % Bullet 2: Digital Curriculum Module Development & Impact
+        \resumeItem{Developed 4 core modules for the 'Digital Curriculum' platform (virtual classrooms, course management) using .Net 4.8, Entity Framework 6.0, and LINQ, supporting 500+ concurrent users and hosting over 200 digital courses.}
+        % Bullet 3: LINQ Usage (Kept as is - describes method rather than quantifiable outcome)
+        \resumeItem{Utilized LINQ for efficient data querying and manipulation across diverse sources including object collections, XML documents, and ADO.NET/Entity Framework entities.}
+        % Bullet 4: TFS Admin & Deployment Scope
+        \resumeItem{Administered Team Foundation Server (TFS) for source control and managed build/deployment processes for 3 major application streams, ensuring code integrity and deployment consistency.}
+        % Bullet 5: API Development & Usage
+        \resumeItem{Created 2 secure RESTful Web APIs (.NET) enabling critical data access for internal mobile applications, handling an average of 10,000+ daily requests.}
+      \resumeItemListEnd % End bullets for Melite
+      
+    \resumeSubheading
+      {IT Consultant}{Jul 2012 – Sep 2016}
+      {{\CompanyThree}}{Secunderabad, India}
+      \resumeItemListStart
+        % Bullet 1: Team Leadership & Solution Scope
+        \resumeItem{Led an in-house team of 8 developers, delivering 3 major custom ERP/CRM solutions (ASP.NET, SQL Server) that streamlined operations across administrative, academic, and finance departments for 2,000+ users (staff and students).}
+        % Bullet 2: CRM Feature Impact
+        \resumeItem{Developed key CRM features including automated communication campaigns (reducing manual SMS/email efforts by approx. 60\%) and integrated portals, resulting in a 25\% improvement in parent engagement metrics.}
+        % Bullet 3: Website Management & Reliability
+        \resumeItem{Designed, developed, and maintained 4 distinct school websites (ASP.NET, HTML/CSS/JS), achieving 99.5\% uptime and handling content updates for diverse school events and announcements.}
+        % Bullet 4: Consultation Impact (Focus on Infrastructure Scale)
+        \resumeItem{Provided technical consultation influencing hardware procurement decisions and network infrastructure design supporting over 500 networked devices across the campus.}
+      \resumeItemListEnd % End bullets for Delhi Public School
+
+    \resumeSubheading
+      {Application Developer}{Dec 2010 – Feb 2012}
+      {{\CompanyFour}}{Stamford, CT, USA}
+      \resumeItemListStart
+        % Bullet 1: ERP Lead Developer Impact
+        \resumeItem{Acted as Lead Developer for the internal ERP portal (ASP.NET, C\#, SQL Server), enhancing 5 core business workflows utilized daily by 200+ employees across multiple departments.}
+        % Bullet 2: General Ledger Automation Efficiency
+        \resumeItem{Collaborated with the finance department to automate General Ledger reconciliation processes, reducing manual data entry time by over 75\% and minimizing reconciliation errors.}
+        % Bullet 3: SSIS Package Scale & Reliability
+        \resumeItem{Developed and maintained 15+ critical SSIS packages for migrating and transforming data from legacy systems into the enterprise data warehouse, processing millions of records nightly with 99\% reliability.}
+        % Bullet 4: SSRS Report Automation & Scope
+        \resumeItem{Created 20+ parameterized SSRS reports and templates, automating generation via SQL Agent Jobs, providing key business insights to management and saving approx. 10 hours/week in manual reporting efforts.}
+        % Bullet 5: Sponsor Portal Development & Feature Impact
+        \resumeItem{Developed and maintained the customer-facing "Sponsor Portal," managing over 50,000 user accounts; integrated social login (Facebook, Twitter), contributing to a 15\% increase in user registrations.}
+      \resumeItemListEnd % End bullets for QSP
+
+\end{itemize} % End outer list for job entries
+\vspace{-10pt}
+%-----------EDUCATION-----------
+\section{Education}
+\vspace{1pt} % Adjust space after section title if needed
+\begin{itemize}[leftmargin=0.28in, rightmargin=0.22in, label={}] % Keep a minimal indent for consistency, but no label
+    \item % Use a simple item for the entry
+        \textbf{Bachelor of Technology, Computer Science and Engineering} \hfill {2005 – 2009} \\ % Degree and Dates on one line, push dates right
+        \textit{{\CollegeName}} \hfill {Hyderabad, India} % University and Location on next line, push location right
+\end{itemize}
+
+%-----------EDUCATION-----------
+
+%-------------------------------------------
+%----------- Removed Technical Skills Section -----------
+% The competencies section above covers this effectively.
+% If you prefer a separate skills section, uncomment and populate this:
+% \section{Technical Skills}
+%  \begin{itemize}[leftmargin=0.15in, label={}]
+%     \small{\item{
+%      \textbf{Languages}{: C\#, SQL, Typescript, JavaScript, HTML, CSS, SASS, Java, GraphQL} \\
+%      \textbf{Backend Frameworks/Technologies}{: ASP.NET, .NET Core, Node.js, MSSQL, MySQL, Docker} \\
+%      \textbf{Frontend Frameworks/Libraries}{: Angular, React, Blazor, React Native, WPF, UWP, Tailwind CSS} \\ % Check React Native accuracy
+%      \textbf{Cloud Platforms}{: Azure (Expert), AWS, Google Cloud, Kubernetes, GitOps} \\
+%      \textbf{DevOps Tools}{: Azure DevOps, GitHub Actions, Terraform, CI/CD, Argo CD} \\
+%      % \textbf{Libraries}{: Add any other key libraries like EF Core, Dapper, etc. if needed}
+%     }}
+%  \end{itemize}
+
+%-------------------------------------------
+\end{document}
