@@ -40,7 +40,7 @@ const MotionStack = motion.create(Stack) as React.ComponentType<StackProps & Mot
 const MotionBox = motion.create(Box) as React.ComponentType<BoxProps & MotionProps>
 
 const Sidebar = ({ soData }: SideBarProps) => {
-	const surNameSize = useBreakpointValue({ base: '3xl', md: '4xl' })
+	const surNameSize = useBreakpointValue({ base: '3xl', md: '4xl', xl: '3xl', '2xl': '4xl' })
 	const mobileAvatar = useColorModeValue(
 		AvatarImages.LightMode,
 		AvatarImages.DarkMode
@@ -52,16 +52,29 @@ const Sidebar = ({ soData }: SideBarProps) => {
 			animate="animate"
 			position={{ xl: 'fixed' }}
 			maxWidth={{ xl: '34%' }}
-			top={{ lg: 0 }}
+			top={0}
+			height={{ xl: '100vh' }}
+			overflowY={{ xl: 'auto' }}
+			css={{
+				'&::-webkit-scrollbar': { display: 'none' },
+				scrollbarWidth: 'none',
+			}}
 		>
 			<Container
 				padding={0}
 				margin={0}
-				height={{ xl: '100vh' }}
 				display={{ xl: 'flex' }}
-				alignItems={{ xl: 'center' }}
+				flexDirection={{ xl: 'column' }}
+				justifyContent={{ xl: 'center' }}
+				minHeight={{ xl: '100vh' }}
 			>
-				<MotionStack variants={stagger} gap={6} w="100">
+				<MotionStack
+					variants={stagger}
+					gap={{ base: 6, xl: 4, '2xl': 5 }}
+					w="100%"
+					paddingTop={{ xl: 14, '2xl': 4 }}
+					paddingBottom={{ xl: 6, '2xl': 4 }}
+				>
 					<MotionBox variants={fadeInUp}>
 						<Flex
 							align="center"
@@ -90,7 +103,7 @@ const Sidebar = ({ soData }: SideBarProps) => {
 								</MotionHeading>
 								<MotionHeading
 									as="h1"
-									size="2xl"
+									size={{ base: '2xl', xl: 'xl', '2xl': '2xl' }}
 									className={styles.marginTopForce}
 									paddingRight={{ lg: '20' }}
 									textTransform="uppercase"
@@ -117,7 +130,7 @@ const Sidebar = ({ soData }: SideBarProps) => {
 
 					<MotionText
 						colorPalette="gray"
-						fontSize="small"
+						fontSize="md"
 						className={styles.marginTopForce}
 						variants={fadeInUp}
 					>
@@ -126,7 +139,7 @@ const Sidebar = ({ soData }: SideBarProps) => {
 
 					<MotionHeading
 						as="h3"
-						size="md" color="text.emphasis"
+						size={{ base: 'lg', xl: 'md', '2xl': 'lg' }} color="text.emphasis"
 						className={styles.marginTopSmall}
 						variants={fadeInUp}
 					>
@@ -134,16 +147,23 @@ const Sidebar = ({ soData }: SideBarProps) => {
 					</MotionHeading>
 
 					<MotionText color="text.description"
-						fontSize="medium"
+						fontSize={{ base: 'md', xl: 'sm', '2xl': 'md' }}
+						lineHeight="tall"
 						paddingRight={{ lg: '12' }}
 						variants={fadeInUp}
 						maxWidth={{ base: '100%', lg: '80%' }}
 					>
-						Hello 👋 Welcome! I am a{' '}
+						Hello 👋 Welcome! I am an{' '}
 						<Text color="text.emphasis" as="span">
-							cloud &amp; software architect
+							Azure-certified cloud &amp; solutions architect
 						</Text>{' '}
-						based in Hyderabad, IN. An ex-pro{' '}
+						with 13+ years of experience, based in Hyderabad, IN. I design
+						scalable cloud platforms, distributed systems, and enterprise
+						architectures using{' '}
+						<Text color="text.emphasis" as="span">
+							.NET, Python &amp; React
+						</Text>
+						. An ex-pro{' '}
 						<Text color="text.emphasis" as="span">
 							Q3A &amp; age2x
 						</Text>{' '}
@@ -163,8 +183,8 @@ const Sidebar = ({ soData }: SideBarProps) => {
 							<SimpleGrid
 								columns={3}
 								gap={3}
-								flex={1}
-								justifyItems="center"
+								justifyItems="end"
+								ml="auto"
 							>
 								{SocialMedias.map((socMedia) => (
 									<Link

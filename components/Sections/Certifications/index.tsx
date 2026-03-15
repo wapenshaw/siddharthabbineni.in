@@ -43,34 +43,48 @@ const CertCard = ({ cert }: { cert: Certification }) => {
 				_hover={{ background: alphaHover, opacity: 1, filter: 'none' }}
 				aspectRatio="1"
 				width="100%"
+				overflow="hidden"
 			>
 				<Stack
-					gap={1}
+					gap={0}
 					align="center"
 					textAlign="center"
-					justify="center"
 					height="100%"
-					padding={{ base: '0.5em', md: '0.8em' }}
+					padding={{ base: '0.6em', md: '0.8em' }}
 				>
-					<Image
-						src={cert.badge}
-						alt={cert.fullName}
-						width={{ base: '40px', md: '52px' }}
-						height={{ base: '40px', md: '52px' }}
-						objectFit="contain"
-					/>
-					<Heading
-						fontSize={{ base: 'xs', md: 'sm' }}
-						lineHeight="short"
+					{/* Logo fills most of the card */}
+					<Box
+						flex={1}
+						display="flex"
+						alignItems="center"
+						justifyContent="center"
+						width="100%"
+						minHeight={0}
 					>
-						{cert.name}
-					</Heading>
-					<Text fontSize="xs" color="text.description">
-						{cert.earned}{' '}
-						<GoLinkExternal
-							style={{ display: 'inline', verticalAlign: 'middle' }}
+						<Image
+							src={cert.badge}
+							alt={cert.fullName}
+							maxWidth="80%"
+							maxHeight="100%"
+							objectFit="contain"
 						/>
-					</Text>
+					</Box>
+					{/* Text pinned to bottom */}
+					<Box flexShrink={0} paddingTop={1}>
+						<Heading
+							fontSize={{ base: 'xs', md: 'sm' }}
+							lineHeight="short"
+							lineClamp={2}
+						>
+							{cert.name}
+						</Heading>
+						<Text fontSize="xs" color="text.description" lineClamp={1}>
+							{cert.earned}{' '}
+							<GoLinkExternal
+								style={{ display: 'inline', verticalAlign: 'middle' }}
+							/>
+						</Text>
+					</Box>
 				</Stack>
 			</Box>
 		</Link>

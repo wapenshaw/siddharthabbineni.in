@@ -47,7 +47,7 @@ const AchievementCard = ({ item }: { item: GamingAchievement }) => {
 			gap={2}
 			align="center"
 			width="100%"
-			height="56px"
+			height="60px"
 			overflow="hidden"
 		>
 			{item.icon ? (
@@ -72,12 +72,12 @@ const AchievementCard = ({ item }: { item: GamingAchievement }) => {
 				</Flex>
 			)}
 			<Box flex={1} minWidth={0}>
-				<Text fontSize="xs" fontWeight="bold" lineClamp={1}>
+				<Text fontSize="sm" fontWeight="bold" lineClamp={1}>
 					{item.name}
 				</Text>
 				<Flex align="center" gap={1}>
-					<PlatformIcon size={10} />
-					<Text fontSize="2xs" color={subColor} lineClamp={1}>
+					<PlatformIcon size={12} />
+					<Text fontSize="xs" color={subColor} lineClamp={1}>
 						{item.gameName} · {formatDate(item.unlocktime)}
 						{item.extra ? ` · ${item.extra}` : ''}
 					</Text>
@@ -102,10 +102,10 @@ const StatItem = ({
 	return (
 		<Flex align="center" gap={1}>
 			{icon}
-			<Text fontSize="xs" fontWeight="bold">
+			<Text fontSize="sm" fontWeight="bold">
 				{typeof value === 'number' ? value.toLocaleString() : value}
 			</Text>
-			<Text fontSize="2xs" color={subColor}>
+			<Text fontSize="xs" color={subColor}>
 				{label}
 			</Text>
 		</Flex>
@@ -145,24 +145,24 @@ const PlatformStats = ({
 	)
 
 	const statsContent = (
-		<Box flex={1} minWidth={0}>
-			<Flex align="center" gap={1} mb={0.5}>
-				<PlatformIcon size={11} />
-				<Text fontSize="2xs" fontWeight="bold" textTransform="uppercase" letterSpacing="wider">
+		<Flex flex={1} minWidth={0} direction="column" justify="space-evenly" gap={1}>
+			<Flex align="center" gap={1}>
+				<PlatformIcon size={13} />
+				<Text fontSize="xs" fontWeight="bold" textTransform="uppercase" letterSpacing="wider">
 					{platform}
 				</Text>
 				{stats.extra && (
-					<Text fontSize="2xs" fontWeight="bold" color="text.emphasis">
+					<Text fontSize="xs" fontWeight="bold" color="text.emphasis">
 						{stats.extra}
 					</Text>
 				)}
 			</Flex>
-			<Flex wrap="wrap" gap={2}>
-				<StatItem icon={<IoGameController size={11} />} value={stats.games} label="games" />
-				<StatItem icon={<HiStar size={11} />} value={stats.perfect} label="100%" />
-				<StatItem icon={<IoTrophy size={11} />} value={stats.achievements} label="ach" />
+			<Flex wrap="wrap" columnGap={2} rowGap={1}>
+				<StatItem icon={<IoGameController size={13} />} value={stats.games} label="games" />
+				<StatItem icon={<HiStar size={13} />} value={stats.perfect} label="100%" />
+				<StatItem icon={<IoTrophy size={13} />} value={stats.achievements} label="ach" />
 			</Flex>
-		</Box>
+		</Flex>
 	)
 
 	return (
@@ -242,7 +242,7 @@ const GamingWidget = () => {
 		<Box width={{ base: '100%', lg: '80%' }}>
 			{/* Achievement ticker */}
 			{current && (
-				<Box position="relative" height="56px" overflow="hidden" mb={2}>
+				<Box position="relative" height="60px" overflow="hidden" mb={2}>
 					<AnimatePresence mode="wait">
 						<MotionBox
 							key={currentIndex}
@@ -261,7 +261,7 @@ const GamingWidget = () => {
 			)}
 
 			{/* Profile stats: Steam (left) | Xbox (right) */}
-			<Flex gap={2}>
+			<Flex gap={2} direction={{ base: 'column', md: 'row' }}>
 				{gamingData.steam && (
 					<PlatformStats
 						platform="steam"

@@ -22,9 +22,9 @@ const TAB_LIST_WIDTH_DESKTOP = '130px'
 
 const ExperienceTab = () => {
 	const { colorMode } = useColorMode()
-	const emphasis = useColorModeValue('teal.600', 'orange.200')
+	const emphasis = useColorModeValue('#26417f', 'orange.200')
 	const borderColor = useColorModeValue('gray.300', 'gray.600')
-	const activeBordercolor = useColorModeValue('teal.600', '#97DFFC')
+	const activeBordercolor = useColorModeValue('#26417f', '#97DFFC')
 	const isMobile = useBreakpointValue(mobileBreakpointsMap)
 	const tabListRef = useRef<HTMLDivElement>(null)
 
@@ -89,7 +89,7 @@ const ExperienceTab = () => {
 					<Tabs.Trigger
 						key={`Tab-${company.name}`}
 						value={company.name}
-						fontSize="smaller"
+						fontSize="sm"
 						h="100px"
 						width={!isMobile ? '100%' : 'auto'}
 						minWidth={tabMinWidth}
@@ -126,7 +126,7 @@ const ExperienceTab = () => {
 						<Stack gap={0}>
 							<Text
 								as="span"
-								fontSize="lg"
+								fontSize="xl"
 								fontWeight="bold"
 								color="text.description"
 							>
@@ -146,20 +146,20 @@ const ExperienceTab = () => {
 								<Text
 									as="span"
 									textTransform="none"
-									fontSize="x-small"
+									fontSize="sm"
 									color="text.description"
 								>
 									{' '}
 									{company.subDetail}
 								</Text>
 							</Text>
-							<Text fontSize="smaller">{company.duration}</Text>
+							<Text fontSize="sm">{company.duration}</Text>
 						</Stack>
 						<List.Root gap={3} pt={5} listStyle="none">
 							{company.roles?.map((roleDesc, idx) => (
 								<List.Item
 									key={`${company.name}-desc-${idx}`}
-									fontSize="smaller"
+									fontSize="sm"
 									display="flex"
 									alignItems="center"
 									justifyContent="flex-start"

@@ -1,6 +1,3 @@
-'use client'
-
-import { memo } from 'react'
 import {
 	Box,
 	Heading,
@@ -11,20 +8,11 @@ import {
 	Separator,
 } from '@chakra-ui/react'
 import { IoMdArrowBack, IoMdOpen } from 'react-icons/io'
-import { Article } from 'types/article'
-import { useColorModeValue } from 'components/ui/color-mode'
+import type { Article } from 'types/article'
 
 const BlogList = ({ articles }: { articles: Article[] }) => {
-	const bg = useColorModeValue('gray.50', 'gray.900')
-	const cardBg = useColorModeValue('blackAlpha.50', 'whiteAlpha.100')
-	const borderColor = useColorModeValue('blackAlpha.300', 'whiteAlpha.100')
-	const alphaHover = useColorModeValue(
-		'rgba(49, 151, 149, 0.06)',
-		'rgba(157, 236, 249, 0.06)'
-	)
-
 	return (
-		<Box minH="100vh" bg={bg} padding={{ base: 4, md: 8, lg: 16 }}>
+		<Box minH="100vh" bg="bg.body" padding={{ base: 4, md: 8, lg: 16 }}>
 			<Stack maxW="900px" mx="auto" gap={8}>
 				<Link
 					href="/"
@@ -59,13 +47,13 @@ const BlogList = ({ articles }: { articles: Article[] }) => {
 							<Stack
 								gap={3}
 								borderWidth="1px"
-								borderColor={borderColor}
+								borderColor="border.divider"
 								borderRadius="1em"
 								padding={{ base: '1em', '2xl': '1.5em' }}
 								height="100%"
 								transition="all 0.2s ease-in-out"
-								backgroundColor={cardBg}
-								_hover={{ background: alphaHover }}
+								backgroundColor="bg.surface"
+								_hover={{ background: 'bg.buttonAltHover' }}
 								as="article"
 							>
 								{article.social_image && (
@@ -88,7 +76,7 @@ const BlogList = ({ articles }: { articles: Article[] }) => {
 								<Heading fontSize="larger" paddingX={2}>
 									{article.title}
 								</Heading>
-								<Separator borderColor="#A6A6A6" width="95%" />
+								<Separator borderColor="border.divider" width="95%" />
 								<Stack gap={1}>
 									<Heading
 										fontSize="small"
@@ -131,4 +119,4 @@ const BlogList = ({ articles }: { articles: Article[] }) => {
 	)
 }
 
-export default memo(BlogList)
+export default BlogList

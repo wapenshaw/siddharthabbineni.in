@@ -36,7 +36,7 @@ const BadgeDot = ({
 	count > 0 ? (
 		<Flex align="center" gap={1}>
 			<Circle size="10px" bg={color} />
-			<Text fontSize="xs" fontWeight="bold">
+			<Text fontSize="sm" fontWeight="bold">
 				{count}
 			</Text>
 		</Flex>
@@ -82,7 +82,7 @@ export const StackOverflowBadge = ({ soData }: SoBadgeProps) => {
 				<Icon w={8} h={8} as={FaStackOverflow} color="currentColor" />
 				<Box>
 					<Stat.Root marginTop={-1}>
-						<Stat.ValueText fontSize="lg" fontWeight="bold">
+						<Stat.ValueText fontSize="xl" fontWeight="bold">
 							{truncate(user.reputation)}
 						</Stat.ValueText>
 						<Stat.HelpText fontSize="sm">

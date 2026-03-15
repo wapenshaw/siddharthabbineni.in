@@ -8,7 +8,9 @@ import {
 	SimpleGrid,
 	Text,
 	Icon,
+	IconButton,
 } from '@chakra-ui/react'
+import { LuX } from 'react-icons/lu'
 import styles from './styles.module.css'
 import { Skill, Skills, splitSkills } from 'config/skills'
 import { useColorModeValue } from 'components/ui/color-mode'
@@ -25,7 +27,7 @@ const SkillList = ({
 	title: string
 	columns: Skill[][]
 }) => {
-	const emphasis = useColorModeValue('teal.600', 'orange.200')
+	const emphasis = useColorModeValue('#26417f', 'orange.200')
 	const colOne = columns[0] ?? []
 	const colTwo = columns[1] ?? []
 	return (
@@ -69,36 +71,52 @@ const SkillList = ({
 const SkillSetModal = ({ isOpen, onClose }: ISkillSetModal) => {
 	const cloudCols = splitSkills(Skills.cloud)
 	const devopsCols = splitSkills(Skills.devops)
-	const backendCols = splitSkills(Skills.backend)
-	const frontendCols = splitSkills(Skills.frontend)
-	const dataBaseCols = splitSkills(Skills.database)
-	const uiFrameWorkCols = splitSkills(Skills['ui frameworks'])
-	const toolsCols = splitSkills(Skills.toolchains)
-	const deliverableCols = splitSkills(Skills.deliverables)
-	const desktopCols = splitSkills(Skills.desktop)
+	const engineeringCols = splitSkills(Skills.engineering)
+	const dataCols = splitSkills(Skills.data)
+	const modalBg = useColorModeValue('white', '#1a1a1a')
+	const closeBtnBg = useColorModeValue('gray.200', 'whiteAlpha.200')
+	const closeBtnHover = useColorModeValue('gray.300', 'whiteAlpha.300')
+
 	return (
 		<Dialog.Root
 			open={isOpen}
 			onOpenChange={(e) => {
 				if (!e.open) onClose()
 			}}
-			size="lg"
+			size="md"
 		>
 			<Dialog.Backdrop />
 			<Dialog.Positioner>
-				<Dialog.Content>
-					<Dialog.Header>Techs n Tools</Dialog.Header>
-					<Dialog.CloseTrigger />
+				<Dialog.Content
+					bg={modalBg}
+					borderRadius="xl"
+					boxShadow="2xl"
+					position="relative"
+				>
+					<Dialog.Header
+						display="flex"
+						justifyContent="space-between"
+						alignItems="center"
+						paddingRight={3}
+					>
+						<Text fontWeight="bold">Techs n Tools</Text>
+						<IconButton
+							aria-label="Close"
+							variant="ghost"
+							size="sm"
+							bg={closeBtnBg}
+							_hover={{ bg: closeBtnHover }}
+							borderRadius="full"
+							onClick={onClose}
+						>
+							<LuX />
+						</IconButton>
+					</Dialog.Header>
 					<Dialog.Body className={styles.skillModal}>
 						<SkillList title="Cloud & Infrastructure" columns={cloudCols} />
-						<SkillList title="DevOps & AI" columns={devopsCols} />
-						<SkillList title="Backend" columns={backendCols} />
-						<SkillList title="Frontend" columns={frontendCols} />
-						<SkillList title="Databases" columns={dataBaseCols} />
-						<SkillList title="Deliverables" columns={deliverableCols} />
-						<SkillList title="UI Frameworks" columns={uiFrameWorkCols} />
-						<SkillList title="Desktop" columns={desktopCols} />
-						<SkillList title="Tools &amp; Toolchains" columns={toolsCols} />
+						<SkillList title="DevOps & Automation" columns={devopsCols} />
+						<SkillList title="Engineering Stack" columns={engineeringCols} />
+						<SkillList title="Data" columns={dataCols} />
 					</Dialog.Body>
 					<Dialog.Footer>
 						<Text fontSize="x-small">I definitely forgot something here</Text>

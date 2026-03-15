@@ -33,27 +33,25 @@ export const Experiences: {
 		},
 		roles: [
 			<>
-				Taking on responsibility to drive automation initiatives across
-				infrastructure and cloud services to streamline service fulfillment,
-				remediation, and reporting.
+				Spearheading &apos;Astra&apos;, a flagship cloud automation platform
+				designed to standardize infrastructure provisioning, streamline
+				multi-cloud workflows, and enforce automation best practices across the
+				enterprise.
 			</>,
 			<>
-				Contributing to the design and implementation of cloud-agnostic
-				automation frameworks to reduce manual effort and improve delivery
-				efficiency.
+				Managing the end-to-end lifecycle of Kubernetes (AKS) clusters from
+				development to production, orchestrating seamless application
+				deployments, release management, and high availability.
 			</>,
 			<>
-				Supporting the development of scalable infrastructure provisioning,
-				multi-cloud deployments, and CI/CD pipelines.
+				Developing and deploying cloud-native microservices and enterprise
+				applications utilizing .NET and Python across Azure and AWS
+				environments.
 			</>,
 			<>
-				Partnering with cloud architects and infrastructure teams to deliver
-				secure and resilient automation solutions.
-			</>,
-			<>
-				Beginning work on advancing self-service platforms, AI/ML-driven
-				automation, and cloud-native practices to modernize enterprise IT
-				services.
+				Automating configuration management and CI/CD pipelines using Ansible
+				and modern DevOps practices, significantly reducing manual
+				infrastructure overhead and deployment times.
 			</>,
 		],
 	},

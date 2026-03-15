@@ -20,18 +20,20 @@ const GetInTouch = () => {
 			>
 				Reach out
 			</Heading>
-			<Text color="text.description">
+			<Text color="text.description" fontSize="md">
 				Being the dungeon dweller that I am, there is always an electronic
 				device on/near me for me to reply. You can contact me through my socials
-				on the left. The best way however, is to
+				on the left. The best way however, is to{' '}
 				<Link
 					href="mailto:siddharth.abbineni@hotmail.com"
-					target="_blank"
-					rel="noreferrer"
+					color="text.emphasis"
+					fontWeight="semibold"
+					textDecoration="underline"
+					_hover={{ color: 'link.descriptionHover' }}
 				>
-					&nbsp;email&nbsp;
-				</Link>
-				me so that I don&apos;t forget to respond. Too boomer for regular social
+					send me an email
+				</Link>{' '}
+				so that I don&apos;t forget to respond. Too boomer for regular social
 				media scrolling.
 			</Text>
 			<Box
