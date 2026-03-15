@@ -6,14 +6,14 @@ import system from 'config/theme'
 
 export function Provider({ children }: { children: React.ReactNode }) {
 	return (
-		<ChakraProvider value={system}>
-			<ThemeProvider
-				attribute="class"
-				defaultTheme="dark"
-				disableTransitionOnChange
-			>
+		<ThemeProvider
+			attribute="class"
+			defaultTheme="dark"
+			disableTransitionOnChange
+		>
+			<ChakraProvider value={system}>
 				{children}
-			</ThemeProvider>
-		</ChakraProvider>
+			</ChakraProvider>
+		</ThemeProvider>
 	)
 }

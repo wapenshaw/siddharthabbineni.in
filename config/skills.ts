@@ -14,6 +14,8 @@ import {
 	SiRedis,
 	SiTerraform,
 	SiTypescript,
+	SiRabbitmq,
+	SiDjango,
 } from 'react-icons/si'
 import { VscAzure, VscAzureDevops } from 'react-icons/vsc'
 import { TbSql } from 'react-icons/tb'
@@ -48,14 +50,15 @@ export const Skills: {
 		{ name: 'C# & .NET', icon: SiDotnet },
 		{ name: 'Python', icon: SiPython },
 		{ name: 'React', icon: SiReact },
+		{ name: 'Django', icon: SiDjango },
 		{ name: 'Angular', icon: SiAngular },
 		{ name: 'TypeScript', icon: SiTypescript },
-		{ name: 'Node', icon: SiNodedotjs },
 	],
 	data: [
 		{ name: 'MsSQL', icon: TbSql },
 		{ name: 'MongoDB', icon: SiMongodb },
 		{ name: 'Redis', icon: SiRedis },
+		{ name: 'Rabbitmq', icon: SiRabbitmq },
 	],
 }
 
