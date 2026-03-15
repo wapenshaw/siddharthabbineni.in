@@ -3,8 +3,10 @@
 import {
 	Box,
 	Container,
+	Flex,
 	Heading,
 	Icon,
+	Image as ChkImage,
 	Link,
 	Stack,
 	Text,
@@ -23,6 +25,8 @@ import {
 	stagger,
 } from 'config/animations'
 import { SocialMedias } from 'config/sidebar'
+import { AvatarImages } from 'components/Avatar'
+import { useColorModeValue } from 'components/ui/color-mode'
 
 import { StackData } from 'types/stackoverflow'
 interface SideBarProps {
@@ -36,6 +40,10 @@ const MotionBox = motion.create(Box) as React.ComponentType<BoxProps & MotionPro
 
 const Sidebar = ({ soData }: SideBarProps) => {
 	const surNameSize = useBreakpointValue({ base: '3xl', md: '4xl' })
+	const mobileAvatar = useColorModeValue(
+		AvatarImages.LightMode,
+		AvatarImages.DarkMode
+	)
 
 	return (
 		<MotionBox
@@ -53,35 +61,57 @@ const Sidebar = ({ soData }: SideBarProps) => {
 				alignItems={{ xl: 'center' }}
 			>
 				<MotionStack variants={stagger} gap={6} w="100">
-					<MotionText
-						variants={fadeInUp}
-						transition={{ delay: 1 }}
-						color="text.accent"
-						fontWeight="light"
+					<Flex
+						align="center"
+						justify="space-between"
+						gap={4}
 					>
-						బ్రెయిన్ వాడితే స్ట్రైన్ తగుద్ది రా చారి!
-					</MotionText>
-					<MotionHeading
-						as="h2"
-						size={surNameSize as HeadingProps['size']}
-						color="text.emphasis"
-						textTransform="uppercase"
-						variants={simpleOpacity}
-						whileHover={{ scale: 1.1 }}
-						whileTap={{ scale: 0.9 }}
-					>
-						Siddharth
-					</MotionHeading>
-					<MotionHeading
-						as="h1"
-						size="2xl"
-						className={styles.marginTopForce}
-						paddingRight={{ lg: '20' }}
-						textTransform="uppercase"
-						variants={fadeInUp}
-					>
-						Abbineni
-					</MotionHeading>
+						<Box flex={1}>
+							<MotionText
+								variants={fadeInUp}
+								transition={{ delay: 1 }}
+								color="text.accent"
+								fontWeight="light"
+							>
+								బ్రెయిన్ వాడితే స్ట్రైన్ తగుద్ది రా చారి!
+							</MotionText>
+							<MotionHeading
+								as="h2"
+								size={surNameSize as HeadingProps['size']}
+								color="text.emphasis"
+								textTransform="uppercase"
+								variants={simpleOpacity}
+								whileHover={{ scale: 1.1 }}
+								whileTap={{ scale: 0.9 }}
+							>
+								Siddharth
+							</MotionHeading>
+							<MotionHeading
+								as="h1"
+								size="2xl"
+								className={styles.marginTopForce}
+								paddingRight={{ lg: '20' }}
+								textTransform="uppercase"
+								variants={fadeInUp}
+							>
+								Abbineni
+							</MotionHeading>
+						</Box>
+						{/* Small avatar visible only on mobile, next to the name */}
+						<Box
+							display={{ base: 'block', lg: 'none' }}
+							flexShrink={0}
+						>
+							<ChkImage
+								src={mobileAvatar}
+								alt="Siddharth Abbineni"
+								boxSize="80px"
+								borderRadius="full"
+								objectFit="cover"
+								loading="eager"
+							/>
+						</Box>
+					</Flex>
 
 					<MotionText
 						colorPalette="gray"

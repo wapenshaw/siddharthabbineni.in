@@ -98,10 +98,10 @@ const StatItem = ({
 	return (
 		<Flex align="center" gap={1}>
 			{icon}
-			<Text fontSize="xs" fontWeight="bold">
+			<Text fontSize="sm" fontWeight="bold">
 				{value.toLocaleString()}
 			</Text>
-			<Text fontSize="2xs" color={subColor}>
+			<Text fontSize="xs" color={subColor}>
 				{label}
 			</Text>
 		</Flex>
@@ -115,23 +115,23 @@ const ProfileStats = ({ stats }: { stats: SteamProfileStats }) => {
 		<Flex
 			wrap="wrap"
 			gap={3}
-			paddingTop={1}
+			paddingTop={2}
 			borderTopWidth="1px"
 			borderColor={borderColor}
 			marginTop={1}
 		>
 			<StatItem
-				icon={<IoGameController size={12} />}
+				icon={<IoGameController size={14} />}
 				value={stats.totalGames}
 				label="games"
 			/>
 			<StatItem
-				icon={<HiStar size={12} />}
+				icon={<HiStar size={14} />}
 				value={stats.perfectGames}
 				label="100%"
 			/>
 			<StatItem
-				icon={<IoTrophy size={12} />}
+				icon={<IoTrophy size={14} />}
 				value={stats.totalAchievements}
 				label="unlocked"
 			/>

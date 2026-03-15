@@ -7,7 +7,7 @@ import { useEffect } from 'react'
 import { avatarAnimation } from 'config/animations'
 import { useColorModeValue } from 'components/ui/color-mode'
 
-const AvatarImages = {
+export const AvatarImages = {
 	DarkMode: '/SA_avatar.png',
 	LightMode: './SA_avatar_light.png',
 }

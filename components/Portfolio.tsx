@@ -84,13 +84,8 @@ const Portfolio = ({
 									lg: 'row',
 								}}
 							>
-								<Box
-									display={{ base: 'block', lg: 'none' }}
-									width="100%"
-								>
-									<Avatar />
-								</Box>
 								<About />
+								{/* Avatar only on desktop — mobile avatar is in Sidebar */}
 								<Box display={{ base: 'none', lg: 'block' }}>
 									<Avatar />
 								</Box>
