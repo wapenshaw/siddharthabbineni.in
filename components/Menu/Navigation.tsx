@@ -55,10 +55,9 @@ const Navigation = () => {
 			<Box
 				display={{ base: 'flex', xl: 'none' }}
 				alignItems="center"
-				paddingTop={1}
 				className={styles.menuBar}
 				zIndex={100}
-				top="3%"
+				top="1.5rem"
 			>
 				<ClientOnly fallback={<Skeleton boxSize="10" />}>
 					<IconButton

@@ -1,6 +1,6 @@
 .menu {
 	position: fixed;
-	top: 0;
+	top: 1rem;
 	right: 5%;
 	z-index: 1;
 }
