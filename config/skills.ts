@@ -3,22 +3,21 @@ import { FaAws } from 'react-icons/fa'
 import {
 	SiAngular,
 	SiAnsible,
+	SiDjango,
 	SiDocker,
 	SiDotnet,
 	SiGithubactions,
 	SiKubernetes,
-	SiNodedotjs,
 	SiMongodb,
 	SiPython,
+	SiRabbitmq,
 	SiReact,
 	SiRedis,
 	SiTerraform,
-	SiTypescript,
-	SiRabbitmq,
-	SiDjango,
+	SiTypescript
 } from 'react-icons/si'
-import { VscAzure, VscAzureDevops } from 'react-icons/vsc'
 import { TbSql } from 'react-icons/tb'
+import { VscAzure, VscAzureDevops } from 'react-icons/vsc'
 
 export type SkillCategory =
 	| 'cloud'
