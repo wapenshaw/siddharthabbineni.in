@@ -1,7 +1,7 @@
 'use client'
 
 import { memo, useState } from 'react'
-import {Image, useBreakpointValue} from '@chakra-ui/react'
+import { ClientOnly, Image, Skeleton, useBreakpointValue } from '@chakra-ui/react'
 import type { ImageProps } from '@chakra-ui/react'
 import Link from 'next/link'
 import { motion, AnimatePresence } from 'motion/react'
@@ -17,15 +17,21 @@ const Logo = () => {
 	const { colorMode } = useColorMode()
 	const [isLogoLoaded, setLogoLoaded] = useState(false)
 	const isMobile = useBreakpointValue(mobileBreakpointsMap)
+	const size = isMobile ? '30px' : '50px'
+
 	return (
 		<AnimatePresence>
 			<Link href="/" passHref>
-				{colorMode === ThemeMode.Dark ? (
+				<ClientOnly fallback={<Skeleton boxSize={size} />}>
 					<MotionImage
 						className={!isMobile ? styles.logo : ''}
-						boxSize={isMobile ? '30px' : '50px'}
+						boxSize={size}
 						objectFit="cover"
-						src="./logo-white.png"
+						src={
+							colorMode === ThemeMode.Dark
+								? './logo-white.png'
+								: './logo-black.png'
+						}
 						alt="Siddharth Abbineni Logo"
 						variants={simpleOpacity}
 						initial="initial"
@@ -33,20 +39,7 @@ const Logo = () => {
 						onLoad={() => setLogoLoaded(true)}
 						zIndex={2}
 					/>
-				) : (
-					<MotionImage
-						className={!isMobile ? styles.logo : ''}
-						boxSize={isMobile ? '30px' : '50px'}
-						objectFit="cover"
-						src="./logo-black.png"
-						alt="Siddharth Abbineni Logo"
-						variants={simpleOpacity}
-						initial="initial"
-						animate={isLogoLoaded ? 'animate' : undefined}
-						onLoad={() => setLogoLoaded(true)}
-						zIndex={2}
-					/>
-				)}
+				</ClientOnly>
 			</Link>
 		</AnimatePresence>
 	)

@@ -3,9 +3,12 @@
 import {
 	Box,
 	Container,
+	Flex,
 	Heading,
 	Icon,
+	Image as ChkImage,
 	Link,
+	SimpleGrid,
 	Stack,
 	Text,
 	useBreakpointValue,
@@ -15,6 +18,7 @@ import type { BoxProps, HeadingProps, StackProps, TextProps } from '@chakra-ui/r
 import { motion } from 'motion/react'
 import type { MotionProps } from 'motion/react'
 import { StackOverflowBadge } from './StackOverflow'
+import GamingWidget from './GamingWidget'
 import styles from './styles.module.css'
 import {
 	fadeInUp,
@@ -22,6 +26,8 @@ import {
 	stagger,
 } from 'config/animations'
 import { SocialMedias } from 'config/sidebar'
+import { AvatarImages } from 'components/Avatar'
+import { useColorModeValue } from 'components/ui/color-mode'
 
 import { StackData } from 'types/stackoverflow'
 interface SideBarProps {
@@ -35,6 +41,10 @@ const MotionBox = motion.create(Box) as React.ComponentType<BoxProps & MotionPro
 
 const Sidebar = ({ soData }: SideBarProps) => {
 	const surNameSize = useBreakpointValue({ base: '3xl', md: '4xl' })
+	const mobileAvatar = useColorModeValue(
+		AvatarImages.LightMode,
+		AvatarImages.DarkMode
+	)
 
 	return (
 		<MotionBox
@@ -52,35 +62,58 @@ const Sidebar = ({ soData }: SideBarProps) => {
 				alignItems={{ xl: 'center' }}
 			>
 				<MotionStack variants={stagger} gap={6} w="100">
-					<MotionText
-						variants={fadeInUp}
-						transition={{ delay: 1 }}
-						color="text.accent"
-						fontWeight="light"
-					>
-						బ్రెయిన్ వాడితే స్ట్రైన్ తగుద్ది రా చారి!
-					</MotionText>
-					<MotionHeading
-						as="h2"
-						size={surNameSize as HeadingProps['size']}
-						color="text.emphasis"
-						textTransform="uppercase"
-						variants={simpleOpacity}
-						whileHover={{ scale: 1.1 }}
-						whileTap={{ scale: 0.9 }}
-					>
-						Siddharth
-					</MotionHeading>
-					<MotionHeading
-						as="h1"
-						size="2xl"
-						className={styles.marginTopForce}
-						paddingRight={{ lg: '20' }}
-						textTransform="uppercase"
-						variants={fadeInUp}
-					>
-						Abbineni
-					</MotionHeading>
+					<MotionBox variants={fadeInUp}>
+						<Flex
+							align="center"
+							justify="space-between"
+							gap={4}
+						>
+							<Box flex={1}>
+								<MotionText
+									variants={fadeInUp}
+									transition={{ delay: 1 }}
+									color="text.accent"
+									fontWeight="light"
+								>
+									బ్రెయిన్ వాడితే స్ట్రైన్ తగుద్ది రా చారి!
+								</MotionText>
+								<MotionHeading
+									as="h2"
+									size={surNameSize as HeadingProps['size']}
+									color="text.emphasis"
+									textTransform="uppercase"
+									variants={simpleOpacity}
+									whileHover={{ scale: 1.1 }}
+									whileTap={{ scale: 0.9 }}
+								>
+									Siddharth
+								</MotionHeading>
+								<MotionHeading
+									as="h1"
+									size="2xl"
+									className={styles.marginTopForce}
+									paddingRight={{ lg: '20' }}
+									textTransform="uppercase"
+									variants={fadeInUp}
+								>
+									Abbineni
+								</MotionHeading>
+							</Box>
+							{/* Small avatar visible only on mobile, next to the name */}
+							<Box
+								display={{ base: 'block', lg: 'none' }}
+								flexShrink={0}
+							>
+								<ChkImage
+									src={mobileAvatar}
+									alt="Siddharth Abbineni"
+									boxSize="80px"
+									borderRadius="full"
+									objectFit="cover"
+								/>
+							</Box>
+						</Flex>
+					</MotionBox>
 
 					<MotionText
 						colorPalette="gray"
@@ -97,7 +130,7 @@ const Sidebar = ({ soData }: SideBarProps) => {
 						className={styles.marginTopSmall}
 						variants={fadeInUp}
 					>
-						Developer, Engineer, Gamer
+						Architect, Developer, Gamer
 					</MotionHeading>
 
 					<MotionText color="text.description"
@@ -108,7 +141,7 @@ const Sidebar = ({ soData }: SideBarProps) => {
 					>
 						Hello 👋 Welcome! I am a{' '}
 						<Text color="text.emphasis" as="span">
-							software engineer
+							cloud &amp; software architect
 						</Text>{' '}
 						based in Hyderabad, IN. An ex-pro{' '}
 						<Text color="text.emphasis" as="span">
@@ -117,24 +150,42 @@ const Sidebar = ({ soData }: SideBarProps) => {
 						player now turned into a casual. I play dota2 when I need to get mad
 						and Anno 1800/Cities Skylines when I need to chill.
 					</MotionText>
-					<MotionBox display="flex" variants={simpleOpacity}>
-						<StackOverflowBadge soData={soData} />
-					</MotionBox>
-					<MotionBox style={{ margin: 0 }} display="flex" variants={simpleOpacity}>
-						{SocialMedias.map((socMedia) => (
-							<Link color="link.description"
-								key={socMedia.label}
-								paddingRight={3}
-								aria-label={socMedia.label}
-								rel="noreferrer"
-								width={8}
-								href={socMedia.href}
-								target="_blank"
-								_focusVisible={{ boxShadow: 'none' }}
+					{/* SO badge on left, social icons grid on right */}
+					<MotionBox variants={simpleOpacity}>
+						<Flex
+							align="center"
+							gap={{ base: 4, lg: 5 }}
+							width={{ base: '100%', lg: '80%' }}
+						>
+							<Box flexShrink={0}>
+								<StackOverflowBadge soData={soData} />
+							</Box>
+							<SimpleGrid
+								columns={3}
+								gap={3}
+								flex={1}
+								justifyItems="center"
 							>
-								<Icon w={8} h={8} as={socMedia.icon} color="currentColor" />
-							</Link>
-						))}
+								{SocialMedias.map((socMedia) => (
+									<Link
+										color="text.emphasis"
+										key={socMedia.label}
+										aria-label={socMedia.label}
+										rel="noreferrer"
+										href={socMedia.href}
+										target="_blank"
+										_focusVisible={{ boxShadow: 'none' }}
+										_hover={{ color: 'link.descriptionHover' }}
+										transition="color 0.2s"
+									>
+										<Icon w={6} h={6} as={socMedia.icon} color="currentColor" />
+									</Link>
+								))}
+							</SimpleGrid>
+						</Flex>
+					</MotionBox>
+					<MotionBox variants={simpleOpacity}>
+						<GamingWidget />
 					</MotionBox>
 				</MotionStack>
 			</Container>

@@ -16,11 +16,12 @@ const DetailSection = () => (
 			Experience
 		</Heading>
 		<Text color="text.description">
-			8 years of Full stack web development experience. Substantial involvement
-			in software development, UI design, system analysis & design and
-			enterprise project collaborations. Currently working at&nbsp;
-			<Link href="https://pinion.services/" target="_blank" rel="noreferrer">
-				Pinion
+			Azure-certified Solutions Architect and Full Stack Lead with 13+ years
+			of experience in designing and implementing complex systems using the
+			.NET ecosystem, modern web frameworks, and cloud platforms. Currently
+			at&nbsp;
+			<Link href="https://www.assurant.com/" target="_blank" rel="noreferrer">
+				Assurant
 			</Link>
 			.
 		</Text>

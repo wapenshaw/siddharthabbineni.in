@@ -1,9 +1,16 @@
 .menu {
 	position: fixed;
-	top: 0;
+	top: 1rem;
 	right: 5%;
 	z-index: 1;
 }
+
+.menuBar {
+	position: fixed;
+	right: 5%;
+	z-index: 100;
+}
+
 .mobileMenuContainer {
 	position: fixed;
 	z-index: 1;

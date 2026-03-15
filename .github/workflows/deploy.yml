@@ -1,4 +1,4 @@
-name: Deploy
+name: Deploy to Azure Static Web App
 
 on:
   push:
@@ -9,7 +9,7 @@ on:
 
 jobs:
   deploy:
-    name: Build & Deploy
+    name:  ${{ github.ref == 'refs/heads/master' && 'Production' || 'Staging' }} - Build & Deploy
     runs-on: ubuntu-latest
 
     permissions:
@@ -27,11 +27,27 @@ jobs:
           node-version: 22
           cache: npm
 
+      - name: Cache Next.js build
+        uses: actions/cache@v4
+        with:
+          path: .next/cache
+          key: nextjs-${{ runner.os }}-${{ hashFiles('package-lock.json') }}-${{ hashFiles('**/*.ts', '**/*.tsx', '**/*.css') }}
+          restore-keys: |
+            nextjs-${{ runner.os }}-${{ hashFiles('package-lock.json') }}-
+            nextjs-${{ runner.os }}-
+
       - name: Install dependencies
         run: npm ci
 
       - name: Build
         run: npm run build
+        env:
+          STEAM_API_KEY: ${{ secrets.STEAM_API_KEY }}
+          STEAM_USER_ID: ${{ secrets.STEAM_USER_ID }}
+          XBOX_API_KEY: ${{ secrets.XBOX_API_KEY }}
+          XBOX_XUID: ${{ secrets.XBOX_XUID }}
+          SO_USER_ID: '66384'
+          NEXT_PUBLIC_SITE_URL: ${{ github.ref == 'refs/heads/master' && 'https://www.siddharthabbineni.in' || 'https://staging.siddharthabbineni.in' }}
 
       - name: Deploy
         uses: Azure/static-web-apps-deploy@v1

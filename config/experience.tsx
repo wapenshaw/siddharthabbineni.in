@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from '@chakra-ui/react'
 
-export type Company = 'Pinion' | 'Melite' | 'DPS' | 'QSP'
+export type Company = 'Assurant' | 'Pinion' | 'Melite' | 'DPS' | 'QSP'
 
 export type CompanyDetail = {
 	name: string
@@ -20,34 +20,76 @@ export type CompanyDetail = {
 export const Experiences: {
 	[key in Company]: CompanyDetail
 } = {
+	Assurant: {
+		name: 'Assurant',
+		longName: 'Assurant',
+		subDetail: 'Hyderabad, India',
+		url: 'https://www.assurant.com',
+		position: 'Sr Technology Automation Engineer',
+		duration: 'Aug 2025 – Present',
+		logo: {
+			light: '/work_images/assurant/assurant-logo.png',
+			dark: '/work_images/assurant/assurant-logo.png',
+		},
+		roles: [
+			<>
+				Taking on responsibility to drive automation initiatives across
+				infrastructure and cloud services to streamline service fulfillment,
+				remediation, and reporting.
+			</>,
+			<>
+				Contributing to the design and implementation of cloud-agnostic
+				automation frameworks to reduce manual effort and improve delivery
+				efficiency.
+			</>,
+			<>
+				Supporting the development of scalable infrastructure provisioning,
+				multi-cloud deployments, and CI/CD pipelines.
+			</>,
+			<>
+				Partnering with cloud architects and infrastructure teams to deliver
+				secure and resilient automation solutions.
+			</>,
+			<>
+				Beginning work on advancing self-service platforms, AI/ML-driven
+				automation, and cloud-native practices to modernize enterprise IT
+				services.
+			</>,
+		],
+	},
 	Pinion: {
 		name: 'Pinion',
 		longName: 'Pinion Services, UK',
-		subDetail: 'UK, US, India',
+		subDetail: 'UK, India',
 		url: 'https://pinion.services',
-		position: 'Senior Technical Analyist',
-		duration: 'Dec 2020 - Present',
+		position: 'Senior Technical Specialist',
+		duration: 'Dec 2020 – Aug 2025',
 		logo: {
 			light: '/work_images/pinion/Pinion_logo.svg',
 			dark: '/work_images/pinion/Pinion_logo.svg',
 		},
 		roles: [
 			<>
-				Headed development of two major projects on the latest tech stacks
-				available, React and Blazor with .Net Core API Backends.
+				Led the technical roadmap for Azure & AWS migrations and spearheaded a
+				.NET Core/AKS Distributions & Collections Engine for Santander Consumer
+				Bank, increasing debt recovery by 30%.
 			</>,
 			<>
-				A Document management center completely written from the ground up using
-				.NET Core 6 and Blazor, deployed on Azure Static apps and Azure APIs.
+				Architected 8+ mission-critical core banking microservices and
+				prototyped AI-driven credit risk analysis models using Azure Cognitive
+				Services & OpenAI.
 			</>,
 			<>
-				A Timesheets portal where employees can enter daily timesheets with
-				approvals and other flows in ReactJS and .NET core API, deployed on an
-				Azure App service.
+				Implemented Azure Infrastructure as Code (IaC) using Terraform and
+				authored comprehensive C4 system designs.
 			</>,
 			<>
-				Upgraded existing public-facing in production .Net Core MVC Web
-				Application&nbsp;
+				Architected a Positive Credit Register API and a full-stack Document
+				Management Center using React.js and Azure Cognitive Services within
+				strict regulatory deadlines.
+			</>,
+			<>
+				Spearheaded feature upgrades for&nbsp;
 				<Link
 					aria-label="Vatify - UK Tax Bridge"
 					href="https://vatify.pinion.services"
@@ -56,137 +98,117 @@ export const Experiences: {
 				>
 					Vatify
 				</Link>
-				&nbsp;to add new client specified features.
+				, integrating Stripe payments and scaling active users from 100+ to
+				1,000+.
 			</>,
 			<>
-				Currently engineering a cloud-based solution to automate Quotations,
-				Billing, Data import and export for Smartawater UK
-			</>,
-			<>
-				Manage Pinion’s Azure applications and DevOps, authored pipelines in
-				Azure DevOps to automate deployments and tests of current and new
-				projects at Pinion.
+				Managed Azure cloud resources and CI/CD pipelines via Azure DevOps for
+				efficient, automated deployments.
 			</>,
 		],
 	},
 	Melite: {
 		name: 'Melite',
 		longName: 'Melite Technologies',
-		subDetail: 'Solutions beyond imagination',
+		subDetail: 'Hyderabad, India',
 		url: 'http://www.melitetechnologies.com/',
 		position: 'Senior Software Engineer',
-		duration: 'Nov 2016 - Nov 2020',
+		duration: 'Nov 2016 \u2013 Nov 2020',
 		logo: {
 			light: '/work_images/melite/melite_logo.png',
 			dark: '/work_images/melite/melite_logo.png',
 		},
 		roles: [
 			<>
-				Lead a development team in developing a Educational ERP/CRM solution,
-				named
-				<Link
-					aria-label="Studease"
-					href="https://www.melitetechnologies.com/studease.html"
-					target="_blank"
-					rel="noreferrer"
-				>
-					&nbsp;Studease&nbsp;
-				</Link>
-				Handled Webservices and Payment gateway integration within the system.
-				ERP system is based on ASP.NET 4.0 and MSSQL. XML documents, Web
-				services, ADO.Net Objects and Entity Framework 4.0
+				Led a team of 5 engineers building the Studease Educational ERP/CRM
+				solution (ASP.NET, SQL Server), deployed across 5 institutions managing
+				15,000+ student and staff records.
 			</>,
 			<>
-				Develop independent modules for an existing Project Digital Curriculum.
-				Modules included online classroom/virtual classrooms, courses and
-				management, live chat. Worked with Web API to provide services to HTTP
-				requests.
+				Developed 4 core modules for the Digital Curriculum platform \u2014 virtual
+				classrooms, course management \u2014 supporting 500+ concurrent users and
+				200+ digital courses.
 			</>,
 			<>
-				Administered integration and deployment systems. (TFS, 3rd Party
-				Hosting).
+				Created 2 secure RESTful Web APIs enabling data access for internal
+				mobile applications, handling 10,000+ daily requests.
 			</>,
 			<>
-				Created 2 Web APIs to provide access to in house mobile applications.
-			</>,
-			<>
-				Train, assist, transfer knowledge to new/regular team members, help set
-				up their access to environments, provide them code reviews/feedback and
-				other developmental resources, and understand the business logic.
+				Administered Team Foundation Server (TFS) for source control and managed
+				build/deployment processes for 3 major application streams.
 			</>,
 		],
 	},
 	DPS: {
 		name: 'DPS Nacharam',
 		longName: 'Delhi Public School, Nacharam',
-		subDetail: 'Maredpally, Secunderabad',
+		subDetail: 'Secunderabad, India',
 		url: 'https://dpssecunderabad.in',
 		position: 'IT Consultant',
-		duration: 'Mar 2012 - Sept 2016',
+		duration: 'Jul 2012 \u2013 Sep 2016',
 		logo: {
 			light: '/work_images/dps/dps_logo.png',
 			dark: '/work_images/dps/dps_logo.png',
 		},
 		roles: [
 			<>
-				Lead an in-house team of 8 developers to create various ERP / CRM
-				solutions in ASP.NET / MSSQL for the organization.
+				Led an in-house team of 8 developers, delivering 3 major ERP/CRM
+				solutions (ASP.NET, SQL Server) for 2,000+ users across administrative,
+				academic, and finance departments.
 			</>,
 			<>
-				CRM application included automatic SMS and email campaigns, social
-				media, customer service portals, employee management and various other
-				modules.
+				Developed automated communication campaigns reducing manual SMS/email
+				efforts by ~60%, with integrated portals improving parent engagement by
+				25%.
 			</>,
 			<>
-				Websites design and maintenance, created and maintained 4 different
-				websites with latest technologies
+				Designed and maintained 4 school websites achieving 99.5% uptime,
+				handling content updates for events and announcements.
 			</>,
 			<>
-				Consulted on Hardware integration possibilities, networking and various
-				other technology related avenues.
+				Provided technical consultation for hardware procurement and network
+				infrastructure supporting 500+ networked devices campus-wide.
 			</>,
 		],
 	},
 	QSP: {
 		name: 'QSP',
 		longName: 'QSP, Time Inc.',
-		subDetail: "America's #1 Magazine fundraiser",
+		subDetail: 'Stamford, CT, USA',
 		url: 'https://www.linkedin.com/company/qsp_2/',
-		position: 'Lead Developer',
-		duration: 'Nov 2010 - Feb 2012',
+		position: 'Application Developer',
+		duration: 'Dec 2010 \u2013 Feb 2012',
 		logo: {
 			light: '/work_images/qsp/qsp_logo.png',
 			dark: '/work_images/qsp/qsp_logo.png',
 		},
 		roles: [
 			<>
-				Lead developer for the Enterprise Resource management system (ERP)
-				portal. Portal involved controlling various aspect of business workflow.
+				Lead developer for the internal ERP portal (ASP.NET, C#, SQL Server),
+				enhancing 5 core business workflows used daily by 200+ employees.
 			</>,
 			<>
-				Collaborating with Financial personnel to automate the General Ledger
-				system, with functionally to manually manage and edit entries when
-				needed.
+				Automated General Ledger reconciliation with the finance department,
+				reducing manual data entry time by over 75%.
 			</>,
 			<>
-				Developed SSIS packages to allow of easy data migration. SSIS packages
-				for local data manipulation and packages to allow to store in the Data
-				Warehouse.
+				Developed 15+ SSIS packages for data migration and transformation,
+				processing millions of records nightly with 99% reliability.
 			</>,
 			<>
-				Developed SSRS Reports and Report templates for automatic report
-				generation based on SQL Jobs
+				Created 20+ parameterized SSRS reports automated via SQL Agent Jobs,
+				saving ~10 hours/week in manual reporting.
 			</>,
 			<>
-				Responsible for “Sponsor Portal” to allow for users to manage their
-				accounts and also integrated the portal with various social networks
-				like Facebook and Twitter
+				Built the customer-facing Sponsor Portal managing 50,000+ user accounts
+				with social login integration, driving 15% increase in registrations.
 			</>,
 		],
 	},
 }
 
 export const ExperiencesList = [
+	Experiences.Assurant,
 	Experiences.Pinion,
 	Experiences.Melite,
 	Experiences.DPS,

@@ -10,6 +10,7 @@ import {
 	Icon,
 	useBreakpointValue,
 } from '@chakra-ui/react'
+import { useRef, useCallback } from 'react'
 import { motion } from 'motion/react'
 import { BiRightArrow } from 'react-icons/bi'
 import styles from './styles.module.css'
@@ -17,12 +18,15 @@ import { ExperiencesList } from 'config/experience'
 import { mobileBreakpointsMap } from 'config/theme'
 import { useColorModeValue, useColorMode } from 'components/ui/color-mode'
 
+const TAB_LIST_WIDTH_DESKTOP = '130px'
+
 const ExperienceTab = () => {
 	const { colorMode } = useColorMode()
-	const emphasis = useColorModeValue('blue.500', 'orange.200')
+	const emphasis = useColorModeValue('teal.600', 'orange.200')
 	const borderColor = useColorModeValue('gray.300', 'gray.600')
-	const activeBordercolor = useColorModeValue('blue.500', '#97DFFC')
+	const activeBordercolor = useColorModeValue('teal.600', '#97DFFC')
 	const isMobile = useBreakpointValue(mobileBreakpointsMap)
+	const tabListRef = useRef<HTMLDivElement>(null)
 
 	const tabOrientation: 'horizontal' | 'vertical' =
 		useBreakpointValue({
@@ -34,12 +38,36 @@ const ExperienceTab = () => {
 		}) ?? 'vertical'
 
 	const tabMinWidth = useBreakpointValue({
-		base: '160px',
-		sm: '160px',
+		base: '130px',
+		sm: '130px',
 		md: 'auto',
 		lg: 'auto',
 		xl: 'auto',
 	})
+
+	// Trapped scroll: when hovering over the tab list on desktop,
+	// scroll through companies before allowing page scroll
+	const handleWheel = useCallback(
+		(e: React.WheelEvent<HTMLDivElement>) => {
+			if (isMobile) return
+			const el = tabListRef.current
+			if (!el) return
+
+			const { scrollTop, scrollHeight, clientHeight } = el
+			const atTop = scrollTop <= 0
+			const atBottom = scrollTop + clientHeight >= scrollHeight - 1
+
+			// If there's room to scroll within the tab list, trap the scroll
+			if (scrollHeight > clientHeight) {
+				if ((e.deltaY < 0 && !atTop) || (e.deltaY > 0 && !atBottom)) {
+					e.stopPropagation()
+					el.scrollTop += e.deltaY
+				}
+			}
+		},
+		[isMobile]
+	)
+
 	return (
 		<Tabs.Root
 			id="experienceTabs"
@@ -48,18 +76,22 @@ const ExperienceTab = () => {
 			lazyMount
 		>
 			<Tabs.List
-				width={!isMobile ? '30%' : 'auto'}
+				ref={tabListRef}
+				width={!isMobile ? TAB_LIST_WIDTH_DESKTOP : 'auto'}
+				flexShrink={0}
 				borderColor="transparent"
-				overflowX={isMobile ? 'scroll' : 'auto'}
-				overflowY={'hidden'}
+				overflowX={isMobile ? 'auto' : 'hidden'}
+				overflowY={!isMobile ? 'auto' : 'hidden'}
 				className={styles.experienceTabs}
+				onWheel={handleWheel}
 			>
 				{ExperiencesList.map((company) => (
 					<Tabs.Trigger
 						key={`Tab-${company.name}`}
 						value={company.name}
 						fontSize="smaller"
-						h="120px"
+						h="100px"
+						width={!isMobile ? '100%' : 'auto'}
 						minWidth={tabMinWidth}
 						boxShadow="none"
 						borderColor={borderColor}
@@ -78,7 +110,9 @@ const ExperienceTab = () => {
 								colorMode === 'dark' ? company.logo.dark : company.logo.light
 							}
 							alt={company.longName}
-							maxWidth="88px"
+							width="80px"
+							maxHeight="60px"
+							objectFit="contain"
 						/>
 					</Tabs.Trigger>
 				))}
@@ -101,7 +135,7 @@ const ExperienceTab = () => {
 							<Text as="span">
 								<Link
 									href={company.url}
-									aria-label="scentregroup"
+									aria-label={company.longName}
 									rel="noreferrer"
 									target="_blank"
 									fontSize="lg"

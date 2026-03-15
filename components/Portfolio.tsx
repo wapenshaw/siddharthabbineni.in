@@ -8,6 +8,7 @@ import Sidebar from 'components/Sidebar'
 import Avatar from 'components/Avatar'
 import About from 'components/Sections/About'
 import Experience from 'components/Sections/Experience'
+import Certifications from 'components/Sections/Certifications'
 import ScrollMore from 'components/Misc/ScrollMore'
 import FadeInLayout from 'components/Layout/FadeWhenVisible'
 import { Article } from 'types/article'
@@ -79,12 +80,15 @@ const Portfolio = ({
 								paddingTop={{ base: 0, lg: 20, xl: 0 }}
 								paddingBottom={{ base: 12, lg: 0 }}
 								flexDirection={{
-									base: 'column-reverse',
+									base: 'column',
 									lg: 'row',
 								}}
 							>
 								<About />
-								<Avatar />
+								{/* Avatar only on desktop — mobile avatar is in Sidebar */}
+								<Box display={{ base: 'none', lg: 'block' }}>
+									<Avatar />
+								</Box>
 							</Box>
 						</FadeInLayout>
 						<FadeInLayout>
@@ -97,6 +101,18 @@ const Portfolio = ({
 								flexDirection={'row'}
 							>
 								<Experience />
+							</Box>
+						</FadeInLayout>
+						<FadeInLayout>
+							<Box
+								id="certifications"
+								className="contentRow"
+								paddingTop={{ base: 0, lg: 20, xl: 0 }}
+								paddingBottom={{ base: 12, lg: 10 }}
+								paddingX={0}
+								flexDirection={'row'}
+							>
+								<Certifications />
 							</Box>
 						</FadeInLayout>
 						<FadeInLayout>

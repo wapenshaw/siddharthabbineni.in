@@ -19,10 +19,11 @@
 # production
 /build
 
+.env
 # misc
 .DS_Store
 *.pem
-details.txt
+*.txt
 # debug
 npm-debug.log*
 

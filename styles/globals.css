@@ -5,6 +5,17 @@ body {
 	scroll-behavior: smooth;
 }
 
+/* Snap-scroll on desktop */
+@media (min-width: 1280px) {
+	html {
+		scroll-snap-type: y proximity;
+	}
+	.contentRow {
+		scroll-snap-align: start;
+		scroll-padding-top: 2rem;
+	}
+}
+
 a {
 	color: inherit;
 	text-decoration: none;

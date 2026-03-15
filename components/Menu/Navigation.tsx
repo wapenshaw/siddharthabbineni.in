@@ -1,11 +1,13 @@
 'use client'
 
 import { memo, useCallback } from 'react'
-import {Container,
+import {ClientOnly,
+	Container,
 	Button,
 	Flex,
 	Box,
 	IconButton,
+	Skeleton,
 	useBreakpointValue} from '@chakra-ui/react'
 import type { ContainerProps } from '@chakra-ui/react'
 import { motion, useCycle } from 'motion/react'
@@ -15,7 +17,6 @@ import styles from './styles.module.css'
 import MobileMenu from './toggle'
 import { ThemeMode, mobileBreakpointsMap } from 'config/theme'
 import { menuAnim } from 'config/animations'
-import useScrollDirection, { ScrollDirection } from 'hooks/useScrollDirection'
 import { useColorModeValue, useColorMode } from 'components/ui/color-mode'
 
 const MotionContainer = motion.create(Container) as React.ComponentType<ContainerProps & MotionProps>
@@ -34,7 +35,7 @@ const Navigation = () => {
 		'rgba(18, 18, 18, 0.9)'
 	)
 
-	const borderColor = useColorModeValue('blue.500', 'orange.200')
+	const borderColor = useColorModeValue('teal.600', 'orange.200')
 
 	const IsDark = colorMode === ThemeMode.Dark
 	const btnClassName = `${styles.blogBtn} ${!IsDark && styles.dark}`
@@ -48,27 +49,27 @@ const Navigation = () => {
 		},
 		[isMobile, toggleOpen]
 	)
-	const scrollDirection = useScrollDirection()
 
 	return (
 		<>
 			<Box
 				display={{ base: 'flex', xl: 'none' }}
 				alignItems="center"
-				paddingTop={1}
 				className={styles.menuBar}
 				zIndex={100}
-				top="3%"
+				top="1.5rem"
 			>
-				<IconButton
-					aria-label="Color Mode"
-					variant="ghost"
-					boxShadow="none"
-					onClick={toggleColorMode}
-					padding={0}
-				>
-					<ThemeIcon />
-				</IconButton>
+				<ClientOnly fallback={<Skeleton boxSize="10" />}>
+					<IconButton
+						aria-label="Color Mode"
+						variant="ghost"
+						boxShadow="none"
+						onClick={toggleColorMode}
+						padding={0}
+					>
+						<ThemeIcon />
+					</IconButton>
+				</ClientOnly>
 				<MobileMenu isDarkMode={IsDark} toggle={toggleOpen} isOpen={isOpen} />
 			</Box>
 
@@ -77,19 +78,10 @@ const Navigation = () => {
 				backgroundColor={bg}
 				maxWidth={{ base: '100%', sm: '100%', lg: '50%', xl: '60%' }}
 				className={styles.menu}
-				right={{
-					lg:
-						!isMobile && scrollDirection === ScrollDirection.Down
-							? '2%'
-							: '3.5%',
-				}}
+				right={{ lg: '3.5%' }}
 				initial="hide"
 				animate={(!isMobile || isOpen) ? 'show' : undefined}
 				style={{
-					width:
-						!isMobile && scrollDirection === ScrollDirection.Down
-							? '12%'
-							: '100%',
 					top: !isOpen && isMobile ? '-100vh' : undefined,
 					opacity: !isOpen && isMobile ? '0' : undefined,
 					left: isOpen && isMobile ? 0 : undefined,
@@ -104,15 +96,11 @@ const Navigation = () => {
 			>
 				<Flex
 					justifyContent={{ base: 'center', lg: 'flex-end' }}
-					direction={{
-						base: 'column',
-						lg: scrollDirection === ScrollDirection.Down ? 'column' : 'row',
-					}}
+					direction={{ base: 'column', lg: 'row' }}
+					alignItems={{ lg: 'center' }}
+					flexWrap={{ lg: 'wrap' }}
 					paddingX={{ base: '', sm: '10', lg: '0' }}
-					paddingY={{
-						base: '10',
-						lg: scrollDirection === ScrollDirection.Down ? '10' : '3',
-					}}
+					paddingY={{ base: '10', lg: '3' }}
 					height={{ base: '100vh', lg: 'auto' }}
 					paddingRight="0"
 					paddingBottom={isMobile ? 10 : '0'}
@@ -162,6 +150,30 @@ const Navigation = () => {
 								onClick={onMenuItemClick}
 							>
 								Experience
+							</a>
+						</Button>
+					</Box>
+					<Box
+						width={{ base: '100%', lg: 'auto' }}
+						textAlign={{ base: 'center', lg: 'left' }}
+						marginY={{ base: 2, lg: 0 }}
+					>
+						<Button
+							asChild
+							fontWeight="light"
+							variant="ghost"
+							fontSize={menuButtonSize}
+							letterSpacing={2}
+							className={btnClassName}
+							padding={2}
+							marginX={2}
+						>
+							<a
+								href="#certifications"
+								rel="noreferrer"
+								onClick={onMenuItemClick}
+							>
+								Certifications
 							</a>
 						</Button>
 					</Box>
@@ -240,15 +252,17 @@ const Navigation = () => {
 					</Box>
 					{!isMobile && (
 						<Box>
-							<IconButton
-								marginX={1}
-								aria-label="Color Mode"
-								variant="ghost"
-								boxShadow="none"
-								onClick={toggleColorMode}
-							>
-								<ThemeIcon />
-							</IconButton>
+							<ClientOnly fallback={<Skeleton boxSize="10" />}>
+								<IconButton
+									marginX={1}
+									aria-label="Color Mode"
+									variant="ghost"
+									boxShadow="none"
+									onClick={toggleColorMode}
+								>
+									<ThemeIcon />
+								</IconButton>
+							</ClientOnly>
 						</Box>
 					)}
 				</Flex>
