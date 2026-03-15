@@ -6,8 +6,7 @@
 }
 
 .menuBar {
-	position: fixed;
-	right: 5%;
+	position: static;
 	z-index: 100;
 }
 

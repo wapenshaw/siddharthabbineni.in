@@ -57,7 +57,6 @@ const Navigation = () => {
 				alignItems="center"
 				className={styles.menuBar}
 				zIndex={100}
-				top="1.5rem"
 			>
 				<ClientOnly fallback={<Skeleton boxSize="10" />}>
 					<IconButton

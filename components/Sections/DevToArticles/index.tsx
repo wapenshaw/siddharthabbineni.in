@@ -6,6 +6,7 @@ import {Heading,
 	Flex,
 	Link,
 	Stack,
+	SimpleGrid,
 	Separator} from '@chakra-ui/react'
 import { Article } from 'types/article'
 import { useColorModeValue } from 'components/ui/color-mode'
@@ -35,10 +36,10 @@ const DevToArticles = ({ articles }: { articles: Article[] }) => {
 			>
 				Blog
 			</Heading>
-			<Text color="text.description">
+			<Text color="text.description" fontSize="md">
 				Latest articles and guides on software engineering.
 			</Text>
-			<Stack gap={4}>
+			<SimpleGrid columns={{ base: 1, md: 2 }} gap={4}>
 				{displayArticles.map((item) => (
 					<Link
 						aria-label={item.title}
@@ -101,7 +102,7 @@ const DevToArticles = ({ articles }: { articles: Article[] }) => {
 						</Stack>
 					</Link>
 				))}
-			</Stack>
+			</SimpleGrid>
 			<Link
 				href="https://dev.to/wapenshaw"
 				target="_blank"
