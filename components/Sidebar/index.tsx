@@ -153,11 +153,17 @@ const Sidebar = ({ soData }: SideBarProps) => {
 						variants={fadeInUp}
 						maxWidth={{ base: '100%', lg: '80%' }}
 					>
-						Hello 👋 Welcome! I am a{' '}
+						Hello 👋 Welcome! I am an{' '}
 						<Text color="text.emphasis" as="span">
-							cloud &amp; software architect
+							Azure-certified cloud &amp; solutions architect
 						</Text>{' '}
-						based in Hyderabad, IN. An ex-pro{' '}
+						with 13+ years of experience, based in Hyderabad, IN. I design
+						scalable cloud platforms, distributed systems, and enterprise
+						architectures using{' '}
+						<Text color="text.emphasis" as="span">
+							.NET, Python &amp; React
+						</Text>
+						. An ex-pro{' '}
 						<Text color="text.emphasis" as="span">
 							Q3A &amp; age2x
 						</Text>{' '}
@@ -178,6 +184,7 @@ const Sidebar = ({ soData }: SideBarProps) => {
 								columns={3}
 								gap={3}
 								justifyItems="end"
+								ml="auto"
 							>
 								{SocialMedias.map((socMedia) => (
 									<Link

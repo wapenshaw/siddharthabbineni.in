@@ -12,6 +12,23 @@ const XBL_BASE = 'https://xbl.io/api/v2'
 /** Cache this route's response for 6 hours */
 export const revalidate = 21600
 
+interface XblActivityItem {
+	achievementName: string
+	achievementDescription: string
+	achievementIcon: string
+	contentTitle: string
+	date: string
+	gamerscore: number
+	rarityCategory: string
+	rarityPercentage: number
+	activityItemType: string
+}
+
+interface XblActivityResponse {
+	numItems: number
+	activityItems: XblActivityItem[]
+}
+
 interface XblTitle {
 	name: string
 	displayImage: string
@@ -53,36 +70,23 @@ async function fetchXbl<T>(path: string): Promise<T | null> {
 	}
 }
 
-async function getRecentGames(): Promise<XboxAchievement[]> {
-	const data = await fetchXbl<{ titles: XblTitle[] }>(
-		`/achievements/player/${XBOX_XUID}`
-	)
-	if (!data?.titles) return []
+async function getRecentAchievements(): Promise<XboxAchievement[]> {
+	const data = await fetchXbl<XblActivityResponse>('/activity/history')
+	if (!data?.activityItems) return []
 
-	const withAch = data.titles
-		.filter(
-			(t) => t.achievement.currentAchievements > 0 && t.titleHistory
-		)
-		.sort(
-			(a, b) =>
-				new Date(b.titleHistory!.lastTimePlayed).getTime() -
-				new Date(a.titleHistory!.lastTimePlayed).getTime()
-		)
+	return data.activityItems
+		.filter((item) => item.activityItemType === 'Achievement')
 		.slice(0, 5)
-
-	return withAch.map((t): XboxAchievement => {
-		const a = t.achievement
-		return {
-			name: t.name,
-			description: `${a.currentGamerscore}/${a.totalGamerscore} GS`,
-			icon: t.displayImage,
-			unlocktime: Math.floor(
-				new Date(t.titleHistory!.lastTimePlayed).getTime() / 1000
-			),
-			gameName: t.name,
-			progress: `${a.progressPercentage}%`,
-		}
-	})
+		.map((item): XboxAchievement => ({
+			name: item.achievementName,
+			description: item.achievementDescription,
+			icon: item.achievementIcon,
+			unlocktime: Math.floor(new Date(item.date).getTime() / 1000),
+			gameName: item.contentTitle,
+			progress: item.rarityCategory
+				? `${item.rarityPercentage}% · ${item.rarityCategory}`
+				: `${item.gamerscore} GS`,
+		}))
 }
 
 async function getProfileAndStats(): Promise<XboxProfileStats | null> {
@@ -133,7 +137,7 @@ export async function GET() {
 
 	try {
 		const [achievements, profile] = await Promise.all([
-			getRecentGames(),
+			getRecentAchievements(),
 			getProfileAndStats(),
 		])
 

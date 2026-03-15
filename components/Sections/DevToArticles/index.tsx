@@ -43,10 +43,8 @@ const DevToArticles = ({ articles }: { articles: Article[] }) => {
 				{displayArticles.map((item) => (
 					<Link
 						aria-label={item.title}
-						target="_blank"
-						rel="noreferrer"
 						key={item.id}
-						href={item.url}
+						href="/blog"
 						color="currentcolor"
 						_hover={{ textDecoration: 'none' }}
 						transition="all 0.5s ease"
@@ -104,14 +102,12 @@ const DevToArticles = ({ articles }: { articles: Article[] }) => {
 				))}
 			</SimpleGrid>
 			<Link
-				href="https://dev.to/wapenshaw"
-				target="_blank"
-				rel="noreferrer"
+				href="/blog"
 				color="text.accentAlt"
 				fontWeight="medium"
 				_hover={{ textDecoration: 'underline' }}
 			>
-				Read more on Dev.to →
+				Read more →
 			</Link>
 		</Stack>
 	)

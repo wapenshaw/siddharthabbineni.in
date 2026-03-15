@@ -34,7 +34,10 @@ const config = defineConfig({
 		semanticTokens: {
 			colors: {
 				'bg.body': {
-					value: { _light: '#F0EDED', _dark: '#121212' },
+					value: { _light: '#D5D3D2', _dark: '#121212' },
+				},
+				'bg.surface': {
+					value: { _light: '#DDDCDB', _dark: '#1a1a1a' },
 				},
 				'text.body': {
 					value: {
@@ -44,7 +47,7 @@ const config = defineConfig({
 				},
 				'text.emphasis': {
 					value: {
-						_light: '{colors.teal.600}',
+						_light: '#26417f',
 						_dark: '{colors.orange.200}',
 					},
 				},
@@ -58,11 +61,11 @@ const config = defineConfig({
 					value: { _light: '{colors.gray.800}', _dark: '{colors.orange.200}' },
 				},
 				'text.accentAlt': {
-					value: { _light: '{colors.teal.700}', _dark: '#A6A6A6' },
+					value: { _light: '#1d3566', _dark: '#A6A6A6' },
 				},
 				'link.default': {
 					value: {
-						_light: '{colors.teal.600}',
+						_light: '#26417f',
 						_dark: '{colors.orange.200}',
 					},
 				},
@@ -74,7 +77,7 @@ const config = defineConfig({
 				},
 				'link.descriptionHover': {
 					value: {
-						_light: '{colors.teal.600}',
+						_light: '#26417f',
 						_dark: '{colors.orange.200}',
 					},
 				},
@@ -85,7 +88,7 @@ const config = defineConfig({
 					},
 				},
 				'border.button': {
-					value: { _light: '{colors.gray.700}', _dark: '{colors.orange.200}' },
+					value: { _light: '#26417f', _dark: '{colors.orange.200}' },
 				},
 				'border.buttonAlt': {
 					value: {
@@ -95,7 +98,7 @@ const config = defineConfig({
 				},
 				'bg.buttonAltHover': {
 					value: {
-						_light: 'rgba(49, 151, 149, 0.08)',
+						_light: 'rgba(38, 65, 127, 0.08)',
 						_dark: 'rgba(157, 236, 249, 0.06)',
 					},
 				},

@@ -10,7 +10,6 @@ import Navigation from './Navigation'
 
 import { mobileBreakpointsMap } from 'config/theme'
 import useScrollDirection, { ScrollDirection } from 'hooks/useScrollDirection'
-import { useColorModeValue } from 'components/ui/color-mode'
 
 const mobileMenuVariants: Variants = {
 	hidden: {
@@ -32,7 +31,6 @@ const mobileMenuVariants: Variants = {
 }
 
 const Menu = () => {
-	const bg = useColorModeValue('gray.100', 'black')
 	const controls = useAnimation()
 	const isMobile = useBreakpointValue(mobileBreakpointsMap)
 	const scrollDirection = useScrollDirection(true, isMobile)
@@ -56,7 +54,7 @@ const Menu = () => {
 				justifyContent="space-between"
 				padding={{ base: 5, lg: 0 }}
 				paddingY={{ base: 5, lg: 0 }}
-				backgroundColor={isMobile ? bg : 'transparent'}
+				backgroundColor="transparent"
 				width="100vw"
 				maxWidth="100vw"
 				margin={0}

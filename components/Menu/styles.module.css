@@ -42,3 +42,16 @@
 .blogBtn.dark:active {
 	text-decoration-color: #121212;
 }
+
+.menuOverlay {
+	animation: fadeInOverlay 0.25s ease-in-out;
+}
+
+@keyframes fadeInOverlay {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+}

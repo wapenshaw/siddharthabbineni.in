@@ -13,9 +13,7 @@ import {
 import { memo } from 'react'
 import { IoMdOpen } from 'react-icons/io'
 import {
-	SiAnsible,
 	SiDotnet,
-	SiGithubactions,
 	SiKubernetes,
 	SiPython,
 	SiReact,
@@ -31,7 +29,7 @@ type ISkillSetModal = {
 }
 
 const Detail = ({ onOpen }: ISkillSetModal) => {
-	const emphasis = useColorModeValue('teal.600', 'orange.200')
+	const emphasis = useColorModeValue('#26417f', 'orange.200')
 	// const currentYear = new Date().getFullYear()
 	// const professionalYears = currentYear - 2010
 
@@ -52,7 +50,7 @@ const Detail = ({ onOpen }: ISkillSetModal) => {
 				About Me
 			</Heading>
 			<Text color="text.description">
-				An <b>Azure-certified Solutions Architect</b> who still writes code -
+				An <b>Azure-certified Cloud &amp; Solutions Architect</b> who still writes code -
 				because someone has to make sure the architecture actually works. 😉
 				{' '}
 				<Tooltip.Root>
@@ -64,14 +62,14 @@ const Detail = ({ onOpen }: ISkillSetModal) => {
 					</Tooltip.Positioner>
 				</Tooltip.Root>
 				until <b>TypeScript</b> saved the day, and now I architect cloud
-				solutions while sneaking in <b>React</b> apps on the side.
+				platforms while sneaking in <b>React</b> apps on the side.
 				13+ years building everything from ERPs to microservices across{' '}
 				<b>Azure</b>, <b>AWS</b>, and everything in between.
 				<br />
 				<br />
-				Currently automating the cloud at <b>Assurant</b> - think Terraform,
-				Kubernetes, and a healthy dose of &quot;why is this pipeline failing at
-				2 AM?&quot;
+				Currently spearheading cloud automation at <b>Assurant</b> — building
+				platforms for infrastructure provisioning, managing Kubernetes clusters,
+				and deploying cloud-native services across Azure &amp; AWS.
 				<br />
 				<br />I{' '}
 				<Tooltip.Root>
@@ -90,7 +88,7 @@ const Detail = ({ onOpen }: ISkillSetModal) => {
 				<List.Root gap={3} listStyle="none">
 					<List.Item fontSize="medium" display="flex" alignItems="center">
 						<Icon as={VscAzure} color={emphasis} fontSize="2em" marginRight={2} />
-						Azure Cloud
+						Azure
 					</List.Item>
 					<List.Item fontSize="medium" display="flex" alignItems="center">
 						<Icon as={FaAws} color={emphasis} fontSize="2em" marginRight={2} />
@@ -103,10 +101,6 @@ const Detail = ({ onOpen }: ISkillSetModal) => {
 					<List.Item fontSize="medium" display="flex" alignItems="center">
 						<Icon as={SiKubernetes} color={emphasis} fontSize="2em" marginRight={2} />
 						Kubernetes
-					</List.Item>
-					<List.Item fontSize="medium" display="flex" alignItems="center">
-						<Icon as={SiAnsible} color={emphasis} fontSize="2em" marginRight={2} />
-						Ansible
 					</List.Item>
 				</List.Root>
 				<List.Root gap={3} listStyle="none">
@@ -125,10 +119,6 @@ const Detail = ({ onOpen }: ISkillSetModal) => {
 					<List.Item fontSize="medium" display="flex" alignItems="center">
 						<Icon as={SiTypescript} color={emphasis} fontSize="2em" marginRight={2} />
 						TypeScript
-					</List.Item>
-					<List.Item fontSize="medium" display="flex" alignItems="center">
-						<Icon as={SiGithubactions} color={emphasis} fontSize="2em" marginRight={2} />
-						GitHub Actions
 					</List.Item>
 				</List.Root>
 				<Box>

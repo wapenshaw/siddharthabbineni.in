@@ -22,9 +22,9 @@ const TAB_LIST_WIDTH_DESKTOP = '130px'
 
 const ExperienceTab = () => {
 	const { colorMode } = useColorMode()
-	const emphasis = useColorModeValue('teal.600', 'orange.200')
+	const emphasis = useColorModeValue('#26417f', 'orange.200')
 	const borderColor = useColorModeValue('gray.300', 'gray.600')
-	const activeBordercolor = useColorModeValue('teal.600', '#97DFFC')
+	const activeBordercolor = useColorModeValue('#26417f', '#97DFFC')
 	const isMobile = useBreakpointValue(mobileBreakpointsMap)
 	const tabListRef = useRef<HTMLDivElement>(null)
 

@@ -145,8 +145,8 @@ const PlatformStats = ({
 	)
 
 	const statsContent = (
-		<Box flex={1} minWidth={0}>
-			<Flex align="center" gap={1} mb={0.5}>
+		<Flex flex={1} minWidth={0} direction="column" justify="space-evenly" gap={1}>
+			<Flex align="center" gap={1}>
 				<PlatformIcon size={13} />
 				<Text fontSize="xs" fontWeight="bold" textTransform="uppercase" letterSpacing="wider">
 					{platform}
@@ -157,12 +157,12 @@ const PlatformStats = ({
 					</Text>
 				)}
 			</Flex>
-			<Flex wrap="wrap" gap={2}>
+			<Flex wrap="wrap" columnGap={2} rowGap={1}>
 				<StatItem icon={<IoGameController size={13} />} value={stats.games} label="games" />
 				<StatItem icon={<HiStar size={13} />} value={stats.perfect} label="100%" />
 				<StatItem icon={<IoTrophy size={13} />} value={stats.achievements} label="ach" />
 			</Flex>
-		</Box>
+		</Flex>
 	)
 
 	return (

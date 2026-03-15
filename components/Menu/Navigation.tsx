@@ -30,12 +30,12 @@ const Navigation = () => {
 		md: 'sm',
 	})
 
-	const bg = useColorModeValue(
-		'rgba(237, 242, 247, 0.95)',
-		'rgba(18, 18, 18, 0.9)'
+	const dropdownBg = useColorModeValue(
+		'rgba(213, 211, 210, 0.97)',
+		'rgba(18, 18, 18, 0.97)'
 	)
 
-	const borderColor = useColorModeValue('teal.600', 'orange.200')
+	const borderColor = useColorModeValue('#26417f', 'orange.200')
 
 	const IsDark = colorMode === ThemeMode.Dark
 	const btnClassName = `${styles.blogBtn} ${!IsDark && styles.dark}`
@@ -50,6 +50,11 @@ const Navigation = () => {
 		[isMobile, toggleOpen]
 	)
 
+	const overlayBg = useColorModeValue(
+		'rgba(0, 0, 0, 0.4)',
+		'rgba(0, 0, 0, 0.6)'
+	)
+
 	return (
 		<>
 			<Box
@@ -57,6 +62,7 @@ const Navigation = () => {
 				alignItems="center"
 				className={styles.menuBar}
 				zIndex={100}
+				gap={1}
 			>
 				<ClientOnly fallback={<Skeleton boxSize="10" />}>
 					<IconButton
@@ -72,10 +78,25 @@ const Navigation = () => {
 				<MobileMenu isDarkMode={IsDark} toggle={toggleOpen} isOpen={isOpen} />
 			</Box>
 
+			{/* Mobile overlay backdrop */}
+			{isOpen && isMobile && (
+				<Box
+					position="fixed"
+					top={0}
+					left={0}
+					width="100vw"
+					height="100vh"
+					bg={overlayBg}
+					zIndex={0}
+					onClick={() => toggleOpen()}
+					className={styles.menuOverlay}
+				/>
+			)}
+
 			<MotionContainer
 				width="100%"
-				backgroundColor={bg}
-				maxWidth={{ base: '100%', sm: '100%', lg: '50%', xl: '60%' }}
+				backgroundColor={isMobile ? dropdownBg : 'transparent'}
+				maxWidth={{ base: '100%', sm: '100%', lg: '60%', xl: '65%' }}
 				className={styles.menu}
 				right={{ lg: '3.5%' }}
 				initial="hide"
@@ -111,7 +132,7 @@ const Navigation = () => {
 					>
 						<Button
 							asChild
-							fontWeight="light"
+							fontWeight="medium"
 							variant="ghost"
 							fontSize={menuButtonSize}
 							letterSpacing={2}
@@ -135,7 +156,7 @@ const Navigation = () => {
 					>
 						<Button
 							asChild
-							fontWeight="light"
+							fontWeight="medium"
 							variant="ghost"
 							fontSize={menuButtonSize}
 							letterSpacing={2}
@@ -159,7 +180,7 @@ const Navigation = () => {
 					>
 						<Button
 							asChild
-							fontWeight="light"
+							fontWeight="medium"
 							variant="ghost"
 							fontSize={menuButtonSize}
 							letterSpacing={2}
@@ -183,7 +204,7 @@ const Navigation = () => {
 					>
 						<Button
 							asChild
-							fontWeight="light"
+							fontWeight="medium"
 							variant="ghost"
 							fontSize={menuButtonSize}
 							letterSpacing={2}
@@ -207,7 +228,7 @@ const Navigation = () => {
 					>
 						<Button
 							asChild
-							fontWeight="light"
+							fontWeight="medium"
 							variant="ghost"
 							fontSize={menuButtonSize}
 							letterSpacing={2}
@@ -232,7 +253,7 @@ const Navigation = () => {
 					>
 						<Button
 							asChild
-							fontWeight="light"
+							fontWeight="medium"
 							variant="ghost"
 							fontSize={menuButtonSize}
 							letterSpacing={2}
@@ -250,7 +271,7 @@ const Navigation = () => {
 						</Button>
 					</Box>
 					{!isMobile && (
-						<Box>
+						<Box flexShrink={0} marginLeft={2}>
 							<ClientOnly fallback={<Skeleton boxSize="10" />}>
 								<IconButton
 									marginX={1}
