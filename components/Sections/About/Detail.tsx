@@ -31,7 +31,7 @@ type ISkillSetModal = {
 }
 
 const Detail = ({ onOpen }: ISkillSetModal) => {
-	const emphasis = useColorModeValue('blue.500', 'orange.200')
+	const emphasis = useColorModeValue('teal.600', 'orange.200')
 	// const currentYear = new Date().getFullYear()
 	// const professionalYears = currentYear - 2010
 
@@ -52,7 +52,7 @@ const Detail = ({ onOpen }: ISkillSetModal) => {
 				About Me
 			</Heading>
 			<Text color="text.description">
-				An <b>Azure-certified Solutions Architect</b> who still writes code —
+				An <b>Azure-certified Solutions Architect</b> who still writes code -
 				because someone has to make sure the architecture actually works. 😉
 				{' '}
 				<Tooltip.Root>
@@ -69,7 +69,7 @@ const Detail = ({ onOpen }: ISkillSetModal) => {
 				<b>Azure</b>, <b>AWS</b>, and everything in between.
 				<br />
 				<br />
-				Currently automating the cloud at <b>Assurant</b> — think Terraform,
+				Currently automating the cloud at <b>Assurant</b> - think Terraform,
 				Kubernetes, and a healthy dose of &quot;why is this pipeline failing at
 				2 AM?&quot;
 				<br />
