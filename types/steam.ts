@@ -25,7 +25,15 @@ export interface RecentAchievement {
 	appid: number
 }
 
+export interface SteamProfileStats {
+	totalGames: number
+	playedGames: number
+	perfectGames: number
+	totalAchievements: number
+}
+
 export interface SteamAchievementsResponse {
 	achievements: RecentAchievement[]
+	stats?: SteamProfileStats
 	error?: string
 }

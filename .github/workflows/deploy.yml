@@ -32,6 +32,10 @@ jobs:
 
       - name: Build
         run: npm run build
+        env:
+          STEAM_API_KEY: ${{ secrets.STEAM_API_KEY }}
+          STEAM_USER_ID: ${{ secrets.STEAM_USER_ID }}
+          SO_USER_ID: '66384'
 
       - name: Deploy
         uses: Azure/static-web-apps-deploy@v1
