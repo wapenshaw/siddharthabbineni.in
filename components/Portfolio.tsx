@@ -80,12 +80,20 @@ const Portfolio = ({
 								paddingTop={{ base: 0, lg: 20, xl: 0 }}
 								paddingBottom={{ base: 12, lg: 0 }}
 								flexDirection={{
-									base: 'column-reverse',
+									base: 'column',
 									lg: 'row',
 								}}
 							>
+								<Box
+									display={{ base: 'block', lg: 'none' }}
+									width="100%"
+								>
+									<Avatar />
+								</Box>
 								<About />
-								<Avatar />
+								<Box display={{ base: 'none', lg: 'block' }}>
+									<Avatar />
+								</Box>
 							</Box>
 						</FadeInLayout>
 						<FadeInLayout>

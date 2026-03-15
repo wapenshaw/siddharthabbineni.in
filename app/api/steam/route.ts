@@ -1,81 +1,103 @@
 import { NextResponse } from 'next/server'
+import type {
+	SteamAchievement,
+	AchievementSchema,
+	RecentAchievement,
+	SteamAchievementsResponse,
+} from 'types/steam'
 
 const STEAM_API_KEY = process.env.STEAM_API_KEY
 const STEAM_USER_ID = process.env.STEAM_USER_ID
 
-interface SteamAchievement {
-	apiname: string
-	achieved: number
-	unlocktime: number
-	name?: string
-	description?: string
-}
-
-interface SteamGame {
-	appid: number
-	name: string
-	achievements: SteamAchievement[]
-	totalAchievements: number
-	completedAchievements: number
+async function fetchJson<T>(url: string): Promise<T | null> {
+	try {
+		const res = await fetch(url, { next: { revalidate: 18_000 } })
+		if (!res.ok) return null
+		return res.json()
+	} catch {
+		return null
+	}
 }
 
 export async function GET() {
 	if (!STEAM_API_KEY || !STEAM_USER_ID) {
 		return NextResponse.json(
-			{ error: 'Steam API not configured' },
+			{ achievements: [], error: 'Steam API not configured' } satisfies SteamAchievementsResponse,
 			{ status: 503 }
 		)
 	}
 
 	try {
-		// Get recently played games
-		const gamesRes = await fetch(
-			`https://api.steampowered.com/IPlayerService/GetRecentlyPlayedGames/v1/?key=${STEAM_API_KEY}&steamid=${STEAM_USER_ID}&count=5`,
-			{ next: { revalidate: 3600 } }
+		const gamesData = await fetchJson<{
+			response: { games?: { appid: number; name: string }[] }
+		}>(
+			`https://api.steampowered.com/IPlayerService/GetRecentlyPlayedGames/v1/?key=${STEAM_API_KEY}&steamid=${STEAM_USER_ID}&count=5`
 		)
 
-		if (!gamesRes.ok) {
-			return NextResponse.json(
-				{ error: 'Failed to fetch Steam data' },
-				{ status: gamesRes.status }
-			)
+		const games = gamesData?.response?.games ?? []
+		if (games.length === 0) {
+			return NextResponse.json({
+				achievements: [],
+			} satisfies SteamAchievementsResponse)
 		}
 
-		const gamesData = await gamesRes.json()
-		const games: SteamGame[] = []
+		// Fetch player achievements + schema for each game in parallel
+		const gameResults = await Promise.all(
+			games.map(async (game) => {
+				const [playerData, schemaData] = await Promise.all([
+					fetchJson<{
+						playerstats: { achievements?: SteamAchievement[] }
+					}>(
+						`https://api.steampowered.com/ISteamUserStats/GetPlayerAchievements/v1/?key=${STEAM_API_KEY}&steamid=${STEAM_USER_ID}&appid=${game.appid}`
+					),
+					fetchJson<{
+						game: {
+							availableGameStats?: {
+								achievements?: AchievementSchema[]
+							}
+						}
+					}>(
+						`https://api.steampowered.com/ISteamUserStats/GetSchemaForGame/v2/?key=${STEAM_API_KEY}&appid=${game.appid}`
+					),
+				])
 
-		// Fetch achievements for each game
-		for (const game of gamesData.response?.games ?? []) {
-			try {
-				const achieveRes = await fetch(
-					`https://api.steampowered.com/ISteamUserStats/GetPlayerAchievements/v1/?key=${STEAM_API_KEY}&steamid=${STEAM_USER_ID}&appid=${game.appid}`,
-					{ next: { revalidate: 3600 } }
+				const achievements =
+					playerData?.playerstats?.achievements?.filter(
+						(a) => a.achieved === 1
+					) ?? []
+
+				const schemaMap = new Map(
+					(
+						schemaData?.game?.availableGameStats?.achievements ?? []
+					).map((s) => [s.name, s])
 				)
 
-				if (achieveRes.ok) {
-					const achieveData = await achieveRes.json()
-					const achievements: SteamAchievement[] =
-						achieveData.playerstats?.achievements ?? []
-
-					games.push({
+				return achievements.map((a): RecentAchievement => {
+					const schema = schemaMap.get(a.apiname)
+					return {
+						name: schema?.displayName ?? a.apiname,
+						description: schema?.description ?? '',
+						icon: schema?.icon ?? '',
+						unlocktime: a.unlocktime,
+						gameName: game.name,
 						appid: game.appid,
-						name: game.name,
-						achievements: achievements.filter((a: SteamAchievement) => a.achieved === 1),
-						totalAchievements: achievements.length,
-						completedAchievements: achievements.filter(
-							(a: SteamAchievement) => a.achieved === 1
-						).length,
-					})
-				}
-			} catch {
-				// Skip games where achievements aren't available
-			}
-		}
+					}
+				})
+			})
+		)
 
-		return NextResponse.json({ games })
+		// Flatten, sort by newest first, take top 5
+		const allAchievements = gameResults
+			.flat()
+			.sort((a, b) => b.unlocktime - a.unlocktime)
+			.slice(0, 5)
+
+		return NextResponse.json({
+			achievements: allAchievements,
+		} satisfies SteamAchievementsResponse)
 	} catch {
 		return NextResponse.json(
-			{ error: 'Steam API error' },
+			{ achievements: [], error: 'Steam API error' } satisfies SteamAchievementsResponse,
 			{ status: 500 }
 		)
 	}

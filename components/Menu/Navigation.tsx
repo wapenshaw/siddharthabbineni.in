@@ -1,11 +1,13 @@
 'use client'
 
 import { memo, useCallback } from 'react'
-import {Container,
+import {ClientOnly,
+	Container,
 	Button,
 	Flex,
 	Box,
 	IconButton,
+	Skeleton,
 	useBreakpointValue} from '@chakra-ui/react'
 import type { ContainerProps } from '@chakra-ui/react'
 import { motion, useCycle } from 'motion/react'
@@ -60,15 +62,17 @@ const Navigation = () => {
 				zIndex={100}
 				top="3%"
 			>
-				<IconButton
-					aria-label="Color Mode"
-					variant="ghost"
-					boxShadow="none"
-					onClick={toggleColorMode}
-					padding={0}
-				>
-					<ThemeIcon />
-				</IconButton>
+				<ClientOnly fallback={<Skeleton boxSize="10" />}>
+					<IconButton
+						aria-label="Color Mode"
+						variant="ghost"
+						boxShadow="none"
+						onClick={toggleColorMode}
+						padding={0}
+					>
+						<ThemeIcon />
+					</IconButton>
+				</ClientOnly>
 				<MobileMenu isDarkMode={IsDark} toggle={toggleOpen} isOpen={isOpen} />
 			</Box>
 
@@ -264,15 +268,17 @@ const Navigation = () => {
 					</Box>
 					{!isMobile && (
 						<Box>
-							<IconButton
-								marginX={1}
-								aria-label="Color Mode"
-								variant="ghost"
-								boxShadow="none"
-								onClick={toggleColorMode}
-							>
-								<ThemeIcon />
-							</IconButton>
+							<ClientOnly fallback={<Skeleton boxSize="10" />}>
+								<IconButton
+									marginX={1}
+									aria-label="Color Mode"
+									variant="ghost"
+									boxShadow="none"
+									onClick={toggleColorMode}
+								>
+									<ThemeIcon />
+								</IconButton>
+							</ClientOnly>
 						</Box>
 					)}
 				</Flex>
