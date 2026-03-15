@@ -15,22 +15,13 @@ import { GoLinkExternal } from 'react-icons/go'
 import { certifications, type Certification } from 'config/certifications'
 import { useColorModeValue } from 'components/ui/color-mode'
 
-const levelColor: Record<string, [string, string]> = {
-	Expert: ['purple.600', 'purple.300'],
-	Specialty: ['teal.600', 'teal.300'],
-	Associate: ['blue.600', 'blue.300'],
-	Fundamentals: ['gray.600', 'gray.400'],
-}
-
 const CertCard = ({ cert }: { cert: Certification }) => {
 	const bg = useColorModeValue('blackAlpha.50', 'whiteAlpha.100')
 	const borderColor = useColorModeValue('blackAlpha.300', 'whiteAlpha.100')
 	const alphaHover = useColorModeValue(
-		'rgba(49, 151, 149, 0.06)',
+		'rgba(49, 151, 149, 0.08)',
 		'rgba(157, 236, 249, 0.06)'
 	)
-	const [light, dark] = levelColor[cert.level] ?? ['gray.500', 'gray.400']
-	const color = useColorModeValue(light, dark)
 	const isExpired = cert.expired === true
 
 	return (
@@ -41,15 +32,14 @@ const CertCard = ({ cert }: { cert: Certification }) => {
 			color="currentcolor"
 			_hover={{ textDecoration: 'none' }}
 		>
-			{/* Square card via aspect-ratio */}
 			<Box
 				borderWidth="1px"
 				borderColor={borderColor}
 				borderRadius="1em"
 				transition="all 0.2s ease-in-out"
 				backgroundColor={bg}
-				opacity={isExpired ? 0.5 : 1}
-				filter={isExpired ? 'grayscale(0.7)' : 'none'}
+				opacity={isExpired ? 0.45 : 1}
+				filter={isExpired ? 'grayscale(0.8)' : 'none'}
 				_hover={{ background: alphaHover, opacity: 1, filter: 'none' }}
 				aspectRatio="1"
 				width="100%"
@@ -60,22 +50,21 @@ const CertCard = ({ cert }: { cert: Certification }) => {
 					textAlign="center"
 					justify="center"
 					height="100%"
-					padding={{ base: '0.6em', md: '1em' }}
+					padding={{ base: '0.5em', md: '0.8em' }}
 				>
 					<Image
 						src={cert.badge}
 						alt={cert.fullName}
-						width={{ base: '36px', md: '44px' }}
-						height={{ base: '36px', md: '44px' }}
+						width={{ base: '40px', md: '52px' }}
+						height={{ base: '40px', md: '52px' }}
 						objectFit="contain"
 					/>
-					<Heading fontSize={{ base: 'xs', md: 'sm' }} lineHeight="short">
+					<Heading
+						fontSize={{ base: 'xs', md: 'sm' }}
+						lineHeight="short"
+					>
 						{cert.name}
 					</Heading>
-					<Text fontSize="xs" fontWeight="bold" color={color}>
-						{cert.level}
-						{isExpired && ' (Expired)'}
-					</Text>
 					<Text fontSize="xs" color="text.description">
 						{cert.earned}{' '}
 						<GoLinkExternal

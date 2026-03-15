@@ -13,7 +13,7 @@ export interface Certification {
 }
 
 export const certifications: Certification[] = [
-	// Featured certs (Expert + Specialty) — shown by default
+	// Featured certs — shown on first load (4 cards: Expert + Associate)
 	{
 		name: 'Solutions Architect',
 		fullName: 'Azure Solutions Architect Expert',
@@ -37,18 +37,6 @@ export const certifications: Certification[] = [
 		featured: true,
 	},
 	{
-		name: 'Cosmos DB Developer',
-		fullName: 'Azure Cosmos DB Developer Specialty',
-		level: 'Specialty',
-		verifyUrl:
-			'https://learn.microsoft.com/api/credentials/share/en-us/wapenshaw/F831A97B38148BF8?sharingId=1731259073C0B668',
-		badge: '/certifications/certified-specialty-badge.svg',
-		earned: 'September 2023',
-		expired: true,
-		featured: true,
-	},
-	// Associate certs
-	{
 		name: 'Administrator',
 		fullName: 'Azure Administrator Associate',
 		level: 'Associate',
@@ -57,6 +45,7 @@ export const certifications: Certification[] = [
 		badge: '/certifications/associate-badge.svg',
 		earned: 'March 2023',
 		expires: 'March 2027',
+		featured: true,
 	},
 	{
 		name: 'Developer',
@@ -67,8 +56,9 @@ export const certifications: Certification[] = [
 		badge: '/certifications/associate-badge.svg',
 		earned: 'April 2023',
 		expires: 'April 2027',
+		featured: true,
 	},
-	// Fundamentals certs
+	// Fundamentals certs (active)
 	{
 		name: 'AI Fundamentals',
 		fullName: 'Azure AI Fundamentals',
@@ -104,5 +94,16 @@ export const certifications: Certification[] = [
 			'https://learn.microsoft.com/api/credentials/share/en-us/wapenshaw/2A5E20286A4D6F19?sharingId=1731259073C0B668',
 		badge: '/certifications/fundamentals-badge.svg',
 		earned: 'December 2022',
+	},
+	// Expired cert — always last
+	{
+		name: 'Cosmos DB Developer',
+		fullName: 'Azure Cosmos DB Developer Specialty',
+		level: 'Specialty',
+		verifyUrl:
+			'https://learn.microsoft.com/api/credentials/share/en-us/wapenshaw/F831A97B38148BF8?sharingId=1731259073C0B668',
+		badge: '/certifications/certified-specialty-badge.svg',
+		earned: 'September 2023',
+		expired: true,
 	},
 ]

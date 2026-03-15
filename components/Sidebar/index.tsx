@@ -120,19 +120,26 @@ const Sidebar = ({ soData }: SideBarProps) => {
 					<MotionBox display="flex" variants={simpleOpacity}>
 						<StackOverflowBadge soData={soData} />
 					</MotionBox>
-					<MotionBox style={{ margin: 0 }} display="flex" variants={simpleOpacity}>
+					<MotionBox
+						style={{ margin: 0 }}
+						display="flex"
+						justifyContent="space-between"
+						width={{ base: '100%', lg: '80%' }}
+						variants={simpleOpacity}
+					>
 						{SocialMedias.map((socMedia) => (
-							<Link color="link.description"
+							<Link
+								color="text.emphasis"
 								key={socMedia.label}
-								paddingRight={3}
 								aria-label={socMedia.label}
 								rel="noreferrer"
-								width={8}
 								href={socMedia.href}
 								target="_blank"
 								_focusVisible={{ boxShadow: 'none' }}
+								_hover={{ color: 'link.descriptionHover' }}
+								transition="color 0.2s"
 							>
-								<Icon w={8} h={8} as={socMedia.icon} color="currentColor" />
+								<Icon w={7} h={7} as={socMedia.icon} color="currentColor" />
 							</Link>
 						))}
 					</MotionBox>
