@@ -40,7 +40,7 @@ const MotionStack = motion.create(Stack) as React.ComponentType<StackProps & Mot
 const MotionBox = motion.create(Box) as React.ComponentType<BoxProps & MotionProps>
 
 const Sidebar = ({ soData }: SideBarProps) => {
-	const surNameSize = useBreakpointValue({ base: '3xl', md: '4xl' })
+	const surNameSize = useBreakpointValue({ base: '3xl', md: '4xl', xl: '3xl', '2xl': '4xl' })
 	const mobileAvatar = useColorModeValue(
 		AvatarImages.LightMode,
 		AvatarImages.DarkMode
@@ -52,16 +52,29 @@ const Sidebar = ({ soData }: SideBarProps) => {
 			animate="animate"
 			position={{ xl: 'fixed' }}
 			maxWidth={{ xl: '34%' }}
-			top={{ lg: 0 }}
+			top={0}
+			height={{ xl: '100vh' }}
+			overflowY={{ xl: 'auto' }}
+			css={{
+				'&::-webkit-scrollbar': { display: 'none' },
+				scrollbarWidth: 'none',
+			}}
 		>
 			<Container
 				padding={0}
 				margin={0}
-				height={{ xl: '100vh' }}
 				display={{ xl: 'flex' }}
-				alignItems={{ xl: 'center' }}
+				flexDirection={{ xl: 'column' }}
+				justifyContent={{ xl: 'center' }}
+				minHeight={{ xl: '100vh' }}
 			>
-				<MotionStack variants={stagger} gap={6} w="100">
+				<MotionStack
+					variants={stagger}
+					gap={{ base: 6, xl: 4, '2xl': 5 }}
+					w="100%"
+					paddingTop={{ xl: 14, '2xl': 4 }}
+					paddingBottom={{ xl: 6, '2xl': 4 }}
+				>
 					<MotionBox variants={fadeInUp}>
 						<Flex
 							align="center"
@@ -90,7 +103,7 @@ const Sidebar = ({ soData }: SideBarProps) => {
 								</MotionHeading>
 								<MotionHeading
 									as="h1"
-									size="2xl"
+									size={{ base: '2xl', xl: 'xl', '2xl': '2xl' }}
 									className={styles.marginTopForce}
 									paddingRight={{ lg: '20' }}
 									textTransform="uppercase"
@@ -126,7 +139,7 @@ const Sidebar = ({ soData }: SideBarProps) => {
 
 					<MotionHeading
 						as="h3"
-						size="lg" color="text.emphasis"
+						size={{ base: 'lg', xl: 'md', '2xl': 'lg' }} color="text.emphasis"
 						className={styles.marginTopSmall}
 						variants={fadeInUp}
 					>
@@ -134,7 +147,7 @@ const Sidebar = ({ soData }: SideBarProps) => {
 					</MotionHeading>
 
 					<MotionText color="text.description"
-						fontSize="md"
+						fontSize={{ base: 'md', xl: 'sm', '2xl': 'md' }}
 						lineHeight="tall"
 						paddingRight={{ lg: '12' }}
 						variants={fadeInUp}
