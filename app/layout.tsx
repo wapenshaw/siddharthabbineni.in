@@ -99,19 +99,22 @@ export default function RootLayout({
 			</head>
 			<body>
 				<Provider>{children}</Provider>
-				<Script
-					defer
-					src="https://www.googletagmanager.com/gtag/js?id=G-GK9R79RGL6"
-					strategy="afterInteractive"
-				/>
-				<Script defer id="google-analytics" strategy="afterInteractive">
-					{`
-						window.dataLayer = window.dataLayer || [];
-						function gtag(){window.dataLayer.push(arguments);}
-						gtag('js', new Date());
-						gtag('config', 'G-GK9R79RGL6');
-					`}
-				</Script>
+				{process.env.NEXT_PUBLIC_SITE_URL?.includes('staging') ? null : (
+					<>
+						<Script
+							src="https://www.googletagmanager.com/gtag/js?id=G-GK9R79RGL6"
+							strategy="afterInteractive"
+						/>
+						<Script id="google-analytics" strategy="afterInteractive">
+							{`
+								window.dataLayer = window.dataLayer || [];
+								function gtag(){window.dataLayer.push(arguments);}
+								gtag('js', new Date());
+								gtag('config', 'G-GK9R79RGL6');
+							`}
+						</Script>
+					</>
+				)}
 			</body>
 		</html>
 	)

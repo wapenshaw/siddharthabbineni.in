@@ -9,6 +9,9 @@ const XBOX_API_KEY = process.env.XBOX_API_KEY
 const XBOX_XUID = process.env.XBOX_XUID
 const XBL_BASE = 'https://xbl.io/api/v2'
 
+/** Cache this route's response for 6 hours */
+export const revalidate = 21600
+
 interface XblTitle {
 	name: string
 	displayImage: string
@@ -37,6 +40,7 @@ async function fetchXbl<T>(path: string): Promise<T | null> {
 				Accept: 'application/json',
 				'Accept-Language': 'en-US',
 			},
+			next: { revalidate: 21_600 },
 		})
 		if (!res.ok) {
 			console.error(`[Xbox] ${path} returned ${res.status}`)

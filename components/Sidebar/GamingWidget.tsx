@@ -200,13 +200,13 @@ const GamingWidget = () => {
 	const { data: steamData } = useSWR<SteamAchievementsResponse>(
 		'/api/steam',
 		fetcher,
-		{ revalidateOnFocus: false, refreshInterval: 18_000_000 }
+		{ revalidateOnFocus: false, refreshInterval: 21_600_000 }
 	)
 
 	const { data: xboxData } = useSWR<XboxAchievementsResponse>(
 		'/api/xbox',
 		fetcher,
-		{ revalidateOnFocus: false, refreshInterval: 18_000_000 }
+		{ revalidateOnFocus: false, refreshInterval: 21_600_000 }
 	)
 
 	const gamingData: GamingData = {

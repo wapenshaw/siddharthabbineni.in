@@ -57,7 +57,7 @@ export const StackOverflowBadge = ({ soData }: SoBadgeProps) => {
 	const { data } = useSWR<StackData>('/api/stackoverflow', fetcher, {
 		fallbackData: soData,
 		revalidateOnFocus: false,
-		refreshInterval: 3600_000,
+		refreshInterval: 21_600_000,
 	})
 
 	const user = data?.items?.[0]

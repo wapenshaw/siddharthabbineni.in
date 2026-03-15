@@ -10,9 +10,12 @@ import type {
 const STEAM_API_KEY = process.env.STEAM_API_KEY
 const STEAM_USER_ID = process.env.STEAM_USER_ID
 
+/** Cache this route's response for 6 hours */
+export const revalidate = 21600
+
 async function fetchJson<T>(url: string): Promise<T | null> {
 	try {
-		const res = await fetch(url, { next: { revalidate: 18_000 } })
+		const res = await fetch(url, { next: { revalidate: 21_600 } })
 		if (!res.ok) return null
 		return res.json()
 	} catch {
