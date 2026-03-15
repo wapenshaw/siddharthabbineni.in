@@ -25,7 +25,7 @@ const GetInTouch = () => {
 				device on/near me for me to reply. You can contact me through my socials
 				on the left. The best way however, is to
 				<Link
-					href="mailto:siddharth.abbineni@gmail.com"
+					href="mailto:siddharth.abbineni@hotmail.com"
 					target="_blank"
 					rel="noreferrer"
 				>

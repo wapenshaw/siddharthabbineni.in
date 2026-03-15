@@ -1,29 +1,88 @@
 'use client'
 
-import { memo } from 'react'
+import { memo, useState } from 'react'
 import {
 	Heading,
 	Text,
 	Stack,
 	SimpleGrid,
 	Link,
-	Box,
+	Image,
+	Button,
 } from '@chakra-ui/react'
-import { VscAzure } from 'react-icons/vsc'
 import { IoMdOpen } from 'react-icons/io'
-import { certifications } from 'config/certifications'
+import { certifications, type Certification } from 'config/certifications'
 import { useColorModeValue } from 'components/ui/color-mode'
 
-const Certifications = () => {
+const levelColor: Record<string, [string, string]> = {
+	Expert: ['purple.600', 'purple.300'],
+	Specialty: ['teal.600', 'teal.300'],
+	Associate: ['blue.600', 'blue.300'],
+	Fundamentals: ['gray.600', 'gray.400'],
+}
+
+const CertCard = ({ cert }: { cert: Certification }) => {
 	const bg = useColorModeValue('blackAlpha.50', 'whiteAlpha.100')
 	const borderColor = useColorModeValue('blackAlpha.300', 'whiteAlpha.100')
 	const alphaHover = useColorModeValue(
 		'rgba(49, 151, 149, 0.06)',
 		'rgba(157, 236, 249, 0.06)'
 	)
-	const azureColor = useColorModeValue('blue.500', 'blue.300')
-	const expertColor = useColorModeValue('purple.600', 'purple.300')
-	const assocColor = useColorModeValue('blue.600', 'blue.300')
+	const [light, dark] = levelColor[cert.level] ?? ['gray.500', 'gray.400']
+	const color = useColorModeValue(light, dark)
+	const isExpired = cert.expired === true
+
+	return (
+		<Link
+			href={cert.verifyUrl}
+			target="_blank"
+			rel="noreferrer"
+			color="currentcolor"
+			_hover={{ textDecoration: 'none' }}
+		>
+			<Stack
+				gap={2}
+				borderWidth="1px"
+				borderColor={borderColor}
+				borderRadius="1em"
+				padding={{ base: '0.8em', md: '1em', '2xl': '1.5em' }}
+				height="100%"
+				align="center"
+				textAlign="center"
+				transition="all 0.2s ease-in-out"
+				backgroundColor={bg}
+				opacity={isExpired ? 0.5 : 1}
+				filter={isExpired ? 'grayscale(0.7)' : 'none'}
+				_hover={{ background: alphaHover, opacity: 1, filter: 'none' }}
+			>
+				<Image
+					src={cert.badge}
+					alt={cert.fullName}
+					width="48px"
+					height="48px"
+					objectFit="contain"
+				/>
+				<Heading fontSize="sm">{cert.name}</Heading>
+				<Text fontSize="xs" fontWeight="bold" color={color}>
+					{cert.level}
+					{isExpired && ' (Expired)'}
+				</Text>
+				<Text fontSize="xs" color="text.description">
+					{cert.earned}
+				</Text>
+				<Text fontSize="xs" color="text.description">
+					Verify <IoMdOpen style={{ display: 'inline' }} />
+				</Text>
+			</Stack>
+		</Link>
+	)
+}
+
+const Certifications = () => {
+	const [expanded, setExpanded] = useState(false)
+	const featured = certifications.filter((c) => c.featured)
+	const rest = certifications.filter((c) => !c.featured)
+	const displayCerts = expanded ? certifications : featured
 
 	return (
 		<Stack
@@ -43,47 +102,27 @@ const Certifications = () => {
 				Microsoft Azure certified professional with expertise across
 				architecture, development, administration, and DevOps.
 			</Text>
-			<SimpleGrid columns={{ base: 2, md: 4 }} gap={{ base: 4, md: 6 }}>
-				{certifications.map((cert) => (
-					<Link
-						key={cert.name}
-						href={cert.verifyUrl}
-						target="_blank"
-						rel="noreferrer"
-						color="currentcolor"
-						_hover={{ textDecoration: 'none' }}
-					>
-						<Stack
-							gap={3}
-							borderWidth="1px"
-							borderColor={borderColor}
-							borderRadius="1em"
-							padding={{ base: '1em', '2xl': '1.5em' }}
-							height="100%"
-							align="center"
-							textAlign="center"
-							transition="all 0.2s ease-in-out"
-							backgroundColor={bg}
-							_hover={{ background: alphaHover }}
-						>
-							<Box color={azureColor}>
-								<VscAzure size={36} />
-							</Box>
-							<Heading fontSize="sm">{cert.name}</Heading>
-							<Text
-								fontSize="xs"
-								fontWeight="bold"
-								color={cert.level === 'Expert' ? expertColor : assocColor}
-							>
-								{cert.level}
-							</Text>
-							<Text fontSize="xs" color="text.description">
-								Verify <IoMdOpen style={{ display: 'inline' }} />
-							</Text>
-						</Stack>
-					</Link>
+			<SimpleGrid
+				columns={{ base: 2, md: 3 }}
+				gap={{ base: 3, md: 5 }}
+			>
+				{displayCerts.map((cert) => (
+					<CertCard key={cert.name} cert={cert} />
 				))}
 			</SimpleGrid>
+			{rest.length > 0 && (
+				<Button
+					variant="ghost"
+					size="sm"
+					onClick={() => setExpanded(!expanded)}
+					alignSelf="flex-start"
+					color="text.accentAlt"
+				>
+					{expanded
+						? 'Show fewer'
+						: `+${rest.length} more certifications`}
+				</Button>
+			)}
 		</Stack>
 	)
 }

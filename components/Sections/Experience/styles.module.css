@@ -1,10 +1,25 @@
+/* Hide scrollbar on desktop vertical tabs */
+.experienceTabs {
+	scrollbar-width: none;
+}
 .experienceTabs::-webkit-scrollbar {
-	height: 0.5em;
+	display: none;
 }
-.experienceTabs::-webkit-scrollbar-track-piece {
-	height: 10px;
-}
-.experienceTabs::-webkit-scrollbar-thumb {
-	background: var(--chakra-colors-gray-600);
-	border-radius: 1em;
+
+/* Thin scrollbar for mobile horizontal tabs */
+@media (max-width: 767px) {
+	.experienceTabs {
+		scrollbar-width: thin;
+	}
+	.experienceTabs::-webkit-scrollbar {
+		display: block;
+		height: 0.5em;
+	}
+	.experienceTabs::-webkit-scrollbar-track-piece {
+		height: 10px;
+	}
+	.experienceTabs::-webkit-scrollbar-thumb {
+		background: var(--chakra-colors-gray-600);
+		border-radius: 1em;
+	}
 }

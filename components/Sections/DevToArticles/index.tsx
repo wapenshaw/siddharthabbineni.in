@@ -87,16 +87,16 @@ const DevToArticles = ({ articles }: { articles: Article[] }) => {
 					</Link>
 				))}
 			</SimpleGrid>
-			{articles.length > MAX_HOME_ARTICLES && (
-				<Link
-					href="/blog"
-					color="text.accentAlt"
-					fontWeight="medium"
-					_hover={{ textDecoration: 'underline' }}
-				>
-					View all {articles.length} articles →
-				</Link>
-			)}
+			<Link
+				href="https://dev.to/wapenshaw"
+				target="_blank"
+				rel="noreferrer"
+				color="text.accentAlt"
+				fontWeight="medium"
+				_hover={{ textDecoration: 'underline' }}
+			>
+				Read more on Dev.to →
+			</Link>
 		</Stack>
 	)
 }

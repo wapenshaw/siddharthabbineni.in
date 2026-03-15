@@ -33,24 +33,27 @@ export const Experiences: {
 		},
 		roles: [
 			<>
-				Driving automation initiatives across infrastructure and cloud services
-				to streamline service fulfillment, remediation, and reporting.
+				Taking on responsibility to drive automation initiatives across
+				infrastructure and cloud services to streamline service fulfillment,
+				remediation, and reporting.
 			</>,
 			<>
-				Designing and implementing cloud-agnostic automation frameworks to
-				reduce manual effort and improve delivery efficiency.
+				Contributing to the design and implementation of cloud-agnostic
+				automation frameworks to reduce manual effort and improve delivery
+				efficiency.
 			</>,
 			<>
-				Building scalable infrastructure provisioning, multi-cloud deployments,
-				and CI/CD pipelines.
+				Supporting the development of scalable infrastructure provisioning,
+				multi-cloud deployments, and CI/CD pipelines.
 			</>,
 			<>
 				Partnering with cloud architects and infrastructure teams to deliver
 				secure and resilient automation solutions.
 			</>,
 			<>
-				Advancing self-service platforms, AI/ML-driven automation, and
-				cloud-native practices to modernize enterprise IT services.
+				Beginning work on advancing self-service platforms, AI/ML-driven
+				automation, and cloud-native practices to modernize enterprise IT
+				services.
 			</>,
 		],
 	},
