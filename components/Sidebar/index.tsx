@@ -148,31 +148,39 @@ const Sidebar = ({ soData }: SideBarProps) => {
 						player now turned into a casual. I play dota2 when I need to get mad
 						and Anno 1800/Cities Skylines when I need to chill.
 					</MotionText>
-					<MotionBox display="flex" variants={simpleOpacity}>
-						<StackOverflowBadge soData={soData} />
-					</MotionBox>
-					<MotionBox
-						style={{ margin: 0 }}
-						display="flex"
-						justifyContent="space-between"
-						width={{ base: '100%', lg: '80%' }}
-						variants={simpleOpacity}
-					>
-						{SocialMedias.map((socMedia) => (
-							<Link
-								color="text.emphasis"
-								key={socMedia.label}
-								aria-label={socMedia.label}
-								rel="noreferrer"
-								href={socMedia.href}
-								target="_blank"
-								_focusVisible={{ boxShadow: 'none' }}
-								_hover={{ color: 'link.descriptionHover' }}
-								transition="color 0.2s"
+					{/* SO badge on left, social icons grid on right */}
+					<MotionBox variants={simpleOpacity}>
+						<Flex
+							align="center"
+							gap={{ base: 4, lg: 5 }}
+							width={{ base: '100%', lg: '80%' }}
+						>
+							<Box flexShrink={0}>
+								<StackOverflowBadge soData={soData} />
+							</Box>
+							<Flex
+								flex={1}
+								wrap="wrap"
+								gap={3}
+								justify="flex-end"
 							>
-								<Icon w={7} h={7} as={socMedia.icon} color="currentColor" />
-							</Link>
-						))}
+								{SocialMedias.map((socMedia) => (
+									<Link
+										color="text.emphasis"
+										key={socMedia.label}
+										aria-label={socMedia.label}
+										rel="noreferrer"
+										href={socMedia.href}
+										target="_blank"
+										_focusVisible={{ boxShadow: 'none' }}
+										_hover={{ color: 'link.descriptionHover' }}
+										transition="color 0.2s"
+									>
+										<Icon w={6} h={6} as={socMedia.icon} color="currentColor" />
+									</Link>
+								))}
+							</Flex>
+						</Flex>
 					</MotionBox>
 					<MotionBox variants={simpleOpacity}>
 						<SteamAchievements />

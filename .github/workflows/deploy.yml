@@ -1,4 +1,4 @@
-name: Deploy
+name: Deploy to Azure Static Web App
 
 on:
   push:
@@ -9,7 +9,7 @@ on:
 
 jobs:
   deploy:
-    name: Build & Deploy
+    name: Build & Deploy ${{ github.ref == 'refs/heads/master' && 'Production' || 'Staging' }}
     runs-on: ubuntu-latest
 
     permissions:

@@ -17,7 +17,6 @@ import styles from './styles.module.css'
 import MobileMenu from './toggle'
 import { ThemeMode, mobileBreakpointsMap } from 'config/theme'
 import { menuAnim } from 'config/animations'
-import useScrollDirection, { ScrollDirection } from 'hooks/useScrollDirection'
 import { useColorModeValue, useColorMode } from 'components/ui/color-mode'
 
 const MotionContainer = motion.create(Container) as React.ComponentType<ContainerProps & MotionProps>
@@ -50,7 +49,6 @@ const Navigation = () => {
 		},
 		[isMobile, toggleOpen]
 	)
-	const scrollDirection = useScrollDirection()
 
 	return (
 		<>
@@ -81,19 +79,10 @@ const Navigation = () => {
 				backgroundColor={bg}
 				maxWidth={{ base: '100%', sm: '100%', lg: '50%', xl: '60%' }}
 				className={styles.menu}
-				right={{
-					lg:
-						!isMobile && scrollDirection === ScrollDirection.Down
-							? '2%'
-							: '3.5%',
-				}}
+				right={{ lg: '3.5%' }}
 				initial="hide"
 				animate={(!isMobile || isOpen) ? 'show' : undefined}
 				style={{
-					width:
-						!isMobile && scrollDirection === ScrollDirection.Down
-							? '12%'
-							: '100%',
 					top: !isOpen && isMobile ? '-100vh' : undefined,
 					opacity: !isOpen && isMobile ? '0' : undefined,
 					left: isOpen && isMobile ? 0 : undefined,
@@ -108,15 +97,11 @@ const Navigation = () => {
 			>
 				<Flex
 					justifyContent={{ base: 'center', lg: 'flex-end' }}
-					direction={{
-						base: 'column',
-						lg: scrollDirection === ScrollDirection.Down ? 'column' : 'row',
-					}}
+					direction={{ base: 'column', lg: 'row' }}
+					alignItems={{ lg: 'center' }}
+					flexWrap={{ lg: 'wrap' }}
 					paddingX={{ base: '', sm: '10', lg: '0' }}
-					paddingY={{
-						base: '10',
-						lg: scrollDirection === ScrollDirection.Down ? '10' : '3',
-					}}
+					paddingY={{ base: '10', lg: '3' }}
 					height={{ base: '100vh', lg: 'auto' }}
 					paddingRight="0"
 					paddingBottom={isMobile ? 10 : '0'}

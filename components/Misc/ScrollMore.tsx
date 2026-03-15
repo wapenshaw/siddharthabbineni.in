@@ -20,7 +20,7 @@ const scrollMoreVariants: Variants = {
 		},
 	},
 	bounce: {
-		y: [0, -18, 0],
+		y: [0, -14, 0],
 		transition: {
 			duration: 1.6,
 			ease: 'easeOut',
@@ -37,9 +37,12 @@ const ScrollMore = () => {
 	return (
 		<Box
 			position="fixed"
-			bottom="1em"
-			right="3%"
-			display={isMobile ? '' : 'block'}
+			bottom={{ base: '1.5em', lg: '1em' }}
+			left="50%"
+			transform="translateX(-50%)"
+			display="block"
+			zIndex={10}
+			pointerEvents="none"
 		>
 			<AnimatePresence>
 				{[ScrollDirection.Initial, ScrollDirection.Up].includes(
@@ -51,11 +54,11 @@ const ScrollMore = () => {
 						variants={scrollMoreVariants}
 					>
 						<Icon
-							w={6}
-							h={6}
+							w={{ base: 8, lg: 7 }}
+							h={{ base: 8, lg: 7 }}
 							as={RiArrowDownLine}
 							color="currentColor"
-							opacity="0.75"
+							opacity="0.45"
 						/>
 					</motion.div>
 				)}

@@ -82,10 +82,10 @@ export const StackOverflowBadge = ({ soData }: SoBadgeProps) => {
 				<Icon w={8} h={8} as={FaStackOverflow} color="currentColor" />
 				<Box>
 					<Stat.Root marginTop={-1}>
-						<Stat.ValueText fontSize="md">
+						<Stat.ValueText fontSize="lg" fontWeight="bold">
 							{truncate(user.reputation)}
 						</Stat.ValueText>
-						<Stat.HelpText fontSize="xs">
+						<Stat.HelpText fontSize="sm">
 							<Stat.UpIndicator />
 							{user.reputation_change_month}
 						</Stat.HelpText>
