@@ -30,6 +30,9 @@ export interface SteamProfileStats {
 	playedGames: number
 	perfectGames: number
 	totalAchievements: number
+	avatarUrl?: string
+	profileUrl?: string
+	personaName?: string
 }
 
 export interface SteamAchievementsResponse {

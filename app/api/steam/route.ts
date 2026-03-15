@@ -28,12 +28,26 @@ interface OwnedGame {
 }
 
 async function getProfileStats(): Promise<SteamProfileStats> {
-	const ownedData = await fetchJson<{
-		response: { game_count?: number; games?: OwnedGame[] }
-	}>(
-		`https://api.steampowered.com/IPlayerService/GetOwnedGames/v1/?key=${STEAM_API_KEY}&steamid=${STEAM_USER_ID}&include_appinfo=1&include_played_free_games=1`
-	)
+	const [ownedData, profileData] = await Promise.all([
+		fetchJson<{
+			response: { game_count?: number; games?: OwnedGame[] }
+		}>(
+			`https://api.steampowered.com/IPlayerService/GetOwnedGames/v1/?key=${STEAM_API_KEY}&steamid=${STEAM_USER_ID}&include_appinfo=1&include_played_free_games=1`
+		),
+		fetchJson<{
+			response: {
+				players?: {
+					avatarfull: string
+					profileurl: string
+					personaname: string
+				}[]
+			}
+		}>(
+			`https://api.steampowered.com/ISteamUser/GetPlayerSummaries/v2/?key=${STEAM_API_KEY}&steamids=${STEAM_USER_ID}`
+		),
+	])
 
+	const player = profileData?.response?.players?.[0]
 	const allGames = ownedData?.response?.games ?? []
 	const totalGames = ownedData?.response?.game_count ?? allGames.length
 	const playedGames = allGames.filter((g) => g.playtime_forever > 0)
@@ -72,6 +86,9 @@ async function getProfileStats(): Promise<SteamProfileStats> {
 			(sum, r) => sum + r.completed,
 			0
 		),
+		avatarUrl: player?.avatarfull,
+		profileUrl: player?.profileurl,
+		personaName: player?.personaname,
 	}
 }
 

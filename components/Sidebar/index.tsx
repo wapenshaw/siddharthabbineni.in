@@ -18,7 +18,7 @@ import type { BoxProps, HeadingProps, StackProps, TextProps } from '@chakra-ui/r
 import { motion } from 'motion/react'
 import type { MotionProps } from 'motion/react'
 import { StackOverflowBadge } from './StackOverflow'
-import SteamAchievements from './SteamAchievements'
+import GamingWidget from './GamingWidget'
 import styles from './styles.module.css'
 import {
 	fadeInUp,
@@ -185,7 +185,7 @@ const Sidebar = ({ soData }: SideBarProps) => {
 						</Flex>
 					</MotionBox>
 					<MotionBox variants={simpleOpacity}>
-						<SteamAchievements />
+						<GamingWidget />
 					</MotionBox>
 				</MotionStack>
 			</Container>
