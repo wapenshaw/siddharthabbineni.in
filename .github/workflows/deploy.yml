@@ -9,7 +9,7 @@ on:
 
 jobs:
   deploy:
-    name: Build & Deploy ${{ github.ref == 'refs/heads/master' && 'Production' || 'Staging' }}
+    name:  ${{ github.ref == 'refs/heads/master' && 'Production' || 'Staging' }} - Build & Deploy
     runs-on: ubuntu-latest
 
     permissions:
@@ -36,6 +36,7 @@ jobs:
           STEAM_API_KEY: ${{ secrets.STEAM_API_KEY }}
           STEAM_USER_ID: ${{ secrets.STEAM_USER_ID }}
           SO_USER_ID: '66384'
+          NEXT_PUBLIC_SITE_URL: ${{ github.ref == 'refs/heads/master' && 'https://www.siddharthabbineni.in' || 'https://staging.siddharthabbineni.in' }}
 
       - name: Deploy
         uses: Azure/static-web-apps-deploy@v1

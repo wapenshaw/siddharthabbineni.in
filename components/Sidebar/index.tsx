@@ -8,6 +8,7 @@ import {
 	Icon,
 	Image as ChkImage,
 	Link,
+	SimpleGrid,
 	Stack,
 	Text,
 	useBreakpointValue,
@@ -61,57 +62,58 @@ const Sidebar = ({ soData }: SideBarProps) => {
 				alignItems={{ xl: 'center' }}
 			>
 				<MotionStack variants={stagger} gap={6} w="100">
-					<Flex
-						align="center"
-						justify="space-between"
-						gap={4}
-					>
-						<Box flex={1}>
-							<MotionText
-								variants={fadeInUp}
-								transition={{ delay: 1 }}
-								color="text.accent"
-								fontWeight="light"
-							>
-								బ్రెయిన్ వాడితే స్ట్రైన్ తగుద్ది రా చారి!
-							</MotionText>
-							<MotionHeading
-								as="h2"
-								size={surNameSize as HeadingProps['size']}
-								color="text.emphasis"
-								textTransform="uppercase"
-								variants={simpleOpacity}
-								whileHover={{ scale: 1.1 }}
-								whileTap={{ scale: 0.9 }}
-							>
-								Siddharth
-							</MotionHeading>
-							<MotionHeading
-								as="h1"
-								size="2xl"
-								className={styles.marginTopForce}
-								paddingRight={{ lg: '20' }}
-								textTransform="uppercase"
-								variants={fadeInUp}
-							>
-								Abbineni
-							</MotionHeading>
-						</Box>
-						{/* Small avatar visible only on mobile, next to the name */}
-						<Box
-							display={{ base: 'block', lg: 'none' }}
-							flexShrink={0}
+					<MotionBox variants={fadeInUp}>
+						<Flex
+							align="center"
+							justify="space-between"
+							gap={4}
 						>
-							<ChkImage
-								src={mobileAvatar}
-								alt="Siddharth Abbineni"
-								boxSize="80px"
-								borderRadius="full"
-								objectFit="cover"
-								loading="eager"
-							/>
-						</Box>
-					</Flex>
+							<Box flex={1}>
+								<MotionText
+									variants={fadeInUp}
+									transition={{ delay: 1 }}
+									color="text.accent"
+									fontWeight="light"
+								>
+									బ్రెయిన్ వాడితే స్ట్రైన్ తగుద్ది రా చారి!
+								</MotionText>
+								<MotionHeading
+									as="h2"
+									size={surNameSize as HeadingProps['size']}
+									color="text.emphasis"
+									textTransform="uppercase"
+									variants={simpleOpacity}
+									whileHover={{ scale: 1.1 }}
+									whileTap={{ scale: 0.9 }}
+								>
+									Siddharth
+								</MotionHeading>
+								<MotionHeading
+									as="h1"
+									size="2xl"
+									className={styles.marginTopForce}
+									paddingRight={{ lg: '20' }}
+									textTransform="uppercase"
+									variants={fadeInUp}
+								>
+									Abbineni
+								</MotionHeading>
+							</Box>
+							{/* Small avatar visible only on mobile, next to the name */}
+							<Box
+								display={{ base: 'block', lg: 'none' }}
+								flexShrink={0}
+							>
+								<ChkImage
+									src={mobileAvatar}
+									alt="Siddharth Abbineni"
+									boxSize="80px"
+									borderRadius="full"
+									objectFit="cover"
+								/>
+							</Box>
+						</Flex>
+					</MotionBox>
 
 					<MotionText
 						colorPalette="gray"
@@ -158,11 +160,11 @@ const Sidebar = ({ soData }: SideBarProps) => {
 							<Box flexShrink={0}>
 								<StackOverflowBadge soData={soData} />
 							</Box>
-							<Flex
-								flex={1}
-								wrap="wrap"
+							<SimpleGrid
+								columns={3}
 								gap={3}
-								justify="flex-end"
+								flex={1}
+								justifyItems="center"
 							>
 								{SocialMedias.map((socMedia) => (
 									<Link
@@ -179,7 +181,7 @@ const Sidebar = ({ soData }: SideBarProps) => {
 										<Icon w={6} h={6} as={socMedia.icon} color="currentColor" />
 									</Link>
 								))}
-							</Flex>
+							</SimpleGrid>
 						</Flex>
 					</MotionBox>
 					<MotionBox variants={simpleOpacity}>
