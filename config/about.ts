@@ -1,14 +1,14 @@
 export const aboutContent = {
 	headline: 'About Me',
 	paragraphs: [
-		'A <b>C# and Dotnet</b> developer for as long as I can remember. I sometimes make <b>architectural decisions</b>.',
-		'Avoided JavaScript 😉 as much as I could until <b>Typescript</b> came along and now, I love making apps in <b>React</b>!',
-		'Successfully delivered many commercial and custom solutions for various clients.',
-		'Currently exploring various implementations for the <b>SPA + API</b> architecture with a touch of "Microservices"',
+		'An <b>Azure-certified Solutions Architect</b> who still writes code — because someone has to make sure the architecture actually works. 😉',
+		'Started as a <b>C# and .NET</b> developer, avoided JavaScript until <b>TypeScript</b> saved the day, and now I architect cloud solutions while sneaking in <b>React</b> apps on the side.',
+		'13+ years building everything from ERPs to microservices across Azure, AWS, and everything in between.',
+		'Currently automating the cloud at <b>Assurant</b> — think Azure, Terraform, Kubernetes, and a healthy dose of "why is this pipeline failing at 2 AM?"',
 	],
 	tooltips: {
 		avoidedJs: 'No static type checking! 😠',
-		workOn: 'at Pinion and my free time',
+		workOn: 'at Assurant and my free time',
 	},
 	workOnLabel: 'work on..',
 	moreSkillsLabel: '..and worked on..',

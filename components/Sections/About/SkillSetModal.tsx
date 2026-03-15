@@ -67,9 +67,10 @@ const SkillList = ({
 }
 
 const SkillSetModal = ({ isOpen, onClose }: ISkillSetModal) => {
+	const cloudCols = splitSkills(Skills.cloud)
+	const devopsCols = splitSkills(Skills.devops)
 	const backendCols = splitSkills(Skills.backend)
 	const frontendCols = splitSkills(Skills.frontend)
-	const cicdCols = splitSkills(Skills.cicd)
 	const dataBaseCols = splitSkills(Skills.database)
 	const uiFrameWorkCols = splitSkills(Skills['ui frameworks'])
 	const toolsCols = splitSkills(Skills.toolchains)
@@ -89,11 +90,12 @@ const SkillSetModal = ({ isOpen, onClose }: ISkillSetModal) => {
 					<Dialog.Header>Techs n Tools</Dialog.Header>
 					<Dialog.CloseTrigger />
 					<Dialog.Body className={styles.skillModal}>
+						<SkillList title="Cloud & Infrastructure" columns={cloudCols} />
+						<SkillList title="DevOps & AI" columns={devopsCols} />
 						<SkillList title="Backend" columns={backendCols} />
 						<SkillList title="Frontend" columns={frontendCols} />
 						<SkillList title="Databases" columns={dataBaseCols} />
 						<SkillList title="Deliverables" columns={deliverableCols} />
-						<SkillList title="CI/CD" columns={cicdCols} />
 						<SkillList title="UI Frameworks" columns={uiFrameWorkCols} />
 						<SkillList title="Desktop" columns={desktopCols} />
 						<SkillList title="Tools &amp; Toolchains" columns={toolsCols} />

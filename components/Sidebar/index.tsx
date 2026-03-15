@@ -97,7 +97,7 @@ const Sidebar = ({ soData }: SideBarProps) => {
 						className={styles.marginTopSmall}
 						variants={fadeInUp}
 					>
-						Developer, Engineer, Gamer
+						Architect, Developer, Gamer
 					</MotionHeading>
 
 					<MotionText color="text.description"
@@ -108,7 +108,7 @@ const Sidebar = ({ soData }: SideBarProps) => {
 					>
 						Hello 👋 Welcome! I am a{' '}
 						<Text color="text.emphasis" as="span">
-							software engineer
+							cloud &amp; software architect
 						</Text>{' '}
 						based in Hyderabad, IN. An ex-pro{' '}
 						<Text color="text.emphasis" as="span">

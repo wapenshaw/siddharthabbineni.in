@@ -13,15 +13,17 @@ import {
 import { memo } from 'react'
 import { IoMdOpen } from 'react-icons/io'
 import {
-	SiAngular,
-	SiBlazor,
+	SiAnsible,
 	SiDotnet,
-	SiElectron,
-	SiNodedotjs,
+	SiGithubactions,
+	SiKubernetes,
+	SiPython,
 	SiReact,
+	SiTerraform,
 	SiTypescript,
 } from 'react-icons/si'
-import { VscAzureDevops, VscAzure, VscDatabase } from 'react-icons/vsc'
+import { VscAzure } from 'react-icons/vsc'
+import { FaAws } from 'react-icons/fa'
 import { useColorModeValue } from 'components/ui/color-mode'
 
 type ISkillSetModal = {
@@ -50,21 +52,26 @@ const Detail = ({ onOpen }: ISkillSetModal) => {
 				About Me
 			</Heading>
 			<Text color="text.description">
-				A <b>C# and Dotnet</b> developer for as long as I can remember. I
-				sometimes make <b>architectural decisions</b>.{' '}
+				An <b>Azure-certified Solutions Architect</b> who still writes code —
+				because someone has to make sure the architecture actually works. 😉
+				{' '}
 				<Tooltip.Root>
 					<Tooltip.Trigger asChild>
-						<Text as="span">Avoided JavaScript 😉 </Text>
+						<Text as="span">Avoided JavaScript </Text>
 					</Tooltip.Trigger>
 					<Tooltip.Positioner>
 						<Tooltip.Content>No static type checking! 😠</Tooltip.Content>
 					</Tooltip.Positioner>
 				</Tooltip.Root>
-				as much as I could until <b>Typescript</b> came along and now, I love
-				making apps in <b>React</b>! Successfully delivered many commercial and
-				custom solutions for various clients. Currently exploring various
-				implementations for the <b>SPA + API </b>
-				architecture with a touch of &quot;Microservices&quot;
+				until <b>TypeScript</b> saved the day, and now I architect cloud
+				solutions while sneaking in <b>React</b> apps on the side.
+				13+ years building everything from ERPs to microservices across{' '}
+				<b>Azure</b>, <b>AWS</b>, and everything in between.
+				<br />
+				<br />
+				Currently automating the cloud at <b>Assurant</b> — think Terraform,
+				Kubernetes, and a healthy dose of &quot;why is this pipeline failing at
+				2 AM?&quot;
 				<br />
 				<br />I{' '}
 				<Tooltip.Root>
@@ -74,7 +81,7 @@ const Detail = ({ onOpen }: ISkillSetModal) => {
 						</Text>
 					</Tooltip.Trigger>
 					<Tooltip.Positioner>
-						<Tooltip.Content>at Pinion and my free time</Tooltip.Content>
+						<Tooltip.Content>at Assurant and my free time</Tooltip.Content>
 					</Tooltip.Positioner>
 				</Tooltip.Root>{' '}
 			</Text>
@@ -82,46 +89,46 @@ const Detail = ({ onOpen }: ISkillSetModal) => {
 			<SimpleGrid columns={2} gap={4}>
 				<List.Root gap={3} listStyle="none">
 					<List.Item fontSize="medium" display="flex" alignItems="center">
-						<Icon as={SiDotnet} color={emphasis} fontSize="2em" marginRight={2} />
-						C# &amp; Dotnet
+						<Icon as={VscAzure} color={emphasis} fontSize="2em" marginRight={2} />
+						Azure Cloud
 					</List.Item>
 					<List.Item fontSize="medium" display="flex" alignItems="center">
-						<Icon as={SiBlazor} color={emphasis} fontSize="2em" marginRight={2} />
-						Blazor
+						<Icon as={FaAws} color={emphasis} fontSize="2em" marginRight={2} />
+						AWS
 					</List.Item>
 					<List.Item fontSize="medium" display="flex" alignItems="center">
-						<Icon as={SiTypescript} color={emphasis} fontSize="2em" marginRight={2} />
-						Typescript
+						<Icon as={SiTerraform} color={emphasis} fontSize="2em" marginRight={2} />
+						Terraform
 					</List.Item>
 					<List.Item fontSize="medium" display="flex" alignItems="center">
-						<Icon as={SiNodedotjs} color={emphasis} fontSize="2em" marginRight={2} />
-						Node
+						<Icon as={SiKubernetes} color={emphasis} fontSize="2em" marginRight={2} />
+						Kubernetes
 					</List.Item>
 					<List.Item fontSize="medium" display="flex" alignItems="center">
-						<Icon as={VscAzureDevops} color={emphasis} fontSize="2em" marginRight={2} />
-						Azure DevOps
+						<Icon as={SiAnsible} color={emphasis} fontSize="2em" marginRight={2} />
+						Ansible
 					</List.Item>
 				</List.Root>
 				<List.Root gap={3} listStyle="none">
+					<List.Item fontSize="medium" display="flex" alignItems="center">
+						<Icon as={SiDotnet} color={emphasis} fontSize="2em" marginRight={2} />
+						C# &amp; .NET
+					</List.Item>
+					<List.Item fontSize="medium" display="flex" alignItems="center">
+						<Icon as={SiPython} color={emphasis} fontSize="2em" marginRight={2} />
+						Python
+					</List.Item>
 					<List.Item fontSize="medium" display="flex" alignItems="center">
 						<Icon as={SiReact} color={emphasis} fontSize="2em" marginRight={2} />
 						React
 					</List.Item>
 					<List.Item fontSize="medium" display="flex" alignItems="center">
-						<Icon as={SiAngular} color={emphasis} fontSize="2em" marginRight={2} />
-						Angular
+						<Icon as={SiTypescript} color={emphasis} fontSize="2em" marginRight={2} />
+						TypeScript
 					</List.Item>
 					<List.Item fontSize="medium" display="flex" alignItems="center">
-						<Icon as={SiElectron} color={emphasis} fontSize="2em" marginRight={2} />
-						Electron
-					</List.Item>
-					<List.Item fontSize="medium" display="flex" alignItems="center">
-						<Icon as={VscDatabase} color={emphasis} fontSize="2em" marginRight={2} />
-						SQL Server
-					</List.Item>
-					<List.Item fontSize="medium" display="flex" alignItems="center">
-						<Icon as={VscAzure} color={emphasis} fontSize="2em" marginRight={2} />
-						Azure Cloud
+						<Icon as={SiGithubactions} color={emphasis} fontSize="2em" marginRight={2} />
+						GitHub Actions
 					</List.Item>
 				</List.Root>
 				<Box>

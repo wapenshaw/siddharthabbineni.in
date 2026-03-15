@@ -1,9 +1,11 @@
 import { IconType } from 'react-icons'
 import { AiOutlineAntDesign } from 'react-icons/ai'
 import { CgUiKit } from 'react-icons/cg'
+import { FaAws } from 'react-icons/fa'
 import { IoLogoPwa, IoLogoWebComponent } from 'react-icons/io5'
 import {
 	SiAngular,
+	SiAnsible,
 	SiBlazor,
 	SiDocker,
 	SiDotnet,
@@ -11,37 +13,43 @@ import {
 	SiElectron,
 	SiFramer,
 	SiGit,
+	SiGithub,
 	SiGithubactions,
+	SiGithubcopilot,
 	SiGnubash,
+	SiHelm,
 	SiJquery,
+	SiKubernetes,
 	SiMaterialdesign,
 	SiMongodb,
 	SiMysql,
 	SiNextdotjs,
 	SiNodedotjs,
+	SiOpenai,
 	SiPhp,
 	SiPostgresql,
+	SiPython,
 	SiReact,
 	SiRedis,
 	SiRedux,
 	SiRider,
-	SiRuby,
 	SiSocketdotio,
 	SiStorybook,
 	SiStyledcomponents,
 	SiTailwindcss,
-	SiTravisci,
+	SiTerraform,
 	SiUnity,
 	SiVite,
 	SiYarn,
 } from 'react-icons/si'
-import { VscAzureDevops } from 'react-icons/vsc'
+import { VscAzure, VscAzureDevops } from 'react-icons/vsc'
 import { TbApi, TbBrandVisualStudio, TbDatabase, TbDeviceDesktopAnalytics, TbSql } from 'react-icons/tb'
 import { TfiMicrosoft } from 'react-icons/tfi'
 export type SkillCategory =
+	| 'cloud'
+	| 'devops'
 	| 'backend'
 	| 'frontend'
-	| 'cicd'
 	| 'database'
 	| 'ui frameworks'
 	| 'toolchains'
@@ -57,18 +65,70 @@ export type Skill = {
 export const Skills: {
 	[key in SkillCategory]: Skill[]
 } = {
+	cloud: [
+		{
+			name: 'Azure',
+			icon: VscAzure,
+		},
+		{
+			name: 'AWS',
+			icon: FaAws,
+		},
+		{
+			name: 'Terraform',
+			icon: SiTerraform,
+		},
+		{
+			name: 'Kubernetes',
+			icon: SiKubernetes,
+		},
+		{
+			name: 'Ansible',
+			icon: SiAnsible,
+		},
+		{
+			name: 'Helm',
+			icon: SiHelm,
+		},
+	],
+	devops: [
+		{
+			name: 'Docker',
+			icon: SiDocker,
+		},
+		{
+			name: 'Azure DevOps',
+			icon: VscAzureDevops,
+		},
+		{
+			name: 'GitHub Actions',
+			icon: SiGithubactions,
+		},
+		{
+			name: 'GitHub',
+			icon: SiGithub,
+		},
+		{
+			name: 'GitHub Copilot',
+			icon: SiGithubcopilot,
+		},
+		{
+			name: 'Azure OpenAI',
+			icon: SiOpenai,
+		},
+	],
 	backend: [
 		{
-			name: 'Dotnet',
+			name: 'C# & .NET',
 			icon: SiDotnet,
+		},
+		{
+			name: 'Python',
+			icon: SiPython,
 		},
 		{
 			name: 'Node',
 			icon: SiNodedotjs,
-		},
-		{
-			name: 'Ruby',
-			icon: SiRuby,
 		},
 		{
 			name: 'PHP',
@@ -107,6 +167,10 @@ export const Skills: {
 			icon: TbSql,
 		},
 		{
+			name: 'PostgreSQL',
+			icon: SiPostgresql,
+		},
+		{
 			name: 'MySQL',
 			icon: SiMysql,
 		},
@@ -115,34 +179,12 @@ export const Skills: {
 			icon: SiMongodb,
 		},
 		{
-			name: 'PostgreSQL',
-			icon: SiPostgresql,
-		},
-		{
 			name: 'Redis',
 			icon: SiRedis,
 		},
 		{
 			name: 'SocketIO',
 			icon: SiSocketdotio,
-		},
-	],
-	cicd: [
-		{
-			name: 'Azure DevOps',
-			icon: VscAzureDevops,
-		},
-		{
-			name: 'Github Actions',
-			icon: SiGithubactions,
-		},
-		{
-			name: 'Docker',
-			icon: SiDocker,
-		},
-		{
-			name: 'Travis CI',
-			icon: SiTravisci,
 		},
 	],
 	'ui frameworks': [
