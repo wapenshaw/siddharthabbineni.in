@@ -1,0 +1,45 @@
+/* DOM order is campaign, side, trophies, quests so the stacked view reads well */
+.campaign {
+	grid-column: 2;
+	grid-row: 1;
+}
+
+.side {
+	grid-column: 1;
+	grid-row: 1;
+}
+
+.trophies {
+	grid-column: 3;
+	grid-row: 1;
+}
+
+/* Only the tall layout has room for side quests as their own row */
+.quests {
+	display: none;
+}
+
+@media (min-width: 1700px) and (min-height: 940px) {
+	.view {
+		grid-template-rows: minmax(0, 1fr) auto;
+	}
+
+	.side {
+		grid-row: 1 / 3;
+	}
+
+	.quests {
+		display: flex;
+		grid-column: 2 / 4;
+		grid-row: 2;
+	}
+}
+
+@media (max-width: 1180px), (max-height: 540px) {
+	.campaign,
+	.side,
+	.trophies {
+		grid-column: 1;
+		grid-row: auto;
+	}
+}

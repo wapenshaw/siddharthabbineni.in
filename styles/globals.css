@@ -128,6 +128,33 @@ body {
 	padding: 0;
 }
 
+/*
+ * Every font size is in rem, so this is the one type-scale knob. Full size
+ * (1.25× the original design) everywhere except laptop screens, whose narrow
+ * side columns and short windows step it down to still fit one screen.
+ */
+html {
+	font-size: 100%;
+}
+
+@media (max-width: 1400px), (max-height: 700px) {
+	html {
+		font-size: 87.5%;
+	}
+}
+
+@media (max-height: 640px) {
+	html {
+		font-size: 81.25%;
+	}
+}
+
+@media (max-width: 1180px), (max-height: 540px) {
+	html {
+		font-size: 100%;
+	}
+}
+
 body {
 	min-height: 100vh;
 	background: var(--bg);
@@ -141,6 +168,60 @@ body {
 ::view-transition-old(root),
 ::view-transition-new(root) {
 	animation-duration: 0.25s;
+}
+
+/* Profile ⇄ devlog: the views slide sideways under the fixed profile strip */
+::view-transition-old(.to-left) {
+	animation: 200ms ease-in both view-out-left;
+}
+
+::view-transition-new(.from-left) {
+	animation: 320ms ease-out 80ms both view-in-left;
+}
+
+::view-transition-old(.to-right) {
+	animation: 200ms ease-in both view-out-right;
+}
+
+::view-transition-new(.from-right) {
+	animation: 320ms ease-out 80ms both view-in-right;
+}
+
+@keyframes view-out-left {
+	to {
+		opacity: 0;
+		transform: translateX(-56px);
+	}
+}
+
+@keyframes view-in-left {
+	from {
+		opacity: 0;
+		transform: translateX(-56px);
+	}
+}
+
+@keyframes view-out-right {
+	to {
+		opacity: 0;
+		transform: translateX(56px);
+	}
+}
+
+@keyframes view-in-right {
+	from {
+		opacity: 0;
+		transform: translateX(56px);
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	::view-transition-old(.to-left),
+	::view-transition-new(.from-left),
+	::view-transition-old(.to-right),
+	::view-transition-new(.from-right) {
+		animation: none;
+	}
 }
 
 a {
@@ -192,11 +273,23 @@ ul {
 
 .label {
 	font-family: var(--display);
-	font-size: 12px;
+	font-size: 0.9375rem;
 	font-weight: 600;
 	letter-spacing: 0.14em;
 	text-transform: uppercase;
 	color: var(--muted);
+	white-space: nowrap;
+}
+
+/* the side columns are narrow here, so headings tighten instead of wrapping */
+@media (max-width: 1600px) {
+	.label {
+		letter-spacing: 0.08em;
+	}
+
+	.phead {
+		padding: 12px 16px;
+	}
 }
 
 .label-hi {
@@ -225,7 +318,7 @@ ul {
 
 .pill {
 	font-family: var(--display);
-	font-size: 11.5px;
+	font-size: 0.875rem;
 	font-weight: 600;
 	letter-spacing: 0.06em;
 	text-transform: uppercase;
@@ -242,7 +335,7 @@ ul {
 }
 
 .chip {
-	font-size: 13px;
+	font-size: 1rem;
 	color: var(--text);
 	background: var(--panel2);
 	border: 1px solid var(--line);
@@ -252,7 +345,7 @@ ul {
 
 .btn {
 	font-family: var(--display);
-	font-size: 12.5px;
+	font-size: 1rem;
 	font-weight: 600;
 	letter-spacing: 0.08em;
 	text-transform: uppercase;

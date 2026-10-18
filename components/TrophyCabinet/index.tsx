@@ -1,7 +1,6 @@
 import { TrophyIcon } from 'components/Icons'
 import { certifications } from 'config/certifications'
 import { profile } from 'config/profile'
-import Link from 'next/link'
 import { Suspense } from 'react'
 import styles from './TrophyCabinet.module.css'
 import Unlocks, { UnlocksSkeleton } from './Unlocks'
@@ -65,9 +64,6 @@ export default function TrophyCabinet({ className }: { className?: string }) {
 				>
 					Exophase →
 				</a>
-				<Link href="/blog" className="disp">
-					Devlog →
-				</Link>
 			</div>
 		</section>
 	)

@@ -14,3 +14,8 @@ export interface Article {
 	comments_count: number
 	public_reactions_count: number
 }
+
+export interface DevlogEntry extends Article {
+	/** Rendered by dev.to, which sanitises it */
+	body_html: string
+}

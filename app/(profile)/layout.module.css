@@ -18,45 +18,19 @@
 	gap: 14px;
 }
 
-/* DOM order is strip, campaign, side, trophies, quests so the stacked view reads well */
 .strip {
 	grid-column: 1 / -1;
 }
 
-.campaign {
-	grid-column: 2;
+/* Each page (profile, devlog) is one view: a row of panels on the same columns */
+.view {
+	grid-column: 1 / -1;
 	grid-row: 2;
-}
-
-.side {
-	grid-column: 1;
-	grid-row: 2;
-}
-
-.trophies {
-	grid-column: 3;
-	grid-row: 2;
-}
-
-/* Only the tall layout has room for side quests as their own row */
-.quests {
-	display: none;
-}
-
-@media (min-width: 1700px) and (min-height: 940px) {
-	.screen {
-		grid-template-rows: auto minmax(0, 1fr) auto;
-	}
-
-	.side {
-		grid-row: 2 / 4;
-	}
-
-	.quests {
-		display: flex;
-		grid-column: 2 / 4;
-		grid-row: 3;
-	}
+	min-height: 0;
+	display: grid;
+	grid-template-columns: subgrid;
+	grid-template-rows: minmax(0, 1fr);
+	gap: inherit;
 }
 
 @media (max-height: 880px) {
@@ -83,11 +57,9 @@
 		gap: 12px;
 	}
 
-	.strip,
-	.campaign,
-	.side,
-	.trophies {
-		grid-column: 1;
+	.view {
 		grid-row: auto;
+		grid-template-columns: minmax(0, 1fr);
+		grid-template-rows: none;
 	}
 }

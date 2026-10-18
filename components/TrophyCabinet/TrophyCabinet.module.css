@@ -54,7 +54,7 @@
 
 .tier {
 	font-family: var(--display);
-	font-size: 10px;
+	font-size: 0.8125rem;
 	font-weight: 700;
 	letter-spacing: 0.14em;
 	text-transform: uppercase;
@@ -73,7 +73,7 @@
 }
 
 .certName {
-	font-size: 13.5px;
+	font-size: 1.0625rem;
 	font-weight: 600;
 	line-height: 1.2;
 }
@@ -97,7 +97,7 @@
 	overflow: hidden;
 	display: flex;
 	flex-direction: column;
-	/* rows are 54px; the container queries below show only whole rows */
+	/* rows are 60px; the container queries below show only whole rows */
 	container-type: size;
 }
 
@@ -105,7 +105,8 @@
 	display: flex;
 	gap: 12px;
 	align-items: center;
-	padding: 7px 20px;
+	padding: 0 20px;
+	height: 60px;
 	flex: 0 0 auto;
 }
 
@@ -122,10 +123,11 @@
 	min-width: 0;
 	display: flex;
 	flex-direction: column;
+	line-height: 1.3;
 }
 
 .unlockName {
-	font-size: 14px;
+	font-size: 1.125rem;
 	font-weight: 600;
 	white-space: nowrap;
 	overflow: hidden;
@@ -133,7 +135,7 @@
 }
 
 .unlockMeta {
-	font-size: 12.5px;
+	font-size: 1rem;
 	color: var(--muted);
 	white-space: nowrap;
 	overflow: hidden;
@@ -155,20 +157,20 @@
 .offline {
 	flex: 1;
 	padding: 6px 20px;
-	font-size: 14px;
+	font-size: 1.125rem;
 	color: var(--muted);
 }
 
 .footer {
 	flex: 0 0 auto;
 	display: flex;
-	justify-content: space-between;
+	justify-content: flex-end;
 	gap: 10px;
 	flex-wrap: wrap;
 	padding: 11px 20px;
 	border-top: 1px solid var(--line);
 	background: var(--panel2);
-	font-size: 12px;
+	font-size: 0.9375rem;
 	font-weight: 600;
 }
 
@@ -188,32 +190,32 @@
 	}
 }
 
-/* Show as many whole unlock rows as fit (each row is 54px) */
-@container (max-height: 323px) {
+/* Show as many whole unlock rows as fit (each row is 60px) */
+@container (max-height: 359px) {
 	.unlock:nth-child(n + 6) {
 		display: none;
 	}
 }
 
-@container (max-height: 269px) {
+@container (max-height: 299px) {
 	.unlock:nth-child(n + 5) {
 		display: none;
 	}
 }
 
-@container (max-height: 215px) {
+@container (max-height: 239px) {
 	.unlock:nth-child(n + 4) {
 		display: none;
 	}
 }
 
-@container (max-height: 161px) {
+@container (max-height: 179px) {
 	.unlock:nth-child(n + 3) {
 		display: none;
 	}
 }
 
-@container (max-height: 107px) {
+@container (max-height: 119px) {
 	.unlock:nth-child(n + 2) {
 		display: none;
 	}

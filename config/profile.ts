@@ -1,6 +1,9 @@
 export const profile = {
 	name: 'Siddharth Abbineni',
 	initials: 'SA',
+	// A round photo; the strip crops off its baked-in ring and draws its own
+	avatar: '/SA_avatar.png',
+	initialsAvatar: '/logo-black.png',
 	handle: 'tHeSiD',
 	location: 'Hyderabad, India',
 	startYear: 2010,

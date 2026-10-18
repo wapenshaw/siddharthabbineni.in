@@ -1,0 +1,24 @@
+/* Same columns as the profile: list on the left, reader in the middle, patch notes on the right */
+.list {
+	grid-column: 1;
+	grid-row: 1;
+}
+
+.reader {
+	grid-column: 2;
+	grid-row: 1;
+}
+
+.notes {
+	grid-column: 3;
+	grid-row: 1;
+}
+
+@media (max-width: 1180px), (max-height: 540px) {
+	.list,
+	.reader,
+	.notes {
+		grid-column: 1;
+		grid-row: auto;
+	}
+}

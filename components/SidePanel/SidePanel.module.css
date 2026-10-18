@@ -12,10 +12,11 @@
 	box-sizing: border-box;
 	cursor: pointer;
 	font-family: var(--display);
-	font-size: 12px;
+	font-size: 0.9375rem;
 	font-weight: 600;
 	letter-spacing: 0.12em;
 	text-transform: uppercase;
+	white-space: nowrap;
 	color: var(--muted);
 	padding: 7px 10px;
 	border-bottom: 2px solid transparent;
@@ -69,6 +70,13 @@
 }
 
 /* Tall: build only; side quests and the ticker move to their own row */
+@media (max-width: 1600px) {
+	.tab {
+		letter-spacing: 0.06em;
+		padding: 7px 8px;
+	}
+}
+
 @media (min-width: 1700px) and (min-height: 940px) {
 	.tabbar,
 	.footer,

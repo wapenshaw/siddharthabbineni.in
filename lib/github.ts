@@ -10,6 +10,7 @@ interface SearchItem {
 	html_url: string
 	repository_url: string
 	state: 'open' | 'closed'
+	created_at: string
 	pull_request?: { merged_at: string | null }
 }
 
@@ -50,6 +51,7 @@ export async function getUpstreamPullRequests(): Promise<PullRequest[]> {
 				title: item.title,
 				url: item.html_url,
 				state: item.state === 'open' ? 'open' : 'merged',
+				date: item.pull_request?.merged_at ?? item.created_at,
 			}))
 	} catch (e) {
 		console.error('[GitHub] search error:', e)

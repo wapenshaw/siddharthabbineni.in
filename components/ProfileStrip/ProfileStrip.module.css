@@ -8,32 +8,42 @@
 
 .avatar {
 	position: relative;
-	width: 76px;
-	height: 76px;
-	flex: 0 0 76px;
-	background: var(--accFill);
-	border-radius: 3px;
-	display: flex;
-	align-items: center;
-	justify-content: center;
+	width: 84px;
+	height: 84px;
+	flex: 0 0 84px;
+}
+
+/*
+ * The source photo has its own ring, and the face sits low and left. Zooming
+ * in towards the face centres it and pushes that ring out of the circle.
+ */
+.photo {
+	position: absolute;
+	inset: 0;
+	border-radius: 50%;
+	overflow: hidden;
+	border: 3px solid var(--accFill);
+	background: var(--panel2);
+}
+
+.photo img {
+	width: 100%;
+	height: 100%;
+	display: block;
+	transform: scale(1.5);
+	transform-origin: 22% 66%;
 }
 
 .initials {
-	font-size: 32px;
-	font-weight: 700;
-	color: var(--onAcc);
-}
-
-.since {
 	position: absolute;
-	bottom: -7px;
-	right: -7px;
-	background: var(--tier-expert-bg);
-	color: var(--tier-expert-fg);
-	font-size: 10px;
+	bottom: -4px;
+	right: -4px;
+	background: var(--panel2);
+	color: var(--panel2);
+	font-size: 1rem;
 	font-weight: 700;
-	padding: 3px 6px;
-	border-radius: 2px;
+	padding: 3px 3px;
+	border-radius: 1px;
 }
 
 .who {
@@ -49,7 +59,7 @@
 	display: flex;
 	align-items: center;
 	gap: 8px;
-	font-size: 13px;
+	font-size: 1rem;
 	color: var(--acc);
 	font-weight: 600;
 }
@@ -62,7 +72,7 @@
 }
 
 .name {
-	font-size: clamp(26px, 2.1vw, 40px);
+	font-size: clamp(2.0625rem, 2.6vw, 3.125rem);
 	line-height: 1;
 	font-weight: 700;
 	white-space: nowrap;
@@ -87,7 +97,7 @@
 .bio {
 	flex: 1 1 320px;
 	min-width: 0;
-	font-size: 15.5px;
+	font-size: 1.1875rem;
 	color: var(--muted);
 	display: -webkit-box;
 	-webkit-line-clamp: 3;
@@ -122,7 +132,7 @@
 
 @media (max-width: 1600px) {
 	.bio {
-		font-size: 14.5px;
+		font-size: 1.125rem;
 	}
 }
 
@@ -132,13 +142,9 @@
 	}
 
 	.avatar {
-		width: 64px;
-		height: 64px;
-		flex-basis: 64px;
-	}
-
-	.initials {
-		font-size: 28px;
+		width: 70px;
+		height: 70px;
+		flex-basis: 70px;
 	}
 }
 
@@ -154,13 +160,9 @@
 	}
 
 	.avatar {
-		width: 54px;
-		height: 54px;
-		flex-basis: 54px;
-	}
-
-	.initials {
-		font-size: 24px;
+		width: 58px;
+		height: 58px;
+		flex-basis: 58px;
 	}
 
 	.who {
@@ -168,7 +170,7 @@
 	}
 
 	.bio {
-		font-size: 14px;
+		font-size: 1.125rem;
 	}
 
 	.actions {

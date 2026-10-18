@@ -2,11 +2,13 @@ import { GamepadIcon, GitHubIcon, LinkedInIcon, XIcon } from 'components/Icons'
 import ThemeControls from 'components/ThemeControls'
 import { profile } from 'config/profile'
 import styles from './ProfileStrip.module.css'
+import ResumeButton from './ResumeButton'
+import ViewSwitch from './ViewSwitch'
 
 const socials = [
 	{ href: profile.links.github, label: 'GitHub', icon: <GitHubIcon /> },
 	{ href: profile.links.linkedin, label: 'LinkedIn', icon: <LinkedInIcon /> },
-	{ href: profile.links.x, label: 'X', icon: <XIcon /> },
+	{ href: profile.links.x, label: 'X/Twitter', icon: <XIcon /> },
 	{
 		href: profile.links.exophase,
 		label: 'Exophase gaming profile',
@@ -17,9 +19,23 @@ const socials = [
 export default function ProfileStrip({ className }: { className?: string }) {
 	return (
 		<header className={`panel ${styles.strip} ${className ?? ''}`}>
-			<div className={styles.avatar} aria-hidden="true">
-				<span className={`disp ${styles.initials}`}>{profile.initials}</span>
-				<span className={`disp ${styles.since}`}>{profile.startYear}</span>
+			<div className={styles.avatar}>
+				<span className={styles.photo}>
+					<img
+						src={profile.avatar}
+						alt={profile.name}
+						width={300}
+						height={300}
+					/>
+				</span>
+				<span className={`disp ${styles.initials}`} title="Siddharth Abbineni">
+					<img
+						src={profile.initialsAvatar}
+						alt={profile.name}
+						width={20}
+						height={18}
+					/>
+				</span>
 			</div>
 
 			<div className={styles.who}>
@@ -67,14 +83,8 @@ export default function ProfileStrip({ className }: { className?: string }) {
 					<a className="btn btn-fill" href={`mailto:${profile.email}`}>
 						Send invite
 					</a>
-					<a
-						className="btn"
-						href={profile.resumeUrl}
-						target="_blank"
-						rel="noopener"
-					>
-						Resume
-					</a>
+					<ResumeButton href={profile.resumeUrl} />
+					<ViewSwitch />
 				</div>
 			</div>
 		</header>

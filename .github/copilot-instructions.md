@@ -26,7 +26,10 @@ On desktop, the home page fits a single screen with no vertical scrolling. The t
 - **Shorter desktops:** the left column switches between Character build and Side quests with tabs and shows the first four cards only.
 - **Unlock rows:** the trophy cabinet uses container queries to show only as many unlock rows as fit.
 
-The breakpoints are listed at the top of `app/page.module.css`, and each component module repeats the ones it needs. Any change must keep the one-screen fit at those viewports.
+The breakpoints are listed at the top of `app/(profile)/layout.module.css`, and each component module repeats the ones it needs. Any change must keep the one-screen fit at those viewports.
+
+- **Views:** `app/(profile)/layout.tsx` keeps the profile strip fixed. The home page and `/blog` (the Devlog) each render one `<main>` view on the same three columns (CSS subgrid), and they slide between each other with React `<ViewTransition>`.
+- **Type scale:** every font size is in `rem`. The root size in `styles/globals.css` is the one knob: 100% (1.25× the original design) by default, stepping down on laptop-sized and short windows.
 
 ### Content-in-Config Pattern
 
@@ -56,7 +59,7 @@ Tokens (`--bg`, `--panel`, `--acc`, …) are defined per skin × mode in `styles
 | `getUpstreamPullRequests` | GitHub search | `hours` | `GITHUB_TOKEN` (optional), `GITHUB_USER` |
 | `getSteamAchievements` | Steam Web API | `gaming` (6h, set in next.config.ts) | `STEAM_API_KEY`, `STEAM_USER_ID` |
 | `getXboxAchievements` | OpenXBL (`api.xbl.io/v2`, responses wrapped in `content`) | `gaming` | `XBOX_API_KEY` (the key's own account; no XUID) |
-| `getArticles` | dev.to | `hours` | `DEVTO_USERNAME` |
+| `getArticles`, `getDevlog` | dev.to (`getDevlog` adds each post's body) | `hours` | `DEVTO_USERNAME` |
 | `getCampaign` | `config/experience.ts` | `days` | none |
 
 `new Date()` without arguments must stay inside a cached function such as `getCampaign`, or the prerender fails. The trophy cabinet's live unlocks render in a `<Suspense>` boundary.
@@ -66,7 +69,7 @@ The `/api/steam`, `/api/xbox` and `/api/articles` routes wrap the same lib funct
 ### Components
 
 - Server components by default: `ProfileStrip`, `TrophyCabinet` (+ `Unlocks`), `CharacterBuild`, `SideQuests`, `PrTicker`
-- Client components: `Campaign` (timeline tabs with arrow-key navigation), `SidePanel` (tabs only; the server-rendered panes come in as props), `ThemeControls`, `GameIcon`
+- Client components: `Campaign` (timeline tabs with arrow-key navigation), `SidePanel` (tabs only; the server-rendered panes come in as props), `ThemeControls`, `GameIcon`, `Devlog` (post list and reader), `ProfileStrip/ResumeButton` (the PDF in a `<dialog>`; small screens just open the PDF), `ProfileStrip/ViewSwitch`
 - Shared primitives are global classes in `styles/globals.css`: `.panel`, `.phead`, `.label`, `.pill`, `.chip`, `.btn`, `.icon-btn` and `.logo-tile`
 
 ### Deployment
