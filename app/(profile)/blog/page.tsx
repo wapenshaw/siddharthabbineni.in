@@ -1,11 +1,8 @@
-import Devlog from 'components/Devlog'
-import PatchNotes from 'components/Devlog/PatchNotes'
+import devlog from 'components/Devlog/Devlog.module.css'
+import Reader from 'components/Devlog/Reader'
 import { profile } from 'config/profile'
-import { getDevlog } from 'lib/devto'
-import { getUpstreamPullRequests } from 'lib/github'
+import { getPosts, isArchived } from 'lib/posts'
 import type { Metadata } from 'next'
-import { ViewTransition } from 'react'
-import layout from '../layout.module.css'
 import styles from './blog.module.css'
 
 export const metadata: Metadata = {
@@ -16,23 +13,17 @@ export const metadata: Metadata = {
 	},
 }
 
+/** Opens on the newest post, or the newest archived one while there are no new ones */
 export default async function DevlogPage() {
-	const [entries, prs] = await Promise.all([
-		getDevlog(),
-		getUpstreamPullRequests(),
-	])
+	const posts = await getPosts()
+	const latest = posts.find((p) => !isArchived(p)) ?? posts[0]
 
-	return (
-		// The devlog sits to the right of the profile
-		<ViewTransition enter="from-right" exit="to-right" default="none">
-			<main className={layout.view}>
-				<Devlog
-					entries={entries}
-					listClassName={styles.list}
-					readerClassName={styles.reader}
-				/>
-				<PatchNotes prs={prs} className={styles.notes} />
-			</main>
-		</ViewTransition>
-	)
+	if (!latest) {
+		return (
+			<section className={`panel ${styles.reader}`}>
+				<p className={devlog.empty}>No posts yet.</p>
+			</section>
+		)
+	}
+	return <Reader posts={posts} slug={latest.slug} className={styles.reader} />
 }

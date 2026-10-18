@@ -106,7 +106,7 @@ export default async function Unlocks() {
 function UnlocksHead({ gamerscore }: { gamerscore: string }) {
 	return (
 		<div className={styles.unlocksHead}>
-			<h3 className="label label-hi">Recent unlocks · live</h3>
+			<h3 className="label label-hi">Achievements · live</h3>
 			<span className={`label ${styles.gamerscore}`}>{gamerscore}</span>
 		</div>
 	)

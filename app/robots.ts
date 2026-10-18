@@ -1,16 +1,15 @@
+import { isStaging, SITE_URL } from 'config/site'
 import type { MetadataRoute } from 'next'
 
-const isStaging =
-	process.env.AZURE_STATIC_WEB_APPS_ENVIRONMENT === 'staging' ||
-	process.env.NEXT_PUBLIC_SITE_URL?.includes('staging') ||
-	process.env.NEXT_PUBLIC_SITE_URL?.includes('yellow-wave')
-
 export default function robots(): MetadataRoute.Robots {
+	// Staging lets crawlers in so they see its noindex header (next.config.ts and
+	// the deploy workflow); a Disallow here would hide that and URLs found through
+	// links could still be listed
 	if (isStaging) {
 		return {
 			rules: {
 				userAgent: '*',
-				disallow: '/',
+				allow: '/',
 			},
 		}
 	}
@@ -20,6 +19,6 @@ export default function robots(): MetadataRoute.Robots {
 			userAgent: '*',
 			allow: '/',
 		},
-		sitemap: 'https://www.siddharthabbineni.in/sitemap.xml',
+		sitemap: `${SITE_URL}/sitemap.xml`,
 	}
 }

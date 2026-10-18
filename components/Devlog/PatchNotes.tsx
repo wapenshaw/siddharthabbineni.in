@@ -9,7 +9,7 @@ const formatDate = new Intl.DateTimeFormat('en-GB', {
 	timeZone: 'Asia/Kolkata',
 })
 
-/** Upstream pull requests as patch notes (right column of the devlog) */
+/** Upstream pull requests as Opensource Contributions (right column of the devlog) */
 export default function PatchNotes({
 	prs,
 	className,
@@ -24,9 +24,9 @@ export default function PatchNotes({
 		>
 			<div className="phead">
 				<h2 id="patch-title" className="label label-hi">
-					Patch notes
+					Opensource Contributions
 				</h2>
-				<span className="label">Upstream PRs</span>
+				<span className="label">PRs</span>
 			</div>
 			{prs.length === 0 ? (
 				<p className={styles.empty}>No pull requests could be loaded.</p>

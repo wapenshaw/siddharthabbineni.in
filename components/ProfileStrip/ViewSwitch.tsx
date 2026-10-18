@@ -10,7 +10,7 @@ import styles from './ViewSwitch.module.css'
  * the longer label and switching views only changes the text.
  */
 export default function ViewSwitch() {
-	const onDevlog = usePathname() === '/blog'
+	const onDevlog = usePathname().startsWith('/blog')
 
 	return (
 		<Link className="btn btn-fill" href={onDevlog ? '/' : '/blog'}>

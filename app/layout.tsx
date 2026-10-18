@@ -1,5 +1,6 @@
 import { jobs } from 'config/experience'
 import { profile } from 'config/profile'
+import { isStaging, SITE_URL } from 'config/site'
 import { DEFAULT_MODE, DEFAULT_SKIN, themeInitScript } from 'config/skins'
 import type { Metadata } from 'next'
 import { Barlow, Chakra_Petch } from 'next/font/google'
@@ -20,7 +21,6 @@ const body = Barlow({
 	display: 'swap',
 })
 
-const SITE_URL = 'https://www.siddharthabbineni.in'
 const TITLE = `${profile.name} | Automation Engineer & Cloud Architect`
 const DESCRIPTION = `${profile.name}: automation engineer, cloud architect and developer in ${profile.location}. Platform automation, Azure and AWS, .NET, Python and Terraform.`
 const current = jobs.at(-1)
@@ -43,8 +43,15 @@ export const metadata: Metadata = {
 	authors: [{ name: profile.name }],
 	creator: profile.name,
 	metadataBase: new URL(SITE_URL),
+	// staging also sends an X-Robots-Tag header (next.config.ts)
+	...(isStaging && { robots: { index: false, follow: false } }),
 	alternates: {
 		canonical: '/',
+		types: {
+			'application/rss+xml': [
+				{ url: '/blog/feed.xml', title: `Devlog | ${profile.name}` },
+			],
+		},
 	},
 	openGraph: {
 		title: TITLE,
@@ -123,7 +130,7 @@ export default function RootLayout({
 			</head>
 			<body>
 				{children}
-				{process.env.NEXT_PUBLIC_SITE_URL?.includes('staging') ? null : (
+				{isStaging ? null : (
 					<>
 						<Script
 							src="https://www.googletagmanager.com/gtag/js?id=G-GK9R79RGL6"

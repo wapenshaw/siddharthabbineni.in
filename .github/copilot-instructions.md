@@ -28,7 +28,8 @@ On desktop, the home page fits a single screen with no vertical scrolling. The t
 
 The breakpoints are listed at the top of `app/(profile)/layout.module.css`, and each component module repeats the ones it needs. Any change must keep the one-screen fit at those viewports.
 
-- **Views:** `app/(profile)/layout.tsx` keeps the profile strip fixed. The home page and `/blog` (the Devlog) each render one `<main>` view on the same three columns (CSS subgrid), and they slide between each other with React `<ViewTransition>`.
+- **Views:** `app/(profile)/layout.tsx` keeps the profile strip fixed. The home page and `/blog` (the Devlog) each render one `<main>` view on the same three columns (CSS subgrid), and they slide between each other with React `<ViewTransition>`. In the Devlog, `blog/layout.tsx` holds the post list and patch notes; the page (`/blog` for the newest post, `/blog/[slug]` for the rest) is the reader.
+- **Size cap:** the page stops growing at 1920×1080 (`--max-width`, `--max-height` in `styles/globals.css`) and sits top-centre on a dot-grid backdrop. Use `var(--vw)` instead of `vw` so sizes stop growing too.
 - **Type scale:** every font size is in `rem`. The root size in `styles/globals.css` is the one knob: 100% (1.25× the original design) by default, stepping down on laptop-sized and short windows.
 
 ### Content-in-Config Pattern
@@ -40,6 +41,7 @@ All site content lives in TypeScript config files under `config/`:
 - `build.ts`: the character build cards. They are squares, only about 110px inside on a small laptop, so keep each line and its chips short. Their pixel-art icons are in `pixelIcons.ts`.
 - `quests.ts`: side projects
 - `certifications.ts`: Azure certifications. Only entries marked `featured` show.
+- `content/posts/*.md(x)`: the Devlog. Each post starts with YAML front matter (`title`, `description`, `date`, `tags`, `draft?`, `archive?`; see `types/post.ts`); the file name is the slug. `.md` is plain markdown, `.mdx` can use components. Posts with `archive: { site, url }` (the old thesid.net blog and the dev.to guides) show under the Archive tab, stay out of the RSS feed and link back to where they first appeared. Drafts show in development only. Images go in `public/blog/<slug>/`.
 - `skins.ts`: skin ids, the `SKIN_PICKER` flag and the theme init script. The colours themselves live in `styles/globals.css`.
 
 To update content, edit the config file, not the component code.
@@ -61,17 +63,17 @@ Tokens (`--bg`, `--panel`, `--acc`, …) are defined per skin × mode in `styles
 | `getUpstreamPullRequests` | GitHub search | `hours` | `GITHUB_TOKEN` (optional), `GITHUB_USER` |
 | `getSteamAchievements` | Steam Web API | `gaming` (6h, set in next.config.ts) | `STEAM_API_KEY`, `STEAM_USER_ID` |
 | `getXboxAchievements` | OpenXBL (`api.xbl.io/v2`, responses wrapped in `content`) | `gaming` | `XBOX_API_KEY` (the key's own account; no XUID) |
-| `getArticles`, `getDevlog` | dev.to (`getDevlog` adds each post's body) | `hours` | `DEVTO_USERNAME` |
+| `getPosts` | `content/posts/*.md(x)` (front matter parsed with `yaml`, body via `@next/mdx`, code highlighted at build by rehype-pretty-code) | `max` | none |
 | `getCampaign` | `config/experience.ts` | `days` | none |
 
 `new Date()` without arguments must stay inside a cached function such as `getCampaign`, or the prerender fails. The trophy cabinet's live unlocks render in a `<Suspense>` boundary.
 
-The `/api/steam`, `/api/xbox` and `/api/articles` routes wrap the same lib functions.
+The `/api/steam` and `/api/xbox` routes wrap the same lib functions. `/blog/feed.xml` is the Devlog's RSS feed.
 
 ### Components
 
 - Server components by default: `ProfileStrip`, `TrophyCabinet` (+ `Unlocks`), `CharacterBuild`, `SideQuests`, `PrTicker`
-- Client components: `Campaign` (timeline tabs with arrow-key navigation), `SidePanel` (tabs only; the server-rendered panes come in as props), `ThemeControls`, `Devlog` (post list and reader), `ProfileStrip/ResumeButton` (the PDF in a `<dialog>`; small screens just open the PDF), `ProfileStrip/ViewSwitch`
+- Client components: `Campaign` (timeline tabs with arrow-key navigation), `SidePanel` (tabs only; the server-rendered panes come in as props), `ThemeControls`, `Devlog/PostList` (the reader, `Devlog/Reader`, is a server component), `ProfileStrip/ResumeButton` (the PDF in a `<dialog>`; small screens just open the PDF), `ProfileStrip/ViewSwitch`
 - Shared primitives are global classes in `styles/globals.css`: `.panel`, `.phead`, `.label`, `.pill`, `.chip`, `.btn`, `.icon-btn` and `.logo-tile`
 
 ### Deployment

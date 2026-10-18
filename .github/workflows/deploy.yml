@@ -49,6 +49,19 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NEXT_PUBLIC_SITE_URL: ${{ github.ref == 'refs/heads/master' && 'https://www.siddharthabbineni.in' || 'https://staging.siddharthabbineni.in' }}
 
+      # Staging must never be indexed. Next.js adds X-Robots-Tag to what it serves;
+      # this adds it to the files Azure serves directly (images, the resume PDF)
+      - name: Keep staging out of search engines
+        if: github.ref != 'refs/heads/master'
+        run: |
+          node -e "
+            const fs = require('fs')
+            const file = 'staticwebapp.config.json'
+            const config = JSON.parse(fs.readFileSync(file, 'utf8'))
+            config.globalHeaders = { ...config.globalHeaders, 'X-Robots-Tag': 'noindex, nofollow' }
+            fs.writeFileSync(file, JSON.stringify(config, null, 2))
+          "
+
       - name: Deploy
         uses: Azure/static-web-apps-deploy@v1
         with:

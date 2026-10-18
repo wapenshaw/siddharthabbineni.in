@@ -1,7 +1,9 @@
+import { SITE_URL } from 'config/site'
+import { getPosts } from 'lib/posts'
 import type { MetadataRoute } from 'next'
 
-export default function sitemap(): MetadataRoute.Sitemap {
-	const baseUrl = 'https://www.siddharthabbineni.in'
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+	const baseUrl = SITE_URL
 
 	return [
 		{
@@ -14,5 +16,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
 			changeFrequency: 'weekly',
 			priority: 0.8,
 		},
+		...(await getPosts()).map((p) => ({
+			url: `${baseUrl}/blog/${p.slug}`,
+			lastModified: p.date,
+			priority: 0.6,
+		})),
 	]
 }
