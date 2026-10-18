@@ -1,0 +1,107 @@
+.tabbar {
+	padding: 6px 16px 0 12px;
+}
+
+.tabs {
+	display: flex;
+	gap: 4px;
+}
+
+.tab {
+	all: unset;
+	box-sizing: border-box;
+	cursor: pointer;
+	font-family: var(--display);
+	font-size: 12px;
+	font-weight: 600;
+	letter-spacing: 0.12em;
+	text-transform: uppercase;
+	color: var(--muted);
+	padding: 7px 10px;
+	border-bottom: 2px solid transparent;
+}
+
+.tab:hover,
+.tab[aria-selected='true'] {
+	color: var(--text);
+}
+
+.tab[aria-selected='true'] {
+	border-bottom-color: var(--acc);
+}
+
+.tab:focus-visible {
+	outline: 2px solid var(--acc);
+	outline-offset: 2px;
+}
+
+.panes {
+	flex: 1;
+	min-height: 0;
+	overflow: hidden;
+	display: flex;
+	flex-direction: column;
+}
+
+/* A pane fills the panel so the build cards can share its height evenly */
+.pane {
+	flex: 1;
+	min-height: 0;
+	display: flex;
+	flex-direction: column;
+}
+
+.paneHead {
+	display: none;
+	flex: 0 0 auto;
+	padding: 12px 20px;
+	border-bottom: 1px solid var(--line);
+}
+
+.footer {
+	margin-top: auto;
+	flex: 0 0 auto;
+}
+
+.side[data-tab='build'] .paneQuests,
+.side[data-tab='quests'] .paneBuild {
+	display: none;
+}
+
+/* Tall: build only; side quests and the ticker move to their own row */
+@media (min-width: 1700px) and (min-height: 940px) {
+	.tabbar,
+	.footer,
+	.side[data-tab] .paneQuests {
+		display: none;
+	}
+
+	.side[data-tab] .paneBuild {
+		display: flex;
+	}
+
+	.paneHead {
+		display: block;
+	}
+}
+
+/* Stacked and scrolling: both panes with headings, no tabs */
+@media (max-width: 1180px), (max-height: 540px) {
+	.tabbar {
+		display: none;
+	}
+
+	/* beats the per-tab hiding rule above; sized to content, not shared evenly */
+	.side[data-tab] .pane {
+		display: flex;
+		flex: 0 0 auto;
+	}
+
+	.paneHead {
+		display: block;
+	}
+
+	.paneQuests .paneHead {
+		border-top: 1px solid var(--line);
+	}
+}

@@ -1,52 +1,72 @@
+import { jobs } from 'config/experience'
+import { profile } from 'config/profile'
+import { DEFAULT_MODE, DEFAULT_SKIN, themeInitScript } from 'config/skins'
 import type { Metadata } from 'next'
+import { Barlow, Chakra_Petch } from 'next/font/google'
 import Script from 'next/script'
-import { Provider } from 'components/ui/provider'
 import 'styles/globals.css'
 
+const display = Chakra_Petch({
+	subsets: ['latin'],
+	weight: ['500', '600', '700'],
+	variable: '--font-display',
+	display: 'swap',
+})
+
+const body = Barlow({
+	subsets: ['latin'],
+	weight: ['400', '500', '600'],
+	variable: '--font-body',
+	display: 'swap',
+})
+
+const SITE_URL = 'https://www.siddharthabbineni.in'
+const TITLE = `${profile.name} | Automation Engineer & Cloud Architect`
+const DESCRIPTION = `${profile.name}: automation engineer, cloud architect and developer in ${profile.location}. Platform automation, Azure and AWS, .NET, Python and Terraform.`
+const current = jobs.at(-1)
+
 export const metadata: Metadata = {
-	title: 'Siddharth Abbineni | Cloud & Software Architect',
-	description:
-		'Siddharth Abbineni — Cloud & Software Architect based in Hyderabad, India. Specializing in Azure, AWS, .NET, React, and cloud-native solutions.',
+	title: TITLE,
+	description: DESCRIPTION,
 	keywords: [
-		'Siddharth Abbineni',
+		profile.name,
+		'Automation Engineer',
 		'Cloud Architect',
-		'Software Architect',
+		'Platform Engineering',
 		'Azure',
 		'AWS',
-		'React',
+		'Terraform',
+		'Ansible',
 		'.NET',
-		'TypeScript',
 		'Hyderabad',
 	],
-	authors: [{ name: 'Siddharth Abbineni' }],
-	creator: 'Siddharth Abbineni',
-	metadataBase: new URL('https://www.siddharthabbineni.in'),
+	authors: [{ name: profile.name }],
+	creator: profile.name,
+	metadataBase: new URL(SITE_URL),
 	alternates: {
 		canonical: '/',
 	},
 	openGraph: {
-		title: 'Siddharth Abbineni | Cloud & Software Architect',
-		siteName: 'Siddharth Abbineni',
-		url: 'https://www.siddharthabbineni.in',
-		description:
-			'Cloud & Software Architect based in Hyderabad, India. Azure, AWS, .NET, React, and cloud-native solutions.',
+		title: TITLE,
+		siteName: profile.name,
+		url: SITE_URL,
+		description: DESCRIPTION,
 		type: 'profile',
 		images: [
 			{
 				url: '/SA_avatar.png',
 				width: 400,
 				height: 400,
-				alt: 'Siddharth Abbineni',
+				alt: profile.name,
 			},
 		],
 		locale: 'en_US',
 	},
 	twitter: {
 		card: 'summary',
-		title: 'Siddharth Abbineni | Cloud & Software Architect',
-		description:
-			'Cloud & Software Architect based in Hyderabad. Azure, AWS, .NET, React.',
-		creator: '@tHeSiD',
+		title: TITLE,
+		description: DESCRIPTION,
+		creator: `@${profile.handle}`,
 	},
 	icons: {
 		icon: '/favicons/favicon.ico',
@@ -59,46 +79,50 @@ export default function RootLayout({
 	children: React.ReactNode
 }) {
 	return (
-		<html lang="en" suppressHydrationWarning>
+		<html
+			lang="en"
+			data-skin={DEFAULT_SKIN}
+			data-mode={DEFAULT_MODE}
+			className={`${display.variable} ${body.variable}`}
+			// The init script rewrites data-skin/data-mode before hydration
+			suppressHydrationWarning
+		>
 			<head>
-				<link rel="preconnect" href="https://fonts.googleapis.com" />
-				<link
-					rel="preconnect"
-					href="https://fonts.gstatic.com"
-					crossOrigin=""
-				/>
-				<link
-					href="https://fonts.googleapis.com/css2?family=Sora:ital,wght@0,100;0,300;0,400;0,500;0,600;1,100;1,300;1,400;1,500;1,600&display=swap"
-					rel="stylesheet"
-				/>
+				{/* biome-ignore lint/security/noDangerouslySetInnerHtml: constant theme script from config/skins */}
+				<script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
 				<script
 					type="application/ld+json"
+					// biome-ignore lint/security/noDangerouslySetInnerHtml: JSON-LD serialised from config
 					dangerouslySetInnerHTML={{
 						__html: JSON.stringify({
 							'@context': 'https://schema.org',
 							'@type': 'Person',
-							name: 'Siddharth Abbineni',
-							url: 'https://www.siddharthabbineni.in',
-							image: 'https://www.siddharthabbineni.in/SA_avatar.png',
-							jobTitle: 'Cloud & Software Architect',
-							worksFor: { '@type': 'Organization', name: 'Ashera' },
+							name: profile.name,
+							url: SITE_URL,
+							image: `${SITE_URL}/SA_avatar.png`,
+							jobTitle: current?.role,
+							worksFor: current && {
+								'@type': 'Organization',
+								name: current.company,
+								url: current.url,
+							},
 							address: {
 								'@type': 'PostalAddress',
 								addressLocality: 'Hyderabad',
 								addressCountry: 'IN',
 							},
 							sameAs: [
-								'https://www.linkedin.com/in/siddharthabbineni/',
-								'https://github.com/wapenshaw',
-								'https://dev.to/wapenshaw',
-								'https://www.twitter.com/tHeSiD',
+								profile.links.linkedin,
+								profile.links.github,
+								profile.links.devto,
+								profile.links.x,
 							],
 						}),
 					}}
 				/>
 			</head>
 			<body>
-				<Provider>{children}</Provider>
+				{children}
 				{process.env.NEXT_PUBLIC_SITE_URL?.includes('staging') ? null : (
 					<>
 						<Script

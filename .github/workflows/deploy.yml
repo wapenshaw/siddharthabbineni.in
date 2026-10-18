@@ -46,7 +46,8 @@ jobs:
           STEAM_USER_ID: ${{ secrets.STEAM_USER_ID }}
           XBOX_API_KEY: ${{ secrets.XBOX_API_KEY }}
           XBOX_XUID: ${{ secrets.XBOX_XUID }}
-          SO_USER_ID: '66384'
+          # Raises the GitHub search limit for the PR ticker; optional
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NEXT_PUBLIC_SITE_URL: ${{ github.ref == 'refs/heads/master' && 'https://www.siddharthabbineni.in' || 'https://staging.siddharthabbineni.in' }}
 
       - name: Deploy

@@ -1,0 +1,24 @@
+.tile {
+	width: 28px;
+	height: 28px;
+	flex: 0 0 28px;
+	border-radius: 2px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	overflow: hidden;
+}
+
+.tile img {
+	width: 100%;
+	height: 100%;
+	object-fit: contain;
+	/* .exe icons are tiny bitmaps: keep the pixels crisp */
+	image-rendering: pixelated;
+}
+
+.abbr {
+	font-size: 8px;
+	font-weight: 700;
+	color: var(--muted);
+}

@@ -7,18 +7,14 @@ export interface XboxAchievement {
 	progress: string
 }
 
-export interface XboxProfileStats {
+export interface XboxProfile {
 	gamertag: string
 	gamerscore: number
 	avatarUrl: string
-	totalGames: number
-	gamesWithAchievements: number
-	perfectGames: number
-	totalAchievements: number
 }
 
 export interface XboxAchievementsResponse {
 	achievements: XboxAchievement[]
-	profile?: XboxProfileStats
+	profile?: XboxProfile
 	error?: string
 }

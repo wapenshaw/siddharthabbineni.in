@@ -2,6 +2,15 @@ import type { NextConfig } from 'next'
 
 const nextConfig: NextConfig = {
 	output: 'standalone',
+	typedRoutes: true,
+	// Data is cached per function with 'use cache' + cacheLife (see lib/)
+	cacheComponents: true,
+	// <Link> prefetches the route's static shell only
+	partialPrefetching: true,
+	cacheLife: {
+		// Steam and Xbox: refresh every 6 hours, drop after a quiet day
+		gaming: { stale: 3600, revalidate: 21_600, expire: 86_400 },
+	},
 	images: {
 		unoptimized: true,
 	},

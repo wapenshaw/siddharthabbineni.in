@@ -1,0 +1,204 @@
+.strip {
+	flex-direction: row;
+	align-items: center;
+	padding: 16px 22px;
+	gap: 16px 28px;
+	border-top: 3px solid var(--accFill);
+}
+
+.avatar {
+	position: relative;
+	width: 76px;
+	height: 76px;
+	flex: 0 0 76px;
+	background: var(--accFill);
+	border-radius: 3px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.initials {
+	font-size: 32px;
+	font-weight: 700;
+	color: var(--onAcc);
+}
+
+.since {
+	position: absolute;
+	bottom: -7px;
+	right: -7px;
+	background: var(--tier-expert-bg);
+	color: var(--tier-expert-fg);
+	font-size: 10px;
+	font-weight: 700;
+	padding: 3px 6px;
+	border-radius: 2px;
+}
+
+.who {
+	/* keep the class pills on one row; the bio takes the squeeze */
+	flex: 0 0 auto;
+	min-width: 0;
+	display: flex;
+	flex-direction: column;
+	gap: 6px;
+}
+
+.now {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	font-size: 13px;
+	color: var(--acc);
+	font-weight: 600;
+}
+
+.nowDot {
+	width: 7px;
+	height: 7px;
+	border-radius: 50%;
+	background: var(--acc);
+}
+
+.name {
+	font-size: clamp(26px, 2.1vw, 40px);
+	line-height: 1;
+	font-weight: 700;
+	white-space: nowrap;
+}
+
+.classes {
+	list-style: none;
+	padding: 0;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 5px;
+	align-items: center;
+}
+
+.divider {
+	width: 1px;
+	height: 16px;
+	background: var(--line);
+	margin: 0 3px;
+}
+
+.bio {
+	flex: 1 1 320px;
+	min-width: 0;
+	font-size: 15.5px;
+	color: var(--muted);
+	display: -webkit-box;
+	-webkit-line-clamp: 3;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+}
+
+.actions {
+	flex: 0 0 auto;
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	align-items: end;
+}
+
+.row {
+	display: flex;
+	gap: 6px;
+	align-items: center;
+}
+
+.row + .row {
+	gap: 8px;
+}
+
+.sep {
+	width: 1px;
+	height: 20px;
+	background: var(--line);
+	margin: 0 2px;
+}
+
+@media (max-width: 1600px) {
+	.bio {
+		font-size: 14.5px;
+	}
+}
+
+@media (max-height: 880px) {
+	.strip {
+		padding: 12px 18px;
+	}
+
+	.avatar {
+		width: 64px;
+		height: 64px;
+		flex-basis: 64px;
+	}
+
+	.initials {
+		font-size: 28px;
+	}
+}
+
+@media (max-height: 740px) {
+	.bio {
+		-webkit-line-clamp: 2;
+	}
+}
+
+@media (max-height: 640px) {
+	.strip {
+		padding: 10px 16px;
+	}
+
+	.avatar {
+		width: 54px;
+		height: 54px;
+		flex-basis: 54px;
+	}
+
+	.initials {
+		font-size: 24px;
+	}
+
+	.who {
+		gap: 4px;
+	}
+
+	.bio {
+		font-size: 14px;
+	}
+
+	.actions {
+		gap: 8px;
+	}
+}
+
+@media (max-width: 1180px), (max-height: 540px) {
+	.strip {
+		flex-wrap: wrap;
+	}
+
+	.who {
+		flex-shrink: 1;
+	}
+
+	.name {
+		white-space: normal;
+	}
+
+	.bio {
+		-webkit-line-clamp: unset;
+		flex-basis: 100%;
+	}
+
+	.actions {
+		align-items: start;
+	}
+
+	.row {
+		flex-wrap: wrap;
+	}
+}

@@ -1,0 +1,93 @@
+/*
+ * Breakpoints shared by the component modules:
+ *   (max-width: 1600px)                          narrower desktops: trim side detail
+ *   (max-height: 880px), 740px, 640px            shorter desktops: tighten spacing
+ *   (min-width: 1700px) and (min-height: 940px)  tall: side quests get their own row
+ *   (max-width: 1180px), (max-height: 540px)     too small for one screen: stack and scroll
+ */
+
+.screen {
+	height: 100vh;
+	overflow: hidden;
+	padding: 16px 28px 18px;
+	display: grid;
+	grid-template-columns:
+		clamp(290px, 21vw, 400px) minmax(0, 1fr)
+		clamp(290px, 21vw, 400px);
+	grid-template-rows: auto minmax(0, 1fr);
+	gap: 14px;
+}
+
+/* DOM order is strip, campaign, side, trophies, quests so the stacked view reads well */
+.strip {
+	grid-column: 1 / -1;
+}
+
+.campaign {
+	grid-column: 2;
+	grid-row: 2;
+}
+
+.side {
+	grid-column: 1;
+	grid-row: 2;
+}
+
+.trophies {
+	grid-column: 3;
+	grid-row: 2;
+}
+
+/* Only the tall layout has room for side quests as their own row */
+.quests {
+	display: none;
+}
+
+@media (min-width: 1700px) and (min-height: 940px) {
+	.screen {
+		grid-template-rows: auto minmax(0, 1fr) auto;
+	}
+
+	.side {
+		grid-row: 2 / 4;
+	}
+
+	.quests {
+		display: flex;
+		grid-column: 2 / 4;
+		grid-row: 3;
+	}
+}
+
+@media (max-height: 880px) {
+	.screen {
+		padding: 12px 22px 14px;
+		gap: 12px;
+	}
+}
+
+@media (max-height: 640px) {
+	.screen {
+		padding: 10px 18px 12px;
+		gap: 10px;
+	}
+}
+
+@media (max-width: 1180px), (max-height: 540px) {
+	.screen {
+		height: auto;
+		overflow: visible;
+		grid-template-columns: minmax(0, 1fr);
+		grid-template-rows: none;
+		padding: 12px;
+		gap: 12px;
+	}
+
+	.strip,
+	.campaign,
+	.side,
+	.trophies {
+		grid-column: 1;
+		grid-row: auto;
+	}
+}

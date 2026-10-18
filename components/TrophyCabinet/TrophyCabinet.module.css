@@ -1,0 +1,227 @@
+.certs {
+	list-style: none;
+	padding: 0;
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	gap: 1px;
+	background: var(--line);
+	border-bottom: 1px solid var(--line);
+	flex: 0 0 auto;
+}
+
+.cert {
+	height: 100%;
+	background: var(--panel);
+	padding: 13px 14px;
+	display: flex;
+	gap: 11px;
+	align-items: center;
+	color: var(--text);
+}
+
+.cert:hover {
+	text-decoration: none;
+	background: var(--panel2);
+}
+
+.ring {
+	width: 36px;
+	height: 36px;
+	flex: 0 0 36px;
+	border: 2px solid var(--line);
+	border-radius: 50%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.ring-expert {
+	border-color: #e8b020;
+}
+
+.ring-associate {
+	border-color: #aeb4c0;
+}
+
+.certText {
+	flex: 1;
+	min-width: 0;
+	display: flex;
+	flex-direction: column;
+	align-items: start;
+	gap: 5px;
+}
+
+.tier {
+	font-family: var(--display);
+	font-size: 10px;
+	font-weight: 700;
+	letter-spacing: 0.14em;
+	text-transform: uppercase;
+	padding: 2px 7px;
+	border-radius: 2px;
+}
+
+.tier-expert {
+	color: var(--tier-expert-fg);
+	background: var(--tier-expert-bg);
+}
+
+.tier-associate {
+	color: var(--tier-associate-fg);
+	background: var(--tier-associate-bg);
+}
+
+.certName {
+	font-size: 13.5px;
+	font-weight: 600;
+	line-height: 1.2;
+}
+
+.unlocksHead {
+	display: flex;
+	justify-content: space-between;
+	padding: 12px 20px 6px;
+	flex: 0 0 auto;
+}
+
+.gamerscore {
+	color: var(--gold);
+}
+
+.unlocks {
+	list-style: none;
+	padding: 0;
+	flex: 1;
+	min-height: 0;
+	overflow: hidden;
+	display: flex;
+	flex-direction: column;
+	/* rows are 54px; the container queries below show only whole rows */
+	container-type: size;
+}
+
+.unlock {
+	display: flex;
+	gap: 12px;
+	align-items: center;
+	padding: 7px 20px;
+	flex: 0 0 auto;
+}
+
+.icon {
+	width: 40px;
+	height: 40px;
+	flex: 0 0 40px;
+	border-radius: 2px;
+	object-fit: cover;
+}
+
+.unlockText {
+	flex: 1;
+	min-width: 0;
+	display: flex;
+	flex-direction: column;
+}
+
+.unlockName {
+	font-size: 14px;
+	font-weight: 600;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.unlockMeta {
+	font-size: 12.5px;
+	color: var(--muted);
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.bar {
+	display: block;
+	height: 11px;
+	width: 70%;
+	margin: 3px 0;
+	border-radius: 2px;
+}
+
+.barShort {
+	width: 45%;
+}
+
+.offline {
+	flex: 1;
+	padding: 6px 20px;
+	font-size: 14px;
+	color: var(--muted);
+}
+
+.footer {
+	flex: 0 0 auto;
+	display: flex;
+	justify-content: space-between;
+	gap: 10px;
+	flex-wrap: wrap;
+	padding: 11px 20px;
+	border-top: 1px solid var(--line);
+	background: var(--panel2);
+	font-size: 12px;
+	font-weight: 600;
+}
+
+@media (max-width: 1600px) {
+	.ring {
+		display: none;
+	}
+
+	.cert {
+		padding: 11px 14px;
+	}
+}
+
+@media (max-height: 880px) {
+	.cert {
+		padding: 10px 12px;
+	}
+}
+
+/* Show as many whole unlock rows as fit (each row is 54px) */
+@container (max-height: 323px) {
+	.unlock:nth-child(n + 6) {
+		display: none;
+	}
+}
+
+@container (max-height: 269px) {
+	.unlock:nth-child(n + 5) {
+		display: none;
+	}
+}
+
+@container (max-height: 215px) {
+	.unlock:nth-child(n + 4) {
+		display: none;
+	}
+}
+
+@container (max-height: 161px) {
+	.unlock:nth-child(n + 3) {
+		display: none;
+	}
+}
+
+@container (max-height: 107px) {
+	.unlock:nth-child(n + 2) {
+		display: none;
+	}
+}
+
+/* Scrolling: the list sizes to its rows again */
+@media (max-width: 1180px), (max-height: 540px) {
+	.unlocks {
+		container-type: normal;
+	}
+}
