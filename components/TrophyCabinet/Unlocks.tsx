@@ -12,6 +12,21 @@ const formatDate = new Intl.DateTimeFormat('en-GB', {
 	timeZone: 'Asia/Kolkata',
 })
 
+const byNewest = (a: Unlock, b: Unlock) => b.unlocktime - a.unlocktime
+
+/**
+ * Half the rows go to each platform, so a busy month on one never hides the
+ * other. A platform with fewer unlocks leaves its spare rows to the other.
+ */
+function pickEvenly(steam: Unlock[], xbox: Unlock[]): Unlock[] {
+	const half = MAX_UNLOCKS / 2
+	const s = [...steam].sort(byNewest)
+	const x = [...xbox].sort(byNewest)
+	const steamCount = Math.min(s.length, Math.max(half, MAX_UNLOCKS - x.length))
+	const xboxCount = Math.min(x.length, MAX_UNLOCKS - steamCount)
+	return [...s.slice(0, steamCount), ...x.slice(0, xboxCount)].sort(byNewest)
+}
+
 /** Steam and Xbox are each cached for hours (lib/), so this renders into the static shell */
 export default async function Unlocks() {
 	const [steam, xbox] = await Promise.all([
@@ -19,24 +34,21 @@ export default async function Unlocks() {
 		getXboxAchievements(),
 	])
 
-	const unlocks: Unlock[] = [
-		...steam.achievements.map((a) => ({
-			platform: 'Steam' as const,
-			name: a.name,
-			game: a.gameName,
-			icon: a.icon,
-			unlocktime: a.unlocktime,
-		})),
-		...xbox.achievements.map((a) => ({
-			platform: 'Xbox' as const,
-			name: a.name,
-			game: a.gameName,
-			icon: a.icon,
-			unlocktime: a.unlocktime,
-		})),
-	]
-		.sort((a, b) => b.unlocktime - a.unlocktime)
-		.slice(0, MAX_UNLOCKS)
+	const steamUnlocks: Unlock[] = steam.achievements.map((a) => ({
+		platform: 'Steam',
+		name: a.name,
+		game: a.gameName,
+		icon: a.icon,
+		unlocktime: a.unlocktime,
+	}))
+	const xboxUnlocks: Unlock[] = xbox.achievements.map((a) => ({
+		platform: 'Xbox',
+		name: a.name,
+		game: a.gameName,
+		icon: a.icon,
+		unlocktime: a.unlocktime,
+	}))
+	const unlocks = pickEvenly(steamUnlocks, xboxUnlocks)
 
 	const gamerscore = xbox.profile?.gamerscore
 
