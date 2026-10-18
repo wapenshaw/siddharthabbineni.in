@@ -24,23 +24,10 @@
 	background: var(--panel2);
 }
 
-.ring {
-	width: 36px;
-	height: 36px;
-	flex: 0 0 36px;
-	border: 2px solid var(--line);
-	border-radius: 50%;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-}
-
-.ring-expert {
-	border-color: #e8b020;
-}
-
-.ring-associate {
-	border-color: #aeb4c0;
+.badge {
+	width: 40px;
+	height: 40px;
+	flex: 0 0 40px;
 }
 
 .certText {
@@ -175,12 +162,16 @@
 }
 
 @media (max-width: 1600px) {
-	.ring {
-		display: none;
+	/* a smaller badge keeps "Administrator" on one line on laptops */
+	.badge {
+		width: 32px;
+		height: 32px;
+		flex-basis: 32px;
 	}
 
 	.cert {
-		padding: 11px 14px;
+		padding: 11px 12px;
+		gap: 9px;
 	}
 }
 

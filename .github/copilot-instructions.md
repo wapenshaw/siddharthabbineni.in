@@ -37,7 +37,7 @@ All site content lives in TypeScript config files under `config/`:
 
 - `profile.ts`: name, bio, classes and subclasses, links
 - `experience.ts`: jobs, oldest first, with `YYYY-MM` dates. Logos are in `public/work_images/`, and an optional `logo.dark` variant can be set.
-- `build.ts`: the character build cards, including the Gamer card's favourite games. Icons go in `public/games/`.
+- `build.ts`: the character build cards. They are squares, only about 110px inside on a small laptop, so keep each line and its chips short. Their pixel-art icons are in `pixelIcons.ts`.
 - `quests.ts`: side projects
 - `certifications.ts`: Azure certifications. Only entries marked `featured` show.
 - `skins.ts`: skin ids, the `SKIN_PICKER` flag and the theme init script. The colours themselves live in `styles/globals.css`.
@@ -71,7 +71,7 @@ The `/api/steam`, `/api/xbox` and `/api/articles` routes wrap the same lib funct
 ### Components
 
 - Server components by default: `ProfileStrip`, `TrophyCabinet` (+ `Unlocks`), `CharacterBuild`, `SideQuests`, `PrTicker`
-- Client components: `Campaign` (timeline tabs with arrow-key navigation), `SidePanel` (tabs only; the server-rendered panes come in as props), `ThemeControls`, `GameIcon`, `Devlog` (post list and reader), `ProfileStrip/ResumeButton` (the PDF in a `<dialog>`; small screens just open the PDF), `ProfileStrip/ViewSwitch`
+- Client components: `Campaign` (timeline tabs with arrow-key navigation), `SidePanel` (tabs only; the server-rendered panes come in as props), `ThemeControls`, `Devlog` (post list and reader), `ProfileStrip/ResumeButton` (the PDF in a `<dialog>`; small screens just open the PDF), `ProfileStrip/ViewSwitch`
 - Shared primitives are global classes in `styles/globals.css`: `.panel`, `.phead`, `.label`, `.pill`, `.chip`, `.btn`, `.icon-btn` and `.logo-tile`
 
 ### Deployment

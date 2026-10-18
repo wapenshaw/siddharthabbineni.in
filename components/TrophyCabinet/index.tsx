@@ -1,4 +1,3 @@
-import { TrophyIcon } from 'components/Icons'
 import { certifications } from 'config/certifications'
 import { profile } from 'config/profile'
 import { Suspense } from 'react'
@@ -17,7 +16,7 @@ export default function TrophyCabinet({ className }: { className?: string }) {
 				<h2 id="trophy-title" className="label label-hi">
 					Trophy cabinet
 				</h2>
-				<span className="label">{featured.length} Azure certs</span>
+				<span className="label">{featured.length} Certifications</span>
 			</div>
 
 			<ul className={styles.certs}>
@@ -32,11 +31,14 @@ export default function TrophyCabinet({ className }: { className?: string }) {
 								rel="noopener noreferrer"
 								title={`Verify: ${c.fullName}`}
 							>
-								<span
-									className={`${styles.ring} ${styles[`ring-${tier}`] ?? ''}`}
-								>
-									<TrophyIcon />
-								</span>
+								{/* the official Microsoft badge for the level; the name is in the text beside it */}
+								<img
+									className={styles.badge}
+									src={c.badge}
+									alt=""
+									width={40}
+									height={40}
+								/>
 								<span className={styles.certText}>
 									<span
 										className={`${styles.tier} ${styles[`tier-${tier}`] ?? ''}`}
@@ -62,7 +64,7 @@ export default function TrophyCabinet({ className }: { className?: string }) {
 					target="_blank"
 					rel="noopener noreferrer"
 				>
-					Exophase →
+					Achievements log →
 				</a>
 			</div>
 		</section>

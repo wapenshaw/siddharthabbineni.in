@@ -1,136 +1,105 @@
-/* Uniform cards: every row gets an equal share of the pane's height */
+/*
+ * One layout at every size: square cards in two columns. Type inside a card is
+ * sized to the card (cqi), so a card that fits on a small laptop fits everywhere.
+ */
 .grid {
 	flex: 1;
 	min-height: 0;
 	list-style: none;
 	display: grid;
 	grid-template-columns: repeat(2, minmax(0, 1fr));
-	grid-auto-rows: 1fr;
-	gap: 8px;
-	padding: 14px;
-	container-type: inline-size;
+	align-content: start;
+	gap: 6px;
+	padding: 10px;
+	/* the pane's shape decides how many rows of squares fit */
+	container: build / size;
 }
 
 .card {
+	aspect-ratio: 1;
+	overflow: hidden;
 	background: var(--panel2);
 	border: 1px solid var(--line);
 	border-radius: 3px;
-	padding: 12px 13px;
-	/* number and class name share the first row */
+	padding: 10px;
 	display: grid;
 	grid-template-columns: auto minmax(0, 1fr);
-	align-content: start;
-	align-items: baseline;
-	column-gap: 8px;
-	row-gap: 5px;
+	/* rows: icon and name (as tall as the tallest icon, so names line up across cards),
+	   line, then a stretchy last row so the foot sits at the bottom */
+	grid-template-rows: minmax(24px, auto) auto 1fr;
+	align-items: center;
+	column-gap: 6px;
+	row-gap: 3px;
+	container: card / inline-size;
 }
 
-/* Cards past the fourth only fit on tall screens (and when scrolling) */
+/* Two rows of squares fit on short panes; a third row (cards 5 and 6) needs a tall, narrow one */
 .card:nth-child(n + 5) {
 	display: none;
 }
 
-.line,
-.games {
-	grid-column: 1 / -1;
+@container build (max-aspect-ratio: 2 / 3) {
+	.card:nth-child(n + 5) {
+		display: grid;
+	}
 }
 
-.key {
-	font-size: 0.875rem;
-	font-weight: 700;
+/* The class icon leads the name, in the theme's lime */
+.icon {
+	flex: none;
 	color: var(--acc);
 }
 
 .name {
-	font-size: 1.3125rem;
+	font-size: 11cqi;
 	font-weight: 700;
+	line-height: 1.1;
+}
+
+.line,
+.foot {
+	grid-column: 1 / -1;
 }
 
 .line {
-	font-size: 1.0625rem;
-	color: var(--muted);
-	line-height: 1.4;
-}
-
-.games {
-	display: flex;
-	flex-direction: column;
-	gap: 5px;
-	padding-top: 3px;
-}
-
-.game {
-	display: flex;
-	gap: 8px;
-	align-items: center;
-}
-
-.gameName {
-	font-size: 1rem;
-	font-weight: 600;
+	align-self: start;
+	font-size: 10cqi;
 	line-height: 1.25;
+	color: var(--muted);
 }
 
-/* Narrow column: drop the decorative number so long class names fit */
-@container (max-width: 340px) {
-	.key {
-		display: none;
-	}
-
-	.name {
-		grid-column: 1 / -1;
-		font-size: 1.1875rem;
-	}
+/* Loadout chips, pinned to the bottom of the card */
+.foot {
+	grid-row: 3;
+	align-self: end;
 }
 
-@media (min-width: 1700px) and (min-height: 940px) {
-	.card:nth-child(n + 5) {
-		display: grid;
-	}
+.loadout {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 3px;
 }
 
-@media (max-height: 740px) {
-	.grid {
-		padding: 10px;
-		gap: 6px;
-	}
-
-	.card {
-		padding: 10px;
-		row-gap: 4px;
-	}
+.chip {
+	font-size: max(10px, 9cqi);
+	font-weight: 600;
+	line-height: 1;
+	padding: 0.25em 0.45em;
+	border: 1px solid var(--line);
+	border-radius: 2px;
+	color: var(--text);
+	background: var(--panel);
+	white-space: nowrap;
 }
 
-/* Very short screens: games as a row of icons, names on hover */
-@media (max-height: 640px) {
-	.games {
-		flex-direction: row;
-	}
-
-	.gameName {
-		position: absolute;
-		width: 1px;
-		height: 1px;
-		overflow: hidden;
-		clip: rect(0, 0, 0, 0);
-		white-space: nowrap;
-	}
-}
-
+/* Stacked layout: the page scrolls, so show every card in as many columns as fit */
 @media (max-width: 1180px), (max-height: 540px) {
+	.grid {
+		grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+		container-type: inline-size;
+	}
+
 	.card:nth-child(n + 5) {
 		display: grid;
-	}
-
-	.games {
-		flex-direction: column;
-	}
-
-	.gameName {
-		position: static;
-		width: auto;
-		height: auto;
-		clip: auto;
-		white-space: normal;
 	}
 }

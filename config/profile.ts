@@ -1,18 +1,20 @@
 export const profile = {
 	name: 'Siddharth Abbineni',
 	initials: 'SA',
-	// A round photo; the strip crops off its baked-in ring and draws its own
-	avatar: '/SA_avatar.png',
-	// The SA logo badge on the photo, one per mode
-	initialsAvatar: { light: '/logo-black.png', dark: '/logo-white.png' },
+	// A square photo (400×400) centred on the face; the strip rounds it and draws the ring.
+	// It is also the link preview image.
+	avatar: '/SA_avatar.jpg',
+	// The SA mark on the photo's badge. It's drawn as a mask, so only its shape
+	// matters (a transparent PNG); the theme supplies the colours.
+	logo: '/logo-black.png',
 	handle: 'tHeSiD',
 	location: 'Hyderabad, India',
 	startYear: 2010,
 	nowPlaying: 'Astra at Assurant',
-	classes: ['Automation Engineer', 'Cloud Architect', 'Developer'],
-	// Second subclass is meant to change: edit freely
-	subclasses: ['Gamer', 'Hiking'],
-	bio: "Since 2010 I've designed cloud platforms, written the services that run on them, and automated the work in between. Some days that makes me an architect, some days a developer, and most days the one who makes sure nobody does the same job twice.",
+	classes: ['Solutions Architect', 'Developer'],
+	// Shown after the classes in the muted style: edit freely
+	subclasses: ['Gamer'],
+	bio: 'Coding since childhood. From business applications and engineering leadership to cloud architecture and complex distributed systems, with a focus on building, scaling, and improving software that solves real-world problems.',
 	email: 'siddharth.abbineni@hotmail.com',
 	resumeUrl: '/files/Siddharth-Abbineni-Resume.pdf',
 	links: {

@@ -7,13 +7,23 @@
  */
 
 .screen {
-	height: 100vh;
+	max-width: var(--max-width);
+	height: min(100vh, var(--max-height));
+	margin-inline: auto;
+	/*
+	 * Solid over the backdrop pattern; the edge and shadow only show once the
+	 * screen is bigger than the page (otherwise they sit off-screen).
+	 */
+	background: var(--bg);
+	box-shadow:
+		0 0 0 1px var(--line),
+		0 24px 64px -24px rgb(0 0 0 / 0.35);
 	overflow: hidden;
 	padding: 16px 28px 18px;
 	display: grid;
 	grid-template-columns:
-		clamp(290px, 21vw, 400px) minmax(0, 1fr)
-		clamp(290px, 21vw, 400px);
+		clamp(290px, 21 * var(--vw), 400px) minmax(0, 1fr)
+		clamp(290px, 21 * var(--vw), 400px);
 	grid-template-rows: auto minmax(0, 1fr);
 	gap: 14px;
 }

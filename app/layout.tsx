@@ -54,7 +54,7 @@ export const metadata: Metadata = {
 		type: 'profile',
 		images: [
 			{
-				url: '/SA_avatar.png',
+				url: profile.avatar,
 				width: 400,
 				height: 400,
 				alt: profile.name,
@@ -99,7 +99,7 @@ export default function RootLayout({
 							'@type': 'Person',
 							name: profile.name,
 							url: SITE_URL,
-							image: `${SITE_URL}/SA_avatar.png`,
+							image: `${SITE_URL}${profile.avatar}`,
 							jobTitle: current?.role,
 							worksFor: current && {
 								'@type': 'Organization',

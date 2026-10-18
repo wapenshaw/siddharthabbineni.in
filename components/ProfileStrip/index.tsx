@@ -30,25 +30,18 @@ export default function ProfileStrip({ className }: { className?: string }) {
 					<img
 						src={profile.avatar}
 						alt={profile.name}
-						width={300}
-						height={300}
+						width={400}
+						height={400}
 					/>
 				</span>
-				<span className={`disp ${styles.initials}`} title="Siddharth Abbineni">
-					{/* the photo already carries the name, so the logo is decorative */}
-					<img
-						className={styles.logoLight}
-						src={profile.initialsAvatar.light}
-						alt=""
-						width={20}
-						height={18}
-					/>
-					<img
-						className={styles.logoDark}
-						src={profile.initialsAvatar.dark}
-						alt=""
-						width={20}
-						height={18}
+				{/* the photo already carries the name, so the logo badge is decorative */}
+				<span className={styles.badge} aria-hidden="true">
+					<span
+						className={styles.mark}
+						style={{
+							maskImage: `url(${profile.logo})`,
+							WebkitMaskImage: `url(${profile.logo})`,
+						}}
 					/>
 				</span>
 			</div>
@@ -99,7 +92,7 @@ export default function ProfileStrip({ className }: { className?: string }) {
 					<ViewSwitch />
 					<ResumeButton href={profile.resumeUrl} />
 					<a
-						className="btn"
+						className={`btn ${styles.mail}`}
 						href={`mailto:${profile.email}`}
 						aria-label={`Email ${profile.name}`}
 						title={profile.email}

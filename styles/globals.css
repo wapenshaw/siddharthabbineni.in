@@ -203,6 +203,13 @@ html[data-skin='midnight'][data-mode='light'],
 	--tier-expert-fg: #1e1503;
 	--tier-associate-bg: #d3d7e0;
 	--tier-associate-fg: #16181d;
+	/*
+	 * The page stops growing at 1920×1080 and sits top-centre on bigger
+	 * screens, so sizes use --vw (1vw up to that width) rather than vw.
+	 */
+	--max-width: 1920px;
+	--max-height: 1080px;
+	--vw: min(1vw, var(--max-width) / 100);
 }
 
 *,
@@ -246,7 +253,19 @@ html {
 
 body {
 	min-height: 100vh;
-	background: var(--bg);
+	/*
+	 * The backdrop around the page on screens bigger than 1920×1080: a faint
+	 * dot grid under a soft glow of the accent, both from the skin's colours.
+	 */
+	background:
+		radial-gradient(
+			ellipse 80% 60% at 50% 0%,
+			color-mix(in srgb, var(--acc) 7%, transparent),
+			transparent
+		),
+		radial-gradient(var(--line) 1px, transparent 1.5px) 0 0 / 20px 20px,
+		var(--bg);
+	background-attachment: fixed;
 	color: var(--text);
 	font-family: var(--body);
 	line-height: 1.45;
