@@ -22,14 +22,29 @@ async function fetchJson<T>(url: string): Promise<T | null> {
 	}
 }
 
-async function getRecentAchievements(): Promise<RecentAchievement[]> {
-	const gamesData = await fetchJson<{
-		response: { games?: { appid: number; name: string }[] }
-	}>(
-		`${API}/IPlayerService/GetRecentlyPlayedGames/v1/?key=${STEAM_API_KEY}&steamid=${STEAM_USER_ID}&count=5`
-	)
+interface OwnedGame {
+	appid: number
+	name: string
+	rtime_last_played?: number
+	has_community_visible_stats?: boolean
+}
 
-	const games = gamesData?.response?.games ?? []
+/**
+ * The five most recently played games that have achievements. Uses the owned
+ * games list because GetRecentlyPlayedGames only covers the last two weeks.
+ */
+async function getLastPlayedGames(): Promise<OwnedGame[]> {
+	const owned = await fetchJson<{ response: { games?: OwnedGame[] } }>(
+		`${API}/IPlayerService/GetOwnedGames/v1/?key=${STEAM_API_KEY}&steamid=${STEAM_USER_ID}&include_appinfo=1&include_played_free_games=1`
+	)
+	return (owned?.response?.games ?? [])
+		.filter((g) => g.has_community_visible_stats && g.rtime_last_played)
+		.sort((a, b) => (b.rtime_last_played ?? 0) - (a.rtime_last_played ?? 0))
+		.slice(0, 5)
+}
+
+async function getRecentAchievements(): Promise<RecentAchievement[]> {
+	const games = await getLastPlayedGames()
 	if (games.length === 0) {
 		return []
 	}
