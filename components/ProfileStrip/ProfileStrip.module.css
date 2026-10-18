@@ -104,13 +104,19 @@
 	margin: 0 3px;
 }
 
-.bio {
+.summary {
 	flex: 1 1 320px;
 	min-width: 0;
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+}
+
+.bio {
 	font-size: 1.1875rem;
 	color: var(--muted);
 	display: -webkit-box;
-	-webkit-line-clamp: 4;
+	-webkit-line-clamp: 3;
 	-webkit-box-orient: vertical;
 	overflow: hidden;
 }
@@ -204,16 +210,23 @@
 		white-space: normal;
 	}
 
+	.summary {
+		flex-basis: 100%;
+	}
+
 	.bio {
 		-webkit-line-clamp: unset;
-		flex-basis: 100%;
 	}
 
 	.actions {
 		align-items: start;
+		min-width: 0;
+		max-width: 100%;
 	}
 
-	.row {
+	.row,
+	.buttons {
+		max-width: 100%;
 		flex-wrap: wrap;
 	}
 }

@@ -21,7 +21,8 @@ export const profile = {
 		github: 'https://github.com/wapenshaw',
 		linkedin: 'https://www.linkedin.com/in/siddharthabbineni/',
 		x: 'https://x.com/tHeSiD',
+		instagram: 'https://www.instagram.com/tHeSiD/',
+		stackoverflow: 'https://stackoverflow.com/users/66384/',
 		exophase: 'https://www.exophase.com/user/tHeSiD/',
-		devto: 'https://dev.to/wapenshaw',
 	},
 }

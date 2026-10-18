@@ -121,7 +121,6 @@ export default function RootLayout({
 							sameAs: [
 								profile.links.linkedin,
 								profile.links.github,
-								profile.links.devto,
 								profile.links.x,
 							],
 						}),

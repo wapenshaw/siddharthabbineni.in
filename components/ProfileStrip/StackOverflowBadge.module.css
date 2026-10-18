@@ -1,0 +1,66 @@
+.badge {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 4px 8px;
+	width: fit-content;
+	padding: 3px 5px;
+	margin: -3px -5px;
+	border-radius: 2px;
+	font-size: 0.875rem;
+	line-height: 1.2;
+	color: var(--acc);
+}
+
+.badge:hover {
+	background: var(--accFill);
+	color: var(--onAcc);
+	text-decoration: none;
+}
+
+.badge > svg {
+	flex-shrink: 0;
+}
+
+.badge strong {
+	font-size: 1.0625rem;
+}
+
+.change {
+	color: var(--muted);
+	font-size: 0.75rem;
+	white-space: nowrap;
+}
+
+.badge:hover .change {
+	color: inherit;
+}
+
+.badges,
+.badges > span {
+	display: flex;
+	align-items: center;
+	gap: 5px;
+}
+
+.badges {
+	gap: 8px;
+}
+
+.dot {
+	width: 6px;
+	height: 6px;
+	border-radius: 50%;
+}
+
+.gold {
+	background: var(--gold);
+}
+
+.silver {
+	background: var(--muted);
+}
+
+.bronze {
+	background: var(--alt);
+}

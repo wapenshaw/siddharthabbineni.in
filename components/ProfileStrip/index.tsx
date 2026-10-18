@@ -1,24 +1,30 @@
 import {
-	GamepadIcon,
 	GitHubIcon,
+	InstagramIcon,
 	LinkedInIcon,
-	MailIcon,
-	XIcon,
-} from 'components/Icons'
+	TwitterIcon,
+} from 'components/BrandIcons'
+import { GamepadIcon, MailIcon } from 'components/Icons'
 import ThemeControls from 'components/ThemeControls'
 import { profile } from 'config/profile'
 import styles from './ProfileStrip.module.css'
 import ResumeButton from './ResumeButton'
+import StackOverflowBadge from './StackOverflowBadge'
 import ViewSwitch from './ViewSwitch'
 
 const socials = [
 	{ href: profile.links.github, label: 'GitHub', icon: <GitHubIcon /> },
 	{ href: profile.links.linkedin, label: 'LinkedIn', icon: <LinkedInIcon /> },
-	{ href: profile.links.x, label: 'X/Twitter', icon: <XIcon /> },
+	{ href: profile.links.x, label: 'Twitter', icon: <TwitterIcon /> },
 	{
 		href: profile.links.exophase,
 		label: 'Exophase gaming profile',
 		icon: <GamepadIcon />,
+	},
+	{
+		href: profile.links.instagram,
+		label: 'Instagram',
+		icon: <InstagramIcon />,
 	},
 ]
 
@@ -67,7 +73,10 @@ export default function ProfileStrip({ className }: { className?: string }) {
 				</ul>
 			</div>
 
-			<p className={styles.bio}>{profile.bio}</p>
+			<div className={styles.summary}>
+				<p className={styles.bio}>{profile.bio}</p>
+				<StackOverflowBadge />
+			</div>
 
 			<div className={styles.actions}>
 				<div className={styles.row}>

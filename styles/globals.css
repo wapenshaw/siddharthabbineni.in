@@ -495,12 +495,17 @@ ul {
 	height: 34px;
 	border: 1px solid var(--line);
 	border-radius: 2px;
-	color: var(--text);
+	color: var(--acc);
+	transition:
+		background-color 150ms ease,
+		border-color 150ms ease,
+		color 150ms ease;
 }
 
 .icon-btn:hover {
-	border-color: var(--acc);
-	color: var(--acc);
+	background: var(--accFill);
+	border-color: var(--accFill);
+	color: var(--onAcc);
 	text-decoration: none;
 }
 
