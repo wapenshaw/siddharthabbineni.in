@@ -29,9 +29,18 @@ export default function ProfileStrip({ className }: { className?: string }) {
 					/>
 				</span>
 				<span className={`disp ${styles.initials}`} title="Siddharth Abbineni">
+					{/* the photo already carries the name, so the logo is decorative */}
 					<img
-						src={profile.initialsAvatar}
-						alt={profile.name}
+						className={styles.logoLight}
+						src={profile.initialsAvatar.light}
+						alt=""
+						width={20}
+						height={18}
+					/>
+					<img
+						className={styles.logoDark}
+						src={profile.initialsAvatar.dark}
+						alt=""
 						width={20}
 						height={18}
 					/>

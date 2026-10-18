@@ -40,13 +40,15 @@ All site content lives in TypeScript config files under `config/`:
 - `build.ts`: the character build cards, including the Gamer card's favourite games. Icons go in `public/games/`.
 - `quests.ts`: side projects
 - `certifications.ts`: Azure certifications. Only entries marked `featured` show.
-- `skins.ts`: skin ids and the theme init script. The colours themselves live in `styles/globals.css`.
+- `skins.ts`: skin ids, the `SKIN_PICKER` flag and the theme init script. The colours themselves live in `styles/globals.css`.
 
 To update content, edit the config file, not the component code.
 
 ### Theming
 
-`<html>` carries `data-skin` (`plum` | `arcade` | `hotline`) and `data-mode` (`dark` | `light`). An inline script in `app/layout.tsx` sets both from localStorage before first paint.
+`<html>` carries `data-skin` (`midnight` | `electric` | `plum` | `arcade` | `hotline`) and `data-mode` (`dark` | `light`). An inline script in `app/layout.tsx` sets both from localStorage before first paint.
+
+Midnight Lime is the default and, for now, the only skin visitors see: `SKIN_PICKER` in `config/skins.ts` is off, which hides the swatches and makes the init script ignore a stored skin. Only the dark/light toggle shows. The other skins stay defined, so turning the flag on brings the picker back. Links use their own `--link` token, which matches `--acc` except in Refined Electric (violet).
 
 Tokens (`--bg`, `--panel`, `--acc`, …) are defined per skin × mode in `styles/globals.css`. Any element with its own `data-skin` previews that skin; the swatches rely on this. `components/ThemeControls` switches skin and mode with `document.startViewTransition`.
 

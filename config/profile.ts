@@ -3,7 +3,8 @@ export const profile = {
 	initials: 'SA',
 	// A round photo; the strip crops off its baked-in ring and draws its own
 	avatar: '/SA_avatar.png',
-	initialsAvatar: '/logo-black.png',
+	// The SA logo badge on the photo, one per mode
+	initialsAvatar: { light: '/logo-black.png', dark: '/logo-white.png' },
 	handle: 'tHeSiD',
 	location: 'Hyderabad, India',
 	startYear: 2010,

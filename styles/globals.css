@@ -14,6 +14,7 @@ html[data-skin='plum'][data-mode='dark'],
 	--text: #f2ecfa;
 	--muted: #b9a9d0;
 	--acc: #c8ff2e;
+	--link: #c8ff2e;
 	--accFill: #c8ff2e;
 	--onAcc: #12081c;
 	--alt: #ff7dbb;
@@ -31,6 +32,7 @@ html[data-skin='plum'][data-mode='light'],
 	--text: #1d0f2e;
 	--muted: #5b4977;
 	--acc: #4a7500;
+	--link: #4a7500;
 	--accFill: #c8ff2e;
 	--onAcc: #1d0f2e;
 	--alt: #b8155f;
@@ -48,6 +50,7 @@ html[data-skin='arcade'][data-mode='dark'],
 	--text: #eef1ff;
 	--muted: #aab4e2;
 	--acc: #ffd23f;
+	--link: #ffd23f;
 	--accFill: #ffd23f;
 	--onAcc: #0a0f2c;
 	--alt: #6fe3ff;
@@ -65,6 +68,7 @@ html[data-skin='arcade'][data-mode='light'],
 	--text: #0c1440;
 	--muted: #48548a;
 	--acc: #2140d9;
+	--link: #2140d9;
 	--accFill: #2140d9;
 	--onAcc: #ffffff;
 	--alt: #00728f;
@@ -82,6 +86,7 @@ html[data-skin='hotline'][data-mode='dark'],
 	--text: #f1f1f6;
 	--muted: #ababc0;
 	--acc: #ff3ea5;
+	--link: #ff3ea5;
 	--accFill: #ff3ea5;
 	--onAcc: #0b0b10;
 	--alt: #3ee6ff;
@@ -99,11 +104,95 @@ html[data-skin='hotline'][data-mode='light'],
 	--text: #15141f;
 	--muted: #55546a;
 	--acc: #c4126e;
+	--link: #c4126e;
 	--accFill: #ff3ea5;
 	--onAcc: #15141f;
 	--alt: #00718a;
 	--gold: #946a00;
 	--hatch: rgba(21, 20, 31, 0.07);
+	color-scheme: light;
+}
+
+/*
+ * Refined Electric: emerald for primary actions and the current chapter,
+ * violet for links and secondary highlights.
+ */
+html[data-skin='electric'][data-mode='dark'],
+[data-mode='dark'] [data-skin='electric'] {
+	--bg: #0e0b16;
+	--panel: #1a1625;
+	--panel2: #242033;
+	--line: #393149;
+	--text: #f4f0fa;
+	--muted: #b7aec9;
+	--acc: #00e5a8;
+	--link: #a78bfa;
+	--accFill: #00e5a8;
+	--onAcc: #0e0b16;
+	--alt: #a78bfa;
+	--gold: #ffc93c;
+	--hatch: rgba(255, 255, 255, 0.07);
+	color-scheme: dark;
+}
+
+/* --acc is a shade darker than the #007f5f fill so small text clears AA on --panel2 */
+html[data-skin='electric'][data-mode='light'],
+[data-mode='light'] [data-skin='electric'] {
+	--bg: #f7f6fa;
+	--panel: #ffffff;
+	--panel2: #f0edf7;
+	--line: #d0c8dd;
+	--text: #201a2b;
+	--muted: #5c536e;
+	--acc: #007758;
+	--link: #7553c7;
+	--accFill: #007f5f;
+	--onAcc: #ffffff;
+	--alt: #7553c7;
+	--gold: #866000;
+	--hatch: rgba(32, 26, 43, 0.07);
+	color-scheme: light;
+}
+
+/*
+ * Midnight + Electric Lime (the default): the fluorescent lime from Plum &
+ * Lime for primary buttons, the current chapter and status, violet for
+ * secondary highlights. Bright lime fails contrast on
+ * white, so light mode uses a deep lime green for text and links.
+ */
+html[data-skin='midnight'][data-mode='dark'],
+[data-mode='dark'] [data-skin='midnight'] {
+	--bg: #0e0c18;
+	--panel: #191528;
+	--panel2: #27213b;
+	--line: #393149;
+	--text: #f3effb;
+	--muted: #aaa2c4;
+	--acc: #c8ff2e;
+	--link: #c8ff2e;
+	--accFill: #c8ff2e;
+	--onAcc: #171526;
+	--alt: #a78bfa;
+	--gold: #ffc93c;
+	--hatch: rgba(255, 255, 255, 0.07);
+	color-scheme: dark;
+}
+
+html[data-skin='midnight'][data-mode='light'],
+[data-mode='light'] [data-skin='midnight'] {
+	--bg: #f8f7fc;
+	--panel: #ffffff;
+	--panel2: #f0edf8;
+	--line: #d4cde2;
+	--text: #20192d;
+	--muted: #625873;
+	--acc: #587600;
+	--link: #587600;
+	--accFill: #c8ff2e;
+	--onAcc: #171526;
+	--alt: #7553c7;
+	--gold: #866000;
+	--hatch: rgba(32, 25, 45, 0.07);
 	color-scheme: light;
 }
 
@@ -225,7 +314,7 @@ body {
 }
 
 a {
-	color: var(--acc);
+	color: var(--link);
 	text-decoration: none;
 }
 

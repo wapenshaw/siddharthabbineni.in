@@ -37,5 +37,6 @@
 	width: 14px;
 	height: 14px;
 	border-radius: 50%;
-	background: var(--accFill);
+	/* primary and secondary accent, so skins that share a primary still differ */
+	background: linear-gradient(135deg, var(--accFill) 50%, var(--alt) 50%);
 }

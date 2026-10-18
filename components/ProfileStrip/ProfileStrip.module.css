@@ -46,6 +46,15 @@
 	border-radius: 1px;
 }
 
+.initials img {
+	display: block;
+}
+
+:global([data-mode='dark']) .logoLight,
+:global([data-mode='light']) .logoDark {
+	display: none;
+}
+
 .who {
 	/* keep the class pills on one row; the bio takes the squeeze */
 	flex: 0 0 auto;

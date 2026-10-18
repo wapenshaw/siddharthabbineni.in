@@ -5,6 +5,7 @@ import {
 	DEFAULT_MODE,
 	DEFAULT_SKIN,
 	type Mode,
+	SKIN_PICKER,
 	type Skin,
 	STORAGE_KEYS,
 	skins,
@@ -56,20 +57,22 @@ export default function ThemeControls() {
 	return (
 		<fieldset className={styles.controls}>
 			<legend className="sr-only">Theme</legend>
-			{skins.map((s) => (
-				<button
-					key={s.id}
-					type="button"
-					data-skin={s.id}
-					className={styles.swatch}
-					aria-pressed={s.id === skin}
-					aria-label={`${s.name} skin`}
-					title={s.name}
-					onClick={() => apply('skin', s.id)}
-				>
-					<span className={styles.dot} />
-				</button>
-			))}
+			{/* Skin switching is off for now (config/skins.ts); the mode toggle stays */}
+			{SKIN_PICKER &&
+				skins.map((s) => (
+					<button
+						key={s.id}
+						type="button"
+						data-skin={s.id}
+						className={styles.swatch}
+						aria-pressed={s.id === skin}
+						aria-label={`${s.name} skin`}
+						title={s.name}
+						onClick={() => apply('skin', s.id)}
+					>
+						<span className={styles.dot} />
+					</button>
+				))}
 			<button
 				type="button"
 				className="icon-btn"
