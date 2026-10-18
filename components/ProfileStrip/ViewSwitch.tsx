@@ -8,11 +8,11 @@ export default function ViewSwitch() {
 	const onDevlog = usePathname() === '/blog'
 
 	return onDevlog ? (
-		<Link className="btn" href="/">
+		<Link className="btn btn-fill" href="/">
 			← Profile
 		</Link>
 	) : (
-		<Link className="btn" href="/blog">
+		<Link className="btn btn-fill" href="/blog">
 			Devlog
 		</Link>
 	)

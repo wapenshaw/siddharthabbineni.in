@@ -128,7 +128,10 @@
 	align-items: center;
 }
 
-.row + .row {
+/* Three buttons of exactly the same size, whatever their label */
+.buttons {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
 	gap: 8px;
 }
 

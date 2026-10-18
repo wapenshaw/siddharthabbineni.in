@@ -433,6 +433,9 @@ ul {
 }
 
 .btn {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
 	font-family: var(--display);
 	font-size: 1rem;
 	font-weight: 600;

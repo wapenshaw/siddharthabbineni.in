@@ -28,6 +28,13 @@ export const SunIcon = () => (
 	</Icon>
 )
 
+export const MailIcon = () => (
+	<Icon size={18}>
+		<rect x="3" y="5" width="18" height="14" rx="2" />
+		<path d="m3 7 9 6 9-6" />
+	</Icon>
+)
+
 export const MoonIcon = () => (
 	<Icon strokeWidth={1.8}>
 		<path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z" />

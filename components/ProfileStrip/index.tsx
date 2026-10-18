@@ -1,4 +1,10 @@
-import { GamepadIcon, GitHubIcon, LinkedInIcon, XIcon } from 'components/Icons'
+import {
+	GamepadIcon,
+	GitHubIcon,
+	LinkedInIcon,
+	MailIcon,
+	XIcon,
+} from 'components/Icons'
 import ThemeControls from 'components/ThemeControls'
 import { profile } from 'config/profile'
 import styles from './ProfileStrip.module.css'
@@ -88,12 +94,18 @@ export default function ProfileStrip({ className }: { className?: string }) {
 						</a>
 					))}
 				</div>
-				<div className={styles.row}>
-					<a className="btn btn-fill" href={`mailto:${profile.email}`}>
-						Send invite
-					</a>
-					<ResumeButton href={profile.resumeUrl} />
+				{/* Devlog is the main action; email is just a link, so it gets an icon */}
+				<div className={styles.buttons}>
 					<ViewSwitch />
+					<ResumeButton href={profile.resumeUrl} />
+					<a
+						className="btn"
+						href={`mailto:${profile.email}`}
+						aria-label={`Email ${profile.name}`}
+						title={profile.email}
+					>
+						<MailIcon />
+					</a>
 				</div>
 			</div>
 		</header>
