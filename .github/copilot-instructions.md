@@ -55,7 +55,7 @@ Tokens (`--bg`, `--panel`, `--acc`, …) are defined per skin × mode in `styles
 |----------|--------|----------|----------|
 | `getUpstreamPullRequests` | GitHub search | `hours` | `GITHUB_TOKEN` (optional), `GITHUB_USER` |
 | `getSteamAchievements` | Steam Web API | `gaming` (6h, set in next.config.ts) | `STEAM_API_KEY`, `STEAM_USER_ID` |
-| `getXboxAchievements` | xbl.io | `gaming` | `XBOX_API_KEY`, `XBOX_XUID` |
+| `getXboxAchievements` | OpenXBL (`api.xbl.io/v2`, responses wrapped in `content`) | `gaming` | `XBOX_API_KEY` (the key's own account; no XUID) |
 | `getArticles` | dev.to | `hours` | `DEVTO_USERNAME` |
 | `getCampaign` | `config/experience.ts` | `days` | none |
 
