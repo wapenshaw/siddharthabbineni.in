@@ -12,8 +12,12 @@ const dateFormat = new Intl.DateTimeFormat('en-GB', {
 export const formatPostDate = (date: string) =>
 	dateFormat.format(new Date(`${date}T00:00:00Z`))
 
-/** 'Log 07': posts are numbered oldest first */
-export const logNumber = (n: number) => `Log ${String(n).padStart(2, '0')}`
+/** 'Debrief 07', like the debrief after a race: new posts, numbered oldest first */
+export const debriefNumber = (n: number) =>
+	`Debrief ${String(n).padStart(2, '0')}`
+
+/** 'Season 2006': a post from an old blog goes by its year */
+export const seasonOf = (date: string) => `Season ${date.slice(0, 4)}`
 
 /** A post's URL (slugs are file names, so they never contain a slash) */
 export const postHref = (slug: string) => `/blog/${slug}` as Route

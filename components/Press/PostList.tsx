@@ -1,6 +1,6 @@
 'use client'
 
-import { formatPostDate, logNumber, postHref } from 'lib/postFormat'
+import { debriefNumber, formatPostDate, postHref } from 'lib/postFormat'
 import Link from 'next/link'
 import { useSelectedLayoutSegment } from 'next/navigation'
 import {
@@ -52,8 +52,8 @@ function Highlight({ text, terms }: { text: string; terms: string[] }) {
 }
 
 /**
- * The post list (left column): new posts under Latest, posts brought over from
- * old blogs under Archive, grouped by year. It shows the open post's tab.
+ * The post list (left column): new posts under Debriefs, posts brought over
+ * from old blogs under Past seasons, grouped by year. It shows the open post's tab.
  * Typing in the search box lists matches from both tabs instead.
  */
 export default function PostList({
@@ -117,8 +117,8 @@ export default function PostList({
 	}, [])
 
 	const tabs: { id: View; label: string; count: number }[] = [
-		{ id: 'latest', label: 'Latest', count: latest.length },
-		{ id: 'archive', label: 'Archive', count: archive.length },
+		{ id: 'latest', label: 'Debriefs', count: latest.length },
+		{ id: 'archive', label: 'Past seasons', count: archive.length },
 	]
 
 	const showTab = (next: View) => {
@@ -136,7 +136,7 @@ export default function PostList({
 	}
 
 	const labelOf = (p: ListedPost) =>
-		p.site ?? logNumber(latest.length - latest.indexOf(p))
+		p.site ?? debriefNumber(latest.length - latest.indexOf(p))
 
 	const entry = (p: ListedPost, snippet?: ReactNode) => (
 		<li key={p.slug}>
@@ -257,14 +257,14 @@ export default function PostList({
 							<ol className={styles.group}>{latest.map((p) => entry(p))}</ol>
 						) : (
 							<p className={styles.empty}>
-								Nothing new yet. The archive has {archive.length} older posts.
+								Nothing new yet. Past seasons have {archive.length} older posts.
 							</p>
 						))}
 					{view === 'archive' &&
 						[...Map.groupBy(archive, (p) => p.date.slice(0, 4))].map(
 							([year, group]) => (
 								<section key={year} aria-label={year}>
-									<h3 className={styles.year}>{year}</h3>
+									<h3 className={styles.year}>{year} season</h3>
 									<ol className={styles.group}>{group.map((p) => entry(p))}</ol>
 								</section>
 							)

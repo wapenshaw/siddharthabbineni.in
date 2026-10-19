@@ -1,4 +1,9 @@
-import { formatPostDate, logNumber, postHref } from 'lib/postFormat'
+import {
+	debriefNumber,
+	formatPostDate,
+	postHref,
+	seasonOf,
+} from 'lib/postFormat'
 import { getPostContent, isArchived } from 'lib/posts'
 import Link from 'next/link'
 import { ViewTransition } from 'react'
@@ -38,8 +43,8 @@ export default async function Reader({
 			<div className={styles.readerHead}>
 				<span className="tab slr" data-colour="blue">
 					{post.archive
-						? `Archive, ${post.archive.site}`
-						: logNumber(list.length - index)}
+						? seasonOf(post.date)
+						: debriefNumber(list.length - index)}
 				</span>
 				<span className={styles.readTime}>{post.readingMinutes} min read</span>
 				{/* once the post's own title has scrolled away */}

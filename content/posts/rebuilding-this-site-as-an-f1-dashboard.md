@@ -102,7 +102,7 @@ I had a blog long before dev.to. It started on Blogger, moved to WordPress on th
 
 Its API lists every address it saved for a domain. For my two old domains that was about 1,300 addresses, and most were junk: client sites I used to host, and the crawler going round in circles. After removing duplicates I had 145 posts. Opus wrote a scraper that fetched them slowly, then a second script went looking for the images. Most image hosts from 2006 are gone (RIP echo.cx and ImageShack), so some pictures are lost for good.
 
-I kept the posts exactly as I wrote them, typos and all. They're in the Archive tab under Press now. Reading 2006 me go on about BSNL and the new Iron Maiden album made the whole thing worth it.
+I kept the posts exactly as I wrote them, typos and all. They're under Past seasons in Press now, each labelled with its year. Reading 2006 me go on about BSNL and the new Iron Maiden album made the whole thing worth it.
 
 ## What I'd tell myself
 

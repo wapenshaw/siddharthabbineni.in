@@ -1,5 +1,5 @@
 import { profile } from 'config/profile'
-import { formatPostDate, logNumber } from 'lib/postFormat'
+import { debriefNumber, formatPostDate, seasonOf } from 'lib/postFormat'
 import { getPosts, isArchived } from 'lib/posts'
 import { CARD_SIZE, shareCard } from 'lib/shareCard'
 
@@ -31,8 +31,8 @@ export default async function Image({
 	const list = posts.filter((p) => isArchived(p) === isArchived(post))
 	return shareCard({
 		tab: post.archive
-			? `Archive, ${post.archive.site}`
-			: logNumber(list.length - list.indexOf(post)),
+			? seasonOf(post.date)
+			: debriefNumber(list.length - list.indexOf(post)),
 		colour: 'blue',
 		title: post.title,
 		meta: `${formatPostDate(post.date)}, ${post.readingMinutes} min read`,
