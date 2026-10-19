@@ -5,7 +5,13 @@ date: 2026-10-19
 tags: [nextjs, css, design, devlog, meta]
 ---
 
-My old portfolio was a long page you scrolled down, like most people's. I rebuilt it twice in a few days. The first rebuild was a gamer profile, and it didn't survive my own laptop. The second is the F1-style dashboard you're looking at now.
+My old portfolio was a long page you scrolled down, like most people's.
+
+![The site this replaces, at 1536×730: a 1080p laptop with Windows at 125%](/blog/rebuilding-this-site-as-an-f1-dashboard/current-site.webp)
+
+At that size the page is almost four screens tall. It had also broken quietly: the Xbox card said 0 games, next to a picture that no longer loaded.
+
+I rebuilt it twice in a few days. The first rebuild was a gamer profile, and it didn't survive my own laptop. The second is the F1-style dashboard you're looking at now.
 
 I built both with Claude Code running Opus. I decided what I wanted and Opus did most of the typing.
 
@@ -59,6 +65,8 @@ html {
 
 At 1536×730 that's 16px, and at 1920×1080 it's 20px, where it stops. On bigger screens the page sits in the middle of a dark backdrop with a faint outline of the circuit. Phones get a normal scrolling page with the newest job first.
 
+![The whole old page beside the whole new site, at the same scale. Each yellow line marks one screen at 1536×730.](/blog/rebuilding-this-site-as-an-f1-dashboard/before-after.webp)
+
 I asked Opus for a Playwright script that opens every section at five laptop sizes, from 1280×600 to 1920×1080, and fails if anything scrolls or gets cut off. It checks all five jobs too, because each one has a different amount of text.
 
 The track outline comes from Pitlane02's Nürburgring drawing on Wikimedia Commons (CC BY-SA 3.0), so there's a credit under the route.
@@ -73,9 +81,20 @@ Next.js 16 with Cache Components surprised me a few times:
 - With Partial Prefetching on, you have to read `params` inside a `<Suspense>` boundary so the page can show its outline straight away.
 - Typed routes won't accept `` `/blog/${slug}` `` for a plain string. A small `postHref()` helper fixed it in one place.
 - The standalone build doesn't copy files you read with `fs`, so the posts folder has to go in `outputFileTracingIncludes`.
+- Running `next build` while `next dev` was still running confused the dev server, and every page started reloading itself about five times a second. Restarting it fixed that.
 - A `'use cache'` function caches whatever it returns, failures included. My Xbox and Steam data is cached for six hours, so one rate-limited request would have emptied the Podiums section until the next refresh. Failures now call `cacheLife('minutes')` and get retried soon after.
 
 Reading a long post inside the dashboard meant a lot of scrolling, so the reader got tighter. The text is a bit smaller, Older and Newer moved up into the tab row, and once the title scrolls away the tab row shows it, with a thin progress bar underneath.
+
+## Sharing a post
+
+When I pasted a post link into LinkedIn, the preview had a title and no picture. Each post sets its own Open Graph tags, and those replaced the site-wide ones, image included. X was worse, showing the site's title instead of the post's.
+
+Now every post gets its own card, made at build time with Next's `opengraph-image` files and `next/og`. It has the same tab, slashes and nameplate as the site. The fonts had to be TTF files, because the renderer behind `next/og` can't read the WOFF2 files the site uses.
+
+![This post's share card](/blog/rebuilding-this-site-as-an-f1-dashboard/share-card.webp)
+
+Someone opening a shared link doesn't need the whole dashboard first. A post opened straight from a link now shows on its own, with my header, the post and a button to see the rest of the site. Moving around inside the site works as before. A small script picks the layout before the page paints, so the dashboard never flashes up first.
 
 ## Digging up 2005
 
