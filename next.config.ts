@@ -58,7 +58,7 @@ const withMDX = createMDX({
 			[
 				'rehype-pretty-code',
 				{
-					// both themes are emitted; Devlog.module.css picks one by the site's mode
+					// both themes are emitted; Press.module.css picks one by the site's mode
 					theme: { light: 'github-light', dark: 'github-dark' },
 					keepBackground: false,
 				},

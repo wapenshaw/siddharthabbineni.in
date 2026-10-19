@@ -1,0 +1,78 @@
+.backdrop {
+	position: fixed;
+	inset: 0;
+	z-index: -1;
+	overflow: hidden;
+	background: radial-gradient(
+		ellipse at 50% 50%,
+		#23232d 0%,
+		var(--carbon) 60%,
+		#0f0f15 100%
+	);
+}
+
+.circuit {
+	position: absolute;
+	left: -10vw;
+	top: -20vh;
+	width: 60vw;
+	height: 140vh;
+	transform: rotate(-18deg);
+	opacity: 0.5;
+}
+
+.tarmac,
+.racingLine {
+	fill: none;
+}
+
+.tarmac {
+	stroke: #2a2a35;
+	stroke-width: 16;
+	stroke-linejoin: round;
+}
+
+.racingLine {
+	stroke: var(--red);
+	stroke-width: 1.6;
+	stroke-dasharray: 6 10;
+	opacity: 0.7;
+}
+
+.speed {
+	position: absolute;
+	left: 0;
+	top: 0;
+	bottom: 0;
+	width: 200px;
+	background: repeating-linear-gradient(
+		-60deg,
+		transparent 0 40px,
+		rgb(225 6 0 / 0.08) 40px 46px
+	);
+}
+
+.checker {
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	width: 520px;
+	height: 520px;
+	background-color: #ffffff;
+	background-image: conic-gradient(
+		var(--carbon) 25%,
+		transparent 0 50%,
+		var(--carbon) 0 75%,
+		transparent 0
+	);
+	background-size: 52px 52px;
+	mask-image: radial-gradient(circle at 100% 100%, #000 0, transparent 70%);
+	opacity: 0.18;
+}
+
+/* Only the one-screen layout sits on it */
+@media (max-width: 1179px), (max-height: 559px) {
+	.backdrop {
+		display: none;
+	}
+}

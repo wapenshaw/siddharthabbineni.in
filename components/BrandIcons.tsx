@@ -1,5 +1,10 @@
 import type { SimpleIcon } from 'simple-icons'
-import { siGithub, siInstagram, siStackoverflow } from 'simple-icons'
+import {
+	siGithub,
+	siInstagram,
+	siStackoverflow,
+	siYoutubegaming,
+} from 'simple-icons'
 import styles from './BrandIcons.module.css'
 
 function BrandIcon({ icon, size = 16 }: { icon: SimpleIcon; size?: number }) {
@@ -18,6 +23,7 @@ function BrandIcon({ icon, size = 16 }: { icon: SimpleIcon; size?: number }) {
 
 export const GitHubIcon = () => <BrandIcon icon={siGithub} />
 export const InstagramIcon = () => <BrandIcon icon={siInstagram} />
+export const YouTubeGamingIcon = () => <BrandIcon icon={siYoutubegaming} />
 export const StackOverflowIcon = () => (
 	<BrandIcon icon={siStackoverflow} size={22} />
 )

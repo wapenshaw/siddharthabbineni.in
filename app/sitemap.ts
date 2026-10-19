@@ -11,6 +11,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 			changeFrequency: 'weekly',
 			priority: 1,
 		},
+		...['/profile', '/podiums', '/garage'].map((path) => ({
+			url: `${baseUrl}${path}`,
+			changeFrequency: 'monthly' as const,
+			priority: 0.8,
+		})),
 		{
 			url: `${baseUrl}/blog`,
 			changeFrequency: 'weekly',

@@ -1,215 +1,87 @@
 /*
- * Skins × modes. <html> carries data-skin and data-mode (set before first
- * paint by the script in app/layout.tsx). Any element can also carry its own
- * data-skin to preview another skin in the current mode, which is how the
- * swatch buttons get their colours.
+ * F1 palette. <html> carries data-mode (set before first paint by the script
+ * in app/layout.tsx); the team colours stay the same in both modes.
  */
-:root,
-html[data-skin='plum'][data-mode='dark'],
-[data-mode='dark'] [data-skin='plum'] {
-	--bg: #12081c;
-	--panel: #1b0f29;
-	--panel2: #23143a;
-	--line: #33224d;
-	--text: #f2ecfa;
-	--muted: #b9a9d0;
-	--acc: #c8ff2e;
-	--link: #c8ff2e;
-	--accFill: #c8ff2e;
-	--onAcc: #12081c;
-	--alt: #ff7dbb;
-	--gold: #ffc93c;
-	--hatch: rgba(255, 255, 255, 0.08);
-	color-scheme: dark;
-}
-
-html[data-skin='plum'][data-mode='light'],
-[data-mode='light'] [data-skin='plum'] {
-	--bg: #f4eff9;
-	--panel: #ffffff;
-	--panel2: #f3edfa;
-	--line: #dccfea;
-	--text: #1d0f2e;
-	--muted: #5b4977;
-	--acc: #4a7500;
-	--link: #4a7500;
-	--accFill: #c8ff2e;
-	--onAcc: #1d0f2e;
-	--alt: #b8155f;
-	--gold: #946a00;
-	--hatch: rgba(29, 15, 46, 0.07);
-	color-scheme: light;
-}
-
-html[data-skin='arcade'][data-mode='dark'],
-[data-mode='dark'] [data-skin='arcade'] {
-	--bg: #0a0f2c;
-	--panel: #111943;
-	--panel2: #18225a;
-	--line: #2a3878;
-	--text: #eef1ff;
-	--muted: #aab4e2;
-	--acc: #ffd23f;
-	--link: #ffd23f;
-	--accFill: #ffd23f;
-	--onAcc: #0a0f2c;
-	--alt: #6fe3ff;
-	--gold: #ffd23f;
-	--hatch: rgba(255, 255, 255, 0.08);
-	color-scheme: dark;
-}
-
-html[data-skin='arcade'][data-mode='light'],
-[data-mode='light'] [data-skin='arcade'] {
-	--bg: #eef1fb;
-	--panel: #ffffff;
-	--panel2: #eef1fb;
-	--line: #d2d8f0;
-	--text: #0c1440;
-	--muted: #48548a;
-	--acc: #2140d9;
-	--link: #2140d9;
-	--accFill: #2140d9;
-	--onAcc: #ffffff;
-	--alt: #00728f;
-	--gold: #946a00;
-	--hatch: rgba(12, 20, 64, 0.07);
-	color-scheme: light;
-}
-
-html[data-skin='hotline'][data-mode='dark'],
-[data-mode='dark'] [data-skin='hotline'] {
-	--bg: #0b0b10;
-	--panel: #15151d;
-	--panel2: #1d1d28;
-	--line: #2f2f40;
-	--text: #f1f1f6;
-	--muted: #ababc0;
-	--acc: #ff3ea5;
-	--link: #ff3ea5;
-	--accFill: #ff3ea5;
-	--onAcc: #0b0b10;
-	--alt: #3ee6ff;
-	--gold: #ffc93c;
-	--hatch: rgba(255, 255, 255, 0.07);
-	color-scheme: dark;
-}
-
-html[data-skin='hotline'][data-mode='light'],
-[data-mode='light'] [data-skin='hotline'] {
-	--bg: #f5f4f8;
-	--panel: #ffffff;
-	--panel2: #f1f0f6;
-	--line: #dddce6;
-	--text: #15141f;
-	--muted: #55546a;
-	--acc: #c4126e;
-	--link: #c4126e;
-	--accFill: #ff3ea5;
-	--onAcc: #15141f;
-	--alt: #00718a;
-	--gold: #946a00;
-	--hatch: rgba(21, 20, 31, 0.07);
-	color-scheme: light;
-}
-
-/*
- * Refined Electric: emerald for primary actions and the current chapter,
- * violet for links and secondary highlights.
- */
-html[data-skin='electric'][data-mode='dark'],
-[data-mode='dark'] [data-skin='electric'] {
-	--bg: #0e0b16;
-	--panel: #1a1625;
-	--panel2: #242033;
-	--line: #393149;
-	--text: #f4f0fa;
-	--muted: #b7aec9;
-	--acc: #00e5a8;
-	--link: #a78bfa;
-	--accFill: #00e5a8;
-	--onAcc: #0e0b16;
-	--alt: #a78bfa;
-	--gold: #ffc93c;
-	--hatch: rgba(255, 255, 255, 0.07);
-	color-scheme: dark;
-}
-
-/* --acc is a shade darker than the #007f5f fill so small text clears AA on --panel2 */
-html[data-skin='electric'][data-mode='light'],
-[data-mode='light'] [data-skin='electric'] {
-	--bg: #f7f6fa;
-	--panel: #ffffff;
-	--panel2: #f0edf7;
-	--line: #d0c8dd;
-	--text: #201a2b;
-	--muted: #5c536e;
-	--acc: #007758;
-	--link: #7553c7;
-	--accFill: #007f5f;
-	--onAcc: #ffffff;
-	--alt: #7553c7;
-	--gold: #866000;
-	--hatch: rgba(32, 26, 43, 0.07);
-	color-scheme: light;
-}
-
-/*
- * Midnight + Electric Lime (the default): the fluorescent lime from Plum &
- * Lime for primary buttons, the current chapter and status, violet for
- * secondary highlights. Bright lime fails contrast on
- * white, so light mode uses a deep lime green for text and links.
- */
-html[data-skin='midnight'][data-mode='dark'],
-[data-mode='dark'] [data-skin='midnight'] {
-	--bg: #0e0c18;
-	--panel: #191528;
-	--panel2: #27213b;
-	--line: #393149;
-	--text: #f3effb;
-	--muted: #aaa2c4;
-	--acc: #c8ff2e;
-	--link: #c8ff2e;
-	--accFill: #c8ff2e;
-	--onAcc: #171526;
-	--alt: #a78bfa;
-	--gold: #ffc93c;
-	--hatch: rgba(255, 255, 255, 0.07);
-	color-scheme: dark;
-}
-
-html[data-skin='midnight'][data-mode='light'],
-[data-mode='light'] [data-skin='midnight'] {
-	--bg: #f8f7fc;
-	--panel: #ffffff;
-	--panel2: #f0edf8;
-	--line: #d4cde2;
-	--text: #20192d;
-	--muted: #625873;
-	--acc: #587600;
-	--link: #587600;
-	--accFill: #c8ff2e;
-	--onAcc: #171526;
-	--alt: #7553c7;
-	--gold: #866000;
-	--hatch: rgba(32, 25, 45, 0.07);
-	color-scheme: light;
-}
-
 :root {
-	--display: var(--font-display), system-ui, sans-serif;
-	--body: var(--font-body), system-ui, sans-serif;
-	--tier-expert-bg: #ffc93c;
-	--tier-expert-fg: #1e1503;
-	--tier-associate-bg: #d3d7e0;
-	--tier-associate-fg: #16181d;
-	/*
-	 * The page stops growing at 1920×1080 and sits top-centre on bigger
-	 * screens, so sizes use --vw (1vw up to that width) rather than vw.
-	 */
+	--red: #e10600;
+	--purple: #8e44ec;
+	--yellow: #ffc906;
+	--green: #00c16e;
+	--blue: #1777e5;
+	--papaya: #ff8000;
+	/* the selected stint: never red, which means the current one */
+	--teal: #00d2be;
+	--carbon: #15151e;
+	--carbon-2: #1f1f27;
+	--grey: #38383f;
+	--grey-2: #949498;
+	--on-dark-muted: #a3a3ab;
+
+	--font: var(--font-f1), 'Titillium Web', system-ui, sans-serif;
+
+	/* the parallelogram cut on buttons, tabs, chips and cards */
+	--cut: 0.8rem;
+
+	/* the page stops growing at 1920×1080 and sits in the middle of bigger screens */
 	--max-width: 1920px;
 	--max-height: 1080px;
-	--vw: min(1vw, var(--max-width) / 100);
+}
+
+:root,
+[data-mode='light'] {
+	--page: #ececef;
+	--surface: #ffffff;
+	--ink: #15151e;
+	--muted: #5f5f66;
+	--line: #e1e1e3;
+	--chip: #ececef;
+	--track: #15151e;
+	--stop: #ffffff;
+	/* big stat numbers: the light green is too pale on white */
+	--green-ink: #00a35c;
+	/* links in text: the team blue is a shade too light for small type on white */
+	--blue-ink: #1266c9;
+	color-scheme: light;
+}
+
+[data-mode='dark'] {
+	--page: #15151e;
+	--surface: #1f1f27;
+	--ink: #ffffff;
+	--muted: #a3a3ab;
+	--line: #38383f;
+	--chip: #2a2a33;
+	--track: #ffffff;
+	--stop: #15151e;
+	--green-ink: var(--green);
+	--blue-ink: #6aa8f0;
+	color-scheme: dark;
+}
+
+/* Section colours: --c fills, --on is the text on top of it */
+[data-colour='red'] {
+	--c: var(--red);
+	--on: #ffffff;
+}
+
+[data-colour='purple'] {
+	--c: var(--purple);
+	--on: #ffffff;
+}
+
+[data-colour='yellow'] {
+	--c: var(--yellow);
+	--on: var(--carbon);
+}
+
+[data-colour='green'] {
+	--c: var(--green);
+	--on: var(--carbon);
+}
+
+[data-colour='blue'] {
+	--c: var(--blue);
+	--on: #ffffff;
 }
 
 *,
@@ -225,124 +97,44 @@ body {
 }
 
 /*
- * Every font size is in rem, so this is the one type-scale knob. Full size
- * (1.25× the original design) everywhere except laptop screens, whose narrow
- * side columns and short windows step it down to still fit one screen.
+ * Every size is in rem, so the root size is the one scale knob. Phones and
+ * tablets read at the browser's size and scroll. Desktops fit one screen: the
+ * design is 96rem × 45.6rem (16px at 1536×730), growing to 20px at 1920×1080.
  */
 html {
 	font-size: 100%;
 }
 
-@media (max-width: 1400px), (max-height: 700px) {
+@media (min-width: 1180px) and (min-height: 560px) {
 	html {
-		font-size: 87.5%;
-	}
-}
-
-@media (max-height: 640px) {
-	html {
-		font-size: 81.25%;
-	}
-}
-
-@media (max-width: 1180px), (max-height: 540px) {
-	html {
-		font-size: 100%;
+		font-size: min(100vw / 96, 100dvh / 45.625, 20px);
 	}
 }
 
 body {
-	min-height: 100vh;
-	/*
-	 * The backdrop around the page on screens bigger than 1920×1080: a faint
-	 * dot grid under a soft glow of the accent, both from the skin's colours.
-	 */
-	background:
-		radial-gradient(
-			ellipse 80% 60% at 50% 0%,
-			color-mix(in srgb, var(--acc) 7%, transparent),
-			transparent
-		),
-		radial-gradient(var(--line) 1px, transparent 1.5px) 0 0 / 20px 20px,
-		var(--bg);
-	background-attachment: fixed;
-	color: var(--text);
-	font-family: var(--body);
+	min-height: 100dvh;
+	background: var(--page);
+	color: var(--ink);
+	font-family: var(--font);
 	line-height: 1.45;
 	-webkit-font-smoothing: antialiased;
 }
 
-/* Skin and mode switches cross-fade via document.startViewTransition */
-::view-transition-old(root),
-::view-transition-new(root) {
-	animation-duration: 0.25s;
-}
-
-/* Profile ⇄ devlog: the views slide sideways under the fixed profile strip */
-::view-transition-old(.to-left) {
-	animation: 200ms ease-in both view-out-left;
-}
-
-::view-transition-new(.from-left) {
-	animation: 320ms ease-out 80ms both view-in-left;
-}
-
-::view-transition-old(.to-right) {
-	animation: 200ms ease-in both view-out-right;
-}
-
-::view-transition-new(.from-right) {
-	animation: 320ms ease-out 80ms both view-in-right;
-}
-
-@keyframes view-out-left {
-	to {
-		opacity: 0;
-		transform: translateX(-56px);
-	}
-}
-
-@keyframes view-in-left {
-	from {
-		opacity: 0;
-		transform: translateX(-56px);
-	}
-}
-
-@keyframes view-out-right {
-	to {
-		opacity: 0;
-		transform: translateX(56px);
-	}
-}
-
-@keyframes view-in-right {
-	from {
-		opacity: 0;
-		transform: translateX(56px);
-	}
-}
-
-@media (prefers-reduced-motion: reduce) {
-	::view-transition-old(.to-left),
-	::view-transition-new(.from-left),
-	::view-transition-old(.to-right),
-	::view-transition-new(.from-right) {
-		animation: none;
+/* Desktops: the page is centred on the backdrop (components/Backdrop) */
+@media (min-width: 1180px) and (min-height: 560px) {
+	body {
+		display: grid;
+		background: var(--carbon);
 	}
 }
 
 a {
-	color: var(--link);
+	color: inherit;
 	text-decoration: none;
 }
 
-a:hover {
-	text-decoration: underline;
-}
-
 :focus-visible {
-	outline: 2px solid var(--acc);
+	outline: 2px solid var(--teal);
 	outline-offset: 2px;
 }
 
@@ -355,8 +147,14 @@ h1,
 h2,
 h3,
 p,
-ul {
+ul,
+ol {
 	margin: 0;
+}
+
+button {
+	font: inherit;
+	color: inherit;
 }
 
 .sr-only {
@@ -371,185 +169,141 @@ ul {
 	border: 0;
 }
 
-/* Shared primitives used across the CSS modules */
-
-.disp {
-	font-family: var(--display);
-	text-transform: uppercase;
-	letter-spacing: 0.04em;
+/* The F1 slash: both ends cut, like the nameplate's slashes */
+.sl {
+	clip-path: polygon(
+		var(--cut) 0,
+		100% 0,
+		calc(100% - var(--cut)) 100%,
+		0 100%
+	);
 }
 
-.label {
-	font-family: var(--display);
-	font-size: 0.9375rem;
-	font-weight: 600;
-	letter-spacing: 0.14em;
-	text-transform: uppercase;
-	color: var(--muted);
+/* Square on the left, cut on the right: tabs and the nameplate */
+.slr {
+	clip-path: polygon(0 0, 100% 0, calc(100% - var(--cut)) 100%, 0 100%);
+}
+
+/* A section's heading tab, in its colour */
+.tab {
+	display: inline-block;
+	padding: 0.15rem 1.6rem 0.15rem 1rem;
+	background: var(--c, var(--carbon));
+	color: var(--on, #ffffff);
+	font-size: 1.35rem;
+	font-weight: 900;
+	font-style: italic;
+	line-height: 1.35;
 	white-space: nowrap;
-}
-
-/* the side columns are narrow here, so headings tighten instead of wrapping */
-@media (max-width: 1600px) {
-	.label {
-		letter-spacing: 0.08em;
-	}
-
-	.phead {
-		padding: 12px 16px;
-	}
-}
-
-.label-hi {
-	color: var(--text);
-}
-
-.panel {
-	background: var(--panel);
-	border: 1px solid var(--line);
-	border-radius: 3px;
-	min-height: 0;
-	overflow: hidden;
-	display: flex;
-	flex-direction: column;
-}
-
-.phead {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	gap: 12px;
-	padding: 12px 20px;
-	border-bottom: 1px solid var(--line);
-	flex: 0 0 auto;
-}
-
-.pill {
-	font-family: var(--display);
-	font-size: 0.875rem;
-	font-weight: 600;
-	letter-spacing: 0.06em;
-	text-transform: uppercase;
-	padding: 3px 9px;
-	border-radius: 2px;
-	border: 1px solid var(--line);
-	color: var(--muted);
-	white-space: nowrap;
-}
-
-.pill-acc {
-	border-color: var(--acc);
-	color: var(--acc);
 }
 
 .chip {
-	font-size: 1rem;
-	color: var(--text);
-	background: var(--panel2);
-	border: 1px solid var(--line);
-	border-radius: 2px;
-	padding: 3px 9px;
+	display: inline-block;
+	padding: 0.1rem 1rem;
+	background: var(--chip);
+	font-size: 0.82rem;
+	font-weight: 700;
+	white-space: nowrap;
 }
 
 .btn {
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
-	font-family: var(--display);
+	gap: 0.5rem;
+	padding: 0.5rem 1.6rem;
+	border: 0;
+	background: var(--chip);
+	color: var(--ink);
 	font-size: 1rem;
-	font-weight: 600;
-	letter-spacing: 0.08em;
-	text-transform: uppercase;
-	border: 1px solid var(--line);
-	color: var(--text);
-	padding: 9px 14px;
-	border-radius: 2px;
+	font-weight: 700;
+	line-height: 1.2;
 	white-space: nowrap;
+	cursor: pointer;
+	transition: filter 150ms ease;
 }
 
 .btn:hover {
-	border-color: var(--acc);
-	color: var(--acc);
-	text-decoration: none;
+	filter: brightness(1.12);
 }
 
-.btn-fill {
-	background: var(--accFill);
-	border-color: var(--accFill);
-	color: var(--onAcc);
+.btn-red {
+	background: var(--red);
+	color: #ffffff;
 }
 
-.btn-fill:hover {
-	color: var(--onAcc);
-	filter: brightness(1.08);
+.btn-white {
+	background: #ffffff;
+	color: var(--carbon);
 }
 
-.icon-btn {
-	all: unset;
-	box-sizing: border-box;
-	cursor: pointer;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	width: 34px;
-	height: 34px;
-	border: 1px solid var(--line);
-	border-radius: 2px;
-	color: var(--acc);
-	transition:
-		background-color 150ms ease,
-		border-color 150ms ease,
-		color 150ms ease;
+.btn-carbon {
+	background: var(--carbon);
+	color: #ffffff;
 }
 
-.icon-btn:hover {
-	background: var(--accFill);
-	border-color: var(--accFill);
-	color: var(--onAcc);
-	text-decoration: none;
+[data-mode='dark'] .btn-carbon {
+	background: #ffffff;
+	color: var(--carbon);
 }
 
-.icon-btn:focus-visible {
-	outline: 2px solid var(--acc);
-	outline-offset: 2px;
+/* Clip-paths cut off outlines, so slanted controls show focus inside */
+.sl:focus-visible,
+.slr:focus-visible {
+	outline: 0;
+	box-shadow: inset 0 0 0 3px var(--teal);
 }
 
-/* Company logos sit on a transparent tile with a border, never a white plate */
-.logo-tile {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	background: transparent;
-	border: 1px solid var(--line);
-	border-radius: 3px;
-	padding: 3px;
-}
-
-.logo-tile img {
-	width: 100%;
-	height: 100%;
-	object-fit: contain;
-}
-
-/* Optional dark-mode logo variants */
-.logo-dark {
-	display: none;
-}
-
-html[data-mode='dark'] .logo-has-dark .logo-light {
-	display: none;
-}
-
-html[data-mode='dark'] .logo-dark {
-	display: block;
-}
-
-/* Placeholder hatch for icons that have not loaded */
+/* Placeholder for images that have not loaded */
 .ph {
-	background: repeating-linear-gradient(
-		45deg,
-		var(--panel2) 0 5px,
-		var(--panel) 5px 10px
-	);
-	border: 1px solid var(--line);
+	background: var(--chip);
+}
+
+/* A panel on the page: the section's tab sits on its top edge */
+.panel {
+	min-width: 0;
+	min-height: 0;
+	display: flex;
+	flex-direction: column;
+	background: var(--surface);
+}
+
+.panel > .tab {
+	align-self: flex-start;
+}
+
+/* Moving between sections: the old one drops away, the new one rises in */
+::view-transition-old(.section-out) {
+	animation: 160ms ease-in both section-out;
+}
+
+::view-transition-new(.section-in) {
+	animation: 260ms ease-out 60ms both section-in;
+}
+
+@keyframes section-out {
+	to {
+		opacity: 0;
+		transform: translateY(0.8rem);
+	}
+}
+
+@keyframes section-in {
+	from {
+		opacity: 0;
+		transform: translateY(-0.8rem);
+	}
+}
+
+/* The mode switch cross-fades via document.startViewTransition */
+::view-transition-old(root),
+::view-transition-new(root) {
+	animation-duration: 0.25s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	::view-transition-old(.section-out),
+	::view-transition-new(.section-in) {
+		animation: none;
+	}
 }

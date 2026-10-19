@@ -1,34 +1,37 @@
-export type SideQuest = {
+/**
+ * Personal projects for the Garage. Their repos are private, so cards link to
+ * a post about the project when there is one, never to GitHub.
+ */
+export type Project = {
 	name: string
 	status: string
-	/** Highlights the status pill in the accent colour */
+	/** Shipped projects get the green tab */
 	shipped?: boolean
-	url: string
 	line: string
-	stack: string
+	stack: string[]
+	/** Slug of a post about it in content/posts */
+	post?: string
 }
 
-export const sideQuests: SideQuest[] = [
+export const projects: Project[] = [
 	{
 		name: 'NuPrint',
-		status: 'v1.0',
+		status: 'Shipped, v1.0',
 		shipped: true,
-		url: 'https://github.com/wapenshaw/nuprint',
 		line: 'Print from a computer straight to pocket Bluetooth thermal printers. No phone app, no pairing.',
-		stack: 'Rust · Tauri 2 · Bluetooth LE',
+		stack: ['Rust', 'Tauri 2', 'Bluetooth LE'],
+		post: 'nuprint-printing-without-the-phone-app',
 	},
 	{
 		name: 'LoftLog',
 		status: 'In progress',
-		url: 'https://github.com/wapenshaw/loftlog',
 		line: 'A home’s care in one place: rooms, things, repairs, and the papers that prove it.',
-		stack: 'Next.js · Turso · S3 · Clerk',
+		stack: ['Next.js', 'Turso', 'S3', 'Clerk'],
 	},
 	{
 		name: 'CardWise',
 		status: 'In progress',
-		url: 'https://github.com/wapenshaw/CardWise',
 		line: 'Local-first credit card statement parser and cashback reconciliation.',
-		stack: '.NET · Clean Architecture',
+		stack: ['.NET', 'Clean Architecture'],
 	},
 ]

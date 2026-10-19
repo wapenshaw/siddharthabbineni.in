@@ -11,6 +11,9 @@ export const profile = {
 	location: 'Hyderabad, India',
 	startYear: 2010,
 	nowPlaying: 'Astra at Assurant',
+	/** The one line beside the name in the header */
+	tagline:
+		'Solutions architect and developer. I build cloud platforms and the automation that runs them.',
 	classes: ['Solutions Architect', 'Developer'],
 	// Shown after the classes in the muted style: edit freely
 	subclasses: ['Gamer'],

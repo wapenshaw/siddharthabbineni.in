@@ -1,8 +1,8 @@
-import YouTube from 'components/Devlog/YouTube'
+import YouTube from 'components/Press/YouTube'
 import { youTubeId } from 'lib/postFormat'
 import type { MDXComponents } from 'mdx/types'
 
-/** Required by @next/mdx. Post styles live in Devlog.module.css (.prose) */
+/** Required by @next/mdx. Post styles live in components/Press/Press.module.css (.prose) */
 const components: MDXComponents = {
 	img: (props) => <img {...props} alt={props.alt ?? ''} loading="lazy" />,
 	// [▶ Title](youtube link) embeds the video; other links stay links

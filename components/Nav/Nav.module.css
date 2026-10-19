@@ -1,0 +1,126 @@
+.nav {
+	display: flex;
+	flex-direction: column;
+	gap: 0.45rem;
+}
+
+.tile {
+	position: relative;
+	isolation: isolate;
+	flex: 1;
+	display: flex;
+	align-items: center;
+	gap: 0.9rem;
+	padding: 0 1.6rem 0 1.1rem;
+	background: var(--surface);
+	color: var(--ink);
+	transition: color 200ms ease;
+}
+
+/* The open section's colour, shared between tiles so it slides */
+.fill {
+	position: absolute;
+	inset: 0;
+	z-index: -1;
+	background: var(--c);
+}
+
+.tile[aria-current] {
+	color: var(--on);
+}
+
+.mark {
+	flex: 0 0 0.55rem;
+	align-self: stretch;
+	margin: 0.55rem 0;
+	background: var(--c);
+	transform: skewX(-16deg);
+	transition: transform 150ms ease;
+}
+
+.tile:hover .mark {
+	transform: skewX(-16deg) scaleX(1.6);
+}
+
+.tile[aria-current] .mark {
+	background: var(--on);
+}
+
+.words {
+	flex: 1;
+	min-width: 0;
+}
+
+.words b {
+	display: block;
+	font-size: 1.3rem;
+	line-height: 1.05;
+	font-weight: 700;
+}
+
+.words span {
+	display: block;
+	font-size: 0.85rem;
+	color: var(--muted);
+}
+
+.tile[aria-current] .words span {
+	color: inherit;
+	opacity: 0.85;
+}
+
+/* The shortcut, quiet until the nav is hovered or focused */
+.key {
+	font: inherit;
+	font-size: 0.75rem;
+	font-weight: 700;
+	color: var(--muted);
+	opacity: 0;
+	transition: opacity 150ms ease;
+}
+
+.nav:hover .key,
+.nav:focus-within .key {
+	opacity: 1;
+}
+
+.tile[aria-current] .key {
+	color: inherit;
+}
+
+/* Phones and tablets: a row of tabs that scrolls sideways and sticks to the top */
+@media (max-width: 1179px), (max-height: 559px) {
+	.nav {
+		position: sticky;
+		top: 0;
+		z-index: 5;
+		flex-direction: row;
+		gap: 0.3rem;
+		padding: 0.6rem 1rem;
+		overflow-x: auto;
+		scrollbar-width: none;
+		background: var(--page);
+	}
+
+	.tile {
+		flex: 0 0 auto;
+		padding: 0.55rem 1.4rem;
+		box-shadow: inset 0 -0.25rem 0 var(--c);
+	}
+
+	.tile[aria-current] {
+		box-shadow: none;
+	}
+
+	.mark,
+	.words span,
+	.key {
+		display: none;
+	}
+
+	.words b {
+		font-size: 1rem;
+		line-height: 1.2;
+		white-space: nowrap;
+	}
+}

@@ -1,0 +1,103 @@
+/* One line, white on grey, across the whole screen */
+.bar {
+	display: flex;
+	align-items: center;
+	gap: 1rem;
+	min-width: 0;
+	padding: 0 2rem 0 1.4rem;
+	background: var(--grey);
+	color: #ffffff;
+	white-space: nowrap;
+}
+
+.mark {
+	flex: 0 0 0.45rem;
+	align-self: stretch;
+	margin: 0.5rem 0;
+	/* papaya: no section uses it, so the radio doesn't read as Press */
+	background: var(--papaya);
+	transform: skewX(-16deg);
+}
+
+.name {
+	font-weight: 900;
+	font-style: italic;
+}
+
+/* The messages flip through this slot */
+.window {
+	position: relative;
+	flex: 1;
+	min-width: 0;
+	align-self: stretch;
+	overflow: hidden;
+}
+
+.message {
+	position: absolute;
+	inset: 0;
+	display: flex;
+	align-items: center;
+}
+
+.link {
+	flex: 1;
+	min-width: 0;
+	display: flex;
+	align-items: baseline;
+	gap: 0.5rem;
+}
+
+.kind {
+	color: #c8c8cc;
+}
+
+.title {
+	min-width: 0;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	font-weight: 600;
+}
+
+.link:hover .title {
+	text-decoration: underline;
+}
+
+.detail {
+	color: #c8c8cc;
+}
+
+.date {
+	margin-left: auto;
+	padding-left: 1rem;
+	color: #c8c8cc;
+}
+
+.pause {
+	flex: 0 0 auto;
+	width: 1.8rem;
+	height: 1.6rem;
+	border: 0;
+	background: transparent;
+	color: #c8c8cc;
+	font-size: 0.7rem;
+	cursor: pointer;
+}
+
+.pause:hover {
+	color: #ffffff;
+}
+
+@media (max-width: 1179px), (max-height: 559px) {
+	.bar {
+		gap: 0.7rem;
+		min-height: 2.8rem;
+		padding: 0 1.2rem 0 1rem;
+		font-size: 0.95rem;
+	}
+
+	.detail,
+	.date {
+		display: none;
+	}
+}

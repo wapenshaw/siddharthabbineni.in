@@ -113,17 +113,21 @@ async function getRecentAchievements(xuid: string): Promise<XboxAchievement[]> {
 		.slice(0, 6)
 }
 
-/** Cached with the 'gaming' profile from next.config.ts */
+/**
+ * Cached with the 'gaming' profile from next.config.ts. A failure (a 429 from
+ * the free tier's hourly limit, say) is cached for minutes, not hours.
+ */
 export async function getXboxAchievements(): Promise<XboxAchievementsResponse> {
 	'use cache'
-	cacheLife('gaming')
 
 	if (!XBOX_API_KEY) {
+		cacheLife('gaming')
 		return { achievements: [], error: 'Xbox API not configured' }
 	}
 	try {
 		const person = await getPerson()
 		if (!person) {
+			cacheLife('minutes')
 			return { achievements: [], error: 'Xbox API error' }
 		}
 		const profile: XboxProfile = {
@@ -131,8 +135,11 @@ export async function getXboxAchievements(): Promise<XboxAchievementsResponse> {
 			gamerscore: Number.parseInt(person.gamerScore, 10) || 0,
 			avatarUrl: person.displayPicRaw,
 		}
-		return { achievements: await getRecentAchievements(person.xuid), profile }
+		const achievements = await getRecentAchievements(person.xuid)
+		cacheLife('gaming')
+		return { achievements, profile }
 	} catch {
+		cacheLife('minutes')
 		return { achievements: [], error: 'Xbox API error' }
 	}
 }

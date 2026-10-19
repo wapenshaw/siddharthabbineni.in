@@ -1,7 +1,7 @@
 import { cacheLife } from 'next/cache'
 import type { PullRequest } from 'types/github'
 
-const GITHUB_USER = process.env.GITHUB_USER ?? 'wapenshaw'
+export const GITHUB_USER = process.env.GITHUB_USER ?? 'wapenshaw'
 const GITHUB_TOKEN = process.env.GITHUB_TOKEN
 
 interface SearchItem {
@@ -17,11 +17,10 @@ interface SearchItem {
 /**
  * Recent PRs to other people's repos. Closed-unmerged ones are left out.
  * Unauthenticated search allows 10 calls a minute, far above one an hour,
- * so GITHUB_TOKEN is optional.
+ * so GITHUB_TOKEN is optional. A failure is cached for minutes, not hours.
  */
 export async function getUpstreamPullRequests(): Promise<PullRequest[]> {
 	'use cache'
-	cacheLife('hours')
 
 	const q = encodeURIComponent(
 		`is:pr author:${GITHUB_USER} -user:${GITHUB_USER}`
@@ -39,9 +38,11 @@ export async function getUpstreamPullRequests(): Promise<PullRequest[]> {
 		)
 		if (!res.ok) {
 			console.error(`[GitHub] search returned ${res.status}`)
+			cacheLife('minutes')
 			return []
 		}
 		const data = (await res.json()) as { items?: SearchItem[] }
+		cacheLife('hours')
 		return (data.items ?? [])
 			.filter((item) => item.state === 'open' || item.pull_request?.merged_at)
 			.slice(0, 10)
@@ -55,6 +56,7 @@ export async function getUpstreamPullRequests(): Promise<PullRequest[]> {
 			}))
 	} catch (e) {
 		console.error('[GitHub] search error:', e)
+		cacheLife('minutes')
 		return []
 	}
 }

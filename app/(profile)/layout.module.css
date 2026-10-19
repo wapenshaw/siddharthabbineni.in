@@ -1,75 +1,78 @@
 /*
- * Breakpoints shared by the component modules:
- *   (max-width: 1600px)                          narrower desktops: trim side detail
- *   (max-height: 880px), 740px, 640px            shorter desktops: tighten spacing
- *   (min-width: 1700px) and (min-height: 940px)  tall: side quests get their own row
- *   (max-width: 1180px), (max-height: 540px)     too small for one screen: stack and scroll
+ * Breakpoint shared by the component modules:
+ *   (max-width: 1179px), (max-height: 559px)   too small for one screen: stack and scroll
  */
 
-.screen {
-	max-width: var(--max-width);
-	height: min(100vh, var(--max-height));
-	margin-inline: auto;
-	/*
-	 * Solid over the backdrop pattern; the edge and shadow only show once the
-	 * screen is bigger than the page (otherwise they sit off-screen).
-	 */
-	background: var(--bg);
-	box-shadow:
-		0 0 0 1px var(--line),
-		0 24px 64px -24px rgb(0 0 0 / 0.35);
-	overflow: hidden;
-	padding: 16px 28px 18px;
+.app {
+	width: min(100vw, var(--max-width));
+	height: min(100dvh, var(--max-height));
+	margin: auto;
 	display: grid;
-	grid-template-columns:
-		clamp(290px, 21 * var(--vw), 400px) minmax(0, 1fr)
-		clamp(290px, 21 * var(--vw), 400px);
-	grid-template-rows: auto minmax(0, 1fr);
-	gap: 14px;
+	grid-template:
+		'header header' 4rem
+		'nav main' minmax(0, 1fr)
+		'radio radio' 2.6rem
+		/ 15rem minmax(0, 1fr);
+	gap: 0.75rem;
+	padding: 1rem 1.5rem;
+	overflow: hidden;
+	background: var(--page);
+	/* only visible once the screen is bigger than the page */
+	box-shadow: 0 30px 80px rgb(0 0 0 / 0.6);
 }
 
-.strip {
-	grid-column: 1 / -1;
+.header {
+	grid-area: header;
 }
 
-/* Each page (profile, devlog) is one view: a row of panels on the same columns */
-.view {
-	grid-column: 1 / -1;
-	grid-row: 2;
+.nav {
+	grid-area: nav;
+}
+
+/* Pages size their panels against this box (cqh), since nothing here scrolls */
+.main {
+	grid-area: main;
+	min-width: 0;
 	min-height: 0;
 	display: grid;
-	grid-template-columns: subgrid;
-	grid-template-rows: minmax(0, 1fr);
-	gap: inherit;
+	container: main / size;
 }
 
-@media (max-height: 880px) {
-	.screen {
-		padding: 12px 22px 14px;
-		gap: 12px;
-	}
+.radio {
+	grid-area: radio;
 }
 
-@media (max-height: 640px) {
-	.screen {
-		padding: 10px 18px 12px;
-		gap: 10px;
-	}
+.foot {
+	display: none;
 }
 
-@media (max-width: 1180px), (max-height: 540px) {
-	.screen {
+@media (max-width: 1179px), (max-height: 559px) {
+	.app {
+		width: auto;
 		height: auto;
+		display: flex;
+		flex-direction: column;
+		gap: 0;
+		padding: 0;
 		overflow: visible;
-		grid-template-columns: minmax(0, 1fr);
-		grid-template-rows: none;
-		padding: 12px;
-		gap: 12px;
+		box-shadow: none;
 	}
 
-	.view {
-		grid-row: auto;
-		grid-template-columns: minmax(0, 1fr);
-		grid-template-rows: none;
+	.main {
+		display: block;
+		container: none;
+		padding: 0 1rem;
+	}
+
+	.radio {
+		margin: 1rem 1rem 0;
+	}
+
+	.foot {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		gap: 0.6rem;
+		padding: 1rem 1rem 2rem;
 	}
 }

@@ -98,17 +98,20 @@ async function getRecentAchievements(): Promise<RecentAchievement[]> {
 		.slice(0, 6)
 }
 
-/** Cached with the 'gaming' profile from next.config.ts */
+/** Cached with the 'gaming' profile from next.config.ts; a failure for minutes */
 export async function getSteamAchievements(): Promise<SteamAchievementsResponse> {
 	'use cache'
-	cacheLife('gaming')
 
 	if (!STEAM_API_KEY || !STEAM_USER_ID) {
+		cacheLife('gaming')
 		return { achievements: [], error: 'Steam API not configured' }
 	}
 	try {
-		return { achievements: await getRecentAchievements() }
+		const achievements = await getRecentAchievements()
+		cacheLife('gaming')
+		return { achievements }
 	} catch {
+		cacheLife('minutes')
 		return { achievements: [], error: 'Steam API error' }
 	}
 }

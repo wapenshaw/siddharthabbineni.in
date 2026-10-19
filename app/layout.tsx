@@ -1,23 +1,17 @@
 import { jobs } from 'config/experience'
 import { profile } from 'config/profile'
 import { isStaging, SITE_URL } from 'config/site'
-import { DEFAULT_MODE, DEFAULT_SKIN, themeInitScript } from 'config/skins'
+import { DEFAULT_MODE, themeInitScript } from 'config/theme'
 import type { Metadata } from 'next'
-import { Barlow, Chakra_Petch } from 'next/font/google'
+import { Titillium_Web } from 'next/font/google'
 import Script from 'next/script'
 import 'styles/globals.css'
 
-const display = Chakra_Petch({
+const f1 = Titillium_Web({
 	subsets: ['latin'],
-	weight: ['500', '600', '700'],
-	variable: '--font-display',
-	display: 'swap',
-})
-
-const body = Barlow({
-	subsets: ['latin'],
-	weight: ['400', '500', '600'],
-	variable: '--font-body',
+	weight: ['400', '600', '700', '900'],
+	style: ['normal', 'italic'],
+	variable: '--font-f1',
 	display: 'swap',
 })
 
@@ -49,7 +43,7 @@ export const metadata: Metadata = {
 		canonical: '/',
 		types: {
 			'application/rss+xml': [
-				{ url: '/blog/feed.xml', title: `Devlog | ${profile.name}` },
+				{ url: '/blog/feed.xml', title: `Press | ${profile.name}` },
 			],
 		},
 	},
@@ -88,14 +82,13 @@ export default function RootLayout({
 	return (
 		<html
 			lang="en"
-			data-skin={DEFAULT_SKIN}
 			data-mode={DEFAULT_MODE}
-			className={`${display.variable} ${body.variable}`}
-			// The init script rewrites data-skin/data-mode before hydration
+			className={f1.variable}
+			// The init script rewrites data-mode before hydration
 			suppressHydrationWarning
 		>
 			<head>
-				{/* biome-ignore lint/security/noDangerouslySetInnerHtml: constant theme script from config/skins */}
+				{/* biome-ignore lint/security/noDangerouslySetInnerHtml: constant theme script from config/theme */}
 				<script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
 				<script
 					type="application/ld+json"

@@ -1,4 +1,4 @@
-import Reader, { ReaderSkeleton } from 'components/Devlog/Reader'
+import Reader, { ReaderSkeleton } from 'components/Press/Reader'
 import { profile } from 'config/profile'
 import { getPosts } from 'lib/posts'
 import type { Metadata } from 'next'

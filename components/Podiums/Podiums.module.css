@@ -1,0 +1,160 @@
+.podiums {
+	min-width: 0;
+	min-height: 0;
+	display: flex;
+	gap: 0.45rem;
+}
+
+.certs {
+	flex: 1;
+	gap: 1rem;
+	padding: 0 1.6rem 1.4rem 0;
+}
+
+.head {
+	display: flex;
+	align-items: center;
+	gap: 1rem;
+	font-size: 0.95rem;
+	color: var(--muted);
+}
+
+.featured {
+	flex: 1;
+	min-height: 0;
+	list-style: none;
+	padding: 0 0 0 1.6rem;
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	grid-auto-rows: minmax(0, 1fr);
+	gap: 0.45rem;
+}
+
+.cert {
+	position: relative;
+	height: 100%;
+	display: flex;
+	align-items: center;
+	gap: 1.4rem;
+	padding: 1rem 2.4rem 1rem 2rem;
+	background: var(--chip);
+	transition: filter 150ms ease;
+}
+
+.cert:hover {
+	filter: brightness(1.06);
+}
+
+/* The step: yellow for experts, grey below them */
+.place {
+	position: absolute;
+	top: 0;
+	right: 1.6rem;
+	padding: 0.1rem 0.8rem;
+	background: var(--grey-2);
+	color: var(--carbon);
+	font-weight: 900;
+	font-style: italic;
+}
+
+.cert[data-level='expert'] .place {
+	background: var(--yellow);
+}
+
+.cert img {
+	flex: 0 0 auto;
+	width: 4.5rem;
+	height: 4.5rem;
+}
+
+.certText {
+	min-width: 0;
+	display: flex;
+	flex-direction: column;
+	gap: 0.15rem;
+}
+
+.certText small {
+	font-size: 0.85rem;
+	font-weight: 700;
+	color: var(--muted);
+}
+
+.certText b {
+	font-size: 1.7rem;
+	line-height: 1.05;
+	font-weight: 900;
+	font-style: italic;
+}
+
+.cert:hover b {
+	text-decoration: underline;
+}
+
+.certText span {
+	font-size: 0.88rem;
+	color: var(--muted);
+}
+
+.others {
+	list-style: none;
+	padding: 0 0 0 1.6rem;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.3rem;
+}
+
+.other {
+	font-size: 0.9rem;
+	padding-block: 0.25rem;
+}
+
+.other:hover {
+	text-decoration: underline;
+}
+
+.other[data-expired] {
+	color: var(--muted);
+}
+
+@media (max-width: 1179px), (max-height: 559px) {
+	.podiums {
+		flex-direction: column;
+	}
+
+	.certs {
+		padding: 0 0 1rem;
+	}
+
+	.head {
+		flex-wrap: wrap;
+	}
+
+	.head span {
+		padding: 0 1rem;
+	}
+
+	.featured,
+	.others {
+		padding: 0 1rem;
+	}
+
+	.featured {
+		grid-template-columns: minmax(0, 1fr);
+		grid-auto-rows: auto;
+	}
+
+	.cert {
+		gap: 1rem;
+		padding: 1.4rem 1.6rem 1rem 1.4rem;
+	}
+
+	.cert img {
+		width: 3.4rem;
+		height: 3.4rem;
+	}
+
+	.certText b {
+		font-size: 1.35rem;
+	}
+}
