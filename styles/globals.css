@@ -22,6 +22,10 @@
 	/* the parallelogram cut on buttons, tabs, chips and cards */
 	--cut: 0.8rem;
 
+	/* the lean of the nameplate's slashes (that cut over the 4rem plate),
+	   for the coloured slashes drawn with a skew */
+	--slant: -11.31deg;
+
 	/* the page stops growing at 1920×1080 and sits in the middle of bigger screens */
 	--max-width: 1920px;
 	--max-height: 1080px;

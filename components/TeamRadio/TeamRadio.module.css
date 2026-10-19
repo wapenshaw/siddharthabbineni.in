@@ -16,7 +16,7 @@
 	margin: 0.5rem 0;
 	/* papaya: no section uses it, so the radio doesn't read as Press */
 	background: var(--papaya);
-	transform: skewX(-16deg);
+	transform: skewX(var(--slant));
 }
 
 .name {

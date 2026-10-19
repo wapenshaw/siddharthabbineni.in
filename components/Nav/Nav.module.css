@@ -34,12 +34,12 @@
 	align-self: stretch;
 	margin: 0.55rem 0;
 	background: var(--c);
-	transform: skewX(-16deg);
+	transform: skewX(var(--slant));
 	transition: transform 150ms ease;
 }
 
 .tile:hover .mark {
-	transform: skewX(-16deg) scaleX(1.6);
+	transform: skewX(var(--slant)) scaleX(1.6);
 }
 
 .tile[aria-current] .mark {
