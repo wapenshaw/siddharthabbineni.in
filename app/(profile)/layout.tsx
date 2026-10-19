@@ -6,6 +6,7 @@ import Nav from 'components/Nav'
 import MotionRoot from 'components/Nav/MotionRoot'
 import Navigator from 'components/Nav/Navigator'
 import SectionMotion from 'components/Nav/SectionMotion'
+import { StandaloneWatch } from 'components/Press/ReadingMode'
 import TeamRadio from 'components/TeamRadio'
 import styles from './layout.module.css'
 
@@ -33,6 +34,7 @@ export default function ProfileLayout({
 				</footer>
 			</div>
 			<Navigator />
+			<StandaloneWatch />
 		</MotionRoot>
 	)
 }

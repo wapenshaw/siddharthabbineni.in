@@ -422,6 +422,41 @@ section:first-child > .year {
 	margin-left: auto;
 }
 
+/* A post opened from a link: the post centred, a way into the rest of the site */
+.explore,
+.invite {
+	display: none;
+}
+
+:global(html[data-standalone]) .explore {
+	display: inline-flex;
+	flex: 0 0 auto;
+	margin-left: auto;
+	padding: 0.25rem 1.2rem;
+	font-size: 0.85rem;
+}
+
+:global(html[data-standalone]) .post {
+	margin-inline: auto;
+}
+
+:global(html[data-standalone]) .invite {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 1.5rem;
+	margin-top: 2rem;
+	padding: 1.1rem 1.4rem 1.1rem 1.6rem;
+	background: var(--carbon);
+	color: #ffffff;
+	box-shadow: inset 0.35rem 0 0 var(--red);
+}
+
+.invite p {
+	max-width: 32em;
+	line-height: 1.45;
+}
+
 /* Desktops: Older/Newer sit in the tab row, so the post gets the full height */
 @media (min-width: 1180px) and (min-height: 560px) {
 	.readerHead {
@@ -461,5 +496,10 @@ section:first-child > .year {
 
 	.progress {
 		display: none;
+	}
+
+	:global(html[data-standalone]) .invite {
+		flex-direction: column;
+		align-items: flex-start;
 	}
 }

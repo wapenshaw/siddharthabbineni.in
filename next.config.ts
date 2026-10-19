@@ -13,9 +13,10 @@ const nextConfig: NextConfig = {
 		// Steam and Xbox: refresh every 6 hours, drop after a quiet day
 		gaming: { stale: 3600, revalidate: 21_600, expire: 86_400 },
 	},
-	// Posts are read from content/posts at build and on revalidation
+	// Posts are read from content/posts at build and on revalidation; the
+	// share cards (lib/shareCard.tsx) read their fonts and the headshot
 	outputFileTracingIncludes: {
-		'/**': ['./content/posts/*'],
+		'/**': ['./content/posts/*', './assets/fonts/*', './public/SA_avatar.jpg'],
 	},
 	images: {
 		unoptimized: true,

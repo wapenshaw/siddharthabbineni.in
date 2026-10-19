@@ -15,6 +15,11 @@
 	min-width: 0;
 }
 
+/* A post opened from a link shows without the list */
+:global(html[data-standalone]) .list {
+	display: none;
+}
+
 @media (max-width: 1179px), (max-height: 559px) {
 	.press {
 		flex-direction: column;

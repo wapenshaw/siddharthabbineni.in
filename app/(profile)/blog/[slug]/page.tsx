@@ -1,5 +1,6 @@
 import Reader, { ReaderSkeleton } from 'components/Press/Reader'
 import { profile } from 'config/profile'
+import { SITE_URL } from 'config/site'
 import { getPosts } from 'lib/posts'
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
@@ -23,16 +24,23 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 		description: post.description,
 		keywords: post.tags,
 		alternates: {
-			canonical: `/blog/${post.slug}`,
+			canonical: `${SITE_URL}/blog/${post.slug}`,
 		},
 		openGraph: {
 			type: 'article',
 			title: post.title,
 			description: post.description,
-			url: `/blog/${post.slug}`,
+			url: `${SITE_URL}/blog/${post.slug}`,
 			publishedTime: post.date,
 			authors: [profile.name],
 			tags: post.tags,
+		},
+		// the post's own title on X, with the big card from opengraph-image
+		twitter: {
+			card: 'summary_large_image',
+			title: post.title,
+			description: post.description,
+			creator: `@${profile.handle}`,
 		},
 	}
 }

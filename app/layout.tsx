@@ -1,6 +1,7 @@
+import { standaloneInitScript } from 'components/Press/standalone'
 import { jobs } from 'config/experience'
 import { profile } from 'config/profile'
-import { isStaging, SITE_URL } from 'config/site'
+import { DEPLOY_URL, isStaging, SITE_URL } from 'config/site'
 import { DEFAULT_MODE, themeInitScript } from 'config/theme'
 import type { Metadata } from 'next'
 import { Titillium_Web } from 'next/font/google'
@@ -36,11 +37,11 @@ export const metadata: Metadata = {
 	],
 	authors: [{ name: profile.name }],
 	creator: profile.name,
-	metadataBase: new URL(SITE_URL),
+	metadataBase: new URL(DEPLOY_URL),
 	// staging also sends an X-Robots-Tag header (next.config.ts)
 	...(isStaging && { robots: { index: false, follow: false } }),
 	alternates: {
-		canonical: '/',
+		canonical: SITE_URL,
 		types: {
 			'application/rss+xml': [
 				{ url: '/blog/feed.xml', title: `Press | ${profile.name}` },
@@ -53,18 +54,11 @@ export const metadata: Metadata = {
 		url: SITE_URL,
 		description: DESCRIPTION,
 		type: 'profile',
-		images: [
-			{
-				url: profile.avatar,
-				width: 400,
-				height: 400,
-				alt: profile.name,
-			},
-		],
+		// the picture comes from each section's opengraph-image
 		locale: 'en_US',
 	},
 	twitter: {
-		card: 'summary',
+		card: 'summary_large_image',
 		title: TITLE,
 		description: DESCRIPTION,
 		creator: `@${profile.handle}`,
@@ -84,12 +78,14 @@ export default function RootLayout({
 			lang="en"
 			data-mode={DEFAULT_MODE}
 			className={f1.variable}
-			// The init script rewrites data-mode before hydration
+			// The init scripts set data-mode and data-standalone before hydration
 			suppressHydrationWarning
 		>
 			<head>
 				{/* biome-ignore lint/security/noDangerouslySetInnerHtml: constant theme script from config/theme */}
 				<script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
+				{/* biome-ignore lint/security/noDangerouslySetInnerHtml: constant reading-layout script from components/Press/standalone */}
+				<script dangerouslySetInnerHTML={{ __html: standaloneInitScript }} />
 				<script
 					type="application/ld+json"
 					// biome-ignore lint/security/noDangerouslySetInnerHtml: JSON-LD serialised from config

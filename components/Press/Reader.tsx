@@ -5,6 +5,7 @@ import { ViewTransition } from 'react'
 import type { Post } from 'types/post'
 import styles from './Press.module.css'
 import ReaderScroll from './ReaderScroll'
+import { ExploreButton } from './ReadingMode'
 
 /**
  * The open post (middle column). Older/Newer stay within its own list, so the
@@ -45,6 +46,7 @@ export default async function Reader({
 				<span className={styles.miniTitle} aria-hidden="true">
 					{post.title}
 				</span>
+				<ExploreButton className={styles.explore} />
 				<span className={styles.progress} aria-hidden="true" />
 			</div>
 			<ReaderScroll key={post.slug} className={styles.scroll}>
@@ -84,6 +86,15 @@ export default async function Reader({
 								.
 							</p>
 						)}
+						{/* only for a post opened straight from a link */}
+						<aside className={styles.invite}>
+							<p>
+								This post is part of my F1-style portfolio: where I’ve worked,
+								my certifications, the things I build, and posts going back to
+								2005.
+							</p>
+							<ExploreButton />
+						</aside>
 					</div>
 				</ViewTransition>
 			</ReaderScroll>

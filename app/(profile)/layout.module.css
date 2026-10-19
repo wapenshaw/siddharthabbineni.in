@@ -46,6 +46,19 @@
 	display: none;
 }
 
+/* A post opened from a link: no section nav (components/Press/standalone.ts) */
+:global(html[data-standalone]) .app {
+	grid-template:
+		'header' 4rem
+		'main' minmax(0, 1fr)
+		'radio' 2.6rem
+		/ minmax(0, 1fr);
+}
+
+:global(html[data-standalone]) .nav {
+	display: none;
+}
+
 @media (max-width: 1179px), (max-height: 559px) {
 	.app {
 		width: auto;
