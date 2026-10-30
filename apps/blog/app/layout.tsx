@@ -1,6 +1,8 @@
 import SearchShortcut from 'components/SearchShortcut'
+import { AUTHOR_LD, pageMetadata } from 'lib/metadata'
 import {
 	AUTHOR,
+	BLOG_ID,
 	BLOG_NAME,
 	DEPLOY_URL,
 	DESCRIPTION,
@@ -41,44 +43,14 @@ const mono = Atkinson_Hyperlegible_Mono({
 
 const TITLE = `${BLOG_NAME} | ${AUTHOR}`
 
-/** The share card (app/og.png), as metadata wants it */
-const SHARE_IMAGE = {
-	url: '/og.png',
-	width: 1200,
-	height: 630,
-	alt: `${BLOG_NAME}, the blog of ${AUTHOR}`,
-}
-
 export const metadata: Metadata = {
+	...pageMetadata({ title: TITLE, description: DESCRIPTION, path: '/' }),
 	title: { default: TITLE, template: `%s | ${BLOG_NAME}` },
-	description: DESCRIPTION,
 	authors: [{ name: AUTHOR, url: PORTFOLIO_URL }],
 	creator: AUTHOR,
 	metadataBase: new URL(DEPLOY_URL),
 	// staging also sends an X-Robots-Tag header (the deploy workflow)
 	...(isStaging && { robots: { index: false, follow: false } }),
-	alternates: {
-		canonical: `${SITE_URL}/`,
-		types: {
-			'application/rss+xml': [{ url: '/feed.xml', title: TITLE }],
-		},
-	},
-	openGraph: {
-		title: TITLE,
-		siteName: BLOG_NAME,
-		description: DESCRIPTION,
-		url: `${SITE_URL}/`,
-		type: 'website',
-		locale: 'en_US',
-		images: [SHARE_IMAGE],
-	},
-	twitter: {
-		card: 'summary_large_image',
-		title: TITLE,
-		description: DESCRIPTION,
-		creator: `@${SOCIAL.x}`,
-		images: [SHARE_IMAGE],
-	},
 }
 
 export default function RootLayout({
@@ -97,6 +69,23 @@ export default function RootLayout({
 			<head>
 				{/* biome-ignore lint/security/noDangerouslySetInnerHtml: constant theme script from lib/theme */}
 				<script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
+				<script
+					type="application/ld+json"
+					// biome-ignore lint/security/noDangerouslySetInnerHtml: JSON-LD serialised from lib/site
+					dangerouslySetInnerHTML={{
+						__html: JSON.stringify({
+							'@context': 'https://schema.org',
+							'@type': 'Blog',
+							'@id': BLOG_ID,
+							name: BLOG_NAME,
+							description: DESCRIPTION,
+							url: `${SITE_URL}/`,
+							inLanguage: 'en',
+							author: AUTHOR_LD,
+							publisher: AUTHOR_LD,
+						}),
+					}}
+				/>
 			</head>
 			<body>
 				<a className="skip" href="#content">

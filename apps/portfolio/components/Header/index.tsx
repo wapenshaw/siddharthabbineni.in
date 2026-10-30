@@ -18,10 +18,11 @@ export default function Header({ className }: { className?: string }) {
 				<span className={styles.shot}>
 					<img src={profile.avatar} alt="" width={400} height={409} />
 				</span>
-				<span className={styles.names}>
-					<span className={styles.first}>{first}</span>
+				{/* The page's one h1 on every section, so the name is the headline search engines read */}
+				<h1 className={styles.names}>
+					<span className={styles.first}>{first}</span>{' '}
 					<span className={styles.last}>{rest.join(' ')}</span>
-				</span>
+				</h1>
 			</Link>
 			<span className={`sl ${styles.slashRed}`} aria-hidden="true" />
 			<span className={`sl ${styles.slashYellow}`} aria-hidden="true" />

@@ -1,6 +1,6 @@
 ---
 title: "NuPrint: printing without the phone app"
-description: "How I ended up building a desktop app for my little Bluetooth printer, with a few detours along the way."
+description: "How I ended up building a desktop app for my ZEITEL SC03h, a little Bluetooth thermal printer, so I could print from Windows and macOS without the phone app."
 date: 2026-10-29
 tags: [rust, tauri, slint, bluetooth, nuprint]
 ---

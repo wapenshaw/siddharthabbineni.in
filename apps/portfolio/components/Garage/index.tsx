@@ -33,9 +33,9 @@ export default async function Garage() {
 
 	return (
 		<main className={styles.garage} aria-labelledby="garage-title">
-			<h1 id="garage-title" className="sr-only">
+			<h2 id="garage-title" className="sr-only">
 				Garage
-			</h1>
+			</h2>
 			<div className={styles.cards}>
 				{lead && <ProjectCard project={lead} big />}
 				<div className={styles.row}>
@@ -47,7 +47,7 @@ export default async function Garage() {
 
 			<aside className={tower.tower} aria-labelledby="prs-title">
 				<div className={tower.head}>
-					<h2 id="prs-title">Open source contributions</h2>
+					<h3 id="prs-title">Open source contributions</h3>
 					<span>
 						{merged} merged{open > 0 && `, ${open} under review`}
 					</span>
@@ -130,7 +130,7 @@ function ProjectCard({
 				{project.status}
 			</span>
 			<div className={styles.body}>
-				<h2 className={styles.name}>{project.name}</h2>
+				<h3 className={styles.name}>{project.name}</h3>
 				<p className={styles.line}>{project.line}</p>
 				<Stack items={project.stack} />
 				{project.post && (

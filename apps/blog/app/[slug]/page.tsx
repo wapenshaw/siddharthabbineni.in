@@ -6,14 +6,16 @@ import {
 	runType,
 	sessionHref,
 } from 'lib/format'
+import { AUTHOR_LD, pageMetadata } from 'lib/metadata'
 import {
 	getPostContent,
 	getPosts,
 	isOldBlog,
+	isThin,
 	neighboursOf,
 	type Post,
 } from 'lib/posts'
-import { AUTHOR, PORTFOLIO_URL, SITE_URL } from 'lib/site'
+import { BLOG_ID, SITE_URL } from 'lib/site'
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 
@@ -38,33 +40,21 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 		return {}
 	}
 	const { post } = found
-	const url = `${SITE_URL}${postHref(post.slug)}`
-	// the post's share card, drawn at build by ./og.png/route.ts
-	const image = {
-		url: `${postHref(post.slug)}og.png`,
-		width: 1200,
-		height: 630,
-		alt: post.title,
-	}
 	return {
-		title: post.title,
-		description: post.description,
-		alternates: { canonical: url },
-		openGraph: {
+		...pageMetadata({
 			title: post.title,
 			description: post.description,
-			url,
-			type: 'article',
-			publishedTime: post.date,
-			authors: [AUTHOR],
-			tags: post.tags,
-			images: [image],
-		},
-		twitter: {
-			title: post.title,
-			description: post.description,
-			images: [image],
-		},
+			path: postHref(post.slug),
+			// the post's share card, drawn at build by ./og.png/route.ts
+			image: {
+				url: `${postHref(post.slug)}og.png`,
+				width: 1200,
+				height: 630,
+				alt: post.title,
+			},
+			article: { publishedTime: post.date, tags: post.tags },
+		}),
+		...(isThin(post) && { robots: { index: false, follow: true } }),
 	}
 }
 
@@ -83,6 +73,7 @@ export default async function PostPage({ params }: Props) {
 	const year = post.date.slice(0, 4)
 	const pos = positionOf(post, list)
 	const Content = await getPostContent(post)
+	const url = `${SITE_URL}${postHref(post.slug)}`
 
 	return (
 		<>
@@ -180,11 +171,21 @@ export default async function PostPage({ params }: Props) {
 					__html: JSON.stringify({
 						'@context': 'https://schema.org',
 						'@type': 'BlogPosting',
+						'@id': `${url}#post`,
 						headline: post.title,
 						description: post.description,
 						datePublished: post.date,
-						url: `${SITE_URL}${postHref(post.slug)}`,
-						author: { '@type': 'Person', name: AUTHOR, url: PORTFOLIO_URL },
+						// posts are dated once; there's no separate edit date to give
+						dateModified: post.date,
+						url,
+						mainEntityOfPage: url,
+						image: `${url}og.png`,
+						keywords: post.tags,
+						inLanguage: 'en',
+						wordCount: post.words,
+						author: AUTHOR_LD,
+						publisher: AUTHOR_LD,
+						isPartOf: { '@id': BLOG_ID },
 					}),
 				}}
 			/>

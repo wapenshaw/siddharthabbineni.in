@@ -34,6 +34,7 @@ export interface Post extends PostMeta {
 	slug: string
 	/** The file name in posts/ */
 	file: string
+	words: number
 	readingMinutes: number
 	laps: Lap[]
 }
@@ -43,11 +44,7 @@ const SHOW_DRAFTS = process.env.NODE_ENV === 'development'
 const WORDS_PER_MINUTE = 220
 const FRONT_MATTER = /^---\r?\n([\s\S]*?)\r?\n---\r?\n?/
 
-const readingMinutes = (body: string) =>
-	Math.max(
-		1,
-		Math.round(body.split(/\s+/).filter(Boolean).length / WORDS_PER_MINUTE)
-	)
+const wordsIn = (body: string) => body.split(/\s+/).filter(Boolean).length
 
 /** The h2s outside code blocks, with the ids rehype-slug gives them */
 function lapsOf(body: string): Lap[] {
@@ -96,12 +93,14 @@ async function loadPosts(): Promise<Post[]> {
 			}
 			const meta = parse(match[1]) as PostMeta
 			const body = source.slice(match[0].length)
+			const words = wordsIn(body)
 			return {
 				...meta,
 				date: String(meta.date),
 				slug: file.replace(/\.mdx?$/, ''),
 				file,
-				readingMinutes: readingMinutes(body),
+				words,
+				readingMinutes: Math.max(1, Math.round(words / WORDS_PER_MINUTE)),
 				laps: lapsOf(body),
 			}
 		})
@@ -117,6 +116,12 @@ async function loadPosts(): Promise<Post[]> {
 /** From the old blog (2005 to 2013), as opposed to written for this one or dev.to */
 export const isOldBlog = (post: PostMeta) =>
 	Boolean(post.archive) && post.archive?.site !== 'dev.to'
+
+/**
+ * An old-blog post of a line or two. They stay up for anyone following an old
+ * link, but are kept out of search results and the sitemap.
+ */
+export const isThin = (post: Post) => isOldBlog(post) && post.words < 100
 
 /** The latest runs: posts written for this blog and the dev.to guides, newest first */
 export const runsOf = (posts: Post[]) => posts.filter((p) => !isOldBlog(p))

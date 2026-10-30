@@ -1,13 +1,17 @@
 import Search from 'components/Search'
 import SiteNav from 'components/SiteNav'
+import { pageMetadata } from 'lib/metadata'
 import { getPosts } from 'lib/posts'
-import { SITE_URL } from 'lib/site'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-	title: 'Search',
-	description: 'Search every post on the blog, from 2005 to now.',
-	alternates: { canonical: `${SITE_URL}/search/` },
+	...pageMetadata({
+		title: 'Search',
+		description: 'Search every post on the blog, from 2005 to now.',
+		path: '/search/',
+	}),
+	// an empty search box is nothing to land on from a search engine
+	robots: { index: false, follow: true },
 }
 
 export default async function SearchPage() {
