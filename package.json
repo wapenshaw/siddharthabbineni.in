@@ -2,40 +2,21 @@
 	"name": "wapenshaw-web",
 	"version": "0.2.0",
 	"private": true,
+	"description": "siddharthabbineni.in and its subdomains: each site is its own Next.js app in apps/",
 	"engines": {
 		"node": ">=20.0.0"
 	},
 	"scripts": {
-		"dev": "next dev",
-		"build": "next build",
-		"start": "next start",
+		"setup": "npm install && npm --prefix apps/portfolio install && npm --prefix apps/blog install",
+		"dev:portfolio": "npm --prefix apps/portfolio run dev",
+		"dev:blog": "npm --prefix apps/blog run dev",
+		"build:portfolio": "npm --prefix apps/portfolio run build",
+		"build:blog": "npm --prefix apps/blog run build",
+		"typecheck": "npm --prefix apps/portfolio run typecheck && npm --prefix apps/blog run typecheck",
 		"lint": "biome check .",
-		"format": "biome check --write .",
-		"typecheck": "tsc --noEmit"
-	},
-	"dependencies": {
-		"@mdx-js/loader": "^3.1.1",
-		"@mdx-js/react": "^3.1.1",
-		"@next/mdx": "^16.4.2",
-		"@phosphor-icons/react": "^2.1.10",
-		"motion": "^14.3.0",
-		"next": "^16.4.2",
-		"react": "^19.3.1",
-		"react-dom": "^19.3.1",
-		"rehype-pretty-code": "^0.14.5",
-		"remark-frontmatter": "^5.0.0",
-		"remark-gfm": "^4.0.1",
-		"shiki": "^4.5.0",
-		"simple-icons": "^16.35.0",
-		"yaml": "^2.9.1"
+		"format": "biome check --write ."
 	},
 	"devDependencies": {
-		"@biomejs/biome": "2.5.15",
-		"@playwright/test": "^1.64.1",
-		"@types/mdx": "^2.0.14",
-		"@types/node": "^26.6.5",
-		"@types/react": "^19.3.0",
-		"@types/react-dom": "^19.3.0",
-		"typescript": "^7.0.2"
+		"@biomejs/biome": "2.5.15"
 	}
 }

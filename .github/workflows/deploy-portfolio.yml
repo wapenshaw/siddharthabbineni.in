@@ -1,0 +1,83 @@
+name: Deploy the portfolio
+
+# siddharthabbineni.in (master) and staging.siddharthabbineni.in (staging),
+# from apps/portfolio. The blog has its own workflow and Azure apps.
+on:
+  push:
+    branches:
+      - master
+      - staging
+    paths:
+      - apps/portfolio/**
+      - .github/workflows/deploy-portfolio.yml
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    name:  ${{ github.ref == 'refs/heads/master' && 'Production' || 'Staging' }} - Build & Deploy
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+
+    env:
+      SWA_TOKEN: ${{ github.ref == 'refs/heads/master' && secrets.AZURE_SWA_DEPLOY_TOKEN_PROD || secrets.AZURE_SWA_DEPLOY_TOKEN_STAGING }}
+
+    defaults:
+      run:
+        working-directory: apps/portfolio
+
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: apps/portfolio/package-lock.json
+
+      - name: Cache Next.js build
+        uses: actions/cache@v5
+        with:
+          path: apps/portfolio/.next/cache
+          key: nextjs-${{ runner.os }}-${{ hashFiles('apps/portfolio/package-lock.json') }}-${{ hashFiles('apps/portfolio/**/*.ts', 'apps/portfolio/**/*.tsx', 'apps/portfolio/**/*.css') }}
+          restore-keys: |
+            nextjs-${{ runner.os }}-${{ hashFiles('apps/portfolio/package-lock.json') }}-
+            nextjs-${{ runner.os }}-
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+        env:
+          STEAM_API_KEY: ${{ secrets.STEAM_API_KEY }}
+          STEAM_USER_ID: ${{ secrets.STEAM_USER_ID }}
+          XBOX_API_KEY: ${{ secrets.XBOX_API_KEY }}
+          # Raises the GitHub search limit for the PR ticker; optional
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NEXT_PUBLIC_SITE_URL: ${{ github.ref == 'refs/heads/master' && 'https://www.siddharthabbineni.in' || 'https://staging.siddharthabbineni.in' }}
+          NEXT_PUBLIC_BLOG_URL: ${{ github.ref == 'refs/heads/master' && 'https://blog.siddharthabbineni.in' || 'https://blog-staging.siddharthabbineni.in' }}
+
+      # Staging must never be indexed. Next.js adds X-Robots-Tag to what it serves;
+      # this adds it to the files Azure serves directly (images, the resume PDF)
+      - name: Keep staging out of search engines
+        if: github.ref != 'refs/heads/master'
+        run: |
+          node -e "
+            const fs = require('fs')
+            const file = 'staticwebapp.config.json'
+            const config = JSON.parse(fs.readFileSync(file, 'utf8'))
+            config.globalHeaders = { ...config.globalHeaders, 'X-Robots-Tag': 'noindex, nofollow' }
+            fs.writeFileSync(file, JSON.stringify(config, null, 2))
+          "
+
+      - name: Deploy
+        uses: Azure/static-web-apps-deploy@v1
+        with:
+          azure_static_web_apps_api_token: ${{ env.SWA_TOKEN }}
+          action: upload
+          app_location: apps/portfolio
+          output_location: .next
+          skip_app_build: true

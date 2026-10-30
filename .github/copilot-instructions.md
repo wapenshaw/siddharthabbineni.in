@@ -2,13 +2,22 @@
 
 ## Commands
 
+Each site is its own Next.js app with its own `package.json` and lockfile (no npm workspaces). From the repo root:
+
 ```bash
-npm run dev        # Start dev server (Turbopack)
-npm run build      # Production build
-npm run lint       # Biome: lint + format check
-npm run format     # Biome: apply formatting and safe fixes
-npm run typecheck  # TypeScript 7 strict check (tsc --noEmit)
+npm run setup            # npm install in the root and both apps
+npm run dev:portfolio    # apps/portfolio on :3000 (siddharthabbineni.in)
+npm run dev:blog         # apps/blog on :3001 (blog.siddharthabbineni.in)
+npm run build:portfolio
+npm run build:blog       # static export to apps/blog/out
+npm run lint             # Biome over the whole repo
+npm run format           # Biome: apply formatting and safe fixes
+npm run typecheck        # TypeScript 7 strict check in both apps
 ```
+
+The portfolio reads the blog's latest posts from `<blog>/posts.json` (`NEXT_PUBLIC_BLOG_URL`, set to the local blog in `apps/portfolio/.env.development`). Each app deploys to its own Azure Static Web App from its own workflow in `.github/workflows/`.
+
+The rest of this file describes the portfolio (`apps/portfolio`); paths below are relative to it.
 
 No test suite exists in this project.
 
@@ -28,7 +37,7 @@ On desktop, the home page fits a single screen with no vertical scrolling. The t
 
 The breakpoints are listed at the top of `app/(profile)/layout.module.css`, and each component module repeats the ones it needs. Any change must keep the one-screen fit at those viewports.
 
-- **Views:** `app/(profile)/layout.tsx` keeps the profile strip fixed. The home page and `/blog` (the Devlog) each render one `<main>` view on the same three columns (CSS subgrid), and they slide between each other with React `<ViewTransition>`. In the Devlog, `blog/layout.tsx` holds the post list and patch notes; the page (`/blog` for the newest post, `/blog/[slug]` for the rest) is the reader.
+- **Views:** `app/(profile)/layout.tsx` keeps the profile strip fixed. Each section renders one `<main>` view. `/blog` (Press) is a short feed of the blog's newest posts; the posts themselves live on the blog, and `/blog/<slug>` and `/blog/feed.xml` redirect there (`next.config.ts`).
 - **Size cap:** the page stops growing at 1920×1080 (`--max-width`, `--max-height` in `styles/globals.css`) and sits top-centre on a dot-grid backdrop. Use `var(--vw)` instead of `vw` so sizes stop growing too.
 - **Type scale:** every font size is in `rem`. The root size in `styles/globals.css` is the one knob: 100% (1.25× the original design) by default, stepping down on laptop-sized and short windows.
 
@@ -41,7 +50,7 @@ All site content lives in TypeScript config files under `config/`:
 - `build.ts`: the character build cards. They are squares, only about 110px inside on a small laptop, so keep each line and its chips short. Their pixel-art icons are in `pixelIcons.ts`.
 - `quests.ts`: side projects
 - `certifications.ts`: Azure certifications. Only entries marked `featured` show.
-- `content/posts/*.md(x)`: the Devlog. Each post starts with YAML front matter (`title`, `description`, `date`, `tags`, `draft?`, `archive?`; see `types/post.ts`); the file name is the slug. `.md` is plain markdown, `.mdx` can use components. Posts with `archive: { site, url }` (the old thesid.net blog and the dev.to guides) show under the Archive tab, stay out of the RSS feed and link back to where they first appeared. Drafts show in development only. Images go in `public/blog/<slug>/`.
+- Blog posts are in the blog app: `apps/blog/posts/*.md(x)`, with YAML front matter (`title`, `description`, `date`, `tags`, `draft?`, `archive?`; see `apps/blog/lib/posts.ts`); the file name is the slug. Images go in `apps/blog/public/images/<slug>/`.
 - `skins.ts`: skin ids, the `SKIN_PICKER` flag and the theme init script. The colours themselves live in `styles/globals.css`.
 
 To update content, edit the config file, not the component code.
@@ -63,12 +72,12 @@ Tokens (`--bg`, `--panel`, `--acc`, …) are defined per skin × mode in `styles
 | `getUpstreamPullRequests` | GitHub search | `hours` | `GITHUB_TOKEN` (optional), `GITHUB_USER` |
 | `getSteamAchievements` | Steam Web API | `gaming` (6h, set in next.config.ts) | `STEAM_API_KEY`, `STEAM_USER_ID` |
 | `getXboxAchievements` | OpenXBL (`api.xbl.io/v2`, responses wrapped in `content`) | `gaming` | `XBOX_API_KEY` (the key's own account; no XUID) |
-| `getPosts` | `content/posts/*.md(x)` (front matter parsed with `yaml`, body via `@next/mdx`, code highlighted at build by rehype-pretty-code) | `max` | none |
+| `getBlogFeed` | the blog's `/posts.json` | `hours` | `NEXT_PUBLIC_BLOG_URL` |
 | `getCampaign` | `config/experience.ts` | `days` | none |
 
 `new Date()` without arguments must stay inside a cached function such as `getCampaign`, or the prerender fails. The trophy cabinet's live unlocks render in a `<Suspense>` boundary.
 
-The `/api/steam` and `/api/xbox` routes wrap the same lib functions. `/blog/feed.xml` is the Devlog's RSS feed.
+The `/api/steam` and `/api/xbox` routes wrap the same lib functions. The RSS feed is the blog's own `/feed.xml`.
 
 ### Components
 
