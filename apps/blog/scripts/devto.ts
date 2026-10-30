@@ -85,7 +85,14 @@ async function articleFor(post: Post): Promise<Article> {
 	}
 }
 
-async function api<T>(route: string, init?: RequestInit): Promise<T> {
+const wait = (seconds: number) =>
+	new Promise((resolve) => setTimeout(resolve, seconds * 1000))
+
+async function api<T>(
+	route: string,
+	init?: RequestInit,
+	retries = 3
+): Promise<T> {
 	const res = await fetch(`${API}${route}`, {
 		...init,
 		headers: {
@@ -95,6 +102,13 @@ async function api<T>(route: string, init?: RequestInit): Promise<T> {
 			'user-agent': 'blog.siddharthabbineni.in sync',
 		},
 	})
+	// dev.to's write limit is tight; it says how long to wait, so wait and go again
+	if (res.status === 429 && retries > 0) {
+		const seconds = Number(res.headers.get('retry-after')) || 30
+		console.log(`           rate limited, trying again in ${seconds + 1} s`)
+		await wait(seconds + 1)
+		return api<T>(route, init, retries - 1)
+	}
 	if (!res.ok) {
 		throw new Error(
 			`${init?.method ?? 'GET'} ${route}: ${res.status} ${await res.text()}`
@@ -112,9 +126,6 @@ const isSame = (mine: Article, theirs: DevArticle) =>
 	mine.description === theirs.description &&
 	mine.tags.join() === [...theirs.tag_list].sort().join() &&
 	normalise(mine.body_markdown) === normalise(theirs.body_markdown)
-
-// dev.to allows about ten writes every 30 seconds
-const pause = () => new Promise((resolve) => setTimeout(resolve, 3500))
 
 // written for this blog: not the old blog's posts, and not the ones that started on dev.to
 const posts = (await getPosts()).filter((p) => !p.archive)
@@ -150,7 +161,8 @@ for (const post of posts) {
 			})
 	console.log(`           ${saved.url}`)
 	changed++
-	await pause()
+	// dev.to allows about one new post every 30 seconds
+	await wait(30)
 }
 
 console.log(
