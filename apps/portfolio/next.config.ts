@@ -1,5 +1,5 @@
 import type { NextConfig } from 'next'
-import { BLOG_URL, isStaging, SITE_URL } from './config/site'
+import { BLOG_URL, isStaging } from './config/site'
 
 const nextConfig: NextConfig = {
 	output: 'standalone',
@@ -26,19 +26,6 @@ const nextConfig: NextConfig = {
 	// Posts moved to the blog; old links and feed readers follow them there
 	async redirects() {
 		return [
-			{
-				// the bare domain and production's Azure address are copies of www
-				source: '/:path*',
-				has: [
-					{
-						type: 'host',
-						value:
-							'(?:siddharthabbineni\\.in|witty-grass-0fcda0100\\.2\\.azurestaticapps\\.net)',
-					},
-				],
-				destination: `${SITE_URL}/:path*`,
-				permanent: true,
-			},
 			{
 				source: '/blog/feed.xml',
 				destination: `${BLOG_URL}/feed.xml`,

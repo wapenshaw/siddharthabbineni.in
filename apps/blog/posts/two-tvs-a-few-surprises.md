@@ -1,7 +1,7 @@
 ---
 title: Two TVs, a few surprises
 description: How I cleaned up a TCL Google TV and rooted an LG webOS TV with Codex and Claude, and what didn't go to plan.
-date: 2026-10-18
+date: 2026-10-03
 tags: [android-tv, webos, adb, home]
 ---
 
@@ -11,7 +11,7 @@ In the middle of October I cleaned up the two TVs at home: a TCL 55Q6C running G
 
 I started on 15 October, before I could even connect to the TV. With Codex I looked into launchers, built a small tool to list everything installed, and wrote down some rules. Every change had to be reversible, I'd make changes in small batches, and I'd have a restore script ready.
 
-On 18 October Claude connected to the TV over wireless ADB and recorded how everything looked before I changed anything. I disabled 21 packages in three batches. After each batch I checked the remote, HDMI, Netflix, YouTube, sound and the keyboard. I didn't uninstall anything.
+On 3 October Claude connected to the TV over wireless ADB and recorded how everything looked before I changed anything. I disabled 21 packages in three batches. After each batch I checked the remote, HDMI, Netflix, YouTube, sound and the keyboard. I didn't uninstall anything.
 
 The results were smaller than I hoped. The animation settings were already at 0.5, and clearing caches freed about 300 MB. I never got a fair before-and-after memory comparison, so I can't say the TV got faster.
 

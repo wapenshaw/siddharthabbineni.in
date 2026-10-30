@@ -28,17 +28,18 @@ jobs:
         working-directory: apps/portfolio
 
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
 
       - name: Setup Node.js
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@v7
         with:
+          # the same Node the server runs on in Azure (staticwebapp.config.json)
           node-version: 22
           cache: npm
           cache-dependency-path: apps/portfolio/package-lock.json
 
       - name: Cache Next.js build
-        uses: actions/cache@v5
+        uses: actions/cache@v6
         with:
           path: apps/portfolio/.next/cache
           key: nextjs-${{ runner.os }}-${{ hashFiles('apps/portfolio/package-lock.json') }}-${{ hashFiles('apps/portfolio/**/*.ts', 'apps/portfolio/**/*.tsx', 'apps/portfolio/**/*.css') }}
