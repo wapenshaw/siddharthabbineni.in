@@ -19,6 +19,8 @@ jobs:
 
     permissions:
       contents: read
+      # signs in to Azure with GitHub's OIDC token, so no Azure password is stored
+      id-token: write
 
     env:
       SWA_TOKEN: ${{ github.ref == 'refs/heads/master' && secrets.AZURE_SWA_DEPLOY_TOKEN_PROD || secrets.AZURE_SWA_DEPLOY_TOKEN_STAGING }}
@@ -73,6 +75,27 @@ jobs:
             config.globalHeaders = { ...config.globalHeaders, 'X-Robots-Tag': 'noindex, nofollow' }
             fs.writeFileSync(file, JSON.stringify(config, null, 2))
           "
+
+      # The server refreshes Steam and Xbox every few hours with keys from its own
+      # app settings, not GitHub's. Copying them on each deploy keeps one place
+      # to change them: the GitHub secrets.
+      - name: Sign in to Azure
+        uses: azure/login@v3
+        with:
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+
+      - name: Copy the API keys to the Azure server
+        run: >-
+          az staticwebapp appsettings set
+          --name "$APP" --resource-group Website --output none
+          --setting-names "STEAM_API_KEY=$STEAM_API_KEY" "STEAM_USER_ID=$STEAM_USER_ID" "XBOX_API_KEY=$XBOX_API_KEY"
+        env:
+          APP: ${{ github.ref == 'refs/heads/master' && 'wapenshaw-site' || 'wapenshaw-site-staging' }}
+          STEAM_API_KEY: ${{ secrets.STEAM_API_KEY }}
+          STEAM_USER_ID: ${{ secrets.STEAM_USER_ID }}
+          XBOX_API_KEY: ${{ secrets.XBOX_API_KEY }}
 
       - name: Deploy
         uses: Azure/static-web-apps-deploy@v1
