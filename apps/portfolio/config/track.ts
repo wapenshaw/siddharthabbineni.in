@@ -14,9 +14,11 @@ export const TRACK_PATH =
 
 /** The stretch the route uses, after turning the circuit 180° so it climbs to the present */
 export const TRACK_VIEWBOX = { x: 200, y: 215, width: 165, height: 365 }
-export const TRACK_ROTATE = 'rotate(180 292.5 387.5)'
+/** The circuit turns 180° about this point; topOf and leftOf undo the turn */
+const PIVOT = { x: 292.5, y: 387.5 }
+export const TRACK_ROTATE = `rotate(180 ${PIVOT.x} ${PIVOT.y})`
 
-type TrackPoint = {
+export type TrackPoint = {
 	/** Percentage along the path */
 	at: number
 	/** The point in the path's own (unrotated) coordinates */
@@ -43,6 +45,10 @@ export const STOPS: TrackPoint[] = [
 /** Where the dashes after the current job fade out; moves on with the last stop */
 export const ROAD_END: TrackPoint = { at: 41.3, x: 199.3, y: 544.2 }
 
-/** A point's height down the route, as a percentage; turning the circuit 180° about y 387.5 flips y */
+/** A point's height down the route, as a percentage; the 180° turn flips y */
 export const topOf = ({ y }: TrackPoint) =>
-	((2 * 387.5 - y - TRACK_VIEWBOX.y) / TRACK_VIEWBOX.height) * 100
+	((2 * PIVOT.y - y - TRACK_VIEWBOX.y) / TRACK_VIEWBOX.height) * 100
+
+/** A point's distance across the route, as a percentage; the 180° turn flips x */
+export const leftOf = ({ x }: TrackPoint) =>
+	((2 * PIVOT.x - x - TRACK_VIEWBOX.x) / TRACK_VIEWBOX.width) * 100

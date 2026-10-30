@@ -27,31 +27,19 @@
 	list-style: none;
 	display: flex;
 	flex-direction: column;
-	gap: 6px;
+	gap: 5px;
 	margin: 1.1rem 1.4rem 0;
 	padding: 0;
 }
 
+/* The strip itself (globals.css) is shared with the Seasons race report */
 .post {
-	display: grid;
-	grid-template-columns: 3.25rem minmax(0, 1fr) 9.5rem;
-	align-items: center;
-	gap: 1rem;
-	padding: 0.75rem 1rem;
-	background: var(--chip);
-	color: var(--ink);
+	grid-template-columns: 2.4rem minmax(0, 1fr) 9.5rem;
 	text-decoration: none;
 }
 
 .post:hover .title {
 	color: var(--blue-ink);
-}
-
-.n {
-	color: var(--blue-ink);
-	font-size: 1.6rem;
-	font-style: italic;
-	font-weight: 900;
 }
 
 .text {
@@ -91,8 +79,10 @@
 }
 
 @media (max-width: 1179px), (max-height: 559px) {
+	/* Numbers at the top of the tall phone strips, like the race report's */
 	.post {
-		grid-template-columns: 2.5rem minmax(0, 1fr);
+		grid-template-columns: 2.4rem minmax(0, 1fr);
+		align-items: start;
 	}
 
 	.meta {

@@ -210,6 +210,24 @@ button {
 	white-space: nowrap;
 }
 
+/* A numbered strip, cut like the chips: the Race report rows and the Press posts */
+.strip {
+	display: grid;
+	align-items: center;
+	gap: 0.6rem;
+	padding: 0.4rem 1.3rem 0.4rem 1.4rem;
+	background: var(--chip);
+	color: var(--ink);
+}
+
+.strip-n {
+	color: var(--blue-ink);
+	font-size: 1.4rem;
+	font-style: italic;
+	font-weight: 900;
+	line-height: 1;
+}
+
 .btn {
 	display: inline-flex;
 	align-items: center;

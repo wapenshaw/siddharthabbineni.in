@@ -35,9 +35,9 @@ export default async function Press() {
 				<ol className={styles.posts}>
 					{latest.map((post) => (
 						<li key={post.slug}>
-							<a className={styles.post} href={post.url}>
+							<a className={`sl strip ${styles.post}`} href={post.url}>
 								{/* the newest has the highest number, like a debrief count */}
-								<b className={styles.n}>
+								<b className="strip-n">
 									{post.firstOn
 										? null
 										: String(own.length - own.indexOf(post)).padStart(2, '0')}

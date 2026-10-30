@@ -3,12 +3,14 @@
 import { keysAreBusy, onStep } from 'components/Nav/steps'
 import Stack from 'components/Stack'
 import {
+	leftOf,
 	ROAD_END,
 	RUN_UP,
 	STOPS,
 	TRACK_PATH,
 	TRACK_ROTATE,
 	TRACK_VIEWBOX,
+	type TrackPoint,
 	topOf,
 } from 'config/track'
 import type { Stint } from 'lib/timeline'
@@ -16,7 +18,6 @@ import { AnimatePresence, motion, useReducedMotion } from 'motion/react'
 import { type CSSProperties, type MouseEvent, useEffect, useState } from 'react'
 import styles from './Seasons.module.css'
 
-const STAT_COLOURS = ['var(--purple)', 'var(--green-ink)', 'var(--blue)']
 const EASE = [0.2, 0.8, 0.2, 1] as const
 /** The one-screen layout; below it the stints are an accordion */
 const DESKTOP = '(min-width: 1180px) and (min-height: 560px)'
@@ -24,6 +25,10 @@ const DESKTOP = '(min-width: 1180px) and (min-height: 560px)'
 const ROW_GAP = 8
 /** How long a stint takes to fold (Seasons.module.css, .fold) */
 const FOLD_MS = 550
+
+/** Pins a route label to a point on the track (Seasons.module.css, .lifeLabel and .roadLabel) */
+const placeAt = (p: TrackPoint) =>
+	({ '--top': `${topOf(p)}%`, '--left': `${leftOf(p)}%` }) as CSSProperties
 
 /** A stretch of the path from one percentage to another, as dash settings */
 const dash = (from: number, to: number) => ({
@@ -124,10 +129,7 @@ export default function Seasons({ stints }: { stints: Stint[] }) {
 				<div className={styles.mapArea}>
 					<div className={styles.map}>
 						<Route selected={selected} last={last} onPick={setSelected} />
-						<p
-							className={styles.roadLabel}
-							style={{ '--top': `${topOf(ROAD_END)}%` } as CSSProperties}
-						>
+						<p className={styles.roadLabel} style={placeAt(ROAD_END)}>
 							The road keeps going
 						</p>
 						<ol className={styles.stops}>
@@ -191,10 +193,7 @@ export default function Seasons({ stints }: { stints: Stint[] }) {
 								</li>
 							))}
 						</ol>
-						<span
-							className={styles.lifeLabel}
-							style={{ '--top': `${topOf(RUN_UP)}%` } as CSSProperties}
-						>
+						<span className={styles.lifeLabel} style={placeAt(RUN_UP)}>
 							Life before work
 						</span>
 					</div>
@@ -356,6 +355,7 @@ function Route({
 /** What the stint panel says: on desktops beside the route, on phones under the row */
 function StintBody({ stint, titleId }: { stint: Stint; titleId?: string }) {
 	const Heading = titleId ? 'h2' : 'h3'
+	const SubHeading = titleId ? 'h3' : 'h4'
 	return (
 		<>
 			<div className={styles.who}>
@@ -367,21 +367,19 @@ function StintBody({ stint, titleId }: { stint: Stint; titleId?: string }) {
 				<span>{stint.role}</span>
 			</div>
 			<p className={styles.summary}>{stint.summary}</p>
-			{stint.stats && (
-				<ul className={styles.stats}>
-					{stint.stats.map((s, i) => (
-						<li key={s.label} className={`sl ${styles.stat}`}>
-							<b style={{ color: STAT_COLOURS[i] }}>{s.value}</b>
-							<span>{s.label}</span>
+			<section className={styles.report}>
+				<SubHeading className={styles.reportHead}>Race report</SubHeading>
+				<ol className={styles.rows}>
+					{stint.report.map((item, i) => (
+						<li key={item} className={`sl strip ${styles.row}`}>
+							<b className={`strip-n ${styles.n}`} aria-hidden="true">
+								{String(i + 1).padStart(2, '0')}
+							</b>
+							<span>{item}</span>
 						</li>
 					))}
-				</ul>
-			)}
-			<ul className={styles.bullets} data-roomy={stint.stats ? undefined : ''}>
-				{stint.bullets.map((b) => (
-					<li key={b}>{b}</li>
-				))}
-			</ul>
+				</ol>
+			</section>
 			<Stack items={stint.stack} className={styles.setup} />
 		</>
 	)

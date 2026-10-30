@@ -15,10 +15,8 @@ export type Job = {
 	}
 	/** One or two first-person sentences: the stint's headline */
 	summary: string
-	/** Up to three numbers from the stint, each with what it counts */
-	stats?: { value: string; label: string }[]
-	/** What the summary and stats don’t already say */
-	bullets: string[]
+	/** Five lines from the resume, shortened to fit one row each */
+	report: string[]
 	stack: string[]
 }
 
@@ -35,17 +33,12 @@ export const jobs: Job[] = [
 		logo: { light: '/work_images/qsp/qsp_logo.png' },
 		summary:
 			'I was the lead developer on the internal ERP portal, and I automated the finance team’s reconciliation and reporting.',
-		stats: [
-			{ value: '200+', label: 'employees used the ERP portal every day' },
-			{
-				value: '75%',
-				label: 'less manual data entry in General Ledger reconciliation',
-			},
-			{ value: '10 hrs', label: 'a week saved by automated SSRS reports' },
-		],
-		bullets: [
-			'Wrote 15+ SSIS packages moving millions of records into the warehouse every night.',
-			'Automated 20+ SSRS reports through SQL Agent.',
+		report: [
+			'Lead developer on the internal ERP portal, improving 5 workflows used daily by 200+ staff.',
+			'Automated General Ledger reconciliation with finance, cutting manual data entry by 75%.',
+			'Wrote 15+ SSIS packages that moved millions of records into the data warehouse every night.',
+			'Built 20+ SSRS reports run by SQL Agent, saving about 10 hours of reporting a week.',
+			'Ran the Sponsor Portal for 50,000+ users; adding social login lifted sign-ups by 15%.',
 		],
 		stack: ['C#', 'ASP.NET', 'SSIS', 'SSRS', 'SQL Server'],
 	},
@@ -60,19 +53,12 @@ export const jobs: Job[] = [
 		logo: { light: '/work_images/dps/dps_logo.png' },
 		summary:
 			'I led eight developers building the school’s ERP and CRM systems, and looked after its websites and campus network.',
-		stats: [
-			{
-				value: '2,000+',
-				label: 'staff and students on 3 custom ERP/CRM systems',
-			},
-			{
-				value: '60%',
-				label: 'less manual SMS and email work after automating campaigns',
-			},
-			{ value: '99.5%', label: 'uptime across 4 school websites' },
-		],
-		bullets: [
-			'Advised on hardware and network design for 500+ campus devices.',
+		report: [
+			'Led 8 developers building 3 ERP and CRM systems for 2,000+ staff and students.',
+			'Automated the school’s SMS and email campaigns, cutting that manual work by about 60%.',
+			'Built the parent portals, which raised parent engagement by 25%.',
+			'Built and ran 4 school websites at 99.5% uptime.',
+			'Advised on hardware and network design for 500+ devices across the campus.',
 		],
 		stack: ['ASP.NET', 'SQL Server', 'HTML / CSS / JS'],
 	},
@@ -87,23 +73,12 @@ export const jobs: Job[] = [
 		logo: { light: '/work_images/melite/melite_logo.png' },
 		summary:
 			'I led five engineers building Studease, an education ERP/CRM, and built core modules of the Digital Curriculum platform.',
-		stats: [
-			{
-				value: '15,000+',
-				label: 'students and staff on Studease at 5 institutions',
-			},
-			{
-				value: '500+',
-				label: 'concurrent users on the Digital Curriculum platform',
-			},
-			{
-				value: '10,000+',
-				label: 'requests a day to 2 REST APIs for internal mobile apps',
-			},
-		],
-		bullets: [
-			'Built 4 core modules of the Digital Curriculum platform, serving 200+ courses.',
-			'Ran TFS source control and build/deploy for 3 application streams.',
+		report: [
+			'Led 5 engineers building Studease, an education ERP/CRM used by 15,000+ students and staff.',
+			'Built 4 core modules of the Digital Curriculum platform: 500+ concurrent users, 200+ courses.',
+			'Wrote 2 REST APIs for our mobile apps, handling 10,000+ requests a day.',
+			'Looked after source control, builds and deployments for 3 application streams.',
+			'Rolled Studease out across 5 educational institutions.',
 		],
 		stack: ['ASP.NET', 'EF 6', 'LINQ', 'SQL Server', 'TFS'],
 	},
@@ -118,14 +93,12 @@ export const jobs: Job[] = [
 		logo: { light: '/work_images/pinion/Pinion_logo.svg' },
 		summary:
 			'I led the architecture for Santander Consumer Bank’s move to Azure and AWS, and built the collections engine that raised debt recovery by 30%.',
-		stats: [
-			{ value: '+30%', label: 'debt recovery from the collections engine' },
-			{ value: '8+', label: 'core banking microservices architected' },
-			{ value: '1,000+', label: 'active Vatify users, up from 100+' },
-		],
-		bullets: [
-			'Solutions architect lead for Santander Consumer Bank: set the roadmap for the Azure and AWS migrations.',
-			'Prototyped AI credit-risk models with Azure OpenAI, and architected the Positive Credit Register API.',
+		report: [
+			'Led the Azure and AWS migration roadmap as Santander Consumer Bank’s solutions architect.',
+			'Built Santander’s collections engine, which raised debt recovery by 30%.',
+			'Designed 8+ core banking microservices and prototyped AI credit-risk models.',
+			'Built a Positive Credit Register API and a document centre to tight regulatory deadlines.',
+			'Added Stripe payments to Vatify and grew it from 100 to 1,000+ active users.',
 		],
 		stack: ['.NET Core', 'AKS', 'Terraform', 'Azure OpenAI', 'React', 'C4'],
 	},
@@ -138,11 +111,13 @@ export const jobs: Job[] = [
 		start: '2025-08',
 		logo: { light: '/work_images/assurant/assurant-logo.png' },
 		summary:
-			'I lead Astra, a cloud automation platform that standardises infrastructure provisioning and multi-cloud workflows across the enterprise.',
-		bullets: [
-			'Own the full lifecycle of AKS clusters from dev to production: deployments, release management and high availability.',
-			'Build cloud-native microservices and enterprise apps in .NET and Python across Azure and AWS.',
-			'Automate configuration management and CI/CD with Ansible, cutting manual infrastructure work and deployment times.',
+			'I lead Astra, the cloud automation platform behind our infrastructure.',
+		report: [
+			'Use Astra to standardise provisioning and multi-cloud workflows across the enterprise.',
+			'Run our Kubernetes clusters from development to production: deployments, releases and uptime.',
+			'Build the cloud-native microservices and enterprise apps that run on both clouds.',
+			'Automate configuration and CI/CD, so infrastructure takes far less hands-on work.',
+			'Work with cloud architects and infrastructure teams on secure, resilient automation.',
 		],
 		stack: ['AKS', 'Ansible', 'Terraform', '.NET', 'Python', 'Azure', 'AWS'],
 	},
