@@ -230,3 +230,32 @@
 		display: none;
 	}
 }
+
+/* Small phones (360px and so): a smaller photo, name and gaps keep the Blog
+   and theme buttons on the nameplate's row */
+@media (max-width: 389px) {
+	.header {
+		column-gap: 0.55rem;
+	}
+
+	.shot {
+		width: 3.4rem;
+	}
+
+	.plate {
+		gap: 0.6rem;
+		padding-right: 0.85rem;
+	}
+
+	.last {
+		font-size: 1.5rem;
+	}
+
+	.mode {
+		margin-left: -0.3rem;
+	}
+
+	.blog {
+		margin-left: auto;
+	}
+}
