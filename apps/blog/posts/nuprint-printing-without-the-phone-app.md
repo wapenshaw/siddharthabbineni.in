@@ -19,7 +19,7 @@ A lot of that was digging through commands, checksums and the way images were co
 
 I did most of that initial digging myself. Eventually I gave what I had to Codex, and it got the remaining pieces working in about an hour. I had a small Python app that could actually print.
 
-That was the point where it started moving again. I'd spent all this time figuring out the printer, and now there was something working to build on. From there, we planned the Rust app, and I've spent roughly the last month working on it with Claude Code around my day job.
+That was the point where it started moving again. I'd spent all this time figuring out the printer, and now there was something working to build on. From there, I planned the Rust app with Claude Code, and I've spent roughly the last month building it around my day job.
 
 The Python version was basic. A little window, some text and image handling, and Bluetooth. The first test was a strip with a border and some text. It came out properly, and I kept that version around as a reference for the rewrite rather than trying to turn it into the finished app.
 

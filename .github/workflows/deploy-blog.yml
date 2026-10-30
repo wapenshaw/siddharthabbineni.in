@@ -29,17 +29,17 @@ jobs:
         working-directory: apps/blog
 
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
 
       - name: Setup Node.js
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@v7
         with:
-          node-version: 22
+          node-version: 26
           cache: npm
           cache-dependency-path: apps/blog/package-lock.json
 
       - name: Cache Next.js build
-        uses: actions/cache@v5
+        uses: actions/cache@v6
         with:
           path: apps/blog/.next/cache
           key: blog-${{ runner.os }}-${{ hashFiles('apps/blog/package-lock.json') }}-${{ hashFiles('apps/blog/**/*.ts', 'apps/blog/**/*.tsx', 'apps/blog/**/*.css', 'apps/blog/posts/**') }}
@@ -76,3 +76,11 @@ jobs:
           app_location: apps/blog/out
           output_location: ''
           skip_app_build: true
+
+      # After the deploy, so the images and covers the copies link to are live.
+      # One way only: the blog's own posts go out, nothing comes back.
+      - name: Copy new and changed posts to dev.to
+        if: github.ref == 'refs/heads/master'
+        run: npm run devto
+        env:
+          DEV_TO_PUBLISH_KEY: ${{ secrets.DEV_TO_PUBLISH_KEY }}
