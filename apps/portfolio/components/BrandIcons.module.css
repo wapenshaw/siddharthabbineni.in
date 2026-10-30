@@ -1,0 +1,17 @@
+.legacy {
+	display: block;
+	width: 16px;
+	height: 16px;
+	background: currentColor;
+	mask-size: contain;
+	mask-repeat: no-repeat;
+	mask-position: center;
+}
+
+.twitter {
+	mask-image: url('/brands/twitter.svg');
+}
+
+.linkedin {
+	mask-image: url('/brands/linkedin.svg');
+}

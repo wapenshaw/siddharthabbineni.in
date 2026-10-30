@@ -1,23 +1,23 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies
-/node_modules
+node_modules/
 /.pnp
 .pnp.js
 
 # testing
-/coverage
+coverage/
 
 # next.js
-/.next/
-/out/
+.next/
+out/
 
 # ide stuff
 /.idea/
 .github/instructions
 
 # production
-/build
+build/
 
 .env
 # misc
@@ -38,9 +38,13 @@ npm-debug.log*
 
 # session/temp files
 /temp/
-tsconfig.tsbuildinfo
+*.tsbuildinfo
+next-env.d.ts
 
 # copilot/ide
 /.agents/
 /.vscode/
 skills-lock.json
+
+# browser screenshots from local checks
+/.playwright-mcp/

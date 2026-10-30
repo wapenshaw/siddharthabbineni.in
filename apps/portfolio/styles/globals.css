@@ -1,0 +1,331 @@
+/*
+ * F1 palette. <html> carries data-mode (set before first paint by the script
+ * in app/layout.tsx); the team colours stay the same in both modes.
+ */
+:root {
+	--red: #e10600;
+	--purple: #8e44ec;
+	--yellow: #ffc906;
+	--green: #00c16e;
+	--blue: #1777e5;
+	--papaya: #ff8000;
+	/* the selected stint: never red, which means the current one */
+	--teal: #00d2be;
+	--carbon: #15151e;
+	--carbon-2: #1f1f27;
+	--grey: #38383f;
+	--grey-2: #949498;
+	--on-dark-muted: #a3a3ab;
+
+	--font: var(--font-f1), 'Titillium Web', system-ui, sans-serif;
+
+	/* the parallelogram cut on buttons, tabs, chips and cards */
+	--cut: 0.8rem;
+
+	/* the lean of the nameplate's slashes (that cut over the 4rem plate),
+	   for the coloured slashes drawn with a skew */
+	--slant: -11.31deg;
+
+	/* the page stops growing at 1920×1080 and sits in the middle of bigger screens */
+	--max-width: 1920px;
+	--max-height: 1080px;
+}
+
+:root,
+[data-mode='light'] {
+	--page: #ececef;
+	--surface: #ffffff;
+	--ink: #15151e;
+	--muted: #5f5f66;
+	--line: #e1e1e3;
+	--chip: #ececef;
+	--track: #15151e;
+	--stop: #ffffff;
+	/* big stat numbers: the light green is too pale on white */
+	--green-ink: #00a35c;
+	/* links in text: the team blue is a shade too light for small type on white */
+	--blue-ink: #1266c9;
+	color-scheme: light;
+}
+
+[data-mode='dark'] {
+	--page: #15151e;
+	--surface: #1f1f27;
+	--ink: #ffffff;
+	--muted: #a3a3ab;
+	--line: #38383f;
+	--chip: #2a2a33;
+	--track: #ffffff;
+	--stop: #15151e;
+	--green-ink: var(--green);
+	--blue-ink: #6aa8f0;
+	color-scheme: dark;
+}
+
+/* Section colours: --c fills, --on is the text on top of it */
+[data-colour='red'] {
+	--c: var(--red);
+	--on: #ffffff;
+}
+
+[data-colour='purple'] {
+	--c: var(--purple);
+	--on: #ffffff;
+}
+
+[data-colour='yellow'] {
+	--c: var(--yellow);
+	--on: var(--carbon);
+}
+
+[data-colour='green'] {
+	--c: var(--green);
+	--on: var(--carbon);
+}
+
+[data-colour='blue'] {
+	--c: var(--blue);
+	--on: #ffffff;
+}
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+
+/*
+ * Every size is in rem, so the root size is the one scale knob. Phones and
+ * tablets read at the browser's size and scroll. Desktops fit one screen: the
+ * design is 96rem × 45.6rem (16px at 1536×730), growing to 20px at 1920×1080.
+ */
+html {
+	font-size: 100%;
+}
+
+@media (min-width: 1180px) and (min-height: 560px) {
+	html {
+		font-size: min(100vw / 96, 100dvh / 45.625, 20px);
+	}
+}
+
+body {
+	min-height: 100dvh;
+	background: var(--page);
+	color: var(--ink);
+	font-family: var(--font);
+	line-height: 1.45;
+	-webkit-font-smoothing: antialiased;
+}
+
+/* Desktops: the page is centred on the backdrop (components/Backdrop) */
+@media (min-width: 1180px) and (min-height: 560px) {
+	body {
+		display: grid;
+		background: var(--carbon);
+	}
+}
+
+a {
+	color: inherit;
+	text-decoration: none;
+}
+
+:focus-visible {
+	outline: 2px solid var(--teal);
+	outline-offset: 2px;
+}
+
+img {
+	display: block;
+	max-width: 100%;
+}
+
+h1,
+h2,
+h3,
+p,
+ul,
+ol {
+	margin: 0;
+}
+
+button {
+	font: inherit;
+	color: inherit;
+}
+
+.sr-only {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	margin: -1px;
+	overflow: hidden;
+	clip: rect(0, 0, 0, 0);
+	white-space: nowrap;
+	border: 0;
+}
+
+/* The F1 slash: both ends cut, like the nameplate's slashes */
+.sl {
+	clip-path: polygon(
+		var(--cut) 0,
+		100% 0,
+		calc(100% - var(--cut)) 100%,
+		0 100%
+	);
+}
+
+/* Square on the left, cut on the right: tabs and the nameplate */
+.slr {
+	clip-path: polygon(0 0, 100% 0, calc(100% - var(--cut)) 100%, 0 100%);
+}
+
+/* A section's heading tab, in its colour */
+.tab {
+	display: inline-block;
+	padding: 0.15rem 1.6rem 0.15rem 1rem;
+	background: var(--c, var(--carbon));
+	color: var(--on, #ffffff);
+	font-size: 1.35rem;
+	font-weight: 900;
+	font-style: italic;
+	line-height: 1.35;
+	white-space: nowrap;
+}
+
+.chip {
+	display: inline-block;
+	padding: 0.1rem 1rem;
+	background: var(--chip);
+	font-size: 0.82rem;
+	font-weight: 700;
+	white-space: nowrap;
+}
+
+/* A numbered strip, cut like the chips: the Race report rows and the Press posts */
+.strip {
+	display: grid;
+	align-items: center;
+	gap: 0.6rem;
+	padding: 0.4rem 1.3rem 0.4rem 1.4rem;
+	background: var(--chip);
+	color: var(--ink);
+}
+
+.strip-n {
+	color: var(--blue-ink);
+	font-size: 1.4rem;
+	font-style: italic;
+	font-weight: 900;
+	line-height: 1;
+}
+
+.btn {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: 0.5rem;
+	padding: 0.5rem 1.6rem;
+	border: 0;
+	background: var(--chip);
+	color: var(--ink);
+	font-size: 1rem;
+	font-weight: 700;
+	line-height: 1.2;
+	white-space: nowrap;
+	cursor: pointer;
+	transition: filter 150ms ease;
+}
+
+.btn:hover {
+	filter: brightness(1.12);
+}
+
+.btn-red {
+	background: var(--red);
+	color: #ffffff;
+}
+
+.btn-white {
+	background: #ffffff;
+	color: var(--carbon);
+}
+
+.btn-carbon {
+	background: var(--carbon);
+	color: #ffffff;
+}
+
+[data-mode='dark'] .btn-carbon {
+	background: #ffffff;
+	color: var(--carbon);
+}
+
+/* Clip-paths cut off outlines, so slanted controls show focus inside */
+.sl:focus-visible,
+.slr:focus-visible {
+	outline: 0;
+	box-shadow: inset 0 0 0 3px var(--teal);
+}
+
+/* Placeholder for images that have not loaded */
+.ph {
+	background: var(--chip);
+}
+
+/* A panel on the page: the section's tab sits on its top edge */
+.panel {
+	min-width: 0;
+	min-height: 0;
+	display: flex;
+	flex-direction: column;
+	background: var(--surface);
+}
+
+.panel > .tab {
+	align-self: flex-start;
+}
+
+/* Moving between sections: the old one drops away, the new one rises in */
+::view-transition-old(.section-out) {
+	animation: 160ms ease-in both section-out;
+}
+
+::view-transition-new(.section-in) {
+	animation: 260ms ease-out 60ms both section-in;
+}
+
+@keyframes section-out {
+	to {
+		opacity: 0;
+		transform: translateY(0.8rem);
+	}
+}
+
+@keyframes section-in {
+	from {
+		opacity: 0;
+		transform: translateY(-0.8rem);
+	}
+}
+
+/* The mode switch cross-fades via document.startViewTransition */
+::view-transition-old(root),
+::view-transition-new(root) {
+	animation-duration: 0.25s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	::view-transition-old(.section-out),
+	::view-transition-new(.section-in) {
+		animation: none;
+	}
+}

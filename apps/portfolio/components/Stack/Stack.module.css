@@ -1,0 +1,27 @@
+.stack {
+	list-style: none;
+	padding: 0;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.35rem;
+}
+
+/* Solid enough to read on either surface: the ink colour at low strength */
+.chip {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.55rem;
+	padding: 0.4rem 1.4rem 0.4rem 1.2rem;
+	background: color-mix(in srgb, var(--ink) 9%, var(--surface));
+	box-shadow: inset 0 -0.15rem 0 color-mix(in srgb, var(--ink) 22%, transparent);
+	font-size: 0.98rem;
+	font-weight: 700;
+	white-space: nowrap;
+}
+
+.chip svg {
+	flex: 0 0 auto;
+	width: 1.2rem;
+	height: 1.2rem;
+	fill: currentColor;
+}

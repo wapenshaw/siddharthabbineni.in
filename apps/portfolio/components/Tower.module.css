@@ -1,0 +1,161 @@
+/*
+ * A timing tower: carbon, uncoloured, one row per entry. Podiums lists game
+ * achievements in it, Garage lists open source pull requests.
+ */
+.tower {
+	flex: 0 0 23rem;
+	min-height: 0;
+	display: flex;
+	flex-direction: column;
+	background: var(--carbon);
+	color: #ffffff;
+}
+
+.head {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: baseline;
+	justify-content: space-between;
+	gap: 1rem;
+	padding: 0.7rem 1rem 0.6rem;
+	border-bottom: 2px solid var(--grey);
+	font-size: 0.85rem;
+	color: var(--on-dark-muted);
+}
+
+.head h2 {
+	font-size: 1.15rem;
+	font-weight: 900;
+	font-style: italic;
+	color: #ffffff;
+}
+
+.columns {
+	display: flex;
+	justify-content: space-between;
+	padding: 0.35rem 0.9rem 0.35rem 3rem;
+	font-size: 0.72rem;
+	color: var(--on-dark-muted);
+}
+
+.rows {
+	flex: 1;
+	min-height: 0;
+	list-style: none;
+	padding: 0;
+	display: flex;
+	flex-direction: column;
+	overflow: hidden;
+}
+
+.rows > li {
+	flex: 1 1 0;
+	min-height: 2.6rem;
+	max-height: 4.4rem;
+	display: flex;
+	border-bottom: 1px solid #2a2a33;
+}
+
+.row {
+	flex: 1;
+	min-width: 0;
+	display: flex;
+	align-items: center;
+	gap: 0.7rem;
+	padding-right: 0.9rem;
+}
+
+a.row:hover {
+	background: var(--carbon-2);
+}
+
+.pos {
+	flex: 0 0 2.2rem;
+	align-self: stretch;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background: var(--grey);
+	font-weight: 900;
+	font-style: italic;
+}
+
+.rows > li:first-child .pos {
+	background: #ffffff;
+	color: var(--carbon);
+}
+
+.icon {
+	flex: 0 0 2.2rem;
+	width: 2.2rem;
+	height: 2.2rem;
+	margin-left: 0.6rem;
+	object-fit: cover;
+}
+
+.text {
+	flex: 1;
+	min-width: 0;
+	display: flex;
+	flex-direction: column;
+	line-height: 1.2;
+}
+
+.text b {
+	font-size: 0.95rem;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+a.row:hover b {
+	text-decoration: underline;
+}
+
+.text small {
+	font-size: 0.78rem;
+	color: var(--on-dark-muted);
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.date {
+	flex: 0 0 auto;
+	font-size: 0.8rem;
+	color: var(--on-dark-muted);
+}
+
+.empty {
+	padding: 1rem;
+	color: var(--on-dark-muted);
+}
+
+.empty a {
+	color: #ffffff;
+	text-decoration: underline;
+}
+
+.foot {
+	padding: 0.6rem 1rem;
+	background: var(--carbon-2);
+	font-size: 0.9rem;
+	font-weight: 700;
+	text-align: right;
+}
+
+.foot:hover {
+	text-decoration: underline;
+}
+
+@media (max-width: 1179px), (max-height: 559px) {
+	.tower {
+		flex: none;
+		margin-top: 0.45rem;
+	}
+
+	.rows > li {
+		flex: none;
+		min-height: 3.2rem;
+	}
+}

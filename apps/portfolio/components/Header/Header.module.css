@@ -1,0 +1,264 @@
+/* Desktop: one carbon bar. Phones: the nameplate and the line; Resume and
+   Blog sit at the end of the page instead (see the profile layout). */
+.header {
+	display: flex;
+	align-items: stretch;
+	min-width: 0;
+	background: var(--carbon);
+	color: #ffffff;
+}
+
+.plate {
+	flex: 0 0 auto;
+	display: flex;
+	align-items: center;
+	gap: 0.85rem;
+	padding: 0 2.4rem 0 0;
+	background: #ffffff;
+	color: var(--carbon);
+}
+
+/* The helmet as on a TV graphic: a slanted cell in team red, the drawing
+   fading into the colour just above a red base stripe */
+.shot {
+	position: relative;
+	align-self: stretch;
+	width: 5rem;
+	background: var(--red);
+	clip-path: polygon(0 0, 100% 0, calc(100% - var(--cut)) 100%, 0 100%);
+}
+
+/* one cut wider and pulled left, so the slant on the right never clips the
+   helmet; the left edge can */
+.shot img {
+	width: calc(100% + var(--cut));
+	max-width: none;
+	height: 100%;
+	margin-left: calc(var(--cut) * -1);
+	object-fit: cover;
+	object-position: 50% 0;
+}
+
+.shot::after {
+	content: '';
+	position: absolute;
+	inset: 0;
+	background: linear-gradient(
+		to top,
+		rgb(225 6 0 / 0.75),
+		rgb(225 6 0 / 0) 28%
+	);
+	box-shadow: inset 0 -0.25rem 0 var(--red);
+}
+
+.names {
+	display: flex;
+	flex-direction: column;
+	line-height: 1;
+}
+
+.first {
+	font-size: 0.95rem;
+	font-weight: 600;
+}
+
+.last {
+	font-size: 2rem;
+	font-weight: 900;
+	font-style: italic;
+	text-transform: uppercase;
+}
+
+.slashRed,
+.slashYellow {
+	flex: 0 0 2.2rem;
+	margin-left: -0.8rem;
+	background: var(--red);
+}
+
+.slashYellow {
+	flex-basis: 1.4rem;
+	margin-left: -0.5rem;
+	background: var(--yellow);
+}
+
+.tagline {
+	flex: 1 1 0;
+	min-width: 12rem;
+	margin-left: 1.2rem;
+	align-self: center;
+	font-size: 1.05rem;
+	line-height: 1.3;
+	display: -webkit-box;
+	-webkit-line-clamp: 2;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+}
+
+.end {
+	flex: 0 0 auto;
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+	padding: 0 0.9rem 0 1rem;
+}
+
+.socials {
+	list-style: none;
+	padding: 0;
+	display: flex;
+	gap: 0.2rem;
+}
+
+.soc,
+.so,
+.mode {
+	height: 1.9rem;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 0.4rem;
+	border: 0;
+	background: var(--grey);
+	color: #c8c8cc;
+	cursor: pointer;
+	transition:
+		background-color 150ms ease,
+		color 150ms ease;
+}
+
+.soc,
+.mode {
+	width: 2.5rem;
+}
+
+.mode {
+	flex: 0 0 auto;
+	align-self: center;
+	margin-left: 1rem;
+}
+
+.blog {
+	display: none;
+}
+
+.soc:hover,
+.mode:hover {
+	background: #ffffff;
+	color: var(--carbon);
+}
+
+/* Brand icons come at a fixed pixel size; the header scales them with the page */
+.soc svg,
+.soc span,
+.so svg,
+.mode svg {
+	width: 1.05rem;
+	height: 1.05rem;
+}
+
+.so {
+	padding: 0 1.1rem 0 1rem;
+	font-weight: 700;
+	font-size: 0.95rem;
+	color: #ffffff;
+	box-shadow: inset 0 -0.2rem 0 var(--papaya);
+}
+
+.so:hover {
+	background: var(--papaya);
+	color: var(--carbon);
+}
+
+.so svg {
+	color: var(--papaya);
+}
+
+.so:hover svg {
+	color: inherit;
+}
+
+@media (max-width: 1179px), (max-height: 559px) {
+	.header {
+		flex-wrap: wrap;
+		gap: 0.75rem;
+		padding: 0.9rem 1rem 1rem;
+	}
+
+	.plate {
+		height: 3.4rem;
+		padding: 0 1rem 0 0;
+	}
+
+	.shot {
+		width: 4rem;
+	}
+
+	.last {
+		font-size: 1.7rem;
+	}
+
+	/* slimmer slashes leave room for the Blog and theme buttons on one row */
+	.slashRed {
+		flex-basis: 1.5rem;
+	}
+
+	.slashYellow {
+		flex-basis: 1.1rem;
+	}
+
+	.mode {
+		order: 1;
+		width: 2.15rem;
+		margin-left: -0.45rem;
+	}
+
+	/* the Blog icon sits before the theme toggle, both pushed to the right */
+	.blog {
+		display: flex;
+		margin-left: auto;
+	}
+
+	.tagline {
+		order: 2;
+		flex: 1 0 100%;
+		margin: 0;
+		font-size: 1rem;
+		line-height: 1.4;
+		color: #d0d0d2;
+		display: block;
+	}
+
+	.end {
+		display: none;
+	}
+}
+
+/* Small phones (360px and so): a smaller photo, name and gaps keep the Blog
+   and theme buttons on the nameplate's row */
+@media (max-width: 389px) {
+	.header {
+		column-gap: 0.55rem;
+	}
+
+	.shot {
+		width: 3.4rem;
+	}
+
+	.plate {
+		gap: 0.6rem;
+		padding-right: 0.85rem;
+	}
+
+	.last {
+		font-size: 1.5rem;
+	}
+
+	.mode {
+		margin-left: -0.3rem;
+	}
+
+	.blog {
+		margin-left: auto;
+	}
+}

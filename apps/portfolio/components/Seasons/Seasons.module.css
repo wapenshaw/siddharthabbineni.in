@@ -1,0 +1,601 @@
+.seasons {
+	min-width: 0;
+	min-height: 0;
+	display: flex;
+	gap: 0.45rem;
+}
+
+/* ---- The route ---- */
+
+/*
+ * As wide as the map (its height × the stretch's 165:365 shape) plus the stop
+ * labels. The map's height is the panel's less the head and --foot, the room
+ * under the route for "Life before work".
+ */
+.route {
+	--foot: 2.2rem;
+	flex: 0 0 calc((100cqh - 4.2rem - var(--foot)) * 165 / 365 + 11rem);
+	padding-bottom: var(--foot);
+}
+
+.routeHead,
+.stintHead {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 0.8rem;
+	padding-right: 1rem;
+	font-size: 0.85rem;
+	color: var(--muted);
+}
+
+.routeHead h1 {
+	margin: 0;
+}
+
+.mapArea {
+	flex: 1;
+	min-height: 0;
+	margin: 0.5rem 0.6rem 0 1rem;
+	container: map / size;
+}
+
+.map {
+	position: relative;
+	height: 100cqh;
+	width: calc(100cqh * 165 / 365);
+}
+
+.svg {
+	position: absolute;
+	inset: 0;
+	width: 100%;
+	height: 100%;
+	overflow: visible;
+}
+
+.underlay {
+	stroke: var(--line);
+	stroke-width: 14;
+}
+
+.lifeLine,
+.work,
+.selLine,
+.now {
+	stroke-width: 6;
+}
+
+.lifeLine {
+	stroke: var(--grey-2);
+	stroke-linecap: round;
+}
+
+.work {
+	stroke: var(--track);
+}
+
+.selLine {
+	stroke: var(--teal);
+}
+
+.now {
+	stroke: var(--red);
+	stroke-linecap: round;
+}
+
+.lifeDot {
+	fill: var(--grey-2);
+}
+
+.marker {
+	cursor: pointer;
+}
+
+.stopDot {
+	fill: var(--stop);
+	stroke: var(--track);
+	stroke-width: 2.6;
+}
+
+.selRing {
+	fill: none;
+	stroke: var(--teal);
+	stroke-width: 2.6;
+}
+
+.selDot {
+	fill: var(--teal);
+	stroke: var(--track);
+	stroke-width: 2;
+}
+
+.nowDot {
+	fill: var(--red);
+	stroke: var(--stop);
+	stroke-width: 2.6;
+}
+
+/* Each end of the route is labelled off its tip: the road's end above, life's start below */
+.lifeLabel,
+.roadLabel {
+	position: absolute;
+	left: var(--left);
+	top: var(--top);
+	font-size: 0.8rem;
+	color: var(--grey-2);
+	white-space: nowrap;
+}
+
+/* ending at the road's last dash, clear of its curl */
+.roadLabel {
+	transform: translate(calc(-100% + 0.6rem), calc(-100% - 2.3rem));
+}
+
+/* under the grey run-up, starting a little in from its rounded end */
+.lifeLabel {
+	transform: translate(1.6rem, 1.2rem);
+}
+
+.stops {
+	list-style: none;
+	padding: 0;
+}
+
+/* Each label sits right of the map, level with its stop */
+.stop {
+	position: absolute;
+	top: var(--top);
+	left: calc(100% + 0.5rem);
+	transform: translateY(-50%);
+	white-space: nowrap;
+}
+
+.pick {
+	position: relative;
+	isolation: isolate;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	margin-left: -0.5rem;
+	padding: 0.2rem 1.3rem 0.2rem 0.9rem;
+	border: 0;
+	background: transparent;
+	text-align: left;
+	cursor: pointer;
+	transition: background-color 150ms ease;
+}
+
+.pick:hover {
+	background: var(--chip);
+}
+
+.pick b {
+	font-size: 1.02rem;
+	font-weight: 700;
+	line-height: 1.15;
+}
+
+.pick small {
+	font-size: 0.8rem;
+	color: var(--muted);
+}
+
+/* The current job is always red */
+.stop[data-state='current'] .pick {
+	background: var(--red);
+	color: #ffffff;
+}
+
+/* The selected one is teal; the fill slides from stop to stop */
+.stop[data-state='selected'] .pick {
+	background: transparent;
+	color: var(--carbon);
+}
+
+.pickFill {
+	position: absolute;
+	inset: 0;
+	z-index: -1;
+	background: var(--teal);
+}
+
+.stop[data-state] .pick small {
+	color: inherit;
+	opacity: 0.85;
+}
+
+.dot {
+	display: none;
+}
+
+.inline {
+	display: none;
+}
+
+/* A stint's details under its row (phones), folded shut unless open */
+.fold {
+	display: none;
+}
+
+/* ---- The stint ---- */
+
+.stint {
+	flex: 1;
+	gap: 0.8rem;
+	padding: 0 1.8rem 1.1rem 0;
+	overflow: hidden;
+}
+
+.stintHead {
+	justify-content: flex-start;
+	font-size: 0.95rem;
+	font-weight: 600;
+}
+
+.selTab {
+	background: var(--teal);
+	color: var(--carbon);
+}
+
+.stintBody {
+	flex: 1;
+	min-height: 0;
+	display: flex;
+	flex-direction: column;
+	gap: 0.7rem;
+	padding-left: 1.6rem;
+	container: stint / size;
+}
+
+.who {
+	display: flex;
+	flex-direction: column;
+	color: var(--muted);
+	font-size: 1.1rem;
+}
+
+.company {
+	font-size: 2.9rem;
+	line-height: 1;
+	font-weight: 900;
+	font-style: italic;
+	color: var(--ink);
+}
+
+.company a:hover {
+	text-decoration: underline;
+	text-decoration-thickness: 0.06em;
+}
+
+.summary {
+	max-width: 40em;
+	font-size: 1.25rem;
+	line-height: 1.4;
+}
+
+/* The resume's bullets as numbered rows, cut like every other chip on the site */
+.report {
+	display: flex;
+	flex-direction: column;
+	gap: 0.35rem;
+}
+
+.reportHead {
+	font-size: 1.15rem;
+	font-weight: 800;
+	font-style: italic;
+	line-height: 1.2;
+}
+
+.rows {
+	list-style: none;
+	padding: 0;
+	display: flex;
+	flex-direction: column;
+	gap: 5px;
+}
+
+/* The strip itself (globals.css) is shared with the Press posts */
+.row {
+	grid-template-columns: 2.4rem minmax(0, 1fr);
+	line-height: 1.35;
+	text-wrap: pretty;
+}
+
+/*
+ * Screens taller than a short laptop's (16:9, 16:10) are narrower here too, so
+ * the text grows a little and the rows share out the spare height
+ */
+@container stint (min-height: 32rem) {
+	.report {
+		flex: 1;
+		gap: 0.5rem;
+	}
+
+	.reportHead {
+		font-size: 1.3rem;
+	}
+
+	.rows {
+		flex: 1;
+		max-height: 24rem;
+		gap: 6px;
+	}
+
+	.row {
+		flex: 1;
+		grid-template-columns: 2.5rem minmax(0, 1fr);
+		padding-block: 0.45rem;
+		font-size: 1.08rem;
+	}
+
+	.n {
+		font-size: 1.6rem;
+	}
+}
+
+/* The stack sits on its own row at the bottom, just above the pager */
+.setup {
+	margin-top: auto;
+	padding-top: 0.4rem;
+}
+
+.pager {
+	padding-left: 1.6rem;
+	display: flex;
+	justify-content: flex-end;
+	gap: 0.3rem;
+}
+
+/* Same width whatever the job name, so each slot stays put */
+.turn {
+	width: 13rem;
+	justify-content: space-between;
+	gap: 1.1rem;
+	padding: 0.45rem 1.8rem 0.45rem 1.6rem;
+	text-align: left;
+}
+
+/* A missing button keeps its slot empty */
+.turn[hidden] {
+	display: inline-flex;
+	visibility: hidden;
+}
+
+.turnText {
+	display: flex;
+	flex-direction: column;
+	font-size: 1.05rem;
+	line-height: 1.15;
+}
+
+.turnLabel {
+	font-size: 0.75rem;
+	font-weight: 600;
+	opacity: 0.7;
+}
+
+.turnKey {
+	font-size: 1.2rem;
+	opacity: 0.6;
+}
+
+/* ---- Phones and tablets: a list, newest first, the track running down its left ---- */
+@media (max-width: 1179px), (max-height: 559px) {
+	.seasons {
+		display: block;
+	}
+
+	.route {
+		padding: 0;
+	}
+
+	.routeHead {
+		padding: 0 1rem 0 0;
+	}
+
+	.mapArea,
+	.map {
+		container: none;
+		margin: 0;
+		width: auto;
+		height: auto;
+	}
+
+	.svg,
+	.stint {
+		display: none;
+	}
+
+	.roadLabel {
+		position: static;
+		transform: none;
+		padding: 0.9rem 0 0 calc(var(--rail) + 1.8rem);
+		font-size: 0.82rem;
+		color: var(--muted);
+	}
+
+	.map {
+		--rail: 1.2rem;
+		--row: 3.5rem;
+	}
+
+	.stops {
+		padding: 0.6rem 0 0;
+	}
+
+	.stop {
+		position: relative;
+		top: auto;
+		left: auto;
+		transform: none;
+		white-space: normal;
+	}
+
+	/* The track above and below each stop; colours follow the desktop route */
+	.stop::before,
+	.stop::after {
+		content: '';
+		position: absolute;
+		left: calc(var(--rail) - 2px);
+		width: 4px;
+		background: var(--track);
+	}
+
+	.stop::before {
+		top: 0;
+		height: calc(var(--row) / 2);
+	}
+
+	.stop::after {
+		top: calc(var(--row) / 2);
+		bottom: 0;
+	}
+
+	.stop[data-state='current']::before {
+		top: -2rem;
+		height: calc(var(--row) / 2 + 2rem);
+		background: linear-gradient(rgb(225 6 0 / 0), var(--red));
+	}
+
+	.stop[data-state='selected']::before,
+	.stop[data-below='selected']::after {
+		background: var(--teal);
+	}
+
+	.stop[data-below='life']::after {
+		background: var(--grey-2);
+	}
+
+	/* The grey run-up continues under the first job */
+	.lifeLabel {
+		display: block;
+		position: relative;
+		top: auto;
+		left: auto;
+		transform: none;
+		padding: 1.2rem 0 1.4rem calc(var(--rail) + 1.8rem);
+		font-size: 0.82rem;
+	}
+
+	.lifeLabel::before {
+		content: '';
+		position: absolute;
+		left: calc(var(--rail) - 2px);
+		top: 0;
+		height: 100%;
+		width: 4px;
+		background: linear-gradient(var(--grey-2), rgb(148 148 152 / 0));
+	}
+
+	.pick {
+		width: 100%;
+		min-height: var(--row);
+		justify-content: center;
+		margin: 0;
+		padding: 0.4rem 1rem 0.4rem calc(var(--rail) + 1.8rem);
+		clip-path: none;
+	}
+
+	.pick b {
+		font-size: 1.12rem;
+	}
+
+	.pick small {
+		font-size: 0.88rem;
+	}
+
+	.dot {
+		display: block;
+		position: absolute;
+		z-index: 1;
+		left: calc(var(--rail) - 0.45rem);
+		top: calc(var(--row) / 2 - 0.45rem);
+		width: 0.9rem;
+		height: 0.9rem;
+		border-radius: 50%;
+		background: var(--stop);
+		border: 3px solid var(--track);
+	}
+
+	.stop[data-state='current'] .dot {
+		background: var(--red);
+		border-color: #ffffff;
+	}
+
+	.stop[data-state='selected'] .dot {
+		left: calc(var(--rail) - 0.62rem);
+		top: calc(var(--row) / 2 - 0.62rem);
+		width: 1.24rem;
+		height: 1.24rem;
+		background: var(--teal);
+		border-color: var(--carbon);
+	}
+
+	.fold {
+		display: grid;
+		grid-template-rows: 0fr;
+		opacity: 0;
+		visibility: hidden;
+		transition:
+			grid-template-rows 550ms cubic-bezier(0.4, 0, 0.2, 1),
+			opacity 550ms ease,
+			visibility 0s 550ms;
+	}
+
+	.fold[data-open] {
+		grid-template-rows: 1fr;
+		opacity: 1;
+		visibility: visible;
+		transition:
+			grid-template-rows 550ms cubic-bezier(0.4, 0, 0.2, 1),
+			opacity 550ms ease;
+	}
+
+	.foldInner {
+		min-height: 0;
+		overflow: hidden;
+	}
+
+	.inline {
+		position: relative;
+		display: flex;
+		flex-direction: column;
+		gap: 0.8rem;
+		padding: 1rem 1rem 1.2rem calc(var(--rail) + 1.8rem);
+		border-bottom: 1px solid var(--line);
+	}
+
+	.company {
+		font-size: 1.9rem;
+	}
+
+	.summary {
+		font-size: 1.1rem;
+	}
+
+	.row {
+		grid-template-columns: 1.9rem minmax(0, 1fr);
+		align-items: start;
+		gap: 0.5rem;
+		padding: 0.65rem 1.3rem 0.65rem 1rem;
+		font-size: 1.06rem;
+	}
+
+	.reportHead {
+		font-size: 1.25rem;
+	}
+
+	.n {
+		font-size: 1.3rem;
+		line-height: 1.1;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.fold,
+	.fold[data-open] {
+		transition: none;
+	}
+}

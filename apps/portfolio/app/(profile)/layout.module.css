@@ -1,0 +1,97 @@
+/*
+ * Breakpoint shared by the component modules:
+ *   (max-width: 1179px), (max-height: 559px)   too small for one screen: stack and scroll
+ */
+
+.app {
+	width: min(100vw, var(--max-width));
+	height: min(100dvh, var(--max-height));
+	margin: auto;
+	display: grid;
+	grid-template:
+		'header header' 4rem
+		'nav main' minmax(0, 1fr)
+		'radio radio' 2.6rem
+		/ 15rem minmax(0, 1fr);
+	gap: 0.75rem;
+	padding: 1rem 1.5rem;
+	overflow: hidden;
+	background: var(--page);
+	/* only visible once the screen is bigger than the page */
+	box-shadow: 0 30px 80px rgb(0 0 0 / 0.6);
+}
+
+.header {
+	grid-area: header;
+}
+
+.nav {
+	grid-area: nav;
+}
+
+/* Pages size their panels against this box (cqh), since nothing here scrolls */
+.main {
+	grid-area: main;
+	min-width: 0;
+	min-height: 0;
+	display: grid;
+	container: main / size;
+}
+
+.radio {
+	grid-area: radio;
+}
+
+.links,
+.foot {
+	display: none;
+}
+
+@media (max-width: 1179px), (max-height: 559px) {
+	.app {
+		width: auto;
+		height: auto;
+		display: flex;
+		flex-direction: column;
+		gap: 0;
+		padding: 0;
+		overflow: visible;
+		box-shadow: none;
+	}
+
+	.main {
+		display: block;
+		container: none;
+		padding: 0 1rem;
+	}
+
+	/* The Team radio, fixed to the bottom of the screen, edge to edge */
+	.app > .radio {
+		position: fixed;
+		inset: auto 0 0;
+		z-index: 20;
+		padding-bottom: env(safe-area-inset-bottom);
+		clip-path: none;
+		box-shadow: 0 -0.4rem 1.2rem rgb(0 0 0 / 0.3);
+	}
+
+	.links {
+		display: flex;
+		gap: 0.4rem;
+		margin: 1rem 1rem 0;
+	}
+
+	.links > a {
+		flex: 1;
+		padding-block: 0.7rem;
+	}
+
+	/* the bottom padding clears the fixed Team radio */
+	.foot {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		gap: 0.6rem;
+		padding: 1rem 1rem calc(2rem + 2.8rem + env(safe-area-inset-bottom));
+	}
+}

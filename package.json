@@ -2,35 +2,21 @@
 	"name": "wapenshaw-web",
 	"version": "0.2.0",
 	"private": true,
+	"description": "siddharthabbineni.in and its subdomains: each site is its own Next.js app in apps/",
 	"engines": {
 		"node": ">=20.0.0"
 	},
 	"scripts": {
-		"dev": "next dev",
-		"build": "next build",
-		"start": "next start",
-		"lint": "next lint",
-		"typecheck": "tsc --noEmit"
-	},
-	"dependencies": {
-		"@chakra-ui/react": "^3.34.0",
-		"@emotion/react": "^11.14.0",
-		"motion": "^12.36.0",
-		"next": "^16.1.6",
-		"next-themes": "^0.4.6",
-		"react": "^19.2.4",
-		"react-dom": "^19.2.4",
-		"react-icons": "^5.6.0",
-		"react-intersection-observer": "^10.0.3",
-		"swr": "^2.4.1"
+		"setup": "npm install && npm --prefix apps/portfolio install && npm --prefix apps/blog install",
+		"dev:portfolio": "npm --prefix apps/portfolio run dev",
+		"dev:blog": "npm --prefix apps/blog run dev",
+		"build:portfolio": "npm --prefix apps/portfolio run build",
+		"build:blog": "npm --prefix apps/blog run build",
+		"typecheck": "npm --prefix apps/portfolio run typecheck && npm --prefix apps/blog run typecheck",
+		"lint": "biome check .",
+		"format": "biome check --write ."
 	},
 	"devDependencies": {
-		"@types/node": "^25.5.0",
-		"@types/react": "^19.2.14",
-		"@types/react-dom": "^19.2.3",
-		"eslint": "^10.0.3",
-		"eslint-config-next": "^16.1.6",
-		"prettier": "^3.8.1",
-		"typescript": "^5.9.3"
+		"@biomejs/biome": "2.5.15"
 	}
 }

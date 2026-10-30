@@ -1,0 +1,108 @@
+/* The latest posts, each opening on the blog */
+.press {
+	padding-bottom: 1.1rem;
+}
+
+.head {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 0.6rem 1.1rem;
+}
+
+.head h1 {
+	margin: 0;
+}
+
+.line {
+	color: var(--muted);
+}
+
+.open {
+	margin-left: auto;
+	margin-right: 1.4rem;
+}
+
+.posts {
+	list-style: none;
+	display: flex;
+	flex-direction: column;
+	gap: 5px;
+	margin: 1.1rem 1.4rem 0;
+	padding: 0;
+}
+
+/* The strip itself (globals.css) is shared with the Seasons race report */
+.post {
+	grid-template-columns: 2.4rem minmax(0, 1fr) 9.5rem;
+	text-decoration: none;
+}
+
+.post:hover .title {
+	color: var(--blue-ink);
+}
+
+.text {
+	min-width: 0;
+}
+
+.title {
+	display: block;
+	font-size: 1.3rem;
+	line-height: 1.15;
+}
+
+.desc {
+	display: block;
+	margin-top: 0.15rem;
+	color: var(--muted);
+	font-size: 0.95rem;
+}
+
+.meta {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-end;
+	color: var(--muted);
+	font-size: 0.95rem;
+}
+
+.foot,
+.empty {
+	margin: auto 1.4rem 0;
+	padding-top: 1.1rem;
+	color: var(--muted);
+}
+
+.empty {
+	margin-top: 1.1rem;
+}
+
+@media (max-width: 1179px), (max-height: 559px) {
+	/* Numbers at the top of the tall phone strips, like the race report's */
+	.post {
+		grid-template-columns: 2.4rem minmax(0, 1fr);
+		align-items: start;
+	}
+
+	.meta {
+		grid-column: 2;
+		flex-direction: row;
+		gap: 1rem;
+	}
+}
+
+@media (max-width: 559px) {
+	.open {
+		margin-left: 1rem;
+	}
+
+	.posts {
+		margin-inline: 1rem;
+	}
+
+	.foot,
+	.empty {
+		margin-inline: 1rem;
+	}
+}
