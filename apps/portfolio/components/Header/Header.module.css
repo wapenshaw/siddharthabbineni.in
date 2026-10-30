@@ -18,8 +18,8 @@
 	color: var(--carbon);
 }
 
-/* The headshot as on a TV graphic: a slanted cell in team red, the photo
-   fading into the colour towards a red base stripe */
+/* The helmet as on a TV graphic: a slanted cell in team red, the drawing
+   fading into the colour just above a red base stripe */
 .shot {
 	position: relative;
 	align-self: stretch;
@@ -28,12 +28,15 @@
 	clip-path: polygon(0 0, 100% 0, calc(100% - var(--cut)) 100%, 0 100%);
 }
 
+/* one cut wider and pulled left, so the slant on the right never clips the
+   helmet; the left edge can */
 .shot img {
-	width: 100%;
+	width: calc(100% + var(--cut));
+	max-width: none;
 	height: 100%;
+	margin-left: calc(var(--cut) * -1);
 	object-fit: cover;
-	object-position: 50% 15%;
-	filter: saturate(0.85) contrast(1.05);
+	object-position: 50% 0;
 }
 
 .shot::after {
@@ -43,7 +46,7 @@
 	background: linear-gradient(
 		to top,
 		rgb(225 6 0 / 0.75),
-		rgb(225 6 0 / 0) 55%
+		rgb(225 6 0 / 0) 28%
 	);
 	box-shadow: inset 0 -0.25rem 0 var(--red);
 }
@@ -184,7 +187,7 @@
 
 	.plate {
 		height: 3.4rem;
-		padding: 0 1rem 0 0.25rem;
+		padding: 0 1rem 0 0;
 	}
 
 	.shot {

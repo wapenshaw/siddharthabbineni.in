@@ -166,10 +166,10 @@ export async function shareCard({
 						}}
 					>
 						<img
-							src={`data:image/jpeg;base64,${avatar.toString('base64')}`}
+							src={`data:image/png;base64,${avatar.toString('base64')}`}
 							width={150}
 							height={120}
-							style={{ objectFit: 'cover', objectPosition: '50% 15%' }}
+							style={{ objectFit: 'cover', objectPosition: '50% 0' }}
 							alt=""
 						/>
 						<div
@@ -181,7 +181,7 @@ export async function shareCard({
 								height: 120,
 								display: 'flex',
 								backgroundImage:
-									'linear-gradient(to top, rgba(225,6,0,0.75), rgba(225,6,0,0) 55%)',
+									'linear-gradient(to top, rgba(225,6,0,0.75), rgba(225,6,0,0) 28%)',
 								borderBottom: '7px solid #e10600',
 							}}
 						/>

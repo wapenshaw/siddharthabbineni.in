@@ -65,9 +65,6 @@ export const metadata: Metadata = {
 		description: DESCRIPTION,
 		creator: `@${profile.handle}`,
 	},
-	icons: {
-		icon: '/favicons/favicon.ico',
-	},
 }
 
 export default function RootLayout({

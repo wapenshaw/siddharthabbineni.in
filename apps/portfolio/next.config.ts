@@ -14,7 +14,7 @@ const nextConfig: NextConfig = {
 	},
 	// The share cards (lib/shareCard.tsx) read their fonts and the headshot
 	outputFileTracingIncludes: {
-		'/**': ['./assets/fonts/*', './public/SA_avatar.jpg'],
+		'/**': ['./assets/fonts/*', './public/wapenshaw-helmet.png'],
 	},
 	images: {
 		unoptimized: true,

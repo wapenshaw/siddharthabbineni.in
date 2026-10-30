@@ -1,7 +1,7 @@
 /**
  * The career route is part of the Nürburgring GP circuit, traced from
  * "Circuit Nürburgring-2013-GP.svg" by Pitlane02 on Wikimedia Commons
- * (CC BY-SA 3.0). The credit is shown under the route.
+ * (CC BY-SA 3.0). The credit isn't on the page yet; it'll get a spot later.
  */
 export const TRACK_CREDIT = {
 	text: 'Track: Pitlane02, CC BY-SA 3.0',
@@ -39,6 +39,9 @@ export const STOPS: TrackPoint[] = [
 	{ at: 28, x: 347.7, y: 424.3 },
 	{ at: 33, x: 300.4, y: 474.5 },
 ]
+
+/** Where the dashes after the current job fade out; moves on with the last stop */
+export const ROAD_END: TrackPoint = { at: 41.3, x: 199.3, y: 544.2 }
 
 /** A point's height down the route, as a percentage; turning the circuit 180° about y 387.5 flips y */
 export const topOf = ({ y }: TrackPoint) =>

@@ -3,9 +3,9 @@
 import { keysAreBusy, onStep } from 'components/Nav/steps'
 import Stack from 'components/Stack'
 import {
+	ROAD_END,
 	RUN_UP,
 	STOPS,
-	TRACK_CREDIT,
 	TRACK_PATH,
 	TRACK_ROTATE,
 	TRACK_VIEWBOX,
@@ -120,12 +120,16 @@ export default function Seasons({ stints }: { stints: Stint[] }) {
 					<h1 id="seasons-title" className="tab slr" data-colour="red">
 						Seasons
 					</h1>
-					<span>Newest at the top</span>
 				</div>
 				<div className={styles.mapArea}>
 					<div className={styles.map}>
 						<Route selected={selected} last={last} onPick={setSelected} />
-						<p className={styles.roadLabel}>The road keeps going</p>
+						<p
+							className={styles.roadLabel}
+							style={{ '--top': `${topOf(ROAD_END)}%` } as CSSProperties}
+						>
+							The road keeps going
+						</p>
 						<ol className={styles.stops}>
 							{newestFirst.map(({ s, i }) => (
 								<li
@@ -195,14 +199,6 @@ export default function Seasons({ stints }: { stints: Stint[] }) {
 						</span>
 					</div>
 				</div>
-				<a
-					className={styles.credit}
-					href={TRACK_CREDIT.url}
-					target="_blank"
-					rel="noopener noreferrer license"
-				>
-					{TRACK_CREDIT.text}
-				</a>
 			</section>
 
 			{stint && (

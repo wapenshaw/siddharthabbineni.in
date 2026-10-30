@@ -111,7 +111,9 @@
 	stroke-width: 2.6;
 }
 
-.lifeLabel {
+/* Each end of the route is labelled in the stops' column, level with it */
+.lifeLabel,
+.roadLabel {
 	position: absolute;
 	left: calc(100% + 0.5rem);
 	top: var(--top);
@@ -121,8 +123,9 @@
 	white-space: nowrap;
 }
 
+/* just under the end of the road, clear of its curl */
 .roadLabel {
-	display: none;
+	transform: translateY(0.9rem);
 }
 
 .stops {
@@ -204,17 +207,6 @@
 /* A stint's details under its row (phones), folded shut unless open */
 .fold {
 	display: none;
-}
-
-.credit {
-	align-self: flex-start;
-	margin: 0.2rem 0 0 1rem;
-	font-size: 0.68rem;
-	color: var(--muted);
-}
-
-.credit:hover {
-	text-decoration: underline;
 }
 
 /* ---- The stint ---- */
@@ -374,10 +366,6 @@
 		padding: 0 1rem 0 0;
 	}
 
-	.routeHead span {
-		font-size: 0.9rem;
-	}
-
 	.mapArea,
 	.map {
 		container: none;
@@ -392,7 +380,8 @@
 	}
 
 	.roadLabel {
-		display: block;
+		position: static;
+		transform: none;
 		padding: 0.9rem 0 0 calc(var(--rail) + 1.8rem);
 		font-size: 0.82rem;
 		color: var(--muted);
@@ -576,10 +565,6 @@
 
 	.stat span {
 		font-size: 0.95rem;
-	}
-
-	.credit {
-		margin: 0.4rem 0 0.8rem 1rem;
 	}
 }
 

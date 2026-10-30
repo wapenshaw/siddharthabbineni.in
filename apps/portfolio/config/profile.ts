@@ -3,7 +3,7 @@ export const profile = {
 	initials: 'SA',
 	// A square photo (400×400) centred on the face; the strip rounds it and draws the ring.
 	// It is also the link preview image.
-	avatar: '/SA_avatar.jpg',
+	avatar: '/wapenshaw-helmet.png',
 	// The SA mark on the photo's badge. It's drawn as a mask, so only its shape
 	// matters (a transparent PNG); the theme supplies the colours.
 	logo: '/logo-black.png',

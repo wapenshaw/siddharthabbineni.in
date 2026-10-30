@@ -16,7 +16,7 @@ export default function Header({ className }: { className?: string }) {
 		<header className={`${styles.header} ${className ?? ''}`}>
 			<Link href="/" className={`slr ${styles.plate}`}>
 				<span className={styles.shot}>
-					<img src={profile.avatar} alt="" width={400} height={400} />
+					<img src={profile.avatar} alt="" width={400} height={409} />
 				</span>
 				<span className={styles.names}>
 					<span className={styles.first}>{first}</span>
