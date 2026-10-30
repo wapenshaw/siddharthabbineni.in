@@ -27,7 +27,7 @@ Three columns were all talking at once, and every panel was packed with small la
 
 ## Trying ideas before writing code
 
-This time I didn't touch the code first. I asked Opus for rough screens of very different ideas: game menus, a magazine spread, a metro map, an F1 pit wall. I liked the metro map and the pit wall, so we mashed them together and drew my career as a line on the Nürburgring GP circuit.
+This time I didn't touch the code first. I asked Opus for rough screens of very different ideas: game menus, a magazine spread, a metro map, an F1 pit wall. I liked the metro map and the pit wall, so I mashed them together and drew my career as a line on the Nürburgring GP circuit.
 
 ![An early concept: the whole circuit, with each section as a coloured sector](/images/rebuilding-this-site-as-an-f1-dashboard/concept-pit-wall.webp)
 

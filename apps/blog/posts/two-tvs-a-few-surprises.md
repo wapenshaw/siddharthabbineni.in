@@ -5,11 +5,11 @@ date: 2026-10-03
 tags: [android-tv, webos, adb, home]
 ---
 
-We have two TVs at home: a TCL 55Q6C running Google TV and an LG 55UN8000PTA running webOS. Both came with years of preinstalled stuff I never open. I wanted less clutter and a home screen that's quick to use, without breaking the things we actually watch.
+I have two TVs at home: a TCL 55Q6C running Google TV and an LG 55UN8000PTA running webOS. Both came with years of preinstalled stuff I never open. I wanted less clutter and a home screen that's quick to use, without breaking the things I actually watch.
 
 ## The TCL
 
-I did the planning with Codex before I could even connect to the TV. We looked at launchers, wrote a small Python tool to capture the TV's state, and agreed on some rules. Nothing gets uninstalled, changes go in small batches, every batch gets tested, and there's a rollback script before anything changes.
+I did the planning with Codex before I could even connect to the TV. I looked at launchers, had Codex write a small Python tool to capture the TV's state, and set myself some rules. Nothing gets uninstalled, changes go in small batches, every batch gets tested, and there's a rollback script before anything changes.
 
 Connecting was the easy part. Wireless debugging on Android 14 pairs with a code, then `adb` talks to a TLS port. Claude took a baseline first: packages, memory, storage and settings. The TV turned out to have 2.45 GB of RAM, and it reports itself as a `Smart TV Pro` rather than a 55Q6C, which made looking up firmware notes harder than it should be.
 
