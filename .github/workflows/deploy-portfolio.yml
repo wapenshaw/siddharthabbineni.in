@@ -35,7 +35,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v7
         with:
-          # the same Node the server runs on in Azure (staticwebapp.config.json)
+          # the same Node the server runs on in Azure (engines in package.json)
           node-version: 22
           cache: npm
           cache-dependency-path: apps/portfolio/package-lock.json
