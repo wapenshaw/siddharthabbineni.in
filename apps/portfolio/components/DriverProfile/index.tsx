@@ -25,9 +25,9 @@ export default async function DriverProfile() {
 	return (
 		<main className={styles.profile} aria-labelledby="profile-title">
 			<section className={`panel ${styles.about}`}>
-				<h1 id="profile-title" className="tab slr" data-colour="purple">
+				<h2 id="profile-title" className="tab slr" data-colour="purple">
 					Driver profile
-				</h1>
+				</h2>
 				<div className={styles.aboutBody}>
 					<p className={styles.bio}>{profile.bio}</p>
 					<dl className={styles.facts}>
@@ -100,9 +100,9 @@ export default async function DriverProfile() {
 			</section>
 
 			<section className={styles.build} aria-labelledby="build-title">
-				<h2 id="build-title" className="sr-only">
+				<h3 id="build-title" className="sr-only">
 					My build
-				</h2>
+				</h3>
 				<ul className={styles.cards}>
 					{characterBuild.map((c, i) => (
 						<li
@@ -111,7 +111,7 @@ export default async function DriverProfile() {
 							data-colour={CARD_COLOURS[i % CARD_COLOURS.length]}
 						>
 							<PixelIcon name={c.icon} className={styles.icon} />
-							<h3 className={styles.name}>{c.name}</h3>
+							<h4 className={styles.name}>{c.name}</h4>
 							<p className={styles.line}>{c.line}</p>
 							{c.loadout && (
 								<ul className={styles.loadout} aria-label="Loadout">

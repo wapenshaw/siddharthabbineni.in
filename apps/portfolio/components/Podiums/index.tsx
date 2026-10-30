@@ -22,9 +22,9 @@ export default function Podiums() {
 		<main className={styles.podiums} aria-labelledby="podiums-title">
 			<section className={`panel ${styles.certs}`}>
 				<div className={styles.head}>
-					<h1 id="podiums-title" className="tab slr" data-colour="yellow">
+					<h2 id="podiums-title" className="tab slr" data-colour="yellow">
 						Podiums
-					</h1>
+					</h2>
 					<span>Microsoft certifications, each links to its proof</span>
 				</div>
 				<ul className={styles.featured}>

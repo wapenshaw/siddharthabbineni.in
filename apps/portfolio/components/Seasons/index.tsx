@@ -122,9 +122,9 @@ export default function Seasons({ stints }: { stints: Stint[] }) {
 		<main className={styles.seasons} aria-labelledby="seasons-title">
 			<section className={`panel ${styles.route}`} aria-label="Career route">
 				<div className={styles.routeHead}>
-					<h1 id="seasons-title" className="tab slr" data-colour="red">
+					<h2 id="seasons-title" className="tab slr" data-colour="red">
 						Seasons
-					</h1>
+					</h2>
 				</div>
 				<div className={styles.mapArea}>
 					<div className={styles.map}>
@@ -354,8 +354,8 @@ function Route({
 
 /** What the stint panel says: on desktops beside the route, on phones under the row */
 function StintBody({ stint, titleId }: { stint: Stint; titleId?: string }) {
-	const Heading = titleId ? 'h2' : 'h3'
-	const SubHeading = titleId ? 'h3' : 'h4'
+	const Heading = titleId ? 'h3' : 'h4'
+	const SubHeading = titleId ? 'h4' : 'h5'
 	return (
 		<>
 			<div className={styles.who}>

@@ -1,12 +1,12 @@
 import Garage from 'components/Garage'
 import { profile } from 'config/profile'
-import type { Metadata } from 'next'
+import { pageMetadata } from 'lib/pageMetadata'
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
 	title: `Garage | ${profile.name}`,
-	description: `Things ${profile.name} builds for fun, and pull requests merged into other people's projects.`,
-	alternates: { canonical: '/garage' },
-}
+	description: `Side projects ${profile.name} builds for fun, like NuPrint, LoftLog and CardWise, and the pull requests merged into other people's open source projects.`,
+	path: '/garage',
+})
 
 export default function GaragePage() {
 	return <Garage />

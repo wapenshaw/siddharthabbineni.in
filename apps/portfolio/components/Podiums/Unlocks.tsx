@@ -105,7 +105,7 @@ export default async function Unlocks() {
 function UnlocksHead({ gamerscore }: { gamerscore: string }) {
 	return (
 		<div className={tower.head}>
-			<h2 id="unlocks-title">Achievements</h2>
+			<h3 id="unlocks-title">Achievements</h3>
 			<span>{gamerscore || 'Live from Steam and Xbox'}</span>
 		</div>
 	)

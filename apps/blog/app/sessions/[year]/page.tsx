@@ -1,7 +1,7 @@
 import SiteNav from 'components/SiteNav'
 import { formatDate, postHref, sessionHref } from 'lib/format'
+import { pageMetadata } from 'lib/metadata'
 import { getPosts, sessionOf, sessionYears } from 'lib/posts'
-import { SITE_URL } from 'lib/site'
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 
@@ -15,11 +15,11 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
 	const { year } = await params
-	return {
+	return pageMetadata({
 		title: `Posts from ${year}`,
 		description: `My blog posts from ${year}, kept as I wrote them.`,
-		alternates: { canonical: `${SITE_URL}${sessionHref(year)}` },
-	}
+		path: sessionHref(year),
+	})
 }
 
 /** One year of the old blog as a timing sheet, newest first */

@@ -17,9 +17,9 @@ export default async function Press() {
 	return (
 		<main className={`panel ${styles.press}`} aria-labelledby="press-title">
 			<div className={styles.head}>
-				<h1 id="press-title" className="tab slr" data-colour="blue">
+				<h2 id="press-title" className="tab slr" data-colour="blue">
 					Press
-				</h1>
+				</h2>
 				<span className={styles.line}>Writing, since 2005</span>
 				<a className={`btn btn-carbon sl ${styles.open}`} href={`${BLOG_URL}/`}>
 					Open the blog

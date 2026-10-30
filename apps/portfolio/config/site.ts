@@ -1,6 +1,9 @@
 /** The live site; canonical links and the sitemap always point here */
 export const SITE_URL = 'https://www.siddharthabbineni.in'
 
+/** The Person in the JSON-LD; the blog's posts point their author here */
+export const PERSON_ID = `${SITE_URL}/#person`
+
 /**
  * Where this build is served. Share images resolve against it, so staging
  * links preview with staging's own cards.

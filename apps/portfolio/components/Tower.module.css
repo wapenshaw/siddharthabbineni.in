@@ -23,7 +23,7 @@
 	color: var(--on-dark-muted);
 }
 
-.head h2 {
+.head h3 {
 	font-size: 1.15rem;
 	font-weight: 900;
 	font-style: italic;

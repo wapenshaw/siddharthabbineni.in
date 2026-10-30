@@ -1,5 +1,5 @@
 import { postHref, sessionHref } from 'lib/format'
-import { getPosts, sessionYears } from 'lib/posts'
+import { getPosts, isThin, sessionYears } from 'lib/posts'
 import { SITE_URL } from 'lib/site'
 import type { MetadataRoute } from 'next'
 
@@ -12,9 +12,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 		...sessionYears(posts).map(({ year }) => ({
 			url: `${SITE_URL}${sessionHref(year)}`,
 		})),
-		...posts.map((p) => ({
-			url: `${SITE_URL}${postHref(p.slug)}`,
-			lastModified: p.date,
-		})),
+		...posts
+			.filter((p) => !isThin(p))
+			.map((p) => ({
+				url: `${SITE_URL}${postHref(p.slug)}`,
+				lastModified: p.date,
+			})),
 	]
 }

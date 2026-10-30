@@ -1,7 +1,14 @@
 import { jobs } from 'config/experience'
 import { profile } from 'config/profile'
-import { BLOG_URL, DEPLOY_URL, isStaging, SITE_URL } from 'config/site'
+import {
+	BLOG_URL,
+	DEPLOY_URL,
+	isStaging,
+	PERSON_ID,
+	SITE_URL,
+} from 'config/site'
 import { DEFAULT_MODE, themeInitScript } from 'config/theme'
+import { pageMetadata } from 'lib/pageMetadata'
 import type { Metadata } from 'next'
 import { Titillium_Web } from 'next/font/google'
 import Script from 'next/script'
@@ -20,8 +27,7 @@ const DESCRIPTION = `${profile.name}: automation engineer, cloud architect and d
 const current = jobs.at(-1)
 
 export const metadata: Metadata = {
-	title: TITLE,
-	description: DESCRIPTION,
+	...pageMetadata({ title: TITLE, description: DESCRIPTION, path: '' }),
 	keywords: [
 		profile.name,
 		'Automation Engineer',
@@ -39,32 +45,6 @@ export const metadata: Metadata = {
 	metadataBase: new URL(DEPLOY_URL),
 	// staging also sends an X-Robots-Tag header (next.config.ts)
 	...(isStaging && { robots: { index: false, follow: false } }),
-	alternates: {
-		canonical: SITE_URL,
-		types: {
-			'application/rss+xml': [
-				{
-					url: `${BLOG_URL}/feed.xml`,
-					title: `Free practice | ${profile.name}`,
-				},
-			],
-		},
-	},
-	openGraph: {
-		title: TITLE,
-		siteName: profile.name,
-		url: SITE_URL,
-		description: DESCRIPTION,
-		type: 'profile',
-		// the picture comes from each section's opengraph-image
-		locale: 'en_US',
-	},
-	twitter: {
-		card: 'summary_large_image',
-		title: TITLE,
-		description: DESCRIPTION,
-		creator: `@${profile.handle}`,
-	},
 }
 
 export default function RootLayout({
@@ -90,7 +70,10 @@ export default function RootLayout({
 						__html: JSON.stringify({
 							'@context': 'https://schema.org',
 							'@type': 'Person',
+							// the blog's posts name their author by this id
+							'@id': PERSON_ID,
 							name: profile.name,
+							alternateName: ['wapenshaw', profile.handle],
 							url: SITE_URL,
 							image: `${SITE_URL}${profile.avatar}`,
 							jobTitle: current?.role,
@@ -108,6 +91,10 @@ export default function RootLayout({
 								profile.links.linkedin,
 								profile.links.github,
 								profile.links.x,
+								profile.links.stackoverflow,
+								profile.links.instagram,
+								BLOG_URL,
+								'https://dev.to/wapenshaw',
 							],
 						}),
 					}}
