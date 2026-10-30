@@ -121,7 +121,8 @@ export async function getXboxAchievements(): Promise<XboxAchievementsResponse> {
 	'use cache'
 
 	if (!XBOX_API_KEY) {
-		cacheLife('gaming')
+		// the keys are Azure app settings; retry soon once they're added
+		cacheLife('minutes')
 		return { achievements: [], error: 'Xbox API not configured' }
 	}
 	try {

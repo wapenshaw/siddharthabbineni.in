@@ -103,7 +103,8 @@ export async function getSteamAchievements(): Promise<SteamAchievementsResponse>
 	'use cache'
 
 	if (!STEAM_API_KEY || !STEAM_USER_ID) {
-		cacheLife('gaming')
+		// the keys are Azure app settings; retry soon once they're added
+		cacheLife('minutes')
 		return { achievements: [], error: 'Steam API not configured' }
 	}
 	try {
