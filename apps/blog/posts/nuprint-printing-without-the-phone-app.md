@@ -1,6 +1,6 @@
 ---
 title: "NuPrint: printing without the phone app"
-description: "How I ended up building a desktop app for my ZEITEL SC03h, a little Bluetooth thermal printer, so I could print from Windows and macOS without the phone app."
+description: "How I ended up building a desktop app for my ZEITEL SC03h, a little Bluetooth thermal printer, so I could print from Windows, macOS and Linux without the phone app."
 date: 2026-10-29
 tags: [rust, tauri, slint, bluetooth, nuprint]
 ---
@@ -71,6 +71,35 @@ I managed to confuse myself with the benchmarks as well. One change initially lo
 
 Testing cancellation also turned up a Windows Bluetooth issue. Cancelling a scan could leave the next scan apparently finding nothing. That needed some recovery handling rather than just assuming another scan would work.
 
+## Getting it working on Linux
+
+Linux was the last system I tried with the printer, and it didn't work first time. On Fedora 44, with BlueZ 5.87, the app found the printer but every connection ended in "Bluetooth connection failed."
+
+I went through the BlueZ logs with Opus. The SC03h is a dual-mode device. On one public address it advertises the LE print service (`af30`, served as `AE30`) and also offers Classic profiles: serial port, headset, A2DP, AVRCP, hands-free and phonebook. NuPrint talks to Bluetooth through [btleplug](https://github.com/deviceplug/btleplug), and on Linux btleplug connects with `org.bluez.Device1.Connect`. That call leaves the bearer to BlueZ, and [BlueZ's documentation](https://github.com/bluez/bluez/blob/5.87/doc/org.bluez.Device.rst?plain=1#L25-L46) spells out the order for a dual-mode device: the bonded bearer first, then the one it saw last, with BR/EDR winning a tie. For this printer it picked Classic. The printer refused A2DP with `Connection refused (111)`, BlueZ answered "No more profiles to connect to", and the GATT print service never appeared.
+
+Removing the pairing didn't help. btleplug scans with its discovery filter set to [`Transport::Auto`](https://github.com/deviceplug/btleplug/blob/0.13.5/src/bluez/adapter.rs#L96), so BlueZ runs a Classic inquiry alongside the LE scan and learns about the Classic side anyway. Finding the printer with an LE-only `bluetoothctl` scan and then calling `Device1.Connect` didn't help either. BlueZ still connected over Classic, and this time it paired with the printer using "Just Works", without a prompt. Windows and macOS never had this problem, because their Bluetooth APIs connect to an LE device over LE.
+
+The first print on Linux worked with `ControllerMode = le` in `/etc/bluetooth/main.conf`, which turns the adapter into an LE-only controller. It also turns off Classic Bluetooth for headphones and everything else, so it wasn't something I could ask anyone to do.
+
+Newer BlueZ has two ways to ask for LE on a dual-mode device. BlueZ 5.80 added a [`PreferredBearer`](https://github.com/bluez/bluez/blob/5.87/doc/org.bluez.Device.rst?plain=1#L449) device property that can be set to `le`, and 5.84 added [`org.bluez.Bearer.LE1`](https://github.com/bluez/bluez/blob/5.87/doc/org.bluez.Bearer.LE.rst), whose `Connect` goes over LE for that one connection and stores nothing. btleplug doesn't expose either, so Opus wrote a small [BlueZ module](https://github.com/wapenshaw/nuprint/blob/master/crates/nuprint-transport/src/ble/bluez.rs) for NuPrint that calls them over D-Bus ([PR #10](https://github.com/wapenshaw/nuprint/pull/10)):
+
+1. If BlueZ has only heard the printer over Classic, so the device has `Bearer.BREDR1` but no `Bearer.LE1`, it runs an LE-only discovery (`SetDiscoveryFilter` with `Transport = le`) for up to 5 seconds. Discovery filters belong to the D-Bus client that sets them, so btleplug's own scans aren't affected.
+2. It calls `Bearer.LE1.Connect` when BlueZ offers it.
+3. Otherwise it sets `PreferredBearer` to `le`, calls `Device1.Connect`, and puts the old value back whether the connection worked or not.
+4. Then it waits for `ServicesResolved`, the same as btleplug's own connect.
+
+Disconnecting needed the same treatment. With the printer paired over Classic, `Device1.Disconnect` on its own left the LE link up, and BlueZ logged "No matching connection for device". NuPrint now calls `Bearer.LE1.Disconnect` first.
+
+The catch is that both are experimental. BlueZ registers `Bearer.LE1.Connect` and `Disconnect` with [`GDBUS_EXPERIMENTAL_ASYNC_METHOD`](https://github.com/bluez/bluez/blob/5.87/src/bearer.c#L199-L202), and `PreferredBearer` is marked experimental too, so they only show up with `Experimental = true` in [`main.conf`](https://github.com/bluez/bluez/blob/5.87/src/main.conf#L125-L127). Fedora and Ubuntu ship that line commented out, and neither GNOME nor KDE has a switch for it. I thought about having the `.deb` and `.rpm` set it, but it turns on experimental D-Bus interfaces for every app on the machine, and I didn't want an installer changing that behind anyone's back. The [guide](https://nuprint.app/guide) has the two commands instead, and if BlueZ still goes for Classic, the app says what to change. Without the setting, NuPrint falls back to btleplug's plain connect, which only works on an LE-only adapter.
+
+NuPrint never pairs on Linux now. A connection through `Bearer.LE1` leaves the printer unpaired, and BlueZ forgets it about 30 seconds after the job, which is its default `TemporaryTimeout`. A printer paired in GNOME's Bluetooth settings still prints, but BlueZ reconnects to it over LE by itself about 10 seconds after NuPrint disconnects and keeps the link open, which can stop the phone app from reaching it. Choosing **Forget** in the settings ends that.
+
+One problem is outside NuPrint. bluez-async 0.9.0, which btleplug uses on Linux, [unwraps the reply](https://github.com/bluez-rs/bluez-async/blob/bluez-async-0.9.0/bluez-async/src/messagestream.rs#L40) when it removes a D-Bus match as an event stream is dropped. If the match is already gone, that background task panics with "No match with that id found". Tokio keeps the panic inside the task and the app carries on, but the message still lands on standard error. Someone else has [reported the same panic](https://github.com/bluez-rs/bluez-async/issues/419), and it's still open.
+
+The releases only had a `.deb`, which Fedora can't install, so [PR #12](https://github.com/wapenshaw/nuprint/pull/12) added an `.rpm` and AppImages. The `.rpm` and the main app's AppImage both printed on my Fedora 44 machine. On Ubuntu it comes down to the BlueZ version ([Launchpad](https://launchpad.net/ubuntu/+source/bluez)). Ubuntu 26.04 ships 5.85, so it should work, but I haven't tried it. Ubuntu 24.04 ships 5.72, which is older than both features, so there the only option is `ControllerMode = le`.
+
+The longer write-up, with the hardware record, is in [docs/linux.md](https://github.com/wapenshaw/nuprint/blob/master/docs/linux.md).
+
 ## Signing, updates, and what's left
 
 The installers still have the usual unsigned-app warnings. I haven't done Apple notarization, and I've applied to the SignPath Foundation for Windows signing but am still waiting on that.
@@ -83,8 +112,8 @@ A review caught a problem in the Slint updater's version checks, which is fixed.
 
 I haven't watched an update install end to end yet. This is the first release with the updater in it, so that test comes with the next one.
 
-As for printer support, I've used NuPrint with my SC03h on Windows and macOS. There's a Linux build, but I haven't tested it with the printer yet. The phone app listed other models with matching settings, so I've exposed those as experimental. I only own the one printer, and I don't want to imply I've tested hardware I haven't.
+As for printer support, I've used NuPrint with my SC03h on Windows, macOS and Linux. The phone app listed other models with matching settings, so I've exposed those as experimental. I only own the one printer, and I don't want to imply I've tested hardware I haven't.
 
 It's grown quite a bit from the Python test. AI helped me get past the point where the earlier attempts had stalled, and a lot of the work since then has been testing, reviewing and fixing things I wouldn't have thought about at the start.
 
-NuPrint is open source under the MIT licence, with builds for Windows, macOS and Linux. If you have one of these little printers and try it, I'd be interested to hear how it works for you.
+NuPrint is open source under the MIT licence, with builds for Windows, macOS and Linux. The downloads are on [nuprint.app](https://nuprint.app) and the code is on [GitHub](https://github.com/wapenshaw/nuprint). If you have one of these little printers and try it, I'd be interested to hear how it works for you.

@@ -1,6 +1,6 @@
-import Seasons from 'components/Seasons'
-import { getSeasons } from 'lib/timeline'
+import DriverProfile from 'components/DriverProfile'
 
-export default async function SeasonsPage() {
-	return <Seasons stints={await getSeasons()} />
+/** The home page; its title and description are the site's (app/layout.tsx) */
+export default function ProfilePage() {
+	return <DriverProfile />
 }

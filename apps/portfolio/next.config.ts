@@ -23,9 +23,11 @@ const nextConfig: NextConfig = {
 	turbopack: {
 		root: process.cwd(),
 	},
-	// Posts moved to the blog; old links and feed readers follow them there
+	// Old addresses: posts moved to the blog, so links and feed readers follow them there
 	async redirects() {
 		return [
+			// Driver profile became the home page
+			{ source: '/profile', destination: '/', permanent: true },
 			{
 				source: '/blog/feed.xml',
 				destination: `${BLOG_URL}/feed.xml`,

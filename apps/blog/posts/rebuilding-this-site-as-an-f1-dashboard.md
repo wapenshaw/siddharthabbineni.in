@@ -35,7 +35,7 @@ I got a second opinion on that concept, and it made two points I agreed with. Th
 
 ## The F1 dashboard
 
-The site shows one section at a time, with F1 names and a plain line under each: Seasons (where I've worked), Driver profile, Podiums, Garage and Press. It uses the real F1 colours, and every button, tab and card has the same slanted cut as the nameplate.
+The site shows one section at a time, with F1 names and a plain line under each: Driver profile, Seasons (where I've worked), Podiums, Garage and Press. It uses the real F1 colours, and every button, tab and card has the same slanted cut as the nameplate.
 
 ![Seasons: the route climbs from my first job at the bottom to now at the top](/images/rebuilding-this-site-as-an-f1-dashboard/seasons.webp)
 
@@ -122,7 +122,7 @@ The blog is a plain static site. Next.js exports it as files, so route handlers 
 
 The repo is now split into `apps/portfolio` and `apps/blog`. Each has its own `package.json` and lockfile, and I skipped npm workspaces, since the two apps share nothing. Each one has its own GitHub workflow that only runs when its folder changes, so fixing a typo in a post doesn't rebuild the dashboard.
 
-Both run on Azure Static Web Apps. My first apps were in West Europe for no good reason, so I deleted them and made new ones in East Asia, which is a lot closer to India. There are four now: the portfolio and the blog, each with a staging copy. Everything goes to staging first, and the staging sites tell search engines not to index them. Opus handled the Cloudflare DNS records through the API with a token that can only edit DNS for this one domain. Adding another subdomain later, like one for NuPrint, is one more app and one more record.
+Both run on Azure Static Web Apps. My first apps were in West Europe for no good reason, so I deleted them and made new ones in East Asia, which is a lot closer to India. That lasted a day. The service I use for my Xbox achievements blocks Azure's East Asia addresses, so the Xbox card went blank every time the server refreshed it. Opus tested the other regions from Azure containers, and only East Asia was blocked, so I moved everything back to West Europe. There are four apps: the portfolio and the blog, each with a staging copy. Everything goes to staging first, and the staging sites tell search engines not to index them. Opus handled the Cloudflare DNS records through the API with a token that can only edit DNS for this one domain. NuPrint's site ended up somewhere else: it has its own domain, [nuprint.app](https://nuprint.app), served straight from Cloudflare.
 
 ## Phones, again
 

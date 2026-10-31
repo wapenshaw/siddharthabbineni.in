@@ -6,8 +6,8 @@ import { shareCard } from 'lib/shareCard'
 export function sectionCard(href: string) {
 	const section = sections.find((s) => s.href === href) ?? sections[0]
 	return shareCard({
-		tab: section?.name ?? 'Seasons',
-		colour: section?.colour ?? 'red',
+		tab: section?.name ?? 'Driver profile',
+		colour: section?.colour ?? 'purple',
 		title: section?.line ?? profile.tagline,
 		meta: profile.tagline,
 	})
