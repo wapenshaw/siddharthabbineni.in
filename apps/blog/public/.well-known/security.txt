@@ -1,0 +1,4 @@
+Contact: https://github.com/wapenshaw/siddharthabbineni.in/security/advisories/new
+Expires: 2027-10-31T00:00:00.000Z
+Preferred-Languages: en
+Canonical: https://blog.siddharthabbineni.in/.well-known/security.txt

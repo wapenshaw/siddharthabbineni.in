@@ -1,9 +1,14 @@
+import { GithubLogo, Globe, PenNib } from '@phosphor-icons/react/ssr'
 import Stack from 'components/Stack'
 import tower from 'components/Tower.module.css'
 import { profile } from 'config/profile'
 import { projects } from 'config/quests'
 import { blogPostUrl } from 'lib/blog'
-import { GITHUB_USER, getUpstreamPullRequests } from 'lib/github'
+import {
+	GITHUB_USER,
+	getLatestRelease,
+	getUpstreamPullRequests,
+} from 'lib/github'
 import styles from './Garage.module.css'
 
 const prDate = new Intl.DateTimeFormat('en-GB', {
@@ -26,10 +31,18 @@ const ALL_PRS = `https://github.com/search?type=pullrequests&q=${encodeURICompon
  * the stewards haven't ruled on yet.
  */
 export default async function Garage() {
-	const prs = await getUpstreamPullRequests()
+	const [prs, releases] = await Promise.all([
+		getUpstreamPullRequests(),
+		Promise.all(
+			projects.map((p) => (p.repo ? getLatestRelease(p.repo) : null))
+		),
+	])
 	const merged = prs.filter((p) => p.state === 'merged').length
 	const open = prs.length - merged
-	const [lead, ...rest] = projects
+	const [lead, ...rest] = projects.map((p, i) => ({
+		...p,
+		status: releases[i] ? `${p.status}, ${releases[i]}` : p.status,
+	}))
 
 	return (
 		<main className={styles.garage} aria-labelledby="garage-title">
@@ -129,17 +142,62 @@ function ProjectCard({
 			>
 				{project.status}
 			</span>
-			<div className={styles.body}>
+			<div className={`${styles.body} ${project.shot ? styles.withShot : ''}`}>
 				<h3 className={styles.name}>{project.name}</h3>
 				<p className={styles.line}>{project.line}</p>
-				<Stack items={project.stack} />
-				{project.post && (
-					<a
-						className={`btn btn-carbon sl ${styles.read}`}
-						href={blogPostUrl(project.post)}
-					>
-						Read how I built it
-					</a>
+				<div className={styles.kit}>
+					<Stack items={project.stack} />
+					<div className={styles.links}>
+						{project.site && (
+							<a
+								className="btn btn-carbon sl"
+								href={project.site}
+								target="_blank"
+								rel="noopener noreferrer"
+							>
+								<Globe weight="bold" aria-hidden="true" />
+								{new URL(project.site).host}
+							</a>
+						)}
+						{project.repo && (
+							<a
+								className="btn sl"
+								href={`https://github.com/${project.repo}`}
+								target="_blank"
+								rel="noopener noreferrer"
+							>
+								<GithubLogo weight="bold" aria-hidden="true" />
+								Source
+							</a>
+						)}
+						{project.post && (
+							<a
+								className={`btn sl ${project.site ? '' : 'btn-carbon'}`}
+								href={blogPostUrl(project.post)}
+							>
+								<PenNib weight="bold" aria-hidden="true" />
+								How I built it
+							</a>
+						)}
+					</div>
+				</div>
+				{project.shot && (
+					<figure className={styles.shot}>
+						<img
+							className={styles.light}
+							src={project.shot.light}
+							alt={project.shot.alt}
+							width={project.shot.width}
+							height={project.shot.height}
+						/>
+						<img
+							className={styles.dark}
+							src={project.shot.dark}
+							alt={project.shot.alt}
+							width={project.shot.width}
+							height={project.shot.height}
+						/>
+					</figure>
 				)}
 			</div>
 		</article>

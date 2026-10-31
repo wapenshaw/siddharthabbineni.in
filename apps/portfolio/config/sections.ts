@@ -13,16 +13,21 @@ export type Section = {
 
 /** The left nav, top to bottom (tabs on phones) */
 export const sections: Section[] = [
-	{ name: 'Seasons', line: 'Where I’ve worked', href: '/', colour: 'red' },
 	{
 		name: 'Driver profile',
 		line: 'About me and my skills',
-		href: '/profile',
+		href: '/',
 		colour: 'purple',
 	},
 	{
+		name: 'Seasons',
+		line: 'Where I’ve worked',
+		href: '/seasons',
+		colour: 'red',
+	},
+	{
 		name: 'Podiums',
-		line: 'Certifications and games',
+		line: 'Certifications and achievements',
 		href: '/podiums',
 		colour: 'yellow',
 	},

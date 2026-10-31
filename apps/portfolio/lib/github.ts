@@ -4,6 +4,12 @@ import type { PullRequest } from 'types/github'
 export const GITHUB_USER = process.env.GITHUB_USER ?? 'wapenshaw'
 const GITHUB_TOKEN = process.env.GITHUB_TOKEN
 
+const GITHUB_HEADERS = {
+	Accept: 'application/vnd.github+json',
+	'X-GitHub-Api-Version': '2022-11-28',
+	...(GITHUB_TOKEN ? { Authorization: `Bearer ${GITHUB_TOKEN}` } : {}),
+}
+
 interface SearchItem {
 	number: number
 	title: string
@@ -28,13 +34,7 @@ export async function getUpstreamPullRequests(): Promise<PullRequest[]> {
 	try {
 		const res = await fetch(
 			`https://api.github.com/search/issues?q=${q}&sort=created&order=desc&per_page=20`,
-			{
-				headers: {
-					Accept: 'application/vnd.github+json',
-					'X-GitHub-Api-Version': '2022-11-28',
-					...(GITHUB_TOKEN ? { Authorization: `Bearer ${GITHUB_TOKEN}` } : {}),
-				},
-			}
+			{ headers: GITHUB_HEADERS }
 		)
 		if (!res.ok) {
 			console.error(`[GitHub] search returned ${res.status}`)
@@ -58,5 +58,29 @@ export async function getUpstreamPullRequests(): Promise<PullRequest[]> {
 		console.error('[GitHub] search error:', e)
 		cacheLife('minutes')
 		return []
+	}
+}
+
+/** A public repo's latest release tag, like "v1.3.0"; null if it has none or GitHub fails */
+export async function getLatestRelease(repo: string): Promise<string | null> {
+	'use cache'
+
+	try {
+		const res = await fetch(
+			`https://api.github.com/repos/${repo}/releases/latest`,
+			{ headers: GITHUB_HEADERS }
+		)
+		if (!res.ok) {
+			console.error(`[GitHub] ${repo} release returned ${res.status}`)
+			cacheLife('minutes')
+			return null
+		}
+		const data = (await res.json()) as { tag_name?: string }
+		cacheLife('hours')
+		return data.tag_name ?? null
+	} catch (e) {
+		console.error(`[GitHub] ${repo} release error:`, e)
+		cacheLife('minutes')
+		return null
 	}
 }
