@@ -1,6 +1,6 @@
 {
 	"name": "wapenshaw-web",
-	"version": "0.2.0",
+	"version": "1.0.0",
 	"private": true,
 	"description": "siddharthabbineni.in and its subdomains: each site is its own Next.js app in apps/",
 	"engines": {
