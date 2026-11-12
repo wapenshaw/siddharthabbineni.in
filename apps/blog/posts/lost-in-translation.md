@@ -20,11 +20,11 @@ Tags: [college](http://www.siddharthabbineni.com/tag/college "college"), [funny]
 
 #### Related posts
 
--   [Pictures from our College tour!](/images/pictures-from-our-college-tour "Pictures from our College tour! (August 28, 2008)") (0)
--   [Soutparkish](/images/soutparkish "Soutparkish (March 7, 2007)") (0)
--   [One for the n00bies](/images/one-for-the-n00bies "One for the n00bies (April 2, 2006)") (0)
--   [Movie-A-Minute: Armageddon](/images/movie-a-minute-armageddon "Movie-A-Minute: Armageddon (December 8, 2006)") (0)
--   [Monkey Style?](/images/monkey-style "Monkey Style? (September 22, 2008)") (2)
+-   [Pictures from our College tour!](/pictures-from-our-college-tour/ "Pictures from our College tour! (August 28, 2008)") (0)
+-   [Soutparkish](/soutparkish/ "Soutparkish (March 7, 2007)") (0)
+-   [One for the n00bies](/one-for-the-n00bies/ "One for the n00bies (April 2, 2006)") (0)
+-   [Movie-A-Minute: Armageddon](/movie-a-minute-armageddon/ "Movie-A-Minute: Armageddon (December 8, 2006)") (0)
+-   [Monkey Style?](/monkey-style/ "Monkey Style? (September 22, 2008)") (2)
 
 (**3**)
 

@@ -41,8 +41,8 @@ Tags: [call of duty](http://www.siddharthabbineni.com/tag/call-of-duty "call of 
 
 #### Related posts
 
--   [Fedora 9 on VMware, mouse tracking issue](/images/fedora-9-vmware-mouse-issue "Fedora 9 on VMware, mouse tracking issue (October 12, 2008)") (8)
--   [Wordpress post title rearrangement](/images/wordpress-pos-title-rearrangement "Wordpress post title rearrangement (November 3, 2008)") (0)
--   [Winterbells](/images/winterbells "Winterbells (June 15, 2007)") (2)
--   [Vista Explorer Tip](/images/vista-explorer-tip "Vista Explorer Tip (August 28, 2008)") (1)
--   [Paste with middle click in Firefox](/images/paste-with-middle-click-in-firefox "Paste with middle click in Firefox (September 11, 2008)") (0)
+-   [Fedora 9 on VMware, mouse tracking issue](/fedora-9-vmware-mouse-issue/ "Fedora 9 on VMware, mouse tracking issue (October 12, 2008)") (8)
+-   [Wordpress post title rearrangement](/wordpress-pos-title-rearrangement/ "Wordpress post title rearrangement (November 3, 2008)") (0)
+-   [Winterbells](/winterbells/ "Winterbells (June 15, 2007)") (2)
+-   [Vista Explorer Tip](/vista-explorer-tip/ "Vista Explorer Tip (August 28, 2008)") (1)
+-   [Paste with middle click in Firefox](/paste-with-middle-click-in-firefox/ "Paste with middle click in Firefox (September 11, 2008)") (0)

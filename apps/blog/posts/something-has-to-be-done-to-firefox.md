@@ -15,8 +15,8 @@ Tags: [browser](http://www.siddharthabbineni.com/tag/browser "browser"), [firefo
 
 #### Related posts
 
--   [Paste with middle click in Firefox](/images/paste-with-middle-click-in-firefox "Paste with middle click in Firefox (September 11, 2008)") (0)
--   [Firefox extensions](/images/firefox-extensions "Firefox extensions (August 28, 2008)") (1)
+-   [Paste with middle click in Firefox](/paste-with-middle-click-in-firefox/ "Paste with middle click in Firefox (September 11, 2008)") (0)
+-   [Firefox extensions](/firefox-extensions/ "Firefox extensions (August 28, 2008)") (1)
 
 Rate this post :
 

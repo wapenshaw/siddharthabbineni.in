@@ -43,10 +43,10 @@ Tags: [fedora](http://www.siddharthabbineni.com/tag/fedora "fedora"), [mouse](ht
 
 #### Related posts
 
--   [Vista Explorer Tip](/images/vista-explorer-tip "Vista Explorer Tip (August 28, 2008)") (1)
--   [Paste with middle click in Firefox](/images/paste-with-middle-click-in-firefox "Paste with middle click in Firefox (September 11, 2008)") (0)
--   [Návrat idiota](/images/navrat-idiota "Návrat idiota (April 9, 2006)") (2)
--   [Fedora Core 6 + AIGLX.. naicee](/images/fedora-core-6-aiglx-naicee "Fedora Core 6 + AIGLX.. naicee (November 3, 2006)") (1)
+-   [Vista Explorer Tip](/vista-explorer-tip/ "Vista Explorer Tip (August 28, 2008)") (1)
+-   [Paste with middle click in Firefox](/paste-with-middle-click-in-firefox/ "Paste with middle click in Firefox (September 11, 2008)") (0)
+-   [Návrat idiota](/navrat-idiota/ "Návrat idiota (April 9, 2006)") (2)
+-   [Fedora Core 6 + AIGLX.. naicee](/fedora-core-6-aiglx-naicee/ "Fedora Core 6 + AIGLX.. naicee (November 3, 2006)") (1)
 
 (**2**)
 

@@ -31,11 +31,11 @@ Tags: [browsers](http://www.siddharthabbineni.com/tag/browsers "browsers"), [fir
 
 #### Related posts
 
--   [Firefox extensions](/images/firefox-extensions "Firefox extensions (August 28, 2008)") (1)
--   [Vista Explorer Tip](/images/vista-explorer-tip "Vista Explorer Tip (August 28, 2008)") (1)
--   [Something has to be done to firefox](/images/something-has-to-be-done-to-firefox "Something has to be done to firefox (January 27, 2007)") (0)
--   [Fedora 9 on VMware, mouse tracking issue](/images/fedora-9-vmware-mouse-issue "Fedora 9 on VMware, mouse tracking issue (October 12, 2008)") (4)
--   [Catch 22?](/images/catch-22 "Catch 22? (December 15, 2007)") (0)
+-   [Firefox extensions](/firefox-extensions/ "Firefox extensions (August 28, 2008)") (1)
+-   [Vista Explorer Tip](/vista-explorer-tip/ "Vista Explorer Tip (August 28, 2008)") (1)
+-   [Something has to be done to firefox](/something-has-to-be-done-to-firefox/ "Something has to be done to firefox (January 27, 2007)") (0)
+-   [Fedora 9 on VMware, mouse tracking issue](/fedora-9-vmware-mouse-issue/ "Fedora 9 on VMware, mouse tracking issue (October 12, 2008)") (4)
+-   [Catch 22?](/catch-22/ "Catch 22? (December 15, 2007)") (0)
 
 (**3**)
 

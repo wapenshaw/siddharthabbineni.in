@@ -17,8 +17,8 @@ Tags: [funny](http://www.siddharthabbineni.com/tag/funny "funny"), [ridiculous](
 
 #### Related posts
 
--   [Speed Breakers](/images/speed-breakers "Speed Breakers (August 29, 2008)") (3)
--   [Soutparkish](/images/soutparkish "Soutparkish (March 7, 2007)") (0)
--   [Other Backward Thoughts](/images/other-backward-thoughts "Other Backward Thoughts (May 25, 2006)") (1)
--   [One for the n00bies](/images/one-for-the-n00bies "One for the n00bies (April 2, 2006)") (0)
--   [OBC My ass!](/images/obc-my-ass "OBC My ass! (May 24, 2006)") (1)
+-   [Speed Breakers](/speed-breakers/ "Speed Breakers (August 29, 2008)") (3)
+-   [Soutparkish](/soutparkish/ "Soutparkish (March 7, 2007)") (0)
+-   [Other Backward Thoughts](/other-backward-thoughts/ "Other Backward Thoughts (May 25, 2006)") (1)
+-   [One for the n00bies](/one-for-the-n00bies/ "One for the n00bies (April 2, 2006)") (0)
+-   [OBC My ass!](/obc-my-ass/ "OBC My ass! (May 24, 2006)") (1)
