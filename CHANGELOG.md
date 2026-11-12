@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.1](https://github.com/wapenshaw/siddharthabbineni.in/compare/v1.0.0...v1.0.1) (2026-11-12)
+
+
+### Bug Fixes
+
+* repoint old sidebar links at their posts and clear the 404s Search Console reports ([#12](https://github.com/wapenshaw/siddharthabbineni.in/issues/12)) ([58947fe](https://github.com/wapenshaw/siddharthabbineni.in/commit/58947fe6b397742e0a742e06934af9bf209f0727))
+
 ## [1.0.0](https://github.com/wapenshaw/siddharthabbineni.in/compare/v0.2.0...v1.0.0) (2026-10-31)
 
 
