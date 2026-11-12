@@ -16,8 +16,8 @@ Tags: [funny](http://www.siddharthabbineni.com/tag/funny "funny"), [rants](http:
 
 #### Related posts
 
--   [One for the n00bies](/images/one-for-the-n00bies "One for the n00bies (April 2, 2006)") (0)
--   [Movie-A-Minute: Armageddon](/images/movie-a-minute-armageddon "Movie-A-Minute: Armageddon (December 8, 2006)") (0)
--   [Lost in Translation](/images/lost-in-translation "Lost in Translation (October 1, 2008)") (0)
--   [I shouldn’t have answered that call!](/images/i-shouldnt-have-answered-that-call "I shouldn’t have answered that call! (April 1, 2006)") (3)
--   [Green Peas](/images/green-peas "Green Peas (May 10, 2007)") (0)
+-   [One for the n00bies](/one-for-the-n00bies/ "One for the n00bies (April 2, 2006)") (0)
+-   [Movie-A-Minute: Armageddon](/movie-a-minute-armageddon/ "Movie-A-Minute: Armageddon (December 8, 2006)") (0)
+-   [Lost in Translation](/lost-in-translation/ "Lost in Translation (October 1, 2008)") (0)
+-   [I shouldn’t have answered that call!](/i-shouldnt-have-answered-that-call/ "I shouldn’t have answered that call! (April 1, 2006)") (3)
+-   [Green Peas](/green-peas/ "Green Peas (May 10, 2007)") (0)

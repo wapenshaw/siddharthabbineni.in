@@ -22,8 +22,8 @@ Tags: [funny](http://www.siddharthabbineni.com/tag/funny "funny"), [simpsons](ht
 
 #### Related posts
 
--   [Soutparkish](/images/soutparkish "Soutparkish (March 7, 2007)") (0)
--   [Movie-A-Minute: Armageddon](/images/movie-a-minute-armageddon "Movie-A-Minute: Armageddon (December 8, 2006)") (0)
--   [Lost in Translation](/images/lost-in-translation "Lost in Translation (October 1, 2008)") (0)
--   [I shouldn’t have answered that call!](/images/i-shouldnt-have-answered-that-call "I shouldn’t have answered that call! (April 1, 2006)") (3)
--   [Captcha](/images/captcha "Captcha (February 17, 2007)") (3)
+-   [Soutparkish](/soutparkish/ "Soutparkish (March 7, 2007)") (0)
+-   [Movie-A-Minute: Armageddon](/movie-a-minute-armageddon/ "Movie-A-Minute: Armageddon (December 8, 2006)") (0)
+-   [Lost in Translation](/lost-in-translation/ "Lost in Translation (October 1, 2008)") (0)
+-   [I shouldn’t have answered that call!](/i-shouldnt-have-answered-that-call/ "I shouldn’t have answered that call! (April 1, 2006)") (3)
+-   [Captcha](/captcha/ "Captcha (February 17, 2007)") (3)

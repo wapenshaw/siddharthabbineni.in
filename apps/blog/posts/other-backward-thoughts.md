@@ -48,8 +48,8 @@ Tags: [india](http://www.siddharthabbineni.com/tag/india "india"), [ridiculous](
 
 #### Related posts
 
--   [OBC My ass!](/images/obc-my-ass "OBC My ass! (May 24, 2006)") (1)
--   [Speed Breakers](/images/speed-breakers "Speed Breakers (August 29, 2008)") (3)
--   [Guilt Traps](/images/guilt-traps "Guilt Traps (July 16, 2006)") (1)
--   [Captcha](/images/captcha "Captcha (February 17, 2007)") (3)
--   [A Fools’ World](/images/a-fools-world "A Fools’ World (October 28, 2006)") (0)
+-   [OBC My ass!](/obc-my-ass/ "OBC My ass! (May 24, 2006)") (1)
+-   [Speed Breakers](/speed-breakers/ "Speed Breakers (August 29, 2008)") (3)
+-   [Guilt Traps](/guilt-traps/ "Guilt Traps (July 16, 2006)") (1)
+-   [Captcha](/captcha/ "Captcha (February 17, 2007)") (3)
+-   [A Fools’ World](/a-fools-world/ "A Fools’ World (October 28, 2006)") (0)

@@ -33,8 +33,8 @@ Tags: [insane](http://www.siddharthabbineni.com/tag/insane "insane"), [politics]
 
 #### Related posts
 
--   [Speed Breakers](/images/speed-breakers "Speed Breakers (August 29, 2008)") (3)
--   [Soutparkish](/images/soutparkish "Soutparkish (March 7, 2007)") (0)
--   [Other Backward Thoughts](/images/other-backward-thoughts "Other Backward Thoughts (May 25, 2006)") (1)
--   [OBC My ass!](/images/obc-my-ass "OBC My ass! (May 24, 2006)") (1)
--   [Guilt Traps](/images/guilt-traps "Guilt Traps (July 16, 2006)") (1)
+-   [Speed Breakers](/speed-breakers/ "Speed Breakers (August 29, 2008)") (3)
+-   [Soutparkish](/soutparkish/ "Soutparkish (March 7, 2007)") (0)
+-   [Other Backward Thoughts](/other-backward-thoughts/ "Other Backward Thoughts (May 25, 2006)") (1)
+-   [OBC My ass!](/obc-my-ass/ "OBC My ass! (May 24, 2006)") (1)
+-   [Guilt Traps](/guilt-traps/ "Guilt Traps (July 16, 2006)") (1)

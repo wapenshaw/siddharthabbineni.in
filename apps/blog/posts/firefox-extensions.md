@@ -56,9 +56,9 @@ Tags: [browsers](http://www.siddharthabbineni.com/tag/browsers "browsers"), [fir
 
 #### Related posts
 
--   [Paste with middle click in Firefox](/images/paste-with-middle-click-in-firefox "Paste with middle click in Firefox (September 11, 2008)") (0)
--   [Something has to be done to firefox](/images/something-has-to-be-done-to-firefox "Something has to be done to firefox (January 27, 2007)") (0)
--   [Catch 22?](/images/catch-22 "Catch 22? (December 15, 2007)") (0)
+-   [Paste with middle click in Firefox](/paste-with-middle-click-in-firefox/ "Paste with middle click in Firefox (September 11, 2008)") (0)
+-   [Something has to be done to firefox](/something-has-to-be-done-to-firefox/ "Something has to be done to firefox (January 27, 2007)") (0)
+-   [Catch 22?](/catch-22/ "Catch 22? (December 15, 2007)") (0)
 
 (**2**)
 

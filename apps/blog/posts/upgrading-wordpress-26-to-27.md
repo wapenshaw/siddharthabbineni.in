@@ -39,6 +39,6 @@ Tags: [Tips](http://www.siddharthabbineni.com/tag/tips "Tips")[troubleshooting](
 
 #### Related posts
 
--   [Wordpress post title rearrangement](/images/wordpress-pos-title-rearrangement "Wordpress post title rearrangement (November 3, 2008)") (0)
--   [Fedora 9 on VMware, mouse tracking issue](/images/fedora-9-vmware-mouse-issue "Fedora 9 on VMware, mouse tracking issue (October 12, 2008)") (8)
--   [Call of Duty - World at War, Solo start error (fixed)](/images/cod-world-at-war-solo-start-error-fixed "Call of Duty - World at War, Solo start error (fixed) (November 18, 2008)") (130)
+-   [Wordpress post title rearrangement](/wordpress-pos-title-rearrangement/ "Wordpress post title rearrangement (November 3, 2008)") (0)
+-   [Fedora 9 on VMware, mouse tracking issue](/fedora-9-vmware-mouse-issue/ "Fedora 9 on VMware, mouse tracking issue (October 12, 2008)") (8)
+-   [Call of Duty - World at War, Solo start error (fixed)](/cod-world-at-war-solo-start-error-fixed/ "Call of Duty - World at War, Solo start error (fixed) (November 18, 2008)") (130)

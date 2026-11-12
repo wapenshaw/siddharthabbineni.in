@@ -48,12 +48,12 @@ Military Bumps
 
 Finally the ones laid by the Military, yes the Indian Army. They are triangles. If you don’e believe me, drive around the Secunderabad club.
 
-Tags: [blues](/images/blues "blues"), [hyderabad](http://www.siddharthabbineni.com/tag/hyderabad "hyderabad"), [ridiculous](http://www.siddharthabbineni.com/tag/ridiculous "ridiculous")  
+Tags: [blues](/blues/ "blues"), [hyderabad](http://www.siddharthabbineni.com/tag/hyderabad "hyderabad"), [ridiculous](http://www.siddharthabbineni.com/tag/ridiculous "ridiculous")  
 
 #### Related posts
 
--   [Other Backward Thoughts](/images/other-backward-thoughts "Other Backward Thoughts (May 25, 2006)") (1)
--   [OBC My ass!](/images/obc-my-ass "OBC My ass! (May 24, 2006)") (1)
--   [Monsoon](/images/monsoon "Monsoon (August 5, 2006)") (0)
--   [In the ditch again](/images/in-the-ditch-again "In the ditch again (March 2, 2007)") (0)
--   [Ignorance isnt Bliss, its Hell](/images/ignorance-isnt-bliss-its-hell "Ignorance isnt Bliss, its Hell (February 10, 2007)") (0)
+-   [Other Backward Thoughts](/other-backward-thoughts/ "Other Backward Thoughts (May 25, 2006)") (1)
+-   [OBC My ass!](/obc-my-ass/ "OBC My ass! (May 24, 2006)") (1)
+-   [Monsoon](/monsoon/ "Monsoon (August 5, 2006)") (0)
+-   [In the ditch again](/in-the-ditch-again/ "In the ditch again (March 2, 2007)") (0)
+-   [Ignorance isnt Bliss, its Hell](/ignorance-isnt-bliss-its-hell/ "Ignorance isnt Bliss, its Hell (February 10, 2007)") (0)

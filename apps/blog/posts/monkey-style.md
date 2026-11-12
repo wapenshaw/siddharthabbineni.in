@@ -18,11 +18,11 @@ Tags: [funny](http://www.siddharthabbineni.com/tag/funny "funny"), [monkeys](htt
 
 #### Related posts
 
--   [Soutparkish](/images/soutparkish "Soutparkish (March 7, 2007)") (0)
--   [One for the n00bies](/images/one-for-the-n00bies "One for the n00bies (April 2, 2006)") (0)
--   [Nature rocks](/images/nature-rocks "Nature rocks (March 3, 2007)") (0)
--   [Movie-A-Minute: Armageddon](/images/movie-a-minute-armageddon "Movie-A-Minute: Armageddon (December 8, 2006)") (0)
--   [Lost in Translation](/images/lost-in-translation "Lost in Translation (October 1, 2008)") (0)
+-   [Soutparkish](/soutparkish/ "Soutparkish (March 7, 2007)") (0)
+-   [One for the n00bies](/one-for-the-n00bies/ "One for the n00bies (April 2, 2006)") (0)
+-   [Nature rocks](/nature-rocks/ "Nature rocks (March 3, 2007)") (0)
+-   [Movie-A-Minute: Armageddon](/movie-a-minute-armageddon/ "Movie-A-Minute: Armageddon (December 8, 2006)") (0)
+-   [Lost in Translation](/lost-in-translation/ "Lost in Translation (October 1, 2008)") (0)
 
 (**3**)
 
