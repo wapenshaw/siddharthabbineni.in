@@ -1,6 +1,6 @@
 ---
-title: Change or Modify Bluetooth Device hardware (MAC) address
-description: I am in the middle of an ongoing experiment, where in I am trying to get a Bluetooth headset to work simultaneously with my windows mobile phone and also my…
+title: Change a Bluetooth adapter's hardware (MAC) address on Linux with bdaddr
+description: How I changed the hardware address (BD_ADDR) of a Bluetooth dongle in Ubuntu 8.10 with bdaddr, so a headset would treat my PC like my phone. The packages and commands.
 date: 2009-02-08
 tags: [hardware]
 archive:
