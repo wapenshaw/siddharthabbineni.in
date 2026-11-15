@@ -89,9 +89,9 @@ The `/api/steam` and `/api/xbox` routes wrap the same lib functions. The RSS fee
 
 Deployed to Azure Static Web Apps (hybrid Next.js) by GitHub Actions (`.github/workflows/deploy.yml`):
 - A push to `master` deploys production (`www.siddharthabbineni.in`).
-- A push to `staging` deploys the staging environment, which is where changes are verified first.
+- There is no staging environment; verify changes locally before merging.
 - The build uses Node 22 and `output: 'standalone'` in next.config.
-- Google Analytics is injected only in production.
+- Google Analytics is injected on every build.
 
 ### Releases
 

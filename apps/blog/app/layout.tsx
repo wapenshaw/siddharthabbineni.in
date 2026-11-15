@@ -6,7 +6,6 @@ import {
 	BLOG_NAME,
 	DEPLOY_URL,
 	DESCRIPTION,
-	isStaging,
 	PORTFOLIO_URL,
 	SITE_URL,
 	SOCIAL,
@@ -49,8 +48,6 @@ export const metadata: Metadata = {
 	authors: [{ name: AUTHOR, url: PORTFOLIO_URL }],
 	creator: AUTHOR,
 	metadataBase: new URL(DEPLOY_URL),
-	// staging also sends an X-Robots-Tag header (the deploy workflow)
-	...(isStaging && { robots: { index: false, follow: false } }),
 }
 
 export default function RootLayout({
@@ -100,22 +97,18 @@ export default function RootLayout({
 					<a href={SOCIAL.github}>GitHub</a>
 					<a href="/feed.xml">RSS</a>
 				</footer>
-				{isStaging ? null : (
-					<>
-						<Script
-							src="https://www.googletagmanager.com/gtag/js?id=G-GK9R79RGL6"
-							strategy="afterInteractive"
-						/>
-						<Script id="google-analytics" strategy="afterInteractive">
-							{`
-								window.dataLayer = window.dataLayer || [];
-								function gtag(){window.dataLayer.push(arguments);}
-								gtag('js', new Date());
-								gtag('config', 'G-GK9R79RGL6');
-							`}
-						</Script>
-					</>
-				)}
+				<Script
+					src="https://www.googletagmanager.com/gtag/js?id=G-GK9R79RGL6"
+					strategy="afterInteractive"
+				/>
+				<Script id="google-analytics" strategy="afterInteractive">
+					{`
+						window.dataLayer = window.dataLayer || [];
+						function gtag(){window.dataLayer.push(arguments);}
+						gtag('js', new Date());
+						gtag('config', 'G-GK9R79RGL6');
+					`}
+				</Script>
 			</body>
 		</html>
 	)

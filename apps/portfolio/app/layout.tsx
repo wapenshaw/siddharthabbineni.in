@@ -3,7 +3,6 @@ import { profile } from 'config/profile'
 import {
 	BLOG_URL,
 	DEPLOY_URL,
-	isStaging,
 	PERSON_ID,
 	SITE_URL,
 } from 'config/site'
@@ -43,8 +42,6 @@ export const metadata: Metadata = {
 	authors: [{ name: profile.name }],
 	creator: profile.name,
 	metadataBase: new URL(DEPLOY_URL),
-	// staging also sends an X-Robots-Tag header (next.config.ts)
-	...(isStaging && { robots: { index: false, follow: false } }),
 }
 
 export default function RootLayout({
@@ -102,22 +99,18 @@ export default function RootLayout({
 			</head>
 			<body>
 				{children}
-				{isStaging ? null : (
-					<>
-						<Script
-							src="https://www.googletagmanager.com/gtag/js?id=G-GK9R79RGL6"
-							strategy="afterInteractive"
-						/>
-						<Script id="google-analytics" strategy="afterInteractive">
-							{`
-								window.dataLayer = window.dataLayer || [];
-								function gtag(){window.dataLayer.push(arguments);}
-								gtag('js', new Date());
-								gtag('config', 'G-GK9R79RGL6');
-							`}
-						</Script>
-					</>
-				)}
+				<Script
+					src="https://www.googletagmanager.com/gtag/js?id=G-GK9R79RGL6"
+					strategy="afterInteractive"
+				/>
+				<Script id="google-analytics" strategy="afterInteractive">
+					{`
+						window.dataLayer = window.dataLayer || [];
+						function gtag(){window.dataLayer.push(arguments);}
+						gtag('js', new Date());
+						gtag('config', 'G-GK9R79RGL6');
+					`}
+				</Script>
 			</body>
 		</html>
 	)

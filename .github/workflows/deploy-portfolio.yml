@@ -1,12 +1,10 @@
 name: Deploy the portfolio
 
-# siddharthabbineni.in (master) and staging.siddharthabbineni.in (staging),
-# from apps/portfolio. The blog has its own workflow and Azure apps.
+# www.siddharthabbineni.in, from apps/portfolio. The blog has its own workflow and Azure apps.
 on:
   push:
     branches:
       - master
-      - staging
     paths:
       - apps/portfolio/**
       - .github/workflows/deploy-portfolio.yml
@@ -14,7 +12,7 @@ on:
 
 jobs:
   deploy:
-    name:  ${{ github.ref == 'refs/heads/master' && 'Production' || 'Staging' }} - Build & Deploy
+    name: Build & Deploy
     runs-on: ubuntu-latest
 
     permissions:
@@ -23,7 +21,7 @@ jobs:
       id-token: write
 
     env:
-      SWA_TOKEN: ${{ github.ref == 'refs/heads/master' && secrets.AZURE_SWA_DEPLOY_TOKEN_PROD || secrets.AZURE_SWA_DEPLOY_TOKEN_STAGING }}
+      SWA_TOKEN: ${{ secrets.AZURE_SWA_DEPLOY_TOKEN_PROD }}
 
     defaults:
       run:
@@ -60,21 +58,6 @@ jobs:
           XBOX_API_KEY: ${{ secrets.XBOX_API_KEY }}
           # Raises the GitHub search limit for the PR ticker; optional
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NEXT_PUBLIC_SITE_URL: ${{ github.ref == 'refs/heads/master' && 'https://www.siddharthabbineni.in' || 'https://staging.siddharthabbineni.in' }}
-          NEXT_PUBLIC_BLOG_URL: ${{ github.ref == 'refs/heads/master' && 'https://blog.siddharthabbineni.in' || 'https://blog-staging.siddharthabbineni.in' }}
-
-      # Staging must never be indexed. Next.js adds X-Robots-Tag to what it serves;
-      # this adds it to the files Azure serves directly (images, the resume PDF)
-      - name: Keep staging out of search engines
-        if: github.ref != 'refs/heads/master'
-        run: |
-          node -e "
-            const fs = require('fs')
-            const file = 'staticwebapp.config.json'
-            const config = JSON.parse(fs.readFileSync(file, 'utf8'))
-            config.globalHeaders = { ...config.globalHeaders, 'X-Robots-Tag': 'noindex, nofollow' }
-            fs.writeFileSync(file, JSON.stringify(config, null, 2))
-          "
 
       # The server refreshes Steam and Xbox every few hours with keys from its own
       # app settings, not GitHub's. Copying them on each deploy keeps one place
@@ -92,7 +75,7 @@ jobs:
           --name "$APP" --resource-group Website --output none
           --setting-names "STEAM_API_KEY=$STEAM_API_KEY" "STEAM_USER_ID=$STEAM_USER_ID" "XBOX_API_KEY=$XBOX_API_KEY"
         env:
-          APP: ${{ github.ref == 'refs/heads/master' && 'wapenshaw-site' || 'wapenshaw-site-staging' }}
+          APP: wapenshaw-site
           STEAM_API_KEY: ${{ secrets.STEAM_API_KEY }}
           STEAM_USER_ID: ${{ secrets.STEAM_USER_ID }}
           XBOX_API_KEY: ${{ secrets.XBOX_API_KEY }}
