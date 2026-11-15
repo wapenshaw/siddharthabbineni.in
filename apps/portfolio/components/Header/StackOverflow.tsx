@@ -22,7 +22,7 @@ export default async function StackOverflowChip() {
 			}
 			aria-label={
 				user
-					? `Stack Overflow: ${user.reputation} reputation`
+					? `${compact.format(user.reputation)} reputation on Stack Overflow`
 					: 'Stack Overflow'
 			}
 			title={user ? `${user.reputation} reputation` : 'Stack Overflow'}

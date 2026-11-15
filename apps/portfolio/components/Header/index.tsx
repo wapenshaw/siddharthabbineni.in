@@ -16,7 +16,7 @@ export default function Header({ className }: { className?: string }) {
 		<header className={`${styles.header} ${className ?? ''}`}>
 			<Link href="/" className={`slr ${styles.plate}`}>
 				<span className={styles.shot}>
-					<img src={profile.avatar} alt="" width={400} height={409} />
+					<img src="/wapenshaw-helmet-sm.webp" alt="" width={240} height={245} />
 				</span>
 				{/* The page's one h1 on every section, so the name is the headline search engines read */}
 				<h1 className={styles.names}>
