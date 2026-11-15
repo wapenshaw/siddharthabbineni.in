@@ -10,7 +10,6 @@ import { DEFAULT_MODE, themeInitScript } from 'config/theme'
 import { pageMetadata } from 'lib/pageMetadata'
 import type { Metadata } from 'next'
 import { Titillium_Web } from 'next/font/google'
-import Script from 'next/script'
 import 'styles/globals.css'
 
 const f1 = Titillium_Web({
@@ -99,18 +98,6 @@ export default function RootLayout({
 			</head>
 			<body>
 				{children}
-				<Script
-					src="https://www.googletagmanager.com/gtag/js?id=G-GK9R79RGL6"
-					strategy="lazyOnload"
-				/>
-				<Script id="google-analytics" strategy="lazyOnload">
-					{`
-						window.dataLayer = window.dataLayer || [];
-						function gtag(){window.dataLayer.push(arguments);}
-						gtag('js', new Date());
-						gtag('config', 'G-GK9R79RGL6');
-					`}
-				</Script>
 			</body>
 		</html>
 	)

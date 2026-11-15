@@ -91,7 +91,7 @@ Deployed to Azure Static Web Apps (hybrid Next.js) by GitHub Actions (`.github/w
 - A push to `master` deploys production (`www.siddharthabbineni.in`).
 - There is no staging environment; verify changes locally before merging.
 - The build uses Node 22 and `output: 'standalone'` in next.config.
-- Google Analytics is injected on every build.
+- Analytics is Cloudflare Web Analytics, which Cloudflare injects at the edge (no tag in the code).
 
 ### Releases
 

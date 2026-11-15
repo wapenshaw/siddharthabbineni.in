@@ -17,7 +17,6 @@ import {
 	Atkinson_Hyperlegible_Next,
 	Saira,
 } from 'next/font/google'
-import Script from 'next/script'
 import './globals.css'
 
 // Saira is drawn at 75% width for headings (.cond)
@@ -97,18 +96,6 @@ export default function RootLayout({
 					<a href={SOCIAL.github}>GitHub</a>
 					<a href="/feed.xml">RSS</a>
 				</footer>
-				<Script
-					src="https://www.googletagmanager.com/gtag/js?id=G-GK9R79RGL6"
-					strategy="lazyOnload"
-				/>
-				<Script id="google-analytics" strategy="lazyOnload">
-					{`
-						window.dataLayer = window.dataLayer || [];
-						function gtag(){window.dataLayer.push(arguments);}
-						gtag('js', new Date());
-						gtag('config', 'G-GK9R79RGL6');
-					`}
-				</Script>
 			</body>
 		</html>
 	)
