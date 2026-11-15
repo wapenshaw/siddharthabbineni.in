@@ -1,5 +1,5 @@
 import type { NextConfig } from 'next'
-import { BLOG_URL, isStaging } from './config/site'
+import { BLOG_URL } from './config/site'
 
 const nextConfig: NextConfig = {
 	output: 'standalone',
@@ -57,11 +57,6 @@ const nextConfig: NextConfig = {
 						key: 'Permissions-Policy',
 						value: 'camera=(), microphone=(), geolocation=()',
 					},
-					// keeps staging out of search results; files Azure serves without
-					// Next.js get the same header from the deploy workflow
-					...(isStaging
-						? [{ key: 'X-Robots-Tag', value: 'noindex, nofollow' }]
-						: []),
 				],
 			},
 		]
