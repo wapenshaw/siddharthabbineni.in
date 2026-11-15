@@ -93,6 +93,7 @@ export default function RootLayout({
 				<footer className="site-footer">
 					<span>blog.siddharthabbineni.in</span>
 					<a href={PORTFOLIO_URL}>The portfolio</a>
+					<a href="https://nuprint.app">NuPrint</a>
 					<a href={SOCIAL.github}>GitHub</a>
 					<a href="/feed.xml">RSS</a>
 				</footer>

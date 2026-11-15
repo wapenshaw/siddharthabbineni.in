@@ -1,6 +1,6 @@
 ---
-title: Call of Duty - World at War, Solo start error (fixed)
-description: When you start a new solo game in COD-World at War, it refuses to start, especially with the RELOADED version. It doesn’t start even if you go via the…
+title: "Call of Duty: World at War won't start a solo game (fixed)"
+description: "Call of Duty: World at War refusing to start a solo game, especially the RELOADED version? Rebuild the profile folder and active.txt. Paths for XP and Vista."
 date: 2008-11-18
 tags: [tips]
 archive:

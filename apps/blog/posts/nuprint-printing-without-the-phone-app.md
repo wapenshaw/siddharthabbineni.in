@@ -116,4 +116,4 @@ As for printer support, I've used NuPrint with my SC03h on Windows, macOS and Li
 
 It's grown quite a bit from the Python test. AI helped me get past the point where the earlier attempts had stalled, and a lot of the work since then has been testing, reviewing and fixing things I wouldn't have thought about at the start.
 
-NuPrint is open source under the MIT licence, with builds for Windows, macOS and Linux. The downloads are on [nuprint.app](https://nuprint.app) and the code is on [GitHub](https://github.com/wapenshaw/nuprint). If you have one of these little printers and try it, I'd be interested to hear how it works for you.
+NuPrint is open source under the MIT licence, with builds for Windows, macOS and Linux. The downloads are on [nuprint.app](https://nuprint.app), which also lists [every printer it supports](https://nuprint.app/printers), and the code is on [GitHub](https://github.com/wapenshaw/nuprint). If you have one of these little printers and try it, I'd be interested to hear how it works for you.
